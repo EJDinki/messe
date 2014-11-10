@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="SurveyModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="SurveyModelTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="SurveyModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="SurveyModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Questions" EntityType="SurveyModel.Question" />
+          <EntitySet Name="Exhibits" EntityType="SurveyModel.Exhibit" />
+          <EntitySet Name="Submissions" EntityType="SurveyModel.Submission" />
+          <EntitySet Name="Answers" EntityType="SurveyModel.Answer" />
+          <EntitySet Name="Surveys" EntityType="SurveyModel.Survey" />
+          <AssociationSet Name="QuestionAnswer" Association="SurveyModel.QuestionAnswer">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="Answer" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="SurveyQuestion" Association="SurveyModel.SurveyQuestion">
+            <End Role="Survey" EntitySet="Surveys" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="SubmissionAnswer" Association="SurveyModel.SubmissionAnswer">
+            <End Role="Submission" EntitySet="Submissions" />
+            <End Role="Answer" EntitySet="Answers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" />
+          <NavigationProperty Name="Answers" Relationship="SurveyModel.QuestionAnswer" FromRole="Question" ToRole="Answer" />
+          <NavigationProperty Name="Survey" Relationship="SurveyModel.SurveyQuestion" FromRole="Question" ToRole="Survey" />
+          <Property Name="Choices" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Exhibit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Image" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Submission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Answers" Relationship="SurveyModel.SubmissionAnswer" FromRole="Submission" ToRole="Answer" />
+          <Property Name="Timestamp" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="SurveyModel.QuestionAnswer" FromRole="Answer" ToRole="Question" />
+          <NavigationProperty Name="Submission" Relationship="SurveyModel.SubmissionAnswer" FromRole="Answer" ToRole="Submission" />
+        </EntityType>
+        <EntityType Name="Survey">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Questions" Relationship="SurveyModel.SurveyQuestion" FromRole="Survey" ToRole="Question" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="CreationDate" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="QuestionAnswer">
+          <End Type="SurveyModel.Question" Role="Question" Multiplicity="1" />
+          <End Type="SurveyModel.Answer" Role="Answer" Multiplicity="*" />
+        </Association>
+        <Association Name="SurveyQuestion">
+          <End Type="SurveyModel.Survey" Role="Survey" Multiplicity="1" />
+          <End Type="SurveyModel.Question" Role="Question" Multiplicity="*" />
+        </Association>
+        <Association Name="SubmissionAnswer">
+          <End Type="SurveyModel.Submission" Role="Submission" Multiplicity="1" />
+          <End Type="SurveyModel.Answer" Role="Answer" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="SurveyModel" />
+        <Alias Key="Target" Value="SurveyModel.Store" />
+        <EntityContainerMapping CdmEntityContainer="SurveyModelContainer" StorageEntityContainer="SurveyModelTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
