@@ -1,0 +1,41 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+  <nav>
+        <ul class="pager">
+            <li class="previous" id="pBut">
+                @Html.Raw("<a href=\"/Home/Index/" + ((int)HttpContext.Current.Session["QuestionIndex"] - 1) + "\" title=\"" + ViewBag.MyURL + "\">" + "<span aria-hidden=\"true\">&larr;</span></a>")
+                
+            </li>
+            <li class="next" id="nBut">
+               @Html.Raw("<a href=\"/Home/Index/" + ((int)HttpContext.Current.Session["QuestionIndex"] + 1) + "\" title=\"" + ViewBag.MyURL + "\">" + "<span aria-hidden=\"true\">&rarr;</span></a>")
+            </li>
+        </ul>
+   </nav>
+ 
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+        </div>
+
+        <div style="position:relative;height:75%">
+            <p style="text-align:center">Survey Progress: @HttpContext.Current.Session["QuestionIndex"] of @HttpContext.Current.Session["NumQuestions"]</p>
+            <progress max="@HttpContext.Current.Session["NumQuestions"]" value="@HttpContext.Current.Session["QuestionIndex"]" style="width:50%;margin-left:25%;margin-right:auto">Survey Progress</progress>
+        </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+
+  
+</body>
+</html>

@@ -1,0 +1,29 @@
+﻿@model DiscoveryCenter.Models.Question
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_SurveyLayout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>Survey Details</h1>
+    @Model.Text
+    <br/>
+    @{
+        foreach (string s in @Model.Choices.Split(';'))
+        {
+            var answer = new DiscoveryCenter.Models.Answer();
+            answer.Question = @Model;
+            answer.Value = s;
+            <p>
+            
+            @Html.RadioButton(s,answer)
+            <label for="@s">@s</label>
+
+            </p>
+        }  
+    }
+    
+
+
+</div>
+
