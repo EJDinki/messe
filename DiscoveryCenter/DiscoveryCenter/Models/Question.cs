@@ -11,7 +11,8 @@ namespace DiscoveryCenter.Models
 
         public enum QuestionType
         {
-            MultipleChoice,
+            MultipleChoiceChooseOne,
+            MultipleChoiceChooseMany,
             ShortAnswer,
             Slider
         }

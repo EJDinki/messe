@@ -1,27 +1,34 @@
-﻿@model DiscoveryCenter.Models.Question
+﻿@model DiscoveryCenter.Models.MultipleChoiceQuestionViewModel
 @{
-    ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_SurveyLayout.cshtml";
 }
 
 <div class="jumbotron">
     <h1>Survey Details</h1>
-    @Model.Text
+    @Model.Question
     <br/>
     @{
-        foreach (string s in @Model.Choices.Split(';'))
+        if(@Model.AllowMultiple)
         {
-            var answer = new DiscoveryCenter.Models.Answer();
-            answer.Question = @Model;
-            answer.Value = s;
-            <p>
-            
-            @Html.RadioButton(s,answer)
-            <label for="@s">@s</label>
-
-            </p>
-        }  
-    }
+            foreach (string s in @Model.Choices)
+            {
+                <p>
+                @Html.CheckBox(s)
+                <label for="@s">@s</label>
+                </p>
+            }
+        }
+        else
+        {
+            foreach (string s in @Model.Choices)
+            {
+                <p>
+                    @Html.RadioButton("Radio", s)
+                    <label for="@s">@s</label>
+                </p>
+            }
+        }
+}
     
 
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>Museum of the Southern Tier</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -13,11 +13,25 @@
   <nav>
         <ul class="pager">
             <li class="previous" id="pBut">
-                @Html.Raw("<a href=\"/Home/Index/" + ((int)HttpContext.Current.Session["QuestionIndex"] - 1) + "\" title=\"" + ViewBag.MyURL + "\">" + "<span aria-hidden=\"true\">&larr;</span></a>")
                 
+                @if ((int)HttpContext.Current.Session["QuestionIndex"] != 0)
+                {
+                   @Html.Raw("<a href=\"/Home/Index/" + ((int)HttpContext.Current.Session["QuestionIndex"] - 1) + "\" title=\"" + ViewBag.MyURL + "\">" + "<span aria-hidden=\"true\">&larr;</span></a>")
+                }
+                else
+                {
+                    <a href="/Home/Index"><span aria-hidden="true">Exit Survey</span></a>
+                }
             </li>
             <li class="next" id="nBut">
-               @Html.Raw("<a href=\"/Home/Index/" + ((int)HttpContext.Current.Session["QuestionIndex"] + 1) + "\" title=\"" + ViewBag.MyURL + "\">" + "<span aria-hidden=\"true\">&rarr;</span></a>")
+               @if ((int)HttpContext.Current.Session["QuestionIndex"]+1 != (int)HttpContext.Current.Session["NumQuestions"])
+               {
+                   @Html.Raw("<a href=\"/Home/Index/" + ((int)HttpContext.Current.Session["QuestionIndex"] + 1) + "\" title=\"" + ViewBag.MyURL + "\">" + "<span aria-hidden=\"true\">&rarr;</span></a>")
+               }
+               else
+               {
+                <a href="/Home/Index"><span aria-hidden="true">Complete Survey</span></a>
+               }
             </li>
         </ul>
    </nav>
@@ -29,8 +43,8 @@
         </div>
 
         <div style="position:relative;height:75%">
-            <p style="text-align:center">Survey Progress: @HttpContext.Current.Session["QuestionIndex"] of @HttpContext.Current.Session["NumQuestions"]</p>
-            <progress max="@HttpContext.Current.Session["NumQuestions"]" value="@HttpContext.Current.Session["QuestionIndex"]" style="width:50%;margin-left:25%;margin-right:auto">Survey Progress</progress>
+            <p style="text-align:center">Survey Progress: @(((int)HttpContext.Current.Session["QuestionIndex"])+1) of @HttpContext.Current.Session["NumQuestions"]</p>
+            <progress max="@HttpContext.Current.Session["NumQuestions"]" value="@((int)HttpContext.Current.Session["QuestionIndex"]+1)" style="width:50%;margin-left:25%;margin-right:auto">Survey Progress</progress>
         </div>
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")

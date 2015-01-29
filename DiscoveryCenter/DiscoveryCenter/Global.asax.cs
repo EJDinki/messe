@@ -1,5 +1,8 @@
-﻿using System;
+﻿using DiscoveryCenter.Migrations;
+using DiscoveryCenter.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;

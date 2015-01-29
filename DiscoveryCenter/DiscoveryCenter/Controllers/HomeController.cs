@@ -16,7 +16,7 @@ namespace DiscoveryCenter.Controllers
          *Need to store previously selected answers in an Answer in the HttpSession and call them up.
          *Probably should break this behemoth of a method into smaller chunks soon. Bad code smell.
          */
-        public ActionResult Index(int id = 0)
+        public PartialViewResult Index(int id = 0)
         {
             if (Session.Count == 0)
             {
@@ -29,6 +29,7 @@ namespace DiscoveryCenter.Controllers
             Models.Question question = null;
             using (Models.SurveyContext aContext = new Models.SurveyContext())
             {
+                
                 survey = (from s in aContext.Surveys where s.Id == 1 select s).Single();
                 Session["Survey"] = survey;
                 Session["NumQuestions"] = survey.Questions.Count;
@@ -45,26 +46,42 @@ namespace DiscoveryCenter.Controllers
                 switch (question.Type)
                 {
                     case (Question.QuestionType.ShortAnswer):
-                        return RedirectToAction("ShortAnswer", "Home", new { id });
-                    case (Question.QuestionType.MultipleChoice):
-                        return RedirectToAction("MultipleChoice", "Home", new { id });
+                        return PartialView("ShortAnswer", question);
+                    case (Question.QuestionType.MultipleChoiceChooseOne):
+                        return PartialView("MultipleChoice", 
+                            new MultipleChoiceQuestionViewModel()
+                            { 
+                                SurveyName = survey.Name,
+                                AllowMultiple = false,
+                                Choices= question.Choices.Split(';').ToList<string>(),
+                                Question=question.Text
+                            });
+                    case (Question.QuestionType.MultipleChoiceChooseMany):
+                        return PartialView("MultipleChoice",
+                            new MultipleChoiceQuestionViewModel()
+                            {
+                                SurveyName = survey.Name,
+                                AllowMultiple = true,
+                                Choices = question.Choices.Split(';').ToList<string>(),
+                                Question = question.Text
+                            });
                     default:
-                        return View(question);
+                        return PartialView(question);
                 }
             }
         }
 
-        public ActionResult MultipleChoice(int id)
-        {
+        //public ActionResult MultipleChoice(int id)
+        //{
 
-            return View(((Survey)Session["Survey"]).Questions[id]);
-        }
+        //    return View(((Survey)Session["Survey"]).Questions[id]);
+        //}
 
-        public ActionResult ShortAnswer(int id)
-        {
+        //public ActionResult ShortAnswer(int id)
+        //{
 
-            return View(((Survey)Session["Survey"]).Questions[id]);
-        }
+        //    return View(((Survey)Session["Survey"]).Questions[id]);
+        //}
 
 
 
