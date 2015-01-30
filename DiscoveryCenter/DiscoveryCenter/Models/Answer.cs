@@ -8,6 +8,12 @@ namespace DiscoveryCenter.Models
 {
     public class Answer
     {
+        public Answer(Question q, string val = null)
+        {
+            Question = q;
+            QuestionId = q.Id;
+            Value = val;
+        }
 
         public int Id { get; set; }
 

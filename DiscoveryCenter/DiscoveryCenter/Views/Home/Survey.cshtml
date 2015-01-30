@@ -1,0 +1,90 @@
+﻿@model DiscoveryCenter.Models.SurveyViewModel
+@using DiscoveryCenter.Models
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_SurveyLayout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>Survey Details</h1>
+    
+    <br/>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control pull-left" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control pull-right" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+    @using (Html.BeginForm("Survey", "Home", FormMethod.Post))
+    
+    {
+        
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            @{
+        for (int i = 1; i < @Model.questions.Count; i++)
+        {
+                    <li data-target="#myCarousel" data-slide-to="@i"></li>
+        }
+            }
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+        @{
+            for (int i = 0; i < @Model.questions.Count; i++)
+            {
+                string val = i == 0 ? "item active" : "item";
+                            <div class="@val">
+                             
+                @{
+                    switch (Model.questions[i].Type)
+                    {
+                        case (Question.QuestionType.MultipleChoiceChooseOne):
+                                    <p>@Model.questions[i].Text</p>
+                            for(int z = 0; z < @Model.options[i].Count; z ++)
+                            {
+                                        @Html.RadioButtonFor(m => m.answer[i],@Model.options[i][z].text)
+                                        @Html.Label(@Model.options[i][z].text)
+                                       <br/>
+                            }
+                            break;
+                        case (Question.QuestionType.MultipleChoiceChooseMany):
+                                    <p>@Model.questions[i].Text</p>
+                         
+                            for(int z = 0; z < @Model.options[i].Count; z ++)
+                            {                                     
+                                        @Html.CheckBoxFor(m =>m.options[i][z].isSelected)
+                                        @Html.Label(@Model.options[i][z].text)
+                                       <br/>
+                            }
+                            break;
+                        case (Question.QuestionType.ShortAnswer):
+                                    <p>@Model.questions[i].Text</p>
+                                    @Html.TextBoxFor(m => m.answer[i])
+                            break;
+                    }
+                    if (i == Model.questions.Count - 1)
+                    {
+                                <br/>
+                               <input type="submit" class="col-lg-offset-6" value="Complete Survey"/>
+                    }
+                }
+                         
+                            </div>
+            }
+        }
+
+        </div>
+    </div>
+    }
+    
+</div>
+

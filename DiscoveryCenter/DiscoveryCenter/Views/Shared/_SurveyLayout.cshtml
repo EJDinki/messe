@@ -10,31 +10,6 @@
 
 </head>
 <body>
-  <nav>
-        <ul class="pager">
-            <li class="previous" id="pBut">
-                
-                @if ((int)HttpContext.Current.Session["QuestionIndex"] != 0)
-                {
-                   @Html.Raw("<a href=\"/Home/Index/" + ((int)HttpContext.Current.Session["QuestionIndex"] - 1) + "\" title=\"" + ViewBag.MyURL + "\">" + "<span aria-hidden=\"true\">&larr;</span></a>")
-                }
-                else
-                {
-                    <a href="/Home/Index"><span aria-hidden="true">Exit Survey</span></a>
-                }
-            </li>
-            <li class="next" id="nBut">
-               @if ((int)HttpContext.Current.Session["QuestionIndex"]+1 != (int)HttpContext.Current.Session["NumQuestions"])
-               {
-                   @Html.Raw("<a href=\"/Home/Index/" + ((int)HttpContext.Current.Session["QuestionIndex"] + 1) + "\" title=\"" + ViewBag.MyURL + "\">" + "<span aria-hidden=\"true\">&rarr;</span></a>")
-               }
-               else
-               {
-                <a href="/Home/Index"><span aria-hidden="true">Complete Survey</span></a>
-               }
-            </li>
-        </ul>
-   </nav>
  
 
         <div class="container body-content">
@@ -42,10 +17,6 @@
             <hr />
         </div>
 
-        <div style="position:relative;height:75%">
-            <p style="text-align:center">Survey Progress: @(((int)HttpContext.Current.Session["QuestionIndex"])+1) of @HttpContext.Current.Session["NumQuestions"]</p>
-            <progress max="@HttpContext.Current.Session["NumQuestions"]" value="@((int)HttpContext.Current.Session["QuestionIndex"]+1)" style="width:50%;margin-left:25%;margin-right:auto">Survey Progress</progress>
-        </div>
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)

@@ -9,13 +9,57 @@ namespace DiscoveryCenter.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
+        public  ActionResult Survey()
+        {
+            SurveyViewModel model = null;
+            using(SurveyContext dbContext = new SurveyContext())
+            {
+                Survey survey = (from s in dbContext.Surveys where s.Id == 1 select s).Single();
+                model = new SurveyViewModel();
+                model.questions = survey.Questions;
+                model.options = new Dictionary<int,List<SurveyViewModel.Option>>();
 
+                for(int i = 0; i < survey.Questions.Count; i++)
+                {
+                    model.answer.Add("");
+                    model.options.Add(i, new List<SurveyViewModel.Option>());
+                    if(survey.Questions[i].Type == Question.QuestionType.MultipleChoiceChooseMany ||
+                       survey.Questions[i].Type == Question.QuestionType.MultipleChoiceChooseOne)
+                    {
+                        foreach(string s in survey.Questions[i].Choices.Split(';'))
+                        {
+                            SurveyViewModel.Option option = new SurveyViewModel.Option(survey.Questions[i].Id);
+                            option.text = s;
+                            model.options[i].Add(option);
+                        }
+                    }
+                    else
+                    {
+                        model.options[i].Add(new SurveyViewModel.Option(survey.Questions[i].Id, true));
+                    }
+                    
+                }
+            }
+            return View(model);
+        }
 
+        [HttpPost]
+        public ActionResult Survey(SurveyViewModel model)
+        {
+            return Redirect("/");
+        }
+
+        public ActionResult Index()
+        {
+            return RedirectToAction("Survey");
+        }
         /*
          *Currently ugly code just meant to test my knowledge.
          *Need to store previously selected answers in an Answer in the HttpSession and call them up.
          *Probably should break this behemoth of a method into smaller chunks soon. Bad code smell.
          */
+        /*
         public PartialViewResult Index(int id = 0)
         {
             if (Session.Count == 0)
@@ -69,21 +113,6 @@ namespace DiscoveryCenter.Controllers
                         return PartialView(question);
                 }
             }
-        }
-
-        //public ActionResult MultipleChoice(int id)
-        //{
-
-        //    return View(((Survey)Session["Survey"]).Questions[id]);
-        //}
-
-        //public ActionResult ShortAnswer(int id)
-        //{
-
-        //    return View(((Survey)Session["Survey"]).Questions[id]);
-        //}
-
-
-
+        }*/
     }
 }
