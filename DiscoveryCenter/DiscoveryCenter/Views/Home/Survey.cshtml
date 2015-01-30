@@ -45,30 +45,38 @@
                             <div class="@val">
                              
                 @{
+                    @Html.HiddenFor(m => m.options)
                     switch (Model.questions[i].Type)
                     {
                         case (Question.QuestionType.MultipleChoiceChooseOne):
-                                    <p>@Model.questions[i].Text</p>
-                            for(int z = 0; z < @Model.options[i].Count; z ++)
+                            <p>@Model.questions[i].Text</p>
+                            @Html.RadioButtonFor(m => m.answer[i], Model.options[i][0].text, new { @checked="checked" })
+                            @Html.Label(@Model.options[i][0].text)
+                            <br />
+                            for (int z = 1; z < @Model.options[i].Count; z++)
                             {
-                                        @Html.RadioButtonFor(m => m.answer[i],@Model.options[i][z].text)
-                                        @Html.Label(@Model.options[i][z].text)
-                                       <br/>
+
+                                @Html.RadioButtonFor(m => m.answer[i], Model.options[i][z].text)
+                                @Html.Label(@Model.options[i][z].text)
+                                <br/>
                             }
                             break;
                         case (Question.QuestionType.MultipleChoiceChooseMany):
                                     <p>@Model.questions[i].Text</p>
-                         
-                            for(int z = 0; z < @Model.options[i].Count; z ++)
-                            {                                     
-                                        @Html.CheckBoxFor(m =>m.options[i][z].isSelected)
-                                        @Html.Label(@Model.options[i][z].text)
-                                       <br/>
+                                    @Html.HiddenFor(m => m.answer[i])
+                            for (int z = 0; z < @Model.options[i].Count; z++)
+                            {
+                                //Do checkbox here
+                                @Html.Label(@Model.options[i][z].text)
+                                <br/>
                             }
                             break;
                         case (Question.QuestionType.ShortAnswer):
                                     <p>@Model.questions[i].Text</p>
                                     @Html.TextBoxFor(m => m.answer[i])
+                            break;
+                        default:
+                            @Html.HiddenFor(m => m.answer[i])
                             break;
                     }
                     if (i == Model.questions.Count - 1)

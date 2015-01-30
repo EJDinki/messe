@@ -7,10 +7,7 @@ namespace DiscoveryCenter.Models
 {
     public class SurveyViewModel
     {
-        public SurveyViewModel()
-        {
-            answer = new List<string>();
-        }
+
         public string SurveyName {get; set;}
         public List<Question> questions { get; set; }
         public Dictionary<int, List<Option>> options { get; set; }

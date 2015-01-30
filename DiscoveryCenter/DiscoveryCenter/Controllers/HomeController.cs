@@ -19,24 +19,22 @@ namespace DiscoveryCenter.Controllers
                 model = new SurveyViewModel();
                 model.questions = survey.Questions;
                 model.options = new Dictionary<int,List<SurveyViewModel.Option>>();
-
+                model.answer = new List<string>();
+                model.SurveyName = survey.Name;
                 for(int i = 0; i < survey.Questions.Count; i++)
                 {
                     model.answer.Add("");
-                    model.options.Add(i, new List<SurveyViewModel.Option>());
-                    if(survey.Questions[i].Type == Question.QuestionType.MultipleChoiceChooseMany ||
+
+                    if (survey.Questions[i].Type == Question.QuestionType.MultipleChoiceChooseMany ||
                        survey.Questions[i].Type == Question.QuestionType.MultipleChoiceChooseOne)
                     {
-                        foreach(string s in survey.Questions[i].Choices.Split(';'))
+                        model.options.Add(i, new List<SurveyViewModel.Option>());
+                        foreach (string s in survey.Questions[i].Choices.Split(';'))
                         {
                             SurveyViewModel.Option option = new SurveyViewModel.Option(survey.Questions[i].Id);
                             option.text = s;
                             model.options[i].Add(option);
                         }
-                    }
-                    else
-                    {
-                        model.options[i].Add(new SurveyViewModel.Option(survey.Questions[i].Id, true));
                     }
                     
                 }
