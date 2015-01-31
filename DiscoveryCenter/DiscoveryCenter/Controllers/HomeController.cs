@@ -17,33 +17,59 @@ namespace DiscoveryCenter.Controllers
             {
                 Survey survey = (from s in dbContext.Surveys where s.Id == 1 select s).Single();
                 model = new SurveyViewModel();
-                model.questions = survey.Questions;
-                model.options = new Dictionary<int,List<SurveyViewModel.Option>>();
-                model.answer = new List<string>();
+                model.QuestionModels = new List<ViewModel>();
+                model.SurveyId = survey.Id;
                 model.SurveyName = survey.Name;
+
                 for(int i = 0; i < survey.Questions.Count; i++)
                 {
-                    model.answer.Add("");
-
-                    if (survey.Questions[i].Type == Question.QuestionType.MultipleChoiceChooseMany ||
-                       survey.Questions[i].Type == Question.QuestionType.MultipleChoiceChooseOne)
+                    switch(survey.Questions[i].Type)
                     {
-                        model.options.Add(i, new List<SurveyViewModel.Option>());
-                        foreach (string s in survey.Questions[i].Choices.Split(';'))
-                        {
-                            SurveyViewModel.Option option = new SurveyViewModel.Option(survey.Questions[i].Id);
-                            option.text = s;
-                            model.options[i].Add(option);
-                        }
+                        case(Question.QuestionType.MultipleChoiceChooseMany):
+                            MultipleSelectViewModel mS = new MultipleSelectViewModel();
+                            mS.QuestionId = survey.Questions[i].Id;
+                            mS.Answer = "";
+                            mS.Question = survey.Questions[i].Text;
+                            mS.Type = survey.Questions[i].Type;
+                            mS.Choices = survey.Questions[i].Choices.Split(';').ToList();
+                            mS.Options = new List<Selection>();
+
+                            foreach(string choice in mS.Choices)
+                            {
+                                Selection select = new Selection();
+                                select.IsSelected = false;
+                                select.text = choice;
+
+                                mS.Options.Add(select);
+                            }
+
+                            model.QuestionModels.Add(mS);
+                            break;
+                        case(Question.QuestionType.MultipleChoiceChooseOne):
+                            MultipleChoiceViewModel mC = new MultipleChoiceViewModel();
+                            mC.QuestionId = survey.Questions[i].Id;
+                            mC.Answer = "";
+                            mC.Question = survey.Questions[i].Text;
+                            mC.Type = survey.Questions[i].Type;
+                            mC.Choices = survey.Questions[i].Choices.Split(';').ToList();
+                            model.QuestionModels.Add(mC);
+                            break;
+                        default:
+                            ViewModel m = new ViewModel();
+                            m.QuestionId = survey.Questions[i].Id;
+                            m.Answer = "";
+                            m.Question = survey.Questions[i].Text;
+                            m.Type = survey.Questions[i].Type;
+                            model.QuestionModels.Add(m);
+                            break;
                     }
-                    
                 }
             }
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Survey(SurveyViewModel model)
+        public ActionResult Survey([ModelBinder(typeof(SurveyModelBinder))]SurveyViewModel model)
         {
             return Redirect("/");
         }

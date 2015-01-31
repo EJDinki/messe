@@ -29,7 +29,7 @@
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             @{
-        for (int i = 1; i < @Model.questions.Count; i++)
+        for (int i = 1; i < @Model.QuestionModels.Count; i++)
         {
                     <li data-target="#myCarousel" data-slide-to="@i"></li>
         }
@@ -39,48 +39,52 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
         @{
-            for (int i = 0; i < @Model.questions.Count; i++)
+            for (int i = 0; i < @Model.QuestionModels.Count; i++)
             {
                 string val = i == 0 ? "item active" : "item";
                             <div class="@val">
-                             
-                @{
-                    @Html.HiddenFor(m => m.options)
-                    switch (Model.questions[i].Type)
+                            @Html.HiddenFor(m =>m.QuestionModels[i].Question)
+                            @Html.HiddenFor(m => m.QuestionModels[i].QuestionId)
+                           
+                @{     
+                    switch (Model.QuestionModels[i].Type)
                     {
                         case (Question.QuestionType.MultipleChoiceChooseOne):
-                            <p>@Model.questions[i].Text</p>
-                            @Html.RadioButtonFor(m => m.answer[i], Model.options[i][0].text, new { @checked="checked" })
-                            @Html.Label(@Model.options[i][0].text)
-                            <br />
-                            for (int z = 1; z < @Model.options[i].Count; z++)
+                            <p>@Model.QuestionModels[i].Question</p>
+                            for (int z = 0; z < ((MultipleChoiceViewModel)@Model.QuestionModels[i]).Choices.Count; z++)
                             {
 
-                                @Html.RadioButtonFor(m => m.answer[i], Model.options[i][z].text)
-                                @Html.Label(@Model.options[i][z].text)
+                                @Html.RadioButtonFor(m => m.QuestionModels[i].Answer, 
+                                ((MultipleChoiceViewModel)@Model.QuestionModels[i]).Choices[z])
+                                @Html.Label((Model.QuestionModels[i] as MultipleChoiceViewModel).Choices[z])
+
                                 <br/>
                             }
                             break;
                         case (Question.QuestionType.MultipleChoiceChooseMany):
-                                    <p>@Model.questions[i].Text</p>
-                                    @Html.HiddenFor(m => m.answer[i])
-                            for (int z = 0; z < @Model.options[i].Count; z++)
+                                    <p>@Model.QuestionModels[i].Question</p>
+    
+                            for (int z = 0; z < ((MultipleChoiceViewModel)@Model.QuestionModels[i]).Choices.Count; z++)
                             {
                                 //Do checkbox here
-                                @Html.Label(@Model.options[i][z].text)
+                                @Html.HiddenFor(m => (((MultipleSelectViewModel)m.QuestionModels[i]).Choices[z]))
+                                @Html.HiddenFor(m => (((MultipleSelectViewModel)m.QuestionModels[i]).Options[z].text))
+                                @Html.CheckBoxFor(m => (((MultipleSelectViewModel)m.QuestionModels[i]).Options[z].IsSelected))
+                                @Html.Label(((MultipleSelectViewModel)Model.QuestionModels[i]).Choices[z])
                                 <br/>
                             }
                             break;
                         case (Question.QuestionType.ShortAnswer):
-                                    <p>@Model.questions[i].Text</p>
-                                    @Html.TextBoxFor(m => m.answer[i])
+                                    <p>@Model.QuestionModels[i].Question</p>
+                                    @Html.TextBoxFor(m => m.QuestionModels[i].Answer)
                             break;
                         default:
-                            @Html.HiddenFor(m => m.answer[i])
+                            @Html.HiddenFor(m => m.QuestionModels[i].Answer)
                             break;
                     }
-                    if (i == Model.questions.Count - 1)
-                    {
+                    @Html.HiddenFor(m => m.QuestionModels[i].Type)
+                if (i == Model.QuestionModels.Count - 1)
+                {
                                 <br/>
                                <input type="submit" class="col-lg-offset-6" value="Complete Survey"/>
                     }

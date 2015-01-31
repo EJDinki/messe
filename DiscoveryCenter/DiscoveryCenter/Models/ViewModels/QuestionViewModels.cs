@@ -5,15 +5,31 @@ using System.Web;
 
 namespace DiscoveryCenter.Models
 {
-    /**
-     * 
-     * This Model is under review to be deleted.
-     * */
-    [System.Obsolete("Under review for removal. Please use SurveyViewModel")]
-    public class MultipleChoiceQuestionViewModel
+
+    public class ViewModel
     {
-        public bool AllowMultiple;
-        public List<String> Choices;
-        public String Question;
+        public string Question { get; set; }
+        public int QuestionId { get; set; }
+
+        public string Answer { get; set; }
+
+        public Question.QuestionType Type { get; set; }
+        
+    }
+
+    public class MultipleChoiceViewModel : ViewModel
+    {
+        public List<String> Choices { get; set; }    
+    }
+
+    public class MultipleSelectViewModel : MultipleChoiceViewModel
+    {
+        public List<Selection> Options { get; set; }
+    }
+
+    public class Selection
+    {
+        public bool IsSelected;
+        public string text;
     }
 }
