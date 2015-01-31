@@ -1,0 +1,9 @@
+﻿@model DiscoveryCenter.Models.MultipleSelectViewModel
+@for (int z = 0; z < @Model.Choices.Count; z++)
+{
+    @Html.HiddenFor(m => m.Choices[z])
+    @Html.HiddenFor(m => m.Options[z].text)
+    @Html.CheckBoxFor(m => m.Options[z].IsSelected)
+    @Html.Label(Model.Choices[z])
+    <br />
+}

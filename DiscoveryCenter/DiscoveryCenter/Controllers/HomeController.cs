@@ -9,6 +9,8 @@ namespace DiscoveryCenter.Controllers
 {
     public class HomeController : Controller
     {
+        private SurveyContext db = new SurveyContext();
+
         [HttpGet]
         public  ActionResult Survey()
         {
@@ -71,6 +73,29 @@ namespace DiscoveryCenter.Controllers
         [HttpPost]
         public ActionResult Survey([ModelBinder(typeof(SurveyModelBinder))]SurveyViewModel model)
         {
+            Submission submission = new Submission() { Timestamp = DateTime.Now, SurveyId = model.SurveyId };
+            db.Submissions.Add(submission);
+
+            foreach(var qmodel in model.QuestionModels)
+            {
+                Answer answer;
+                if(qmodel is MultipleSelectViewModel)
+                {
+                    foreach(var selection in ((MultipleSelectViewModel)qmodel).Options.Where(c => c.IsSelected))
+                    {
+                        answer = new Answer() { QuestionId = qmodel.QuestionId, Value = selection.text, Submission=submission};
+                        db.Answers.Add(answer);
+                    }
+                }
+                else if (!String.IsNullOrWhiteSpace(qmodel.Answer))
+                {
+                    answer = new Answer() { QuestionId = qmodel.QuestionId, Value = qmodel.Answer, Submission = submission };
+                    db.Answers.Add(answer);
+                }
+            }
+
+            db.SaveChanges();
+
             return Redirect("/");
         }
 

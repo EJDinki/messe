@@ -13,5 +13,7 @@ namespace DiscoveryCenter.Models
 
         
         public virtual List<Question> Questions { get; set; }
+
+        public virtual List<Submission> Submissions { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace DiscoveryCenter.Models
 {
     public class Answer
     {
+        public Answer() { }
         public Answer(Question q, string val = null)
         {
             Question = q;
@@ -22,5 +23,10 @@ namespace DiscoveryCenter.Models
         public Question Question { get; set; }
 
         public string Value { get; set; }
+
+        [ForeignKey("Submission")]
+        public int SubmissionId { get; set; }
+
+        public virtual Submission Submission { get; set; }
     }
 }

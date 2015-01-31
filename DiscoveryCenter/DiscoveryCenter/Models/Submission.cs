@@ -15,8 +15,8 @@ namespace DiscoveryCenter.Models
 
         public DateTime Timestamp { get; set; }
 
-        public Survey ParentSurvey { get; set; }
+        public virtual Survey ParentSurvey { get; set; }
 
-        public List<Answer> Answers {get; set;}
+        public virtual List<Answer> Answers {get; set;}
     }
 }

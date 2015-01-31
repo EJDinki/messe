@@ -64,15 +64,22 @@
                         case (Question.QuestionType.MultipleChoiceChooseMany):
                                     <p>@Model.QuestionModels[i].Question</p>
     
-                            for (int z = 0; z < ((MultipleChoiceViewModel)@Model.QuestionModels[i]).Choices.Count; z++)
-                            {
+                            
                                 //Do checkbox here
-                                @Html.HiddenFor(m => (((MultipleSelectViewModel)m.QuestionModels[i]).Choices[z]))
-                                @Html.HiddenFor(m => (((MultipleSelectViewModel)m.QuestionModels[i]).Options[z].text))
-                                @Html.CheckBoxFor(m => (((MultipleSelectViewModel)m.QuestionModels[i]).Options[z].IsSelected))
-                                @Html.Label(((MultipleSelectViewModel)Model.QuestionModels[i]).Choices[z])
-                                <br/>
-                            }
+
+                                 @*
+                                            @Html.HiddenFor(m => (((MultipleSelectViewModel)m.QuestionModels[i]).Choices[z]), new { id = String.Format("{0}{1}choice", i, z), name=String.Format("QuestionModels[{0}].Question.Choices[{1}]", i,z)})
+                                        @Html.HiddenFor(m => (((MultipleSelectViewModel)m.QuestionModels[i]).Options[z].text), new { id = String.Format("{0}{1}option", i, z), name = String.Format("QuestionModels[{0}].Question.Options[{1}].text", i, z) })
+                                        @Html.CheckBoxFor(m => (((MultipleSelectViewModel)m.QuestionModels[i]).Options[z].IsSelected), new { id =  })
+                                            <input id="@(String.Format("{0}{1}choice", i, z))"
+                                               name="@(String.Format("QuestionModels[{0}].Question.Choices[{1}]", i, z))" type="hidden" value="Advertisement (Posters, Flyers)" />
+                                        <input id="@(String.Format("{0}{1}option", i, z))"
+                                               name="@(String.Format("QuestionModels[{0}].Question.Options[{1}].text", i, z))" type="hidden" value="Advertisement (Posters, Flyers)" />
+                                        <input data-val="true" data-val-required="The Boolean field is required."
+                                               id="@(String.Format("{0}{1}choiceSelected", i, z))"
+                                               name="@(String.Format("Questionmodels[{0}].Question.Choices[{1}].IsSelected", i, z))" type="checkbox" value="true" />*@
+                                @(Html.Partial("MultipleChoiceChooseMany", Model.QuestionModels[i]))
+                                
                             break;
                         case (Question.QuestionType.ShortAnswer):
                                     <p>@Model.QuestionModels[i].Question</p>

@@ -4,6 +4,7 @@ namespace DiscoveryCenter.Models
     using System.Data.Entity;
     using System.Linq;
     using DiscoveryCenter.Migrations;
+    using System.Data.Entity.ModelConfiguration.Conventions;
 
     public class SurveyContext : DbContext
     {
@@ -28,5 +29,10 @@ namespace DiscoveryCenter.Models
         public virtual DbSet<Question> Questions { get; set; }
 
         public virtual DbSet<Survey> Surveys { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
     }
 }
