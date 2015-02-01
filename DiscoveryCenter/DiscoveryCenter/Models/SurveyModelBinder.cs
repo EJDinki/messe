@@ -33,6 +33,7 @@ namespace DiscoveryCenter.Models
                     }
                     else if(key.Contains(".Question"))
                     {
+                        options = new List<Selection>();
                         question = request.Form.Get(key);
                     }
                     else if(key.Contains(".Answer"))
@@ -41,7 +42,7 @@ namespace DiscoveryCenter.Models
                     }
                     else if(key.Contains(".text"))
                     {
-                        selectionText = request.Form.Get(key).Split(',')[0];
+                        selectionText = request.Form.Get(key);
                     }
                     else if(key.Contains(".IsSelected"))
                     {
