@@ -23,7 +23,7 @@
     @using (Html.BeginForm("Survey", "Home", FormMethod.Post))
     
     {
-        
+    @Html.HiddenFor(m => m.SurveyId)
     <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
         <!-- Indicators -->
         <ol class="carousel-indicators">

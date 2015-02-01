@@ -16,6 +16,7 @@ namespace DiscoveryCenter.Models
 
                 List<ViewModel> models = new List<ViewModel>();
 
+                int sId = Convert.ToInt32(request.Form.Get("SurveyId"));
                 string question="";
                 int questionId = -1;
                 string ans = "";
@@ -80,6 +81,7 @@ namespace DiscoveryCenter.Models
 
                 return new SurveyViewModel
                 {
+                    SurveyId = sId,
                     QuestionModels = models
                 };
 
