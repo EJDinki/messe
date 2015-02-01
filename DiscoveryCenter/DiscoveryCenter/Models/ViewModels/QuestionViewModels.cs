@@ -6,7 +6,7 @@ using System.Web;
 namespace DiscoveryCenter.Models
 {
 
-    public class ViewModel
+    public class QuestionViewModel
     {
         public string Question { get; set; }
         public int QuestionId { get; set; }
@@ -17,7 +17,7 @@ namespace DiscoveryCenter.Models
         
     }
 
-    public class MultipleChoiceViewModel : ViewModel
+    public class MultipleChoiceViewModel : QuestionViewModel
     {
         public List<String> Choices { get; set; }    
     }

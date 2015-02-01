@@ -14,7 +14,7 @@ namespace DiscoveryCenter.Models
             {
                 HttpRequestBase request = controllerContext.HttpContext.Request;
 
-                List<ViewModel> models = new List<ViewModel>();
+                List<QuestionViewModel> models = new List<QuestionViewModel>();
 
                 int sId = Convert.ToInt32(request.Form.Get("SurveyId"));
                 string question="";
@@ -24,10 +24,11 @@ namespace DiscoveryCenter.Models
                 bool isSelected = false;
                 string selectionText = "";
                 Question.QuestionType type;
-                ViewModel model;
+                QuestionViewModel model;
 
                 foreach (string key in request.Form.Keys)
                 {
+                    
                     if(key.Contains(".QuestionId"))
                     {
                         questionId = Convert.ToInt32(request.Form.Get(key));
@@ -68,12 +69,13 @@ namespace DiscoveryCenter.Models
                                 models.Add(model);
                                 break;
                             default:
-                                model = new ViewModel();
+                                model = new QuestionViewModel();
                                 model.Question = question;
                                 model.QuestionId = questionId;
                                 model.Type = type;
                                 model.Answer = ans;
                                 models.Add(model);
+                                ans = "";
                                 break;
                         }
                     }

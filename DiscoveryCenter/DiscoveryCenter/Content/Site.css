@@ -18,9 +18,13 @@
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select,
-textarea {
+select {
     max-width: 280px;
+}
+
+textarea{
+    width:100%;
+    resize:none
 }
 
 .jumbo-medium{
@@ -31,12 +35,39 @@ textarea {
     height: 750px;
 }
 
-.carousel-controls{
- position:relative; 
-  margin:0 auto;
-  bottom:0;
+.carousel-indicators{
+   width:100%;
+   margin-left:-50%;
+   bottom:0px;
 }
 
-.carousel-indicators{
-   top:0px; 
+.carousel-indicators li{
+   border-color:black; 
+   height:17px;
+   width:17px;
+}
+
+.carousel-indicators .active{
+   background-color:teal; 
+   height:20px;
+   width:20px;
+}
+
+.carousel-inner
+{
+    height:450px;
+}
+
+.checkbox input[type="checkbox"]
+{
+    width:35px;
+    height:35px;
+    margin-right:5px;
+}
+
+.radio input[type="radio"]
+{
+    width:35px;
+    height:35px;
+    margin-right:5px;
 }

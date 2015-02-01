@@ -217,6 +217,7 @@
     <Content Include="Views\Shared\_SurveyLayout.cshtml" />
     <Content Include="Views\Home\Survey.cshtml" />
     <Content Include="Views\Home\MultipleChoiceChooseMany.cshtml" />
+    <Content Include="Views\Home\MultipleChoiceChooseOne.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

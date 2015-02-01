@@ -1,8 +1,12 @@
 ﻿@model DiscoveryCenter.Models.MultipleSelectViewModel
 @for (int z = 0; z < @Model.Choices.Count; z++)
 {
-    @Html.Hidden(String.Format("{0}_Options[{1}].text", Model.QuestionId, z),Model.Options[z].text)
-    @Html.CheckBox(String.Format("{0}_Options[{1}].IsSelected",Model.QuestionId,z),Model.Options[z].IsSelected)
-    @Html.Label(Model.Choices[z])
-    <br />
+    <div class="checkbox">
+        @Html.Hidden(String.Format("{0}_Options[{1}].text", Model.QuestionId, z), Model.Options[z].text)
+        <label>
+            @Html.CheckBox(String.Format("{0}_Options[{1}].IsSelected", Model.QuestionId, z), Model.Options[z].IsSelected)
+            @Model.Choices[z]
+        </label>
+        <br />
+    </div>
 }

@@ -1,0 +1,12 @@
+﻿@model DiscoveryCenter.Models.MultipleChoiceViewModel
+@for(int z = 0; z < @Model.Choices.Count; z++)
+{
+    <div class="radio">
+        <label>
+            @Html.RadioButton(String.Format("QuestionModels[{0}].Answer", Model.QuestionId), @Model.Choices[z])
+            @Model.Choices[z]
+        </label>
+        <br />
+    </div>
+}
+

@@ -17,7 +17,7 @@ namespace DiscoveryCenter.Controllers
             {
                 Survey survey = (from s in dbContext.Surveys where s.Id == 1 select s).Single();
                 model = new SurveyViewModel();
-                model.QuestionModels = new List<ViewModel>();
+                model.QuestionModels = new List<QuestionViewModel>();
                 model.SurveyId = survey.Id;
                 model.SurveyName = survey.Name;
 
@@ -55,7 +55,7 @@ namespace DiscoveryCenter.Controllers
                             model.QuestionModels.Add(mC);
                             break;
                         default:
-                            ViewModel m = new ViewModel();
+                            QuestionViewModel m = new QuestionViewModel();
                             m.QuestionId = survey.Questions[i].Id;
                             m.Answer = "";
                             m.Question = survey.Questions[i].Text;

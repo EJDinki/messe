@@ -7,7 +7,7 @@ namespace DiscoveryCenter.Models
 {
     public class SurveyViewModel
     {
-        public List<ViewModel> QuestionModels { get; set; }
+        public List<QuestionViewModel> QuestionModels { get; set; }
         public int SurveyId { get; set; }
         public string SurveyName { get; set; }
 
