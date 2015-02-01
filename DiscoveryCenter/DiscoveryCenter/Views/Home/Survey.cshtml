@@ -20,76 +20,70 @@
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
+
     @using (Html.BeginForm("Survey", "Home", FormMethod.Post))
-    
     {
-    @Html.HiddenFor(m => m.SurveyId)
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-        <!-- Indicators -->
+        @Html.HiddenFor(m => m.SurveyId)  
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                @for (int i = 0; i < @Model.QuestionModels.Count; i++)
+                {
+                    string val = i == 0 ? "item active" : "item";
+                    <div class="@val">
+                            @Html.HiddenFor(m => m.QuestionModels[i].Question)
+                            @Html.HiddenFor(m => m.QuestionModels[i].QuestionId)
+
+                            @switch (Model.QuestionModels[i].Type)
+                            {
+                                case (Question.QuestionType.MultipleChoiceChooseOne):
+                                    <p>@Model.QuestionModels[i].Question</p>
+                                    for (int z = 0; z < ((MultipleChoiceViewModel)@Model.QuestionModels[i]).Choices.Count; z++)
+                                    {
+
+                                        @Html.RadioButtonFor(m => m.QuestionModels[i].Answer,
+                                    ((MultipleChoiceViewModel)@Model.QuestionModels[i]).Choices[z])
+                                        @Html.Label((Model.QuestionModels[i] as MultipleChoiceViewModel).Choices[z])
+                                        <br />
+                                    }
+                                    break;
+
+                                case (Question.QuestionType.MultipleChoiceChooseMany):
+                                <p>@Model.QuestionModels[i].Question</p>
+                                @(Html.Partial("MultipleChoiceChooseMany", Model.QuestionModels[i]))
+                                    break;
+
+                                case (Question.QuestionType.ShortAnswer):
+                                <p>@Model.QuestionModels[i].Question</p>
+                                @Html.TextBoxFor(m => m.QuestionModels[i].Answer)
+                                    break;
+
+                                default:
+                                @Html.HiddenFor(m => m.QuestionModels[i].Answer)
+                                    break;
+                            }
+                            @Html.HiddenFor(m => m.QuestionModels[i].Type)
+
+                            @if (i == Model.QuestionModels.Count - 1)
+                            {
+                                <br />
+                                <input type="submit" class="col-lg-offset-6" value="Complete Survey" />
+                            }
+                    </div>
+                }
+            </div>
+            <!-- Indicators -->
+            
+        </div>
+    }
+    <div class="carousel-controls center">
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            @{
-        for (int i = 1; i < @Model.QuestionModels.Count; i++)
-        {
-                    <li data-target="#myCarousel" data-slide-to="@i"></li>
-        }
+            @for (int i = 1; i < @Model.QuestionModels.Count; i++)
+            {
+                <li data-target="#myCarousel" data-slide-to="@i"></li>
             }
         </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-        @{
-            for (int i = 0; i < @Model.QuestionModels.Count; i++)
-            {
-                string val = i == 0 ? "item active" : "item";
-                            <div class="@val">
-                            @Html.HiddenFor(m =>m.QuestionModels[i].Question)
-                            @Html.HiddenFor(m => m.QuestionModels[i].QuestionId)
-                           
-                @{     
-                    switch (Model.QuestionModels[i].Type)
-                    {
-                        case (Question.QuestionType.MultipleChoiceChooseOne):
-                            <p>@Model.QuestionModels[i].Question</p>
-                            for (int z = 0; z < ((MultipleChoiceViewModel)@Model.QuestionModels[i]).Choices.Count; z++)
-                            {
-
-                                @Html.RadioButtonFor(m => m.QuestionModels[i].Answer, 
-                                ((MultipleChoiceViewModel)@Model.QuestionModels[i]).Choices[z])
-                                @Html.Label((Model.QuestionModels[i] as MultipleChoiceViewModel).Choices[z])
-
-                                <br/>
-                            }
-                            break;
-                        case (Question.QuestionType.MultipleChoiceChooseMany):
-                                    <p>@Model.QuestionModels[i].Question</p>
-    
-                                @(Html.Partial("MultipleChoiceChooseMany", Model.QuestionModels[i]))
-                                
-                            break;
-                        case (Question.QuestionType.ShortAnswer):
-                                    <p>@Model.QuestionModels[i].Question</p>
-                                    @Html.TextBoxFor(m => m.QuestionModels[i].Answer)
-                            break;
-                        default:
-                            @Html.HiddenFor(m => m.QuestionModels[i].Answer)
-                            break;
-                    }
-                    @Html.HiddenFor(m => m.QuestionModels[i].Type)
-                if (i == Model.QuestionModels.Count - 1)
-                {
-                                <br/>
-                               <input type="submit" class="col-lg-offset-6" value="Complete Survey"/>
-                    }
-                }
-                         
-                            </div>
-            }
-        }
-
-        </div>
     </div>
-    }
-    
 </div>
 

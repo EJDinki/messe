@@ -22,3 +22,21 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.jumbo-medium{
+    height: 500px;
+}
+
+.jumbo-large{
+    height: 750px;
+}
+
+.carousel-controls{
+ position:relative; 
+  margin:0 auto;
+  bottom:0;
+}
+
+.carousel-indicators{
+   top:0px; 
+}
