@@ -1,13 +1,13 @@
-﻿@model DiscoveryCenter.Models.Question
-@{
+﻿@{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_SurveyLayout.cshtml";
 }
 
 <div class="jumbotron">
-    <h1>Survey Details</h1>
-    @Model.Text
-    <br/>
-
+    <center>
+        <h1>Customer Experience Survey</h1>
+        <br/>
+        <a href="/Home/Survey" class="btn btn-default">Start Survey</a>
+    </center>
 </div>
 

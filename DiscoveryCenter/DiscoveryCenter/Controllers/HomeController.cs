@@ -101,7 +101,7 @@ namespace DiscoveryCenter.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("Survey");
+            return View();
         }
       
     }
