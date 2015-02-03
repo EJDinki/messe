@@ -88,14 +88,19 @@
         function sliderChanged(ele)
         {
             if (document.readyState === "complete") {
-                console.log(ele.id);
-                var id = ele.id.replace("Slider", "Answer");
-                var newval = $("#" + ele.id).val();
-                console.log($("#" + id));
-                console.log(ele.value);
-                console.log(newval);
-                $("#" + id).val(ele.value);
-                console.log($("#" + id).val());
+
+                //we have to delay so that the value has time to set to its end value
+                setTimeout(function () {
+                    console.log(ele.id);
+                    var id = ele.id.replace("Slider", "Answer");
+                    var newval = $("#" + ele.id).val();
+                    console.log($("#" + id));
+                    console.log(ele.value);
+                    console.log(newval);
+                    $("#" + id).val(ele.value);
+                    console.log($("#" + id).val());
+                }, 10);
+                
             }
         }
     </script>
