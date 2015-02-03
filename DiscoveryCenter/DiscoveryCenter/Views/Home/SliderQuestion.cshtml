@@ -1,0 +1,8 @@
+﻿@model DiscoveryCenter.Models.SliderViewModel
+<div class="slider-container">
+    @Html.Hidden(String.Format("QuestionModels[{0}].Answer", Model.QuestionId), "")
+    @Html.TextBox(String.Format("QuestionModels[{0}].Slider", Model.QuestionId), "",
+        new { @class = "slider", @onchange = "sliderChanged(this)"})
+    <div class="pull-left"><label>@Model.Choices[0]</label></div>
+    <div class="pull-right"><label>@Model.Choices[1]</label></div>
+</div>

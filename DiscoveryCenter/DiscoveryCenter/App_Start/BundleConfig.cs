@@ -21,10 +21,12 @@ namespace DiscoveryCenter
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap-slider.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-slider.css",
                       "~/Content/site.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,

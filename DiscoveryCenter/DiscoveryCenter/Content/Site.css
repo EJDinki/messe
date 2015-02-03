@@ -55,7 +55,7 @@ textarea{
 
 .carousel-inner
 {
-    height:450px;
+    min-height:400px;
 }
 
 .checkbox input[type="checkbox"]
@@ -70,4 +70,14 @@ textarea{
     width:35px;
     height:35px;
     margin-right:5px;
+}
+
+.slider-container{
+    width:70%;
+    margin-left:10%;
+    margin-right:20%;
+}
+
+.slider.slider-horizontal{
+    width:100%;
 }

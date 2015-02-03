@@ -27,6 +27,11 @@ namespace DiscoveryCenter.Models
         public List<Selection> Options { get; set; }
     }
 
+    public class SliderViewModel : QuestionViewModel
+    {
+        public List<String> Choices { get; set; }
+    }
+
     public class Selection
     {
         public bool IsSelected;

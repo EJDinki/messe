@@ -7,10 +7,10 @@
 }
 @using (Html.BeginForm("Survey", "Home", FormMethod.Post))
 {
-    <div class="jumbotron">
-        <h1>Survey Details</h1>
-    
-        <br/>
+    <div class="jumbotron" >
+        <img src="~/Content/discovery.png"/>
+
+        <br />
 
         <!-- Left and right controls -->
         <a class="left carousel-control pull-left" href="#myCarousel" role="button" data-slide="prev">
@@ -21,8 +21,8 @@
             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
-    
-        @Html.HiddenFor(m => m.SurveyId)  
+
+        @Html.HiddenFor(m => m.SurveyId)
         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
             <!-- Indicators -->
             <div class="carousel-controls center">
@@ -41,31 +41,32 @@
                 {
                     string val = i == 0 ? "item active" : "item";
                     <div class="@val">
-                            @Html.HiddenFor(m => m.QuestionModels[i].Question)
-                            @Html.HiddenFor(m => m.QuestionModels[i].QuestionId)
+                        @Html.HiddenFor(m => m.QuestionModels[i].Question)
+                        @Html.HiddenFor(m => m.QuestionModels[i].QuestionId)
+                        <p><b>@Model.QuestionModels[i].Question</b></p>
+                        @switch (Model.QuestionModels[i].Type)
+                        {
+                            case (Question.QuestionType.MultipleChoiceChooseOne):
+                                @(Html.Partial("MultipleChoiceChooseOne", Model.QuestionModels[i]))
+                                break;
 
-                            @switch (Model.QuestionModels[i].Type)
-                            {
-                                case (Question.QuestionType.MultipleChoiceChooseOne):
-                                    <p>@Model.QuestionModels[i].Question</p>
-                                    @(Html.Partial("MultipleChoiceChooseOne", Model.QuestionModels[i]))
-                                    break;
-
-                                case (Question.QuestionType.MultipleChoiceChooseMany):
-                                <p>@Model.QuestionModels[i].Question</p>
+                            case (Question.QuestionType.MultipleChoiceChooseMany):
                                 @(Html.Partial("MultipleChoiceChooseMany", Model.QuestionModels[i]))
-                                    break;
+                                break;
 
-                                case (Question.QuestionType.ShortAnswer):
-                                <p>@Model.QuestionModels[i].Question</p>
-                                    @Html.TextAreaFor(m => m.QuestionModels[i].Answer)
-                                    break;
+                            case (Question.QuestionType.ShortAnswer):
+                                @Html.TextAreaFor(m => m.QuestionModels[i].Answer)
+                                break;
 
-                                default:
+                            case (Question.QuestionType.Slider):
+                                @(Html.Partial("SliderQuestion", Model.QuestionModels[i]))
+                                break;
+
+                            default:
                                 @Html.HiddenFor(m => m.QuestionModels[i].Answer)
-                                    break;
-                            }
-                            @Html.HiddenFor(m => m.QuestionModels[i].Type)
+                                break;
+                        }
+                        @Html.HiddenFor(m => m.QuestionModels[i].Type)
                     </div>
                 }
             </div>
@@ -79,5 +80,24 @@
     </div>
 }
 
+@section scripts
+{
+    <script>
+        $(".slider").slider();
 
+        function sliderChanged(ele)
+        {
+            if (document.readyState === "complete") {
+                console.log(ele.id);
+                var id = ele.id.replace("Slider", "Answer");
+                var newval = $("#" + ele.id).val();
+                console.log($("#" + id));
+                console.log(ele.value);
+                console.log(newval);
+                $("#" + id).val(ele.value);
+                console.log($("#" + id).val());
+            }
+        }
+    </script>
+}
 

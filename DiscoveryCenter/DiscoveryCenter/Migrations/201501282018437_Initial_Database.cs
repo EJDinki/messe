@@ -20,7 +20,7 @@ namespace DiscoveryCenter.Migrations
                 .ForeignKey("dbo.Questions", t => t.QuestionId, cascadeDelete: true)
                 .ForeignKey("dbo.Submissions", t => t.Submission_Id)
                 .Index(t => t.QuestionId)
-                .Index(t => t.Submission_Id);
+                .Index(t => t.Submission_Id); 
             
             CreateTable(
                 "dbo.Questions",

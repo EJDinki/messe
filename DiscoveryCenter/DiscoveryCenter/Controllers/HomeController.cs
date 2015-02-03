@@ -45,6 +45,15 @@ namespace DiscoveryCenter.Controllers
 
                             model.QuestionModels.Add(mS);
                             break;
+                        case (Question.QuestionType.Slider):
+                            SliderViewModel s = new SliderViewModel();
+                            s.QuestionId = survey.Questions[i].Id;
+                            s.Answer = "";
+                            s.Question = survey.Questions[i].Text;
+                            s.Type = survey.Questions[i].Type;
+                            s.Choices = survey.Questions[i].Choices.Split(';').ToList();
+                            model.QuestionModels.Add(s);
+                            break;
                         case(Question.QuestionType.MultipleChoiceChooseOne):
                             MultipleChoiceViewModel mC = new MultipleChoiceViewModel();
                             mC.QuestionId = survey.Questions[i].Id;

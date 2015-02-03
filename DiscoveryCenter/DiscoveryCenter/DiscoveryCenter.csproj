@@ -179,12 +179,15 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-slider.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\discovery.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap-slider.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -218,6 +221,7 @@
     <Content Include="Views\Home\Survey.cshtml" />
     <Content Include="Views\Home\MultipleChoiceChooseMany.cshtml" />
     <Content Include="Views\Home\MultipleChoiceChooseOne.cshtml" />
+    <Content Include="Views\Home\SliderQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -233,6 +237,7 @@
     <EmbeddedResource Include="Migrations\201501282018437_Initial_Database.resx">
       <DependentUpon>201501282018437_Initial_Database.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502022218227_201501282018437_Initial_Database.cs.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
