@@ -1,5 +1,5 @@
 ﻿body {
-    //padding-top: 50px;
+    /*padding-top: 50px;*/
     padding-bottom: 50px;
 }
 
@@ -84,6 +84,8 @@ textarea{
     width:100%;
 }
 
+/*carousel controls*/
+
 .carousel {
   position: relative;
 }
@@ -151,31 +153,32 @@ textarea{
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
-  width: 15%;
+  /*left: 0;*/
+  width: 7%;
   font-size: 20px;
-  color: #ffffff;
+  /*color: #ffffff;*/
+  color: black;
   text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  opacity: 0.5;
-  filter: alpha(opacity=50);
+  /*text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);*/
+  /*opacity: 0.5;*/
+  /*filter: alpha(opacity=50);*/
 }
 
 .carousel-control.left {
-  /*background-color: blue;*/
-  /*
+  /*background-color: black;*/
+  
   background-image: -webkit-gradient(linear, 0 top, 100% top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.0001)));
   background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.5) 0), color-stop(rgba(0, 0, 0, 0.0001) 100%));
   background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0.0001) 100%);
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0.0001) 100%);
   background-repeat: repeat-x;
-  */
+  
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
 }
 
 .carousel-control.right {
-  right: 0;
-  left: auto;
+  /*right: 0;
+  left: auto;*/
   /*background-color: blue;*/
   background-image: -webkit-gradient(linear, 0 top, 100% top, from(rgba(0, 0, 0, 0.0001)), to(rgba(0, 0, 0, 0.5)));
   background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.0001) 0), color-stop(rgba(0, 0, 0, 0.5) 100%));
@@ -223,12 +226,12 @@ textarea{
 
 .carousel-indicators {
   position: absolute;
-  bottom: 10px;
+  bottom: 1px;
   left: 50%;
   z-index: 15;
-  width: 60%;
+  width: 80%;
   padding-left: 0;
-  margin-left: -30%;
+  margin-left: -40%;
   text-align: center;
   list-style: none;
 }
@@ -240,7 +243,8 @@ textarea{
   margin: 1px;
   text-indent: -999px;
   cursor: pointer;
-  border: 1px solid #ffffff;
+  border: 1px solid #000000;
+  /*background-color:*/
   border-radius: 10px;
 }
 
@@ -248,7 +252,7 @@ textarea{
   width: 12px;
   height: 12px;
   margin: 0;
-  background-color: #ffffff;
+  background-color: black;
 }
 
 .carousel-caption {
@@ -284,5 +288,44 @@ textarea{
   }
   .carousel-indicators {
     bottom: 20px;
+  }
+}
+
+/*end carousel*/
+
+.jumbotron {
+  padding: 10px;
+  margin-bottom: 30px;
+  font-size: 21px;
+  font-weight: 200;
+  line-height: 2.1428571435;
+  color: inherit;
+  background-color: #eeeeee;
+}
+
+.jumbotron h1 {
+  line-height: 1;
+  color: inherit;
+}
+
+.jumbotron p {
+  line-height: 1.4;
+}
+
+.container .jumbotron {
+  border-radius: 6px;
+}
+
+@media screen and (min-width: 768px) {
+  .jumbotron {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .container .jumbotron {
+    padding-right: 60px;
+    padding-left: 60px;
+  }
+  .jumbotron h1 {
+    font-size: 63px;
   }
 }
