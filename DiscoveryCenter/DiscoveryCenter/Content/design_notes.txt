@@ -1,0 +1,48 @@
+overall:
+change from pixels to percentage
+
+color scheme:
+make start button red with white font 
+make background blue with white text
+no color scheme/weird color scheme
+gradient is bad
+flat look or gradient look?
+
+flat:
+solid colors for movement buttons, no outlines
+
+start page:
+grey box is bad
+use helvetica light if possible, or arial if need be
+"start" instead of "start survey"
+make start button larger
+all caps START?
+remove hr
+change hover color on button
+
+survey:
+get rid of dots as progress bar
+move whole question up
+align logo with question/answers, possible move over towards center
+keep arrow where it is
+make question type bigger or answer type smaller
+find somewhere better or take out complete survey/exit survey buttons (align with logo on same level?)
+if there are too many options, move to second column
+move entire question/answer section towards center so they don't overlap back/forward buttons
+turn hover off
+somehow make it evident to show entire left/right sides of screen represent forward/back buttons
+
+
+checkbox:
+more space between boxes and text
+
+radio buttons:
+more space between boxes and text
+
+text box:
+
+slider:
+make the slider flat
+remove popup numbers and replace with values underneath the slider
+line up the question with the slider
+fix alignment issues
