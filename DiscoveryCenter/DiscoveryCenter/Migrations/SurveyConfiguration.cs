@@ -6,10 +6,12 @@ namespace DiscoveryCenter.Migrations
     using System.Linq;
     using DiscoveryCenter.Models;
     using System.Collections.Generic;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<DiscoveryCenter.Models.SurveyContext>
+    internal sealed class SurveyConfiguration : DbMigrationsConfiguration<DiscoveryCenter.Models.SurveyContext>
     {
-        public Configuration()
+        public SurveyConfiguration()
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
@@ -17,7 +19,16 @@ namespace DiscoveryCenter.Migrations
 
         protected override void Seed(DiscoveryCenter.Models.SurveyContext context)
         {
+            //Use this to debug this method
+            //if (System.Diagnostics.Debugger.IsAttached == false)
+            //    System.Diagnostics.Debugger.Launch();
 
+            //accounts
+            AccountDbContext identityContext = new AccountDbContext();
+            var manager = new UserManager<Account>(new UserStore<Account>(identityContext));
+            var user1 = new Account { Id = "1", UserName = "admin"};
+            IdentityResult res = manager.Create(user1, "admin101");
+            identityContext.SaveChanges();
 
             new List<Survey>
             {
