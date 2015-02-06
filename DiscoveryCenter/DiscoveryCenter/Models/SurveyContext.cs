@@ -5,6 +5,7 @@ namespace DiscoveryCenter.Models
     using System.Linq;
     using DiscoveryCenter.Migrations;
     using System.Data.Entity.ModelConfiguration.Conventions;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     public class SurveyContext : DbContext
     {
@@ -32,6 +33,10 @@ namespace DiscoveryCenter.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            //modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
+            //modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
+            //modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
     }
