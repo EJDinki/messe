@@ -10,7 +10,6 @@ using DiscoveryCenter.Models;
 
 namespace DiscoveryCenter.Controllers
 {
-    [Authorize]
     public class CreationController : Controller
     {
         private SurveyContext db = new SurveyContext();

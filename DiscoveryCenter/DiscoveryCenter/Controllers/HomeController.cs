@@ -10,12 +10,12 @@ namespace DiscoveryCenter.Controllers
     public class HomeController : Controller
     {
         [HttpGet]
-        public  ActionResult Survey(int id = 1)
+        public  ActionResult Survey()
         {
             SurveyViewModel model = null;
             using(SurveyContext dbContext = new SurveyContext())
             {
-                Survey survey = (from s in dbContext.Surveys where s.Id == id select s).Single();
+                Survey survey = (from s in dbContext.Surveys where s.Id == 1 select s).Single();
                 model = new SurveyViewModel();
                 model.QuestionModels = new List<QuestionViewModel>();
                 model.SurveyId = survey.Id;
