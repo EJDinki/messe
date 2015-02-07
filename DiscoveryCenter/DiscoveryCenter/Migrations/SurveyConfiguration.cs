@@ -20,8 +20,8 @@ namespace DiscoveryCenter.Migrations
         protected override void Seed(DiscoveryCenter.Models.SurveyContext context)
         {
             //Use this to debug this method
-            if (System.Diagnostics.Debugger.IsAttached == false)
-                System.Diagnostics.Debugger.Launch();
+            //if (System.Diagnostics.Debugger.IsAttached == false)
+            //    System.Diagnostics.Debugger.Launch();
 
             //accounts
             try
