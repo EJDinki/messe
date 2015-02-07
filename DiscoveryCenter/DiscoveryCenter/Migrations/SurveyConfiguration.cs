@@ -20,15 +20,22 @@ namespace DiscoveryCenter.Migrations
         protected override void Seed(DiscoveryCenter.Models.SurveyContext context)
         {
             //Use this to debug this method
-            //if (System.Diagnostics.Debugger.IsAttached == false)
-            //    System.Diagnostics.Debugger.Launch();
+            if (System.Diagnostics.Debugger.IsAttached == false)
+                System.Diagnostics.Debugger.Launch();
 
             //accounts
-            AccountDbContext identityContext = new AccountDbContext();
-            var manager = new UserManager<Account>(new UserStore<Account>(identityContext));
-            var user1 = new Account { Id = "1", UserName = "admin"};
-            IdentityResult res = manager.Create(user1, "admin101");
-            identityContext.SaveChanges();
+            try
+            {
+                AccountDbContext identityContext = new AccountDbContext();
+                var manager = new UserManager<Account>(new UserStore<Account>(identityContext));
+                var user1 = new Account { Id = "1", UserName = "admin" };
+                IdentityResult res = manager.Create(user1, "admin101");
+                identityContext.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+
+            }
 
             new List<Survey>
             {
@@ -39,7 +46,7 @@ namespace DiscoveryCenter.Migrations
                     Name = "Adult", 
 
                 }
-            }.ForEach(survey => context.Surveys.Add(survey));
+            }.ForEach(survey => context.Surveys.AddOrUpdate(survey));
             context.SaveChanges();
 
 
