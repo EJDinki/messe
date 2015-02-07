@@ -21,13 +21,30 @@ namespace DiscoveryCenter
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/bootstrap-slider.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/SurveyView").Include(
+                      "~/Scripts/bootstrap-slider.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/Admin").Include(
+                "~/Scripts/jquery-ui.min.js"));
+
+
+            //styles
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.css"));
+
+            bundles.Add(new StyleBundle("~/Content/Admin").Include(
+                      "~/Content/Admin.css",
+                      "~/Content/jquery-ui.min.css",
+                      "~/Content/jquery-ui.structure.min.css",
+                      "~/Content/jquery-ui.theme.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/SurveyView").Include(
                       "~/Content/bootstrap-slider.css",
-                      "~/Content/site.css"));
+                      "~/Content/SurveyView.css"));
+
+            
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace DiscoveryCenter.Models
 {
@@ -14,6 +15,7 @@ namespace DiscoveryCenter.Models
         
         public virtual List<Question> Questions { get; set; }
 
+        [ScriptIgnore]
         public virtual List<Submission> Submissions { get; set; }
     }
 }

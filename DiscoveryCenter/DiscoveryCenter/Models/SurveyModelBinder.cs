@@ -10,90 +10,151 @@ namespace DiscoveryCenter.Models
     {
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
+            HttpRequestBase request = controllerContext.HttpContext.Request;
             if (bindingContext.ModelType == typeof(SurveyViewModel))
             {
-                HttpRequestBase request = controllerContext.HttpContext.Request;
+                return BindSVM(request);
 
-                List<QuestionViewModel> models = new List<QuestionViewModel>();
-
-                int sId = Convert.ToInt32(request.Form.Get("SurveyId"));
-                string question="";
-                int questionId = -1;
-                string ans = "";
-                List<Selection> options = new List<Selection>();
-                bool isSelected = false;
-                string selectionText = "";
-                Question.QuestionType type;
-                QuestionViewModel model;
-
-                foreach (string key in request.Form.Keys)
-                {
-                    
-                    if(key.Contains(".QuestionId"))
-                    {
-                        questionId = Convert.ToInt32(request.Form.Get(key));
-                    }
-                    else if(key.Contains(".Question"))
-                    {
-                        options = new List<Selection>();
-                        question = request.Form.Get(key);
-                    }
-                    else if(key.Contains(".Answer"))
-                    {
-                        ans = request.Form.Get(key);
-                    }
-                    else if(key.Contains(".text"))
-                    {
-                        selectionText = request.Form.Get(key);
-                    }
-                    else if(key.Contains(".IsSelected"))
-                    {
-                        isSelected = Boolean.Parse(request.Form.Get(key).Split(',')[0]);
-                        Selection select = new Selection();
-                        select.text = selectionText;
-                        select.IsSelected = isSelected;
-                        options.Add(select);
-                    }
-                    else if(key.Contains(".Type"))
-                    {
-                        type = (Question.QuestionType)Enum.Parse(typeof(Question.QuestionType), request.Form.Get(key));
-                        switch(type)
-                        {
-                            case(Question.QuestionType.MultipleChoiceChooseMany):
-                                model = new MultipleSelectViewModel();
-                                model.Question = question;
-                                model.QuestionId = questionId;
-                                model.Type = type;
-                                model.Answer = "";
-                                ((MultipleSelectViewModel)model).Options = options;
-                                models.Add(model);
-                                break;
-                            default:
-                                model = new QuestionViewModel();
-                                model.Question = question;
-                                model.QuestionId = questionId;
-                                model.Type = type;
-                                model.Answer = ans;
-                                models.Add(model);
-                                ans = "";
-                                break;
-                        }
-                    }
-                }
-
-                return new SurveyViewModel
-                {
-                    SurveyId = sId,
-                    QuestionModels = models
-                };
-
-                //// call the default model binder this new binding context
-                //return base.BindModel(controllerContext, newBindingContext);
+            }
+            else if (bindingContext.ModelType == typeof(Survey))
+            {
+                return BindSurvey(request);
             }
             else
             {
                 return base.BindModel(controllerContext, bindingContext);
             }
+        }
+
+        private Survey BindSurvey(HttpRequestBase request)
+        {
+            int sId = Convert.ToInt32(request.Form.Get("Id"));
+            string sName = request.Form.Get("Name");
+            List<Question> questions = new List<Question>();
+            DateTime date = DateTime.Parse(request.Form.Get("CreateDate"));
+
+            string question = "";
+            int questionId = -1;
+            string choices = "";
+            int indexInSurvey = 0;
+            Question.QuestionType type = Question.QuestionType.ShortAnswer;
+
+            foreach (string key in request.Form.Keys)
+            {
+
+                if (key.Contains(".Id"))
+                {
+                    questionId = Convert.ToInt32(request.Form.Get(key));
+                }
+                else if (key.Contains(".Text"))
+                {
+                    question = request.Form.Get(key);
+                }
+                else if (key.Contains(".Type"))
+                {
+                    type = (Question.QuestionType)Enum.Parse(typeof(Question.QuestionType), request.Form.Get(key));
+                }
+                else if (key.Contains("IndexInSurvey"))
+                {
+                    indexInSurvey = Convert.ToInt32(request.Form.Get(key));
+                }
+                else if (key.Contains(".Choices"))
+                {
+                    choices = request.Form.Get(key);
+                    questions.Add(new Question(){
+                        Id = questionId,
+                        SurveyID = sId,
+                        Text = question,
+                        Choices = choices,
+                        Type = type,
+                        IndexInSurvey = indexInSurvey
+                    });
+                }
+                
+            }
+
+            return new Survey()
+            {
+                Name = sName,
+                Id = sId,
+                Questions = questions
+            };
+        }
+
+        private SurveyViewModel BindSVM(HttpRequestBase request)
+        {
+            List<QuestionViewModel> models = new List<QuestionViewModel>();
+
+            int sId = Convert.ToInt32(request.Form.Get("SurveyId"));
+            string question = "";
+            int questionId = -1;
+            string ans = "";
+            List<Selection> options = new List<Selection>();
+            bool isSelected = false;
+            string selectionText = "";
+            Question.QuestionType type;
+            QuestionViewModel model;
+
+            foreach (string key in request.Form.Keys)
+            {
+
+                if (key.Contains(".QuestionId"))
+                {
+                    questionId = Convert.ToInt32(request.Form.Get(key));
+                }
+                else if (key.Contains(".Question"))
+                {
+                    options = new List<Selection>();
+                    question = request.Form.Get(key);
+                }
+                else if (key.Contains(".Answer"))
+                {
+                    ans = request.Form.Get(key);
+                }
+                else if (key.Contains(".text"))
+                {
+                    selectionText = request.Form.Get(key);
+                }
+                else if (key.Contains(".IsSelected"))
+                {
+                    isSelected = Boolean.Parse(request.Form.Get(key).Split(',')[0]);
+                    Selection select = new Selection();
+                    select.text = selectionText;
+                    select.IsSelected = isSelected;
+                    options.Add(select);
+                }
+                else if (key.Contains(".Type"))
+                {
+                    type = (Question.QuestionType)Enum.Parse(typeof(Question.QuestionType), request.Form.Get(key));
+                    switch (type)
+                    {
+                        case (Question.QuestionType.MultipleChoiceChooseMany):
+                            model = new MultipleSelectViewModel();
+                            model.Question = question;
+                            model.QuestionId = questionId;
+                            model.Type = type;
+                            model.Answer = "";
+                            ((MultipleSelectViewModel)model).Options = options;
+                            models.Add(model);
+                            break;
+                        default:
+                            model = new QuestionViewModel();
+                            model.Question = question;
+                            model.QuestionId = questionId;
+                            model.Type = type;
+                            model.Answer = ans;
+                            models.Add(model);
+                            ans = "";
+                            break;
+                    }
+                }
+            }
+
+            return new SurveyViewModel
+            {
+                SurveyId = sId,
+                QuestionModels = models
+            };
         }
 
     }

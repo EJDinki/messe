@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Museum of the Southern Tier</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/SurveyView")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -16,6 +17,7 @@
             @RenderBody()
         </div>
 
+        @Scripts.Render("~/bundles/SurveyView")
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)
