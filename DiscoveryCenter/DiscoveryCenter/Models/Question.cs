@@ -33,5 +33,7 @@ namespace DiscoveryCenter.Models
 
         [ScriptIgnore]
         public virtual List<Answer> Answers { get; set; }
+
+        public int IndexInSurvey { get; set; }
     }
 }

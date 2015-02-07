@@ -76,6 +76,7 @@ namespace DiscoveryCenter.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Survey survey = db.Surveys.Find(id);
+            survey.Questions = survey.Questions.OrderBy(q => q.IndexInSurvey).ToList();
             if (survey == null)
             {
                 return HttpNotFound();
@@ -111,6 +112,7 @@ namespace DiscoveryCenter.Controllers
                        q.Text = match.Text;
                        q.Type = match.Type;
                        q.Choices = match.Choices;
+                       q.IndexInSurvey = match.IndexInSurvey;
                    }
                }
 

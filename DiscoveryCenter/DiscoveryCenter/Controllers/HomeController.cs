@@ -21,17 +21,18 @@ namespace DiscoveryCenter.Controllers
                 model.SurveyId = survey.Id;
                 model.SurveyName = survey.Name;
 
-                for(int i = 0; i < survey.Questions.Count; i++)
+                
+                foreach(var question in survey.Questions.OrderBy(x => x.IndexInSurvey))
                 {
-                    switch(survey.Questions[i].Type)
+                    switch (question.Type)
                     {
                         case(Question.QuestionType.MultipleChoiceChooseMany):
                             MultipleSelectViewModel mS = new MultipleSelectViewModel();
-                            mS.QuestionId = survey.Questions[i].Id;
+                            mS.QuestionId = question.Id;
                             mS.Answer = "";
-                            mS.Question = survey.Questions[i].Text;
-                            mS.Type = survey.Questions[i].Type;
-                            mS.Choices = survey.Questions[i].Choices.Split(';').ToList();
+                            mS.Question = question.Text;
+                            mS.Type = question.Type;
+                            mS.Choices = question.Choices.Split(';').ToList();
                             mS.Options = new List<Selection>();
 
                             foreach(string choice in mS.Choices)
@@ -47,28 +48,28 @@ namespace DiscoveryCenter.Controllers
                             break;
                         case (Question.QuestionType.Slider):
                             SliderViewModel s = new SliderViewModel();
-                            s.QuestionId = survey.Questions[i].Id;
+                            s.QuestionId = question.Id;
                             s.Answer = "";
-                            s.Question = survey.Questions[i].Text;
-                            s.Type = survey.Questions[i].Type;
-                            s.Choices = survey.Questions[i].Choices.Split(';').ToList();
+                            s.Question = question.Text;
+                            s.Type = question.Type;
+                            s.Choices = question.Choices.Split(';').ToList();
                             model.QuestionModels.Add(s);
                             break;
                         case(Question.QuestionType.MultipleChoiceChooseOne):
                             MultipleChoiceViewModel mC = new MultipleChoiceViewModel();
-                            mC.QuestionId = survey.Questions[i].Id;
+                            mC.QuestionId = question.Id;
                             mC.Answer = "";
-                            mC.Question = survey.Questions[i].Text;
-                            mC.Type = survey.Questions[i].Type;
-                            mC.Choices = survey.Questions[i].Choices.Split(';').ToList();
+                            mC.Question = question.Text;
+                            mC.Type = question.Type;
+                            mC.Choices = question.Choices.Split(';').ToList();
                             model.QuestionModels.Add(mC);
                             break;
                         default:
                             QuestionViewModel m = new QuestionViewModel();
-                            m.QuestionId = survey.Questions[i].Id;
+                            m.QuestionId = question.Id;
                             m.Answer = "";
-                            m.Question = survey.Questions[i].Text;
-                            m.Type = survey.Questions[i].Type;
+                            m.Question = question.Text;
+                            m.Type = question.Type;
                             model.QuestionModels.Add(m);
                             break;
                     }

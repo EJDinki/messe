@@ -1,10 +1,41 @@
 ﻿@model Tuple<int,DiscoveryCenter.Models.Question>
 
-<div class="form-group" id="questionDiv">
-    @Html.Hidden(String.Format("Questions[{0}].Id", Guid.NewGuid()), Model.Item2.Id)
-    @Html.TextBox(String.Format("Questions[{0}].Text", Guid.NewGuid()), Model.Item2.Text, new {@class = "form-control", @style = "width:100%;max-width:none;resize:none;" })
-    @Html.EnumDropDownListFor(m => m.Item2.Type, new { Name = String.Format("Questions[{0}].Type", Guid.NewGuid()) })
-    @Html.TextBox(String.Format("Questions[{0}].Choices", Guid.NewGuid()), Model.Item2.Choices, new {@class = "form-control", @style = "width:100%;max-width:none;resize:none;" })
+@{
+    string guid = Guid.NewGuid().ToString();
+}
 
-    <a href="javascript:void(0)" class="deleteRow" onclick="$(this).parent().remove();">Delete Question</a>
-</div>
+<li class="panel panel-info">
+    <div class="panel-heading">Question <span class="IndexInSurvey">@Model.Item2.IndexInSurvey</span></div>
+    <div class="panel-body">
+
+        @Html.Hidden(String.Format("Questions[{0}].Id", guid), Model.Item2.Id)
+        @Html.Hidden(String.Format("Questions[{0}].IndexInSurvey", guid), Model.Item2.IndexInSurvey, new { @class = "IndexInSurvey" })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Item2.Text, new { @class = "col-md-2 control-label" })
+            <div class="col-md-8">
+                @Html.TextBox(String.Format("Questions[{0}].Text", guid), Model.Item2.Text, new { @class = "form-control", @style = "width:100%;max-width:none;resize:none;" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Item2.Type, new { @class = "col-md-2 control-label" })
+            <div class="col-md-8 ">
+                @Html.EnumDropDownListFor(m => m.Item2.Type, new { Name = String.Format("Questions[{0}].Type", guid), @class = "form-control" })
+            </div>
+        </div>
+        @if(Model.Item2.Type == DiscoveryCenter.Models.Question.QuestionType.MultipleChoiceChooseMany ||
+            Model.Item2.Type == DiscoveryCenter.Models.Question.QuestionType.MultipleChoiceChooseOne ||
+            Model.Item2.Type == DiscoveryCenter.Models.Question.QuestionType.Slider )
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.Item2.Choices, new { @class = "col-md-2 control-label" })
+                <div class="col-md-8">
+                    @Html.TextBox(String.Format("Questions[{0}].Choices", guid), Model.Item2.Choices, new { @class = "form-control", @style = "width:100%;max-width:none;resize:none;" })
+                </div>
+            </div>
+        }
+        <div class="pull-right">
+            <a href="javascript:void(0)" class="deleteRow" onclick="$(this).parent().remove();">Delete Question</a>
+        </div>
+    </div>
+</li>

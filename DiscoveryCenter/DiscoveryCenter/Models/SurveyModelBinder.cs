@@ -36,6 +36,7 @@ namespace DiscoveryCenter.Models
             string question = "";
             int questionId = -1;
             string choices = "";
+            int indexInSurvey = 0;
             Question.QuestionType type = Question.QuestionType.ShortAnswer;
 
             foreach (string key in request.Form.Keys)
@@ -53,6 +54,10 @@ namespace DiscoveryCenter.Models
                 {
                     type = (Question.QuestionType)Enum.Parse(typeof(Question.QuestionType), request.Form.Get(key));
                 }
+                else if (key.Contains("IndexInSurvey"))
+                {
+                    indexInSurvey = Convert.ToInt32(request.Form.Get(key));
+                }
                 else if (key.Contains(".Choices"))
                 {
                     choices = request.Form.Get(key);
@@ -61,9 +66,11 @@ namespace DiscoveryCenter.Models
                         SurveyID = sId,
                         Text = question,
                         Choices = choices,
-                        Type = type
+                        Type = type,
+                        IndexInSurvey = indexInSurvey
                     });
                 }
+                
             }
 
             return new Survey()
