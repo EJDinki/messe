@@ -207,6 +207,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -223,7 +224,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\MultipleChoice.cshtml" />
     <Content Include="Views\Home\ShortAnswer.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\_SurveyLayout.cshtml" />
@@ -238,6 +238,7 @@
     <Content Include="Views\Creation\Details.cshtml" />
     <Content Include="Views\Creation\Edit.cshtml" />
     <Content Include="Views\Creation\Index.cshtml" />
+    <Content Include="Views\Creation\Question.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>

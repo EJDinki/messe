@@ -1,0 +1,10 @@
+﻿@model Tuple<int,DiscoveryCenter.Models.Question>
+
+<div class="form-group" id="questionDiv">
+    @Html.Hidden(String.Format("Questions[{0}].Id", Guid.NewGuid()), Model.Item2.Id)
+    @Html.TextBox(String.Format("Questions[{0}].Text", Guid.NewGuid()), Model.Item2.Text, new {@class = "form-control", @style = "width:100%;max-width:none;resize:none;" })
+    @Html.EnumDropDownListFor(m => m.Item2.Type, new { Name = String.Format("Questions[{0}].Type", Guid.NewGuid()) })
+    @Html.TextBox(String.Format("Questions[{0}].Choices", Guid.NewGuid()), Model.Item2.Choices, new {@class = "form-control", @style = "width:100%;max-width:none;resize:none;" })
+
+    <a href="#" class="deleteRow" onclick="$(this).parent().remove();">Delete Question</a>
+</div>

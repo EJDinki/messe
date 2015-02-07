@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DiscoveryCenter.Models;
+using System.Drawing;
 
 namespace DiscoveryCenter.Controllers
 {
@@ -15,6 +16,12 @@ namespace DiscoveryCenter.Controllers
     {
         private SurveyContext db = new SurveyContext();
 
+        public ViewResult BlankQuestionRow(int id, int surveyId)
+        {
+            Survey survey = (from s in db.Surveys where s.Id == surveyId select s).FirstOrDefault();
+            Question q = new Question() { SurveyID = survey.Id };
+            return View("Question", new Tuple<int,Question>(id , q));
+        }
         // GET: Creation
         public ActionResult Index()
         {
@@ -47,7 +54,7 @@ namespace DiscoveryCenter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,CreateDate")] Survey survey)
+        public ActionResult Create([ModelBinder(typeof(SurveyModelBinder))] Survey survey)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +69,8 @@ namespace DiscoveryCenter.Controllers
         // GET: Creation/Edit/5
         public ActionResult Edit(int? id)
         {
+            Session.Add("questionIndex", 0);
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -79,11 +88,43 @@ namespace DiscoveryCenter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,CreateDate")] Survey survey)
+        public ActionResult Edit([ModelBinder(typeof(SurveyModelBinder))] Survey survey)
         {
+            Survey oldVersion = (from s in db.Surveys where s.Id == survey.Id select s).SingleOrDefault();
+
+           
             if (ModelState.IsValid)
             {
-                db.Entry(survey).State = EntityState.Modified;
+                oldVersion.Name = survey.Name;
+                oldVersion.CreateDate = DateTime.Now;
+                List<Question> deleteList = new List<Question>();
+               foreach(Question q in oldVersion.Questions)
+               {
+                   Question match = (from s in survey.Questions where s.Id == q.Id select s).SingleOrDefault();
+
+                   if(match == null)
+                   {
+                       deleteList.Add(q);
+                   }
+                   else
+                   {
+                       q.Text = match.Text;
+                       q.Type = match.Type;
+                       q.Choices = match.Choices;
+                   }
+               }
+
+               foreach (Question delete in deleteList)
+               {
+                   db.Set(typeof(Question)).Remove(delete);
+               }
+
+               foreach (Question newID in survey.Questions)
+               {
+                   if (newID.Id == 0)
+                       oldVersion.Questions.Add(newID);
+               }
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
