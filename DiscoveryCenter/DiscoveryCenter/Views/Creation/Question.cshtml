@@ -6,5 +6,5 @@
     @Html.EnumDropDownListFor(m => m.Item2.Type, new { Name = String.Format("Questions[{0}].Type", Guid.NewGuid()) })
     @Html.TextBox(String.Format("Questions[{0}].Choices", Guid.NewGuid()), Model.Item2.Choices, new {@class = "form-control", @style = "width:100%;max-width:none;resize:none;" })
 
-    <a href="#" class="deleteRow" onclick="$(this).parent().remove();">Delete Question</a>
+    <a href="javascript:void(0)" class="deleteRow" onclick="$(this).parent().remove();">Delete Question</a>
 </div>
