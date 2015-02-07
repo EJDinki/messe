@@ -16,7 +16,9 @@
         <h4>Survey</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.CreateDate)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -26,17 +28,16 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Questions, htmlAttributes: new { @class = "control-label col-md-2" })
-            @for (int i = 0; i < Model.Questions.Count; i++ )
-            { 
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Questions[i].Text, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.EnumDropDownListFor(model => model.Questions[i].Type)
-            </div>
-            }
+        
+        @Html.LabelFor(model => model.Questions, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div id="questionDivList">
+        @for (int i = 0; i < Model.Questions.Count; i++ )
+        { 
+            @Html.Partial("Question",new Tuple<int,Question>(i,Model.Questions[i]))    
+        }
         </div>
 
+        @Html.ActionLink("Add Question", "BlankQuestionRow", new { id = 0, surveyId = Model.Id }, new {id="addItem" })
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -48,3 +49,17 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section scripts
+{
+    <script>
+    $("#addItem").click(function() {
+    $.ajax({
+        url: this.href,
+        cache: false,
+        success: function(html) { $("#questionDivList").append(html); }
+    });
+    return false;
+    });
+    </script>
+}
