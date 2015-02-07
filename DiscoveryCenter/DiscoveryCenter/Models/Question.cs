@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Script.Serialization;
 
 namespace DiscoveryCenter.Models
 {
@@ -25,8 +26,12 @@ namespace DiscoveryCenter.Models
 
         [ForeignKey("ParentSurvey")]
         public int SurveyID { get; set; }
+
+        [ScriptIgnore]
         public Survey ParentSurvey { get; set; }
         public string Choices { get; set; }
+
+        [ScriptIgnore]
         public virtual List<Answer> Answers { get; set; }
     }
 }
