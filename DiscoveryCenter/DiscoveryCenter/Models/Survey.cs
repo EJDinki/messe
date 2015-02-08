@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
@@ -14,6 +15,9 @@ namespace DiscoveryCenter.Models
             Submissions = new List<Submission>();
         }
         public int Id { get; set; }
+
+        [Required]
+        [Display(Name = "Survey Name")]
         public string Name { get; set; }
         public DateTime CreateDate { get; set; }
 

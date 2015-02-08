@@ -23,8 +23,10 @@
             </div>
             <div class="top-divider">
                 <center>
-                    @Html.ActionLink("+Add Question", "BlankQuestionRow", new { id = 0, surveyId = Model.Id }, new { id = "addItem", @class = "btn btn-default" })
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <a class="btn btn-default" href="/Creation/BlankQuestionRow/0?surveyId=@Model.Id" id="addItem">
+                        <i class='glyphicon glyphicon-plus'></i> Add Question
+                    </a>
+                    <button id="save" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
                 </center>
             </div>
             <div>
@@ -40,6 +42,12 @@
         @Html.HiddenFor(model => model.CreateDate)
 
         <div id="questionDivList">
+            <div id="tip">
+                @Html.ValidationMessage("Questions", new { @class = "text-danger" })
+                <h2>No Questions in survey.</h2>
+                <br>
+                <h3><span class="glyphicon glyphicon-arrow-left"></span> Press '+Add Question' to add a question</h3>
+            </div>
             <ul id="draggablePanelList" class="list-unstyled">
                 @for (int i = 0; i < Model.Questions.Count; i++)
                 {
@@ -55,6 +63,7 @@
 @section scripts
 {
     <script>
+        
         $("#addItem").click(function() {
         $.ajax({
             url: this.href,
@@ -62,10 +71,32 @@
             success: function (html) {
                 $("#draggablePanelList").append(html);
                 UpdatePanels();
+                NoQuestions()
             }
         });
         return false;
         });
+
+        NoQuestions();
+        function NoQuestions()
+        {
+            if ($("#draggablePanelList").html().trim() == "") {
+                $(tip).show();
+                $(addItem).removeClass("btn-default");
+                $(addItem).addClass("btn-success");
+
+                $("#save").removeClass("btn-success");
+                $("#save").addClass("btn-default");
+            }
+            else {
+                $(tip).hide();
+                $(addItem).removeClass("btn-success");
+                $(addItem).addClass("btn-default");
+
+                $("#save").removeClass("btn-default");
+                $("#save").addClass("btn-success");
+            }
+        }
 
         //---------------draggable panel---------------------
         var panelList = $('#draggablePanelList');

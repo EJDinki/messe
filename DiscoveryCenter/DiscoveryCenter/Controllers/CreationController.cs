@@ -97,6 +97,11 @@ namespace DiscoveryCenter.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([ModelBinder(typeof(SurveyModelBinder))] Survey survey)
         {
+            if (String.IsNullOrEmpty(survey.Name))
+                ModelState.AddModelError("Name", "Name is invalid");
+            else if(!survey.Questions.Any())
+                ModelState.AddModelError("Questions", "Survey requires at least one question");
+
             if (ModelState.IsValid)
             {
                 Survey oldVersion = (from s in db.Surveys where s.Id == survey.Id select s).SingleOrDefault();
