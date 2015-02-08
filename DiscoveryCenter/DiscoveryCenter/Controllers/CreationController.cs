@@ -19,7 +19,14 @@ namespace DiscoveryCenter.Controllers
         public ViewResult BlankQuestionRow(int id, int surveyId)
         {
             Survey survey = (from s in db.Surveys where s.Id == surveyId select s).FirstOrDefault();
-            Question q = new Question() { SurveyID = survey.Id };
+            Question q;
+            
+            //If survey is null, it is not in DB yet. Use dummy ID of 0 that will be created upon save.
+            if(survey != null)
+                q= new Question() { SurveyID = survey.Id };
+            else
+                q = new Question() { SurveyID = 0 };
+
             return View("Question", new Tuple<int,Question>(id , q));
         }
         // GET: Creation
