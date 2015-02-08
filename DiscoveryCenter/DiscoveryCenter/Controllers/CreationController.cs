@@ -19,7 +19,13 @@ namespace DiscoveryCenter.Controllers
         public ViewResult BlankQuestionRow(int id, int surveyId)
         {
             Survey survey = (from s in db.Surveys where s.Id == surveyId select s).FirstOrDefault();
-            Question q = new Question() { SurveyID = survey.Id };
+            
+            Question q;
+            if(survey != null)
+                q = new Question() { SurveyID = survey.Id };
+            else
+                q = new Question();
+
             return View("Question", new Tuple<int,Question>(id , q));
         }
         // GET: Creation
@@ -46,7 +52,7 @@ namespace DiscoveryCenter.Controllers
         // GET: Creation/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Edit", new Survey());
         }
 
         // POST: Creation/Create
@@ -91,42 +97,43 @@ namespace DiscoveryCenter.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([ModelBinder(typeof(SurveyModelBinder))] Survey survey)
         {
-            Survey oldVersion = (from s in db.Surveys where s.Id == survey.Id select s).SingleOrDefault();
-
-           
             if (ModelState.IsValid)
             {
-                oldVersion.Name = survey.Name;
-                oldVersion.CreateDate = DateTime.Now;
-                List<Question> deleteList = new List<Question>();
-               foreach(Question q in oldVersion.Questions)
-               {
-                   Question match = (from s in survey.Questions where s.Id == q.Id select s).SingleOrDefault();
+                Survey oldVersion = (from s in db.Surveys where s.Id == survey.Id select s).SingleOrDefault();
+                if(oldVersion == null)
+                    db.Surveys.Add(survey);
+                else {
+                    oldVersion.Name = survey.Name;
+                    oldVersion.CreateDate = DateTime.Now;
+                    List<Question> deleteList = new List<Question>();
+                    foreach(Question q in oldVersion.Questions)
+                    {
+                       Question match = (from s in survey.Questions where s.Id == q.Id select s).SingleOrDefault();
 
-                   if(match == null)
+                       if(match == null)
+                       {
+                           deleteList.Add(q);
+                       }
+                       else
+                       {
+                           q.Text = match.Text;
+                           q.Type = match.Type;
+                           q.Choices = match.Choices;
+                           q.IndexInSurvey = match.IndexInSurvey;
+                       }
+                    }
+
+                   foreach (Question delete in deleteList)
                    {
-                       deleteList.Add(q);
+                       db.Set(typeof(Question)).Remove(delete);
                    }
-                   else
+
+                   foreach (Question newID in survey.Questions)
                    {
-                       q.Text = match.Text;
-                       q.Type = match.Type;
-                       q.Choices = match.Choices;
-                       q.IndexInSurvey = match.IndexInSurvey;
+                       if (newID.Id == 0)
+                           oldVersion.Questions.Add(newID);
                    }
-               }
-
-               foreach (Question delete in deleteList)
-               {
-                   db.Set(typeof(Question)).Remove(delete);
-               }
-
-               foreach (Question newID in survey.Questions)
-               {
-                   if (newID.Id == 0)
-                       oldVersion.Questions.Add(newID);
-               }
-
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

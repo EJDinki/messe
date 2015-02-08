@@ -31,7 +31,6 @@ namespace DiscoveryCenter.Models
             int sId = Convert.ToInt32(request.Form.Get("Id"));
             string sName = request.Form.Get("Name");
             List<Question> questions = new List<Question>();
-            DateTime date = DateTime.Parse(request.Form.Get("CreateDate"));
 
             string question = "";
             int questionId = -1;
@@ -77,7 +76,8 @@ namespace DiscoveryCenter.Models
             {
                 Name = sName,
                 Id = sId,
-                Questions = questions
+                Questions = questions,
+                CreateDate = DateTime.Now
             };
         }
 
