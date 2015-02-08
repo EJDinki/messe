@@ -111,7 +111,14 @@ namespace DiscoveryCenter.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            SurveyViewModel model = null;
+            using (SurveyContext dbContext = new SurveyContext())
+            {
+                Survey survey = (from s in dbContext.Surveys where s.Id == 1 select s).Single();
+                model = new SurveyViewModel();
+                model.SurveyName = survey.Name;
+            }
+            return View(model);
         }
       
     }
