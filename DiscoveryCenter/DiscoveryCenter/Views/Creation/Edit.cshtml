@@ -36,7 +36,7 @@
     </div>
 
 
-    <div class="form-horizontal col-md-9 panel panel-body panel-default clearfix">
+    <div class="form-horizontal col-md-8 panel panel-body panel-default clearfix">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.CreateDate)
@@ -77,6 +77,18 @@
         return false;
         });
 
+        function AppendChoiceBox(ele, allowDelete)
+        {
+            $.ajax({
+                url: '/Creation/BlankChoiceBox?value=&&allowDelete=' + allowDelete,
+                cache: false,
+                success: function (html) {
+                    $(ele).closest(".Choices").find(".AppendChoices").append(html);
+                }
+            });
+            return false;
+        }
+
         NoQuestions();
         function NoQuestions()
         {
@@ -96,6 +108,30 @@
                 $("#save").removeClass("btn-default");
                 $("#save").addClass("btn-success");
             }
+        }
+
+        function DeleteChoice(ele)
+        {
+            $(ele).closest(".Choice").remove();
+        }
+
+        function UpdateChoices(ele)
+        {
+            var choicesEle = $(ele).closest(".panel-body").find(".Choices").first();
+            var choices = [];
+
+            $(choicesEle).find("input").each(function (index, elem) {
+                choices.push($(elem).val());
+            });
+
+            $.ajax({
+                url: '/Creation/RefreshChoices?typeIndex=' + $(ele).val() + '&&choices=' + choices.join(";"),
+                cache: false,
+                success: function (html) {
+                    $(choicesEle).html(html);
+                }
+            });
+            return false;
         }
 
         //---------------draggable panel---------------------

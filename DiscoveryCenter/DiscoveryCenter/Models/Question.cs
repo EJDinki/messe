@@ -12,10 +12,10 @@ namespace DiscoveryCenter.Models
 
         public enum QuestionType
         {
-            MultipleChoiceChooseOne,
-            MultipleChoiceChooseMany,
-            ShortAnswer,
-            Slider
+            MultipleChoiceChooseOne = 0,
+            MultipleChoiceChooseMany = 1,
+            ShortAnswer = 2,
+            Slider = 3
         }
 
         public string Text { get; set; }
