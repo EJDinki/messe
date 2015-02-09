@@ -163,6 +163,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CreationController.cs" />
+    <Compile Include="Controllers\ExhibitsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -176,6 +177,7 @@
     <Compile Include="Migrations\SurveyConfiguration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Answer.cs" />
+    <Compile Include="Models\Exhibit.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Submission.cs" />
     <Compile Include="Models\Survey.cs" />
@@ -261,6 +263,11 @@
     <Content Include="Views\Creation\Question.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Exhibits\Create.cshtml" />
+    <Content Include="Views\Exhibits\Delete.cshtml" />
+    <Content Include="Views\Exhibits\Details.cshtml" />
+    <Content Include="Views\Exhibits\Edit.cshtml" />
+    <Content Include="Views\Exhibits\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

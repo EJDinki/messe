@@ -234,6 +234,23 @@ namespace DiscoveryCenter.Migrations
                     }
                 }.ForEach(question => context.Questions.AddOrUpdate(question));
             context.SaveChanges();
+
+            new List<Exhibit>
+            {
+                new Exhibit() 
+                { 
+                    Id=1,
+                    Name = "Fire"
+
+                },
+                new Exhibit() 
+                { 
+                    Id=2,
+                    Name = "Water"
+
+                }
+            }.ForEach(exhibit => context.Exhibits.AddOrUpdate(exhibit));
+            context.SaveChanges();
         }
     }
 }
