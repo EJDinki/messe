@@ -13,12 +13,18 @@ namespace DiscoveryCenter.Models
             HttpRequestBase request = controllerContext.HttpContext.Request;
             if (bindingContext.ModelType == typeof(SurveyViewModel))
             {
-                return BindSVM(request);
-
+                SurveyViewModel svm = BindSVM(request);
+                //bindingContext.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType( () => svm, typeof(SurveyViewModel));
+                base.BindModel(controllerContext, bindingContext);
+                return base.BindModel(controllerContext, bindingContext);
             }
             else if (bindingContext.ModelType == typeof(Survey))
             {
-                return BindSurvey(request);
+                
+                Survey survey = BindSurvey(request);
+                //bindingContext.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => survey, typeof(Survey));
+                base.BindModel(controllerContext, bindingContext);
+                return survey;
             }
             else
             {
@@ -59,6 +65,13 @@ namespace DiscoveryCenter.Models
                 }
                 else if (key.Contains(".Text"))
                 {
+                    if(question == null || question.Text != null)
+                    {
+                        if(question != null)
+                            questions.Add(question);
+                        question = new Question();
+                        choices = new List<string>();
+                    }
                     question.Text = request.Form.Get(key);
                 }
                 else if (key.Contains(".Type"))
@@ -76,8 +89,14 @@ namespace DiscoveryCenter.Models
                 else if (key.Contains(".Choices"))
                 {
                     question.Choices = request.Form.Get(key);
-                }
-                
+                } 
+            }
+
+            if (question != null && question.Text != null)
+            {
+                if (choices.Any() && question.Choices == null)
+                    question.Choices = String.Join(";", choices);
+                questions.Add(question);
             }
 
             return new Survey()
