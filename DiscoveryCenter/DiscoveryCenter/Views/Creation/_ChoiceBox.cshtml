@@ -1,0 +1,13 @@
+﻿@model DiscoveryCenter.Models.ChoiceBoxViewModel
+
+
+<div class="clearfix Choice" style="margin-bottom:5px;">
+    <div class="col-md-10">
+        @Html.TextBox(Model.NameAndId, Model.Value, new { @class = "form-control" })
+    </div>
+    @if(Model.AllowDelete)
+    { 
+        <button type="button" class="btn btn-danger" onclick="DeleteChoice(this)"><span class="glyphicon glyphicon-remove-sign"></span></button>
+    }
+</div>
+

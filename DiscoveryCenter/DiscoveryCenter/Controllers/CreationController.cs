@@ -16,6 +16,17 @@ namespace DiscoveryCenter.Controllers
     {
         private SurveyContext db = new SurveyContext();
 
+        public PartialViewResult RefreshChoices(int typeIndex, string choices)
+        {
+            return PartialView("_ChoicesInputGroup", new Question() { Type = (Question.QuestionType)typeIndex, Choices = choices });
+        }
+
+        public PartialViewResult BlankChoiceBox(string value, bool allowDelete)
+        {
+            string guid = Guid.NewGuid().ToString();
+            string nameAndId = String.Format("Questions[{0}].Choice[{1}]", guid, guid);
+            return PartialView("_ChoiceBox", new ChoiceBoxViewModel() { NameAndId = nameAndId, Value = value, AllowDelete = allowDelete });
+        }
         public ViewResult BlankQuestionRow(int id, int surveyId)
         {
             Survey survey = (from s in db.Surveys where s.Id == surveyId select s).FirstOrDefault();

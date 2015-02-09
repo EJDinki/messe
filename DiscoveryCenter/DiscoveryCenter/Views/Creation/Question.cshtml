@@ -1,11 +1,20 @@
-﻿@model Tuple<int,DiscoveryCenter.Models.Question>
+﻿
+@model Tuple<int,DiscoveryCenter.Models.Question>
 
 @{
     string guid = Guid.NewGuid().ToString();
 }
 
 <li class="panel panel-info">
-    <div class="panel-heading">Question <span class="IndexInSurvey">@Model.Item2.IndexInSurvey</span></div>
+    <div class="panel-heading">
+        Question <span class="IndexInSurvey">@Model.Item2.IndexInSurvey</span>
+        <div class="pull-right">
+            <a href="javascript:void(0)" class="deleteRow btn-sm btn-danger" onclick="$(this).closest('li').remove(); NoQuestions(); UpdatePanels();">
+                <span class="glyphicon glyphicon-remove"></span>
+                Delete Question
+            </a>
+        </div>
+    </div>
     <div class="panel-body">
 
         @Html.Hidden(String.Format("Questions[{0}].Id", guid), Model.Item2.Id)
@@ -20,22 +29,15 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Item2.Type, new { @class = "col-md-2 control-label" })
             <div class="col-md-8 ">
-                @Html.EnumDropDownListFor(m => m.Item2.Type, new { Name = String.Format("Questions[{0}].Type", guid), @class = "form-control" })
+                @Html.EnumDropDownListFor(m => m.Item2.Type, new {
+                    Name = String.Format("Questions[{0}].Type", guid),
+                    @class = "form-control type",
+                    @onchange = "UpdateChoices(this);"
+           })
             </div>
         </div>
-        @if(Model.Item2.Type == DiscoveryCenter.Models.Question.QuestionType.MultipleChoiceChooseMany ||
-            Model.Item2.Type == DiscoveryCenter.Models.Question.QuestionType.MultipleChoiceChooseOne ||
-            Model.Item2.Type == DiscoveryCenter.Models.Question.QuestionType.Slider )
-        {
-            <div class="form-group">
-                @Html.LabelFor(m => m.Item2.Choices, new { @class = "col-md-2 control-label" })
-                <div class="col-md-8">
-                    @Html.TextBox(String.Format("Questions[{0}].Choices", guid), Model.Item2.Choices, new { @class = "form-control", @style = "width:100%;max-width:none;resize:none;" })
-                </div>
-            </div>
-        }
-        <div class="pull-right">
-            <a href="javascript:void(0)" class="deleteRow" onclick="$(this).closest('li').remove(); NoQuestions();">Delete Question</a>
+        <div class="Choices">
+             @Html.Partial("_ChoicesInputGroup", Model.Item2)
         </div>
     </div>
 </li>
