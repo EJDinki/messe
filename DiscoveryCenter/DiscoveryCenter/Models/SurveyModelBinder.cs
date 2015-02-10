@@ -67,8 +67,12 @@ namespace DiscoveryCenter.Models
                 {
                     if(question == null || question.Text != null)
                     {
-                        if(question != null)
+                        if (question != null)
+                        {
+                            if (choices.Any() && String.IsNullOrWhiteSpace(question.Choices))
+                                question.Choices = String.Join(";", choices);
                             questions.Add(question);
+                        }
                         question = new Question();
                         choices = new List<string>();
                     }
@@ -94,7 +98,7 @@ namespace DiscoveryCenter.Models
 
             if (question != null && question.Text != null)
             {
-                if (choices.Any() && question.Choices == null)
+                if (choices.Any() && String.IsNullOrWhiteSpace(question.Choices))
                     question.Choices = String.Join(";", choices);
                 questions.Add(question);
             }
