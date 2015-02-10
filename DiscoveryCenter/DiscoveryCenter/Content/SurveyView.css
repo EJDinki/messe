@@ -329,3 +329,11 @@ textarea{
     font-size: 63px;
   }
 }
+/*
+.slider-choices > div {
+    display: inline-block;
+    *display: inline; /* For IE7 */
+/*    zoom: 1; /* Trigger hasLayout */
+/* width: 32%;
+    text-align: center;
+}*/
