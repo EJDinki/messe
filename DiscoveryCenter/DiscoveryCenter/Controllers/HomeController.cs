@@ -128,7 +128,7 @@ namespace DiscoveryCenter.Controllers
 
                 db.SaveChanges();
             }
-            return RedirectToAction("Index", new { id = model.SurveyId });
+            return RedirectToAction("ThankYou", new { id = model.SurveyId });
         }
 
         // Put this actionresult into the POST for survey abovs
