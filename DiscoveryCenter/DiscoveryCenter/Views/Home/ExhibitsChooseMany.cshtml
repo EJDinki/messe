@@ -1,9 +1,9 @@
 ﻿@model DiscoveryCenter.Models.MultipleSelectViewModel
-<h1>ExhibitsChooseMany View</h1>
 @for (int z = 0; z < @Model.Choices.Count; z++)
 {
     <div class="checkbox">
         @Html.Hidden(String.Format("{0}_Options[{1}].text", Model.QuestionId, z), Model.Options[z].text)
+        <img src=@Model.Options[z].image height="64" width="64">
         <label>
             @Html.CheckBox(String.Format("{0}_Options[{1}].IsSelected", Model.QuestionId, z), Model.Options[z].IsSelected)
             @Model.Choices[z]
