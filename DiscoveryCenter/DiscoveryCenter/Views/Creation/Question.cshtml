@@ -18,14 +18,11 @@
 
         @Html.Hidden(String.Format("Questions[{0}].Id", guid), Model.Id)
         @Html.Hidden(String.Format("Questions[{0}].IndexInSurvey", guid), Model.IndexInSurvey, new { @class = "IndexInSurvey" })
-        <span class="col-md-offset-2 col-md-10">
-            @Html.ValidationMessage(String.Format("Questions[{0}].Text", Model.IndexInSurvey), new { @class = "text-danger" })
-        </span>
         <div class="form-group">
             @Html.LabelFor(m => m.Text, new { @class = "col-md-2 control-label" })
             <div class="col-md-8">
                 @Html.TextBox(String.Format("Questions[{0}].Text", guid), Model.Text, new { @class = "form-control", @style = "width:100%;max-width:none;resize:none;" })
-                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+                @Html.ValidationMessage(String.Format("Questions[{0}].Text", Model.IndexInSurvey), new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">

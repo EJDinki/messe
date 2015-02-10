@@ -55,7 +55,7 @@ namespace DiscoveryCenter.Models
                 {
                     if(question != null)
                     {
-                        if (choices.Any() && question.Choices == null)
+                        if (choices.Any() && String.IsNullOrWhiteSpace(question.Choices))
                             question.Choices = String.Join(";", choices);
                         questions.Add(question);
                     }

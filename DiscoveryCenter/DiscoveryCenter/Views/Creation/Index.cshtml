@@ -6,7 +6,7 @@
 }
 
 <br />
-<div class=" col-md-offset-2 col-md-8 panel panel-default">
+<div class="col-md-offset-3 col-md-6 panel panel-default">
     <div class="panel-body ">
         <h2>Surveys</h2>
         <p>
@@ -16,13 +16,13 @@
         </p>
         <table class="table">
             <tr>
-                <th>
+                <th class="col-md-4">
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
-                <th>
+                <th class="col-md-4">
                     @Html.DisplayNameFor(model => model.CreateDate)
                 </th>
-                <th></th>
+                <th class="col-md-4"></th>
             </tr>
             @foreach (var item in Model)
             {
@@ -35,8 +35,15 @@
                     </td>
                     <td>
                         <div class="btn-group">
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-default", @type = "button" })
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger", @type = "button" })
+                            <a class="btn btn-default" type="button" href="/Creation/Edit/@item.Id">
+                                <span class="glyphicon glyphicon-edit"></span> Edit
+                            </a>
+                            <a class="btn btn-default" type="button" href="/Home/index/@item.Id">
+                                <span class="glyphicon glyphicon-eye-open"></span> View
+                            </a>
+                            <a class="btn btn-danger" type="button" href="/Creation/Delete/@item.Id">
+                                <span class="glyphicon glyphicon-remove"></span> Delete
+                            </a>
                         </div>
                     </td>
                 </tr>

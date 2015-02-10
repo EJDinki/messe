@@ -11,7 +11,7 @@
         
         <h1>Welcome to the @Model.SurveyName Survey</h1>
         <br/>
-        @Html.ActionLink("Start", "Survey", new { }, new { id = "Btn_Start", @class = "btn btn-default" })
+        @Html.ActionLink("Start", "Survey", new { id = Model.SurveyId}, new { id = "Btn_Start", @class = "btn btn-default" })
     </center>
 </div>
 

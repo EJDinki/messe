@@ -10,7 +10,10 @@ namespace DiscoveryCenter.Models
 {
     public class Question
     {
-
+        public Question()
+        {
+            Choices = "";
+        }
         public enum QuestionType
         {
             MultipleChoiceChooseOne = 0,
@@ -33,6 +36,7 @@ namespace DiscoveryCenter.Models
         [ScriptIgnore]
         public Survey ParentSurvey { get; set; }
 
+        [Required(AllowEmptyStrings=true)]
         public string Choices { get; set; }
 
         [ScriptIgnore]

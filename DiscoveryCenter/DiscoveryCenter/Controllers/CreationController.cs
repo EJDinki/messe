@@ -122,13 +122,16 @@ namespace DiscoveryCenter.Controllers
             foreach (var question in survey.Questions)
             {
                 //check if choices are invalid
-                var choices = question.Choices.Split(';');
-                for (int i = 0; i < choices.Length; i++)
-                    if (String.IsNullOrWhiteSpace(choices[i]))
-                    {
-                        ModelState.AddModelError(String.Format("Questions[{0}].Choices", question.IndexInSurvey, i), "A choice can not be whitespace.");
-                        break;
-                    }
+                if (question.Type != Question.QuestionType.ShortAnswer)
+                {
+                    var choices = question.Choices.Split(';');
+                    for (int i = 0; i < choices.Length; i++)
+                        if (String.IsNullOrWhiteSpace(choices[i]))
+                        {
+                            ModelState.AddModelError(String.Format("Questions[{0}].Choices", question.IndexInSurvey, i), "A choice can not be whitespace.");
+                            break;
+                        }
+                }
 
                 //check if question text is invalid
                 if (String.IsNullOrWhiteSpace(question.Text))
