@@ -131,6 +131,12 @@ namespace DiscoveryCenter.Controllers
             return RedirectToAction("Index", new { id = model.SurveyId });
         }
 
+        // Put this actionresult into the POST for survey abovs
+        public ActionResult ThankYou()
+        {
+            return View();
+        }
+
         public ActionResult Index(int id = 1)
         {
             SurveyViewModel model = null;
