@@ -37,7 +37,7 @@ namespace DiscoveryCenter.Controllers
             else
                 q = new Question();
 
-            return View("Question", new Tuple<int,Question>(id , q));
+            return View("Question", q);
         }
         // GET: Creation
         public ActionResult Index()
@@ -108,52 +108,75 @@ namespace DiscoveryCenter.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([ModelBinder(typeof(SurveyModelBinder))] Survey survey)
         {
-            if (String.IsNullOrEmpty(survey.Name))
-                ModelState.AddModelError("Name", "Name is invalid");
-            else if(!survey.Questions.Any())
-                ModelState.AddModelError("Questions", "Survey requires at least one question");
+            
 
-            if (ModelState.IsValid)
+            //--------------------------Validation----------------------------
+            //clear errors
+            //foreach (var key in ModelState.Keys)
+             //   ModelState[key].Errors.Clear();
+
+            //check if there are any questions
+            if (!survey.Questions.Any())
+                ModelState.AddModelError("Questions", "Survey requires at least one question.");
+
+            foreach (var question in survey.Questions)
             {
-                Survey oldVersion = (from s in db.Surveys where s.Id == survey.Id select s).SingleOrDefault();
-                if(oldVersion == null)
-                    db.Surveys.Add(survey);
-                else {
-                    oldVersion.Name = survey.Name;
-                    oldVersion.CreateDate = DateTime.Now;
-                    List<Question> deleteList = new List<Question>();
-                    foreach(Question q in oldVersion.Questions)
+                //check if choices are invalid
+                var choices = question.Choices.Split(';');
+                for (int i = 0; i < choices.Length; i++)
+                    if (String.IsNullOrWhiteSpace(choices[i]))
                     {
-                       Question match = (from s in survey.Questions where s.Id == q.Id select s).SingleOrDefault();
-
-                       if(match == null)
-                       {
-                           deleteList.Add(q);
-                       }
-                       else
-                       {
-                           q.Text = match.Text;
-                           q.Type = match.Type;
-                           q.Choices = match.Choices;
-                           q.IndexInSurvey = match.IndexInSurvey;
-                       }
+                        ModelState.AddModelError(String.Format("Questions[{0}].Choices", question.IndexInSurvey, i), "A choice can not be whitespace.");
+                        break;
                     }
 
-                   foreach (Question delete in deleteList)
-                   {
-                       db.Set(typeof(Question)).Remove(delete);
-                   }
-
-                   foreach (Question newID in survey.Questions)
-                   {
-                       if (newID.Id == 0)
-                           oldVersion.Questions.Add(newID);
-                   }
-                }
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //check if question text is invalid
+                if (String.IsNullOrWhiteSpace(question.Text))
+                    ModelState.AddModelError(String.Format("Questions[{0}].Text", question.IndexInSurvey), "Question text can not be whitespace.");
             }
-            return View(survey);
+
+            //-------------------------Update Survey----------------------------
+
+            if (!ModelState.IsValid)
+                return View(survey);
+
+            Survey oldVersion = (from s in db.Surveys where s.Id == survey.Id select s).SingleOrDefault();
+            if(oldVersion == null)
+                db.Surveys.Add(survey);
+            else {
+                oldVersion.Name = survey.Name;
+                oldVersion.CreateDate = DateTime.Now;
+                List<Question> deleteList = new List<Question>();
+                foreach(Question q in oldVersion.Questions)
+                {
+                    Question match = (from s in survey.Questions where s.Id == q.Id select s).SingleOrDefault();
+
+                    if(match == null)
+                    {
+                        deleteList.Add(q);
+                    }
+                    else
+                    {
+                        q.Text = match.Text;
+                        q.Type = match.Type;
+                        q.Choices = match.Choices;
+                        q.IndexInSurvey = match.IndexInSurvey;
+                    }
+                }
+
+                foreach (Question delete in deleteList)
+                {
+                    db.Set(typeof(Question)).Remove(delete);
+                }
+
+                foreach (Question newID in survey.Questions)
+                {
+                    if (newID.Id == 0)
+                        oldVersion.Questions.Add(newID);
+                }
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Creation/Delete/5

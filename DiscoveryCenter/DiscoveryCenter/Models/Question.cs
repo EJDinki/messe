@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Script.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace DiscoveryCenter.Models
 {
@@ -19,6 +20,7 @@ namespace DiscoveryCenter.Models
             ExhibitsChooseMany = 4
         }
 
+        [Required(ErrorMessage = "Question text is required", AllowEmptyStrings = false)]
         public string Text { get; set; }
         public int Id { get; set; }
 
@@ -30,6 +32,7 @@ namespace DiscoveryCenter.Models
 
         [ScriptIgnore]
         public Survey ParentSurvey { get; set; }
+
         public string Choices { get; set; }
 
         [ScriptIgnore]
