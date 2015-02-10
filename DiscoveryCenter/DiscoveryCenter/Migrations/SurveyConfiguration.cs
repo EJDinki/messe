@@ -175,7 +175,7 @@ namespace DiscoveryCenter.Migrations
                         IndexInSurvey = 14,
                         Text = "How well is the museum maintained?",
                         Type = Question.QuestionType.Slider,
-                        Choices = "Poor;Excellent",
+                        Choices = "Poor;Neutral;Excellent",
                         SurveyID = 1
                     },
                     new Question()
@@ -184,7 +184,7 @@ namespace DiscoveryCenter.Migrations
                         IndexInSurvey = 15,
                         Text = "How would you rate the museum's cleanliness?",
                         Type = Question.QuestionType.Slider,
-                        Choices = "Poor;Excellent",
+                        Choices = "Poor;Neutral;Excellent",
                         SurveyID = 1
                     },
                     new Question()
@@ -193,7 +193,7 @@ namespace DiscoveryCenter.Migrations
                         IndexInSurvey = 16,
                         Text = "How would you rate the museum's educational value?",
                         Type = Question.QuestionType.Slider,
-                        Choices = "Poor;Excellent",
+                        Choices = "Poor;Neutral;Excellent",
                         SurveyID = 1
                     },
                     new Question()
@@ -202,7 +202,7 @@ namespace DiscoveryCenter.Migrations
                         IndexInSurvey = 17,
                         Text = "How would you rate the museum's engagement with children?",
                         Type = Question.QuestionType.Slider,
-                        Choices = "Poor;Excellent",
+                        Choices = "Poor;Neutral;Excellent",
                         SurveyID = 1
                     },
                     new Question()
