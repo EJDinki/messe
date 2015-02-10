@@ -111,7 +111,7 @@ namespace DiscoveryCenter.Migrations
                         Id = 7,
                         IndexInSurvey = 7,
                         Text = "What was your child's favorite exhibit at The Discovery Center( Please choose only 4)?",
-                        Type = Question.QuestionType.MultipleChoiceChooseOne,
+                        Type = Question.QuestionType.ExhibitsChooseMany,
                         Choices = "**list exhibits!!**",
                         SurveyID = 1
                     },

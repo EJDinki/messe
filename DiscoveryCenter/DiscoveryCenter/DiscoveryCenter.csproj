@@ -271,6 +271,7 @@
     <Content Include="Views\Exhibits\Index.cshtml" />
     <Content Include="Views\Creation\_ChoicesInputGroup.cshtml" />
     <Content Include="Views\Creation\_ChoiceBox.cshtml" />
+    <Content Include="Views\Home\ExhibitsChooseMany.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

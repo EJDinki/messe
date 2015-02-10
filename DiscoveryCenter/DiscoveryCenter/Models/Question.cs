@@ -15,7 +15,8 @@ namespace DiscoveryCenter.Models
             MultipleChoiceChooseOne = 0,
             MultipleChoiceChooseMany = 1,
             ShortAnswer = 2,
-            Slider = 3
+            Slider = 3,
+            ExhibitsChooseMany = 4
         }
 
         public string Text { get; set; }
