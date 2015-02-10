@@ -30,6 +30,8 @@ namespace DiscoveryCenter.Models
 
         public virtual DbSet<Survey> Surveys { get; set; }
 
+        public virtual DbSet<Exhibit> Exhibits { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

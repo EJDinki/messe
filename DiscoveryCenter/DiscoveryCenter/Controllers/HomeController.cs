@@ -64,6 +64,27 @@ namespace DiscoveryCenter.Controllers
                             mC.Choices = question.Choices.Split(';').ToList();
                             model.QuestionModels.Add(mC);
                             break;
+                        case(Question.QuestionType.ExhibitsChooseMany):
+                            MultipleSelectViewModel eM = new MultipleSelectViewModel();
+                            eM.QuestionId = question.Id;
+                            eM.Answer = "";
+                            eM.Question = question.Text;
+                            eM.Type = question.Type;
+                            // TODO load choices based on exhibit stuff
+                            eM.Choices = question.Choices.Split(';').ToList();
+                            eM.Options = new List<Selection>();
+
+                            foreach(string choice in eM.Choices)
+                            {
+                                Selection select = new Selection();
+                                select.IsSelected = false;
+                                select.text = choice;
+
+                                eM.Options.Add(select);
+                            }
+
+                            model.QuestionModels.Add(eM);
+                            break;
                         default:
                             QuestionViewModel m = new QuestionViewModel();
                             m.QuestionId = question.Id;

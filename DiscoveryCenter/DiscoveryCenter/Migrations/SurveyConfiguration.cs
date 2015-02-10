@@ -32,7 +32,7 @@ namespace DiscoveryCenter.Migrations
                 IdentityResult res = manager.Create(user1, "admin101");
                 identityContext.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -111,7 +111,7 @@ namespace DiscoveryCenter.Migrations
                         Id = 7,
                         IndexInSurvey = 7,
                         Text = "What was your child's favorite exhibit at The Discovery Center( Please choose only 4)?",
-                        Type = Question.QuestionType.MultipleChoiceChooseOne,
+                        Type = Question.QuestionType.ExhibitsChooseMany,
                         Choices = "**list exhibits!!**",
                         SurveyID = 1
                     },
@@ -233,6 +233,23 @@ namespace DiscoveryCenter.Migrations
                         SurveyID = 1
                     }
                 }.ForEach(question => context.Questions.AddOrUpdate(question));
+            context.SaveChanges();
+
+            new List<Exhibit>
+            {
+                new Exhibit() 
+                { 
+                    Id=1,
+                    Name = "Fire"
+
+                },
+                new Exhibit() 
+                { 
+                    Id=2,
+                    Name = "Water"
+
+                }
+            }.ForEach(exhibit => context.Exhibits.AddOrUpdate(exhibit));
             context.SaveChanges();
         }
     }

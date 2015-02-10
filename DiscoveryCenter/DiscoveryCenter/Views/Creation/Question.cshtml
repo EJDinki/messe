@@ -1,41 +1,49 @@
-﻿@model Tuple<int,DiscoveryCenter.Models.Question>
+﻿@model DiscoveryCenter.Models.Question
 
 @{
     string guid = Guid.NewGuid().ToString();
 }
 
 <li class="panel panel-info">
-    <div class="panel-heading">Question <span class="IndexInSurvey">@Model.Item2.IndexInSurvey</span></div>
-    <div class="panel-body">
-
-        @Html.Hidden(String.Format("Questions[{0}].Id", guid), Model.Item2.Id)
-        @Html.Hidden(String.Format("Questions[{0}].IndexInSurvey", guid), Model.Item2.IndexInSurvey, new { @class = "IndexInSurvey" })
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.Item2.Text, new { @class = "col-md-2 control-label" })
-            <div class="col-md-8">
-                @Html.TextBox(String.Format("Questions[{0}].Text", guid), Model.Item2.Text, new { @class = "form-control", @style = "width:100%;max-width:none;resize:none;" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Item2.Type, new { @class = "col-md-2 control-label" })
-            <div class="col-md-8 ">
-                @Html.EnumDropDownListFor(m => m.Item2.Type, new { Name = String.Format("Questions[{0}].Type", guid), @class = "form-control" })
-            </div>
-        </div>
-        @if(Model.Item2.Type == DiscoveryCenter.Models.Question.QuestionType.MultipleChoiceChooseMany ||
-            Model.Item2.Type == DiscoveryCenter.Models.Question.QuestionType.MultipleChoiceChooseOne ||
-            Model.Item2.Type == DiscoveryCenter.Models.Question.QuestionType.Slider )
-        {
-            <div class="form-group">
-                @Html.LabelFor(m => m.Item2.Choices, new { @class = "col-md-2 control-label" })
-                <div class="col-md-8">
-                    @Html.TextBox(String.Format("Questions[{0}].Choices", guid), Model.Item2.Choices, new { @class = "form-control", @style = "width:100%;max-width:none;resize:none;" })
-                </div>
-            </div>
-        }
+    <div class="panel-heading">
+        Question <span class="IndexInSurvey">@Model.IndexInSurvey</span>
         <div class="pull-right">
-            <a href="javascript:void(0)" class="deleteRow" onclick="$(this).closest('li').remove(); NoQuestions();">Delete Question</a>
+            <a href="javascript:void(0)" class="deleteRow btn-sm btn-danger" onclick="$(this).closest('li').remove(); NoQuestions(); UpdatePanels();">
+                <span class="glyphicon glyphicon-remove"></span>
+                Delete Question
+            </a>
         </div>
     </div>
+    <div class="panel-body">
+
+        @Html.Hidden(String.Format("Questions[{0}].Id", guid), Model.Id)
+        @Html.Hidden(String.Format("Questions[{0}].IndexInSurvey", guid), Model.IndexInSurvey, new { @class = "IndexInSurvey" })
+        <span class="col-md-offset-2 col-md-10">
+            @Html.ValidationMessage(String.Format("Questions[{0}].Text", Model.IndexInSurvey), new { @class = "text-danger" })
+        </span>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Text, new { @class = "col-md-2 control-label" })
+            <div class="col-md-8">
+                @Html.TextBox(String.Format("Questions[{0}].Text", guid), Model.Text, new { @class = "form-control", @style = "width:100%;max-width:none;resize:none;" })
+                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Type, new { @class = "col-md-2 control-label" })
+            <div class="col-md-8 ">
+                @Html.EnumDropDownListFor(m => m.Type, new
+           {
+               Name = String.Format("Questions[{0}].Type", guid),
+               @class = "form-control type",
+               @onchange = "UpdateChoices(this);"
+           })
+            </div>
+        </div>
+        <span class="col-md-offset-3 col-md-9">
+            @Html.ValidationMessage(String.Format("Questions[{0}].Choices", Model.IndexInSurvey), new { @class = "text-danger" })
+        </span>
+        <div class="Choices">
+            @Html.Partial("_ChoicesInputGroup", Model)
+        </div>
+</div>
 </li>

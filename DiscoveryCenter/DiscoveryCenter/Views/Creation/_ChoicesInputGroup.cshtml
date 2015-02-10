@@ -1,0 +1,58 @@
+﻿@using DiscoveryCenter.Models
+@model DiscoveryCenter.Models.Question
+
+@{
+    string guid = Guid.NewGuid().ToString();
+    string[] choices;
+    bool allowDelete = true;
+    if(!String.IsNullOrEmpty(Model.Choices))
+    {
+        choices = Model.Choices.Split(';');
+        if (Model.Type == Question.QuestionType.Slider)
+        {
+            choices = choices.Take(5).ToArray();
+        }
+    }
+    else if(Model.Type == Question.QuestionType.Slider)
+    {
+        choices = new string[] { "", "", "", "", "" };
+    }
+    else
+    {
+        choices = new string[] { "" };
+    }
+    
+    if(Model.Type == Question.QuestionType.Slider)
+    {
+        allowDelete = false;
+    }
+        
+}
+
+@if(Model.Type != Question.QuestionType.ShortAnswer)
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Choices, new { @class = "col-md-3 control-label" })
+        <div class="col-md-7">
+            <div class="AppendChoices col-md-7">
+                @for (int i = 0; i < choices.Length;i++ )
+                {
+                    @Html.Partial("_ChoiceBox", new ChoiceBoxViewModel()
+               {
+                   NameAndId = String.Format("Questions[{0}].Choice[{1}]", guid, i),
+                   Value = choices[i],
+                   AllowDelete = allowDelete
+               })
+                }
+            </div>
+            <div class="col-md-5">
+                @if(Model.Type == Question.QuestionType.MultipleChoiceChooseMany || Model.Type == Question.QuestionType.MultipleChoiceChooseOne)
+                {
+                    <button onclick="AppendChoiceBox(this, '@(allowDelete.ToString())');" class="btn btn-primary" type="button">
+                        <span class="glyphicon glyphicon-plus"></span> Add Choice
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+}

@@ -16,9 +16,11 @@ namespace DiscoveryCenter.Models
         }
         public int Id { get; set; }
 
-        [Required]
+        
         [Display(Name = "Survey Name")]
+        [Required(ErrorMessage = "A survey name is required", AllowEmptyStrings = false)]
         public string Name { get; set; }
+
         public DateTime CreateDate { get; set; }
 
         
@@ -26,5 +28,6 @@ namespace DiscoveryCenter.Models
 
         [ScriptIgnore]
         public virtual List<Submission> Submissions { get; set; }
+
     }
 }

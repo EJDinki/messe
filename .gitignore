@@ -3,3 +3,10 @@
 ################################################################################
 
 /DiscoveryCenter/TestResults
+/DiscoveryCenter/DiscoveryCenter/DiscoveryCenter.csproj.user
+/DiscoveryCenter/DiscoveryCenter/bin/*
+/DiscoveryCenter/DiscoveryCenter/obj/*
+/DiscoveryCenter/DiscoveryCenterTests/bin/*
+/DiscoveryCenter/DiscoveryCenterTests/obj/*
+*.dll
+*.suo

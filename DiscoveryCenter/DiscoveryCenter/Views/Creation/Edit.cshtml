@@ -15,13 +15,16 @@
             <h2>Edit Survey</h2>
 
             <div class="form-group clearfix">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" }) 
                 </div>
             </div>
             <div class="top-divider">
+                @if (!this.ViewData.ModelState.IsValid)
+                {
+                    @Html.ValidationSummary("Survey contains errors.", new { @class = "text-danger pull-right" })
+                }
                 <center>
                     <a class="btn btn-default" href="/Creation/BlankQuestionRow/0?surveyId=@Model.Id" id="addItem">
                         <i class='glyphicon glyphicon-plus'></i> Add Question
@@ -36,7 +39,7 @@
     </div>
 
 
-    <div class="form-horizontal col-md-9 panel panel-body panel-default clearfix">
+    <div class="form-horizontal col-md-8 panel panel-body panel-default clearfix">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.CreateDate)
@@ -51,7 +54,7 @@
             <ul id="draggablePanelList" class="list-unstyled">
                 @for (int i = 0; i < Model.Questions.Count; i++)
                 {
-                    @Html.Partial("Question", new Tuple<int, Question>(i, Model.Questions[i]))
+                    @Html.Partial("Question", Model.Questions[i])
                 }
             </ul>
         </div>
@@ -77,6 +80,18 @@
         return false;
         });
 
+        function AppendChoiceBox(ele, allowDelete)
+        {
+            $.ajax({
+                url: '/Creation/BlankChoiceBox?value=&&allowDelete=' + allowDelete,
+                cache: false,
+                success: function (html) {
+                    $(ele).closest(".Choices").find(".AppendChoices").append(html);
+                }
+            });
+            return false;
+        }
+
         NoQuestions();
         function NoQuestions()
         {
@@ -96,6 +111,30 @@
                 $("#save").removeClass("btn-default");
                 $("#save").addClass("btn-success");
             }
+        }
+
+        function DeleteChoice(ele)
+        {
+            $(ele).closest(".Choice").remove();
+        }
+
+        function UpdateChoices(ele)
+        {
+            var choicesEle = $(ele).closest(".panel-body").find(".Choices").first();
+            var choices = [];
+
+            $(choicesEle).find("input").each(function (index, elem) {
+                choices.push($(elem).val());
+            });
+
+            $.ajax({
+                url: '/Creation/RefreshChoices?typeIndex=' + $(ele).val() + '&&choices=' + choices.join(";"),
+                cache: false,
+                success: function (html) {
+                    $(choicesEle).html(html);
+                }
+            });
+            return false;
         }
 
         //---------------draggable panel---------------------

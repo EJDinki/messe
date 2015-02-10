@@ -20,6 +20,7 @@ namespace DiscoveryCenter
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             ModelBinders.Binders.Add(typeof(SurveyViewModel), new SurveyModelBinder());
+            ModelBinders.Binders.Add(typeof(Survey), new SurveyModelBinder());
         }
     }
 }
