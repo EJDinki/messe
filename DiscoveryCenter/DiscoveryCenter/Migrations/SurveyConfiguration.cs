@@ -32,7 +32,7 @@ namespace DiscoveryCenter.Migrations
                 IdentityResult res = manager.Create(user1, "admin101");
                 identityContext.SaveChanges();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
 
             }
@@ -121,7 +121,7 @@ namespace DiscoveryCenter.Migrations
                         IndexInSurvey = 8,
                         Text = "Do you attend our special events?",
                         Type = Question.QuestionType.MultipleChoiceChooseOne,
-                        Choices = "Yes;NO",
+                        Choices = "Yes;No",
                         SurveyID = 1
                     },
                     new Question()

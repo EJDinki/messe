@@ -518,12 +518,12 @@
 
 			defaultOptions: {
 				id: "",
-			  	min: 0,
-				max: 10,
+			  	min: 1,
+				max: 5,
 				step: 1,
 				precision: 0,
 				orientation: 'horizontal',
-				value: 5,
+				value: 3,
 				range: false,
 				selection: 'before',
 				tooltip: 'show',
