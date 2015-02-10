@@ -70,8 +70,7 @@ namespace DiscoveryCenter.Controllers
                             eM.Answer = "";
                             eM.Question = question.Text;
                             eM.Type = question.Type;
-                            // TODO load choices based on exhibit stuff
-                            eM.Choices = question.Choices.Split(';').ToList();
+                            eM.Choices = (from e in dbContext.Exhibits select e.Name).ToList();
                             eM.Options = new List<Selection>();
 
                             foreach(string choice in eM.Choices)
@@ -79,6 +78,8 @@ namespace DiscoveryCenter.Controllers
                                 Selection select = new Selection();
                                 select.IsSelected = false;
                                 select.text = choice;
+                                // TODO Don't hardcode this
+                                select.image = "http://placekitten.com/g/64/64";
 
                                 eM.Options.Add(select);
                             }

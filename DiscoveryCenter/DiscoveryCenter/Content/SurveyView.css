@@ -75,7 +75,7 @@ textarea{
 }
 
 .slider-container{
-    width:70%;
+    width:80%;
     margin-left:10%;
     margin-right:10%;
 }
@@ -329,11 +329,20 @@ textarea{
     font-size: 63px;
   }
 }
-/*
+.slider-choices {
+	text-align: justify;
+}
 .slider-choices > div {
-    display: inline-block;
-    *display: inline; /* For IE7 */
-/*    zoom: 1; /* Trigger hasLayout */
-/* width: 32%;
-    text-align: center;
-}*/
+	width: 100px; /* Declare your value. Can be in relative units. */
+	display: inline-block;
+	vertical-align: top;
+
+	/* IE fix. */
+	*display: inline;
+	zoom: 1;
+	}
+.slider-choices:after {
+	content: "";
+	width: 100%;
+	display: inline-block;
+    }

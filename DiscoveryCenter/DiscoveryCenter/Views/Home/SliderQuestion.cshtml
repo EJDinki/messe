@@ -3,16 +3,11 @@
     @Html.Hidden(String.Format("QuestionModels[{0}].Answer", Model.QuestionId), "")
     @Html.TextBox(String.Format("QuestionModels[{0}].Slider", Model.QuestionId), "",
         new { @class = "slider", @onchange = "sliderChanged(this)"})
-    
-    <!--
-    <div class="slider-choices">
-                    @for (int i = 1; i < @Model.Choices.Count; i++)
-                    {
-                        <div>@Model.Choices[i]</div>
-                    }
-    </div>
-    -->
-    <div class="pull-left"><label>@Model.Choices[0]</label></div>
-    <div class="pull-right"><label>@Model.Choices[1]</label></div> 
 
+    <div class="slider-choices">
+        @for (int i = 0; i < @Model.Choices.Count; i++)
+        {
+            <div><label>@Model.Choices[i]</label></div>
+        }
+    </div>
 </div>

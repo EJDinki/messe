@@ -62,6 +62,10 @@
                                 @(Html.Partial("SliderQuestion", Model.QuestionModels[i]))
                                 break;
 
+                            case (Question.QuestionType.ExhibitsChooseMany):
+                                @(Html.Partial("ExhibitsChooseMany", Model.QuestionModels[i]))
+                                break;
+
                             default:
                                 @Html.HiddenFor(m => m.QuestionModels[i].Answer)
                                 break;

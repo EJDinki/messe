@@ -32,7 +32,7 @@ namespace DiscoveryCenter.Migrations
                 IdentityResult res = manager.Create(user1, "admin101");
                 identityContext.SaveChanges();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
 
             }
@@ -112,7 +112,7 @@ namespace DiscoveryCenter.Migrations
                         IndexInSurvey = 7,
                         Text = "What was your child's favorite exhibit at The Discovery Center( Please choose only 4)?",
                         Type = Question.QuestionType.ExhibitsChooseMany,
-                        Choices = "**list exhibits!!**",
+                        //Choices are obtained by reading the Exhibits from the database
                         SurveyID = 1
                     },
                     new Question()
@@ -240,13 +240,85 @@ namespace DiscoveryCenter.Migrations
                 new Exhibit() 
                 { 
                     Id=1,
-                    Name = "Fire"
+                    Name = "Fire Station"
 
                 },
                 new Exhibit() 
                 { 
                     Id=2,
-                    Name = "Water"
+                    Name = "Widgets & Gadgets"
+
+                },
+                new Exhibit() 
+                { 
+                    Id=3,
+                    Name = "Take Flight"
+
+                },
+                new Exhibit() 
+                { 
+                    Id=4,
+                    Name = "Hospital"
+
+                },
+                new Exhibit() 
+                { 
+                    Id=5,
+                    Name = "Dental"
+
+                },
+                new Exhibit() 
+                { 
+                    Id=6,
+                    Name = "Power of Play"
+
+                },
+                new Exhibit() 
+                { 
+                    Id=7,
+                    Name = "Weis Markets"
+
+                },
+                new Exhibit() 
+                { 
+                    Id=8,
+                    Name = "Eco Kids"
+
+                },
+                new Exhibit() 
+                { 
+                    Id=9,
+                    Name = "Music Alley"
+
+                },
+                new Exhibit() 
+                { 
+                    Id=10,
+                    Name = "Chenango Canal Alley"
+
+                },
+                new Exhibit() 
+                { 
+                    Id=11,
+                    Name = "Susquhanna Meets The Chesapeake"
+
+                },
+                new Exhibit() 
+                { 
+                    Id=12,
+                    Name = "Studio 60"
+
+                },
+                new Exhibit() 
+                { 
+                    Id=13,
+                    Name = "Action News"
+
+                },
+                new Exhibit() 
+                { 
+                    Id=14,
+                    Name = "You've Got Game"
 
                 }
             }.ForEach(exhibit => context.Exhibits.AddOrUpdate(exhibit));

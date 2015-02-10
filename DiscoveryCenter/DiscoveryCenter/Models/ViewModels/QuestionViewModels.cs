@@ -36,5 +36,6 @@ namespace DiscoveryCenter.Models
     {
         public bool IsSelected;
         public string text;
+        public string image;
     }
 }
