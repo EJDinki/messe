@@ -82,8 +82,10 @@
 
         function AppendChoiceBox(ele, allowDelete)
         {
+            myUrl = '@Url.Action("BlankChoiceBox", "Creation", new {value="",allowDelete =".del." })';
+            myUrl = myUrl.replace(".del.", allowDelete);
             $.ajax({
-                url: '/Creation/BlankChoiceBox?value=&&allowDelete=' + allowDelete,
+                url: myUrl,
                 cache: false,
                 success: function (html) {
                     $(ele).closest(".Choices").find(".AppendChoices").append(html);
@@ -122,13 +124,19 @@
         {
             var choicesEle = $(ele).closest(".panel-body").find(".Choices").first();
             var choices = [];
+            var index = $(ele).val();
+        
 
             $(choicesEle).find("input").each(function (index, elem) {
                 choices.push($(elem).val());
             });
 
+            var joinedChoices = choices.join(";");
+            var myUrl = '@Url.Action("RefreshChoices", "Creation", new { typeIndex=".ti.", choices= ".cs." })';
+            myUrl = myUrl.replace(".ti.", index).replace(".cs.", joinedChoices);
+
             $.ajax({
-                url: '/Creation/RefreshChoices?typeIndex=' + $(ele).val() + '&&choices=' + choices.join(";"),
+                url: myUrl,
                 cache: false,
                 success: function (html) {
                     $(choicesEle).html(html);
