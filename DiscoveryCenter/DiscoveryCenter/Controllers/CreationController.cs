@@ -202,8 +202,13 @@ namespace DiscoveryCenter.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Survey survey = db.Surveys.Find(id);
-            db.Surveys.Remove(survey);
+            //Include Questions & Submissions in context in case they are orphaned.
+            Survey survey = db.Set<Survey>()
+                .Include(m => m.Questions)
+                .Include(m => m.Submissions)
+                .FirstOrDefault(m => m.Id == id);
+
+            db.Set<Survey>().Remove(survey);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

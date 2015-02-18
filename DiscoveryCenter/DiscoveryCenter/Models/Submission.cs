@@ -11,7 +11,7 @@ namespace DiscoveryCenter.Models
         public int Id { get; set; }
 
         [ForeignKey("ParentSurvey")]
-        public int SurveyId { get; set; }
+        public int? SurveyId { get; set; }
 
         public DateTime Timestamp { get; set; }
 

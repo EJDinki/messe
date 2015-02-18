@@ -31,7 +31,7 @@ namespace DiscoveryCenter.Models
 
 
         [ForeignKey("ParentSurvey")]
-        public int SurveyID { get; set; }
+        public int? SurveyID { get; set; }
 
         [ScriptIgnore]
         public Survey ParentSurvey { get; set; }
