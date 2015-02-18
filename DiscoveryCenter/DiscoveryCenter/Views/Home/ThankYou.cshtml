@@ -1,11 +1,13 @@
-﻿@model DiscoveryCenter.Models.SurveyViewModel
-@using DiscoveryCenter.Models
+﻿@using DiscoveryCenter.Models
 
 @{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_SurveyLayout.cshtml";
 }
-<meta http-equiv="refresh" content="5; url=/Home" />
+
+@{string url = Url.Action("Index", "Home", new { id = (int)Model });}
+
+<meta http-equiv="refresh" content="5; url=@url" />
     <div class="jumbotron">
         <img src="~/Content/discovery.png" />
         <h1> Thank you for taking our survey! </h1>

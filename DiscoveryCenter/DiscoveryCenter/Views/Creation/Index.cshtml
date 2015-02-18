@@ -10,7 +10,7 @@
     <div class="panel-body ">
         <h2>Surveys</h2>
         <p>
-            <a class="btn btn-success" href="/Creation/Create" id="addItem">
+            <a class="btn btn-success" href="@Url.Action("Create","Creation")" id="addItem">
                 <i class='glyphicon glyphicon-plus'></i> Create New Survey
             </a>
         </p>
@@ -35,13 +35,13 @@
                     </td>
                     <td>
                         <div class="btn-group">
-                            <a class="btn btn-default" type="button" href="~/Creation/Edit/@item.Id">
+                            <a class="btn btn-default" type="button" href="@Url.Action("Edit", "Creation", new { id = item.Id})">
                                 <span class="glyphicon glyphicon-edit"></span> Edit
                             </a>
-                            <a class="btn btn-default" type="button" href="~/Home/index/@item.Id">
+                            <a class="btn btn-default" type="button" href="@Url.Action("Index", "Home", new { id = item.Id})">
                                 <span class="glyphicon glyphicon-eye-open"></span> View
                             </a>
-                            <a class="btn btn-danger" type="button" href="~/Creation/Delete/@item.Id">
+                            <a class="btn btn-danger" type="button" href="@Url.Action("Delete", "Creation", new { id = item.Id})">
                                 <span class="glyphicon glyphicon-remove"></span> Delete
                             </a>
                         </div>

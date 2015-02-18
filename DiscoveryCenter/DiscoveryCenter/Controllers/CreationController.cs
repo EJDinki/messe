@@ -27,9 +27,9 @@ namespace DiscoveryCenter.Controllers
             string nameAndId = String.Format("Questions[{0}].Choice[{1}]", guid, guid);
             return PartialView("_ChoiceBox", new ChoiceBoxViewModel() { NameAndId = nameAndId, Value = value, AllowDelete = allowDelete });
         }
-        public ViewResult BlankQuestionRow(int id, int surveyId)
+        public ViewResult BlankQuestionRow(int id)
         {
-            Survey survey = (from s in db.Surveys where s.Id == surveyId select s).FirstOrDefault();
+            Survey survey = (from s in db.Surveys where s.Id == id select s).FirstOrDefault();
             
             Question q;
             if(survey != null)

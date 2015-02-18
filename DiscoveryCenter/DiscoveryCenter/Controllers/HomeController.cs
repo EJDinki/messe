@@ -132,9 +132,9 @@ namespace DiscoveryCenter.Controllers
         }
 
         // Put this actionresult into the POST for survey abovs
-        public ActionResult ThankYou()
+        public ActionResult ThankYou(int id)
         {
-            return View();
+            return View(id);
         }
 
         public ActionResult Index(int id = 1)

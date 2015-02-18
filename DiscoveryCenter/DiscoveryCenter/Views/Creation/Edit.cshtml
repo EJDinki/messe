@@ -26,7 +26,7 @@
                     @Html.ValidationSummary("Survey contains errors.", new { @class = "text-danger pull-right" })
                 }
                 <center>
-                    <a class="btn btn-default" href="~/Creation/BlankQuestionRow/0?surveyId=@Model.Id" id="addItem">
+                    <a class="btn btn-default" href="@Url.Action("BlankQuestionRow", "Creation", new {id=Model.Id })" id="addItem">
                         <i class='glyphicon glyphicon-plus'></i> Add Question
                     </a>
                     <button id="save" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
@@ -82,8 +82,8 @@
 
         function AppendChoiceBox(ele, allowDelete)
         {
-            myUrl = '@Url.Action("BlankChoiceBox", "Creation", new {value="",allowDelete =".del." })';
-            myUrl = myUrl.replace(".del.", allowDelete);
+            myUrl = '@Url.Action("BlankChoiceBox", "Creation")?allowDelete='+allowDelete;
+
             $.ajax({
                 url: myUrl,
                 cache: false,
@@ -132,8 +132,8 @@
             });
 
             var joinedChoices = choices.join(";");
-            var myUrl = '@Url.Action("RefreshChoices", "Creation", new { typeIndex=".ti.", choices= ".cs." })';
-            myUrl = myUrl.replace(".ti.", index).replace(".cs.", joinedChoices);
+            var myUrl = '@Url.Action("RefreshChoices", "Creation")?typeIndex='+index+'&choices='+joinedChoices;
+            
 
             $.ajax({
                 url: myUrl,
