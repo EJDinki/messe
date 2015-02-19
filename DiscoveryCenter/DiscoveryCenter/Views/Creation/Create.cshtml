@@ -33,7 +33,7 @@
 
 
     <div class="form-horizontal col-md-9 panel panel-body panel-default">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new { id="valSum", @class = "text-danger"})
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.CreateDate)
 
