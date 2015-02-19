@@ -19,7 +19,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DiscoveryCenterTests
 {
     /// <summary>
-    /// Summary description for TelerikVSUnitTest1
+    /// Confirms that the user is able to create a new survey which saves to the database.
     /// </summary>
     [TestClass]
     public class AddSurveyTest : BaseTest
