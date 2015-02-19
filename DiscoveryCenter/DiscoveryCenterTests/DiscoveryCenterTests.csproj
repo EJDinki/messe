@@ -39,13 +39,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CUITe, Version=1.0.6.0, Culture=neutral, PublicKeyToken=a67a8fd362ae8334, processorArchitecture=MSIL">
+    <Reference Include="ArtOfTest.InternetExplorer, Version=2014.4.1411.0, Culture=neutral, PublicKeyToken=5339893a7cefe4d6, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Users\Bobby\Downloads\cuite-36574\CUITe for .NET v4.5 (VS2013)\bin\Debug\CUITe.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Telerik\Test Studio\Bin\ArtOfTest.InternetExplorer.dll</HintPath>
+    </Reference>
+    <Reference Include="ArtOfTest.WebAii, Version=2014.4.1411.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Telerik\Test Studio\Bin\ArtOfTest.WebAii.dll</HintPath>
     </Reference>
     <Reference Include="Interop.UIAutomationClient, Version=12.0.21213.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
       <HintPath>..\..\..\..\Users\Bobby\Downloads\cuite-36574\CUITe for .NET v4.5 (VS2013)\bin\Debug\Interop.UIAutomationClient.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -65,9 +69,11 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Index.cs" />
-    <Compile Include="ObjectRepository\HomeScreen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AddSurveyTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ObjectRepository\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
