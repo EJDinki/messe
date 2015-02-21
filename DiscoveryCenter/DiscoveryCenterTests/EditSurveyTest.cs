@@ -16,6 +16,7 @@ using ArtOfTest.WebAii.Silverlight.UI;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DiscoveryCenter.Models;
+using DiscoveryCenterTests.ObjectRepository;
 
 namespace DiscoveryCenterTests
 {
@@ -74,7 +75,8 @@ namespace DiscoveryCenterTests
                 Text = "This is a multiple choice choose one.",
                 Type = Question.QuestionType.MultipleChoiceChooseOne,
                 IndexInSurvey = 2,
-                ParentSurvey = theSurvey
+                ParentSurvey = theSurvey,
+                Choices = "m1Choice;m1Choice2"
             };
 
             Question mChooseM = new Question()
@@ -82,7 +84,8 @@ namespace DiscoveryCenterTests
                 Text = "This is a multiple choice choose many.",
                 Type = Question.QuestionType.MultipleChoiceChooseMany,
                 IndexInSurvey = 3,
-                ParentSurvey = theSurvey
+                ParentSurvey = theSurvey,
+                Choices = "mMChoice;mMChoice2"
             };
 
             Question sSlider = new Question()
@@ -90,7 +93,8 @@ namespace DiscoveryCenterTests
                 Text = "This is a slider.",
                 Type = Question.QuestionType.Slider,
                 IndexInSurvey = 4,
-                ParentSurvey = theSurvey
+                ParentSurvey = theSurvey,
+                Choices = "sChoice;sChoice2;sChoice3"
             };
 
             theSurvey.Questions = new List<Question>();
@@ -114,46 +118,17 @@ namespace DiscoveryCenterTests
             Settings settings = GetSettings();
 
             settings.Web.DefaultBrowser = BrowserType.Chrome;
-
+            settings.Web.RecycleBrowser = false;
+            settings.ExecutionDelay = 200;
             Initialize(settings);
             #endregion
 
-            //
-            // Place any additional initialization here
-            //
-
-        }
-        /// <summary>
-        /// Checks to see if created survey is in db before testing web app.
-        /// This test must be first. The order of all other tests do not matter.
-        /// </summary>
-        [TestMethod]
-        public void SurveyInDb()
-        {
-            Survey found = (from m in dbContext.Surveys where m.Name == surveyName.ToString() select m).SingleOrDefault();
-            Assert.IsNotNull(found);
-        }
-
-        /// <summary>
-        /// Confirms that clicking "Edit" from the survey list page brings you to the 
-        /// appropriate edit survey page and it is properly filled in.
-        /// </summary>
-        [TestMethod]
-        public void EditSurveyNavigation()
-        {
             this.Manager.LaunchNewBrowser();
             this.ActiveBrowser.Window.Maximize();
             this.ActiveBrowser.NavigateTo("http://discovery.rh.rit.edu/Production");
 
-            //Click to edit the newly added survey
-            Element btnEdit = this.ActiveBrowser.Find.ById("edit_" + theSurvey.Id);
-            this.ActiveBrowser.Actions.Click(btnEdit);
-
-            HtmlInputText txtSurveyName = new HtmlInputText(this.ActiveBrowser.Find.ById("Name"));
-
-            //Assert the Name of the survey is correct upon navigation
-            Assert.AreEqual(theSurvey.Name, txtSurveyName.Text);
         }
+       
 
         // Use TestCleanup to run code after each test has run
         [TestCleanup()]
@@ -185,5 +160,97 @@ namespace DiscoveryCenterTests
 
         #endregion
 
+        #region [Tests]
+        /// <summary>
+        /// Checks to see if created survey is in db before testing web app.
+        /// This test must be first. The order of all other tests do not matter.
+        /// </summary>
+        [TestMethod]
+        public void SurveyInDb()
+        {
+            Survey found = (from m in dbContext.Surveys where m.Name == surveyName.ToString() select m).SingleOrDefault();
+            Assert.IsNotNull(found);
+        }
+
+        /// <summary>
+        /// Confirms that clicking "Edit" from the survey list page brings you to the 
+        /// appropriate edit survey page and it is properly filled in.
+        /// </summary>
+        [TestMethod]
+        public void EditSurveyNavigation()
+        {
+            //Click to edit the newly added survey
+            SurveyListPage sListPage = new SurveyListPage(this);
+            sListPage.GetEditFor(theSurvey.Id).Click();
+
+            EditSurveyPage editPage = new EditSurveyPage(this);
+
+            //Assert the Name of the survey is correct upon navigation
+            Assert.AreEqual(theSurvey.Name, editPage.SurveyName.Text);
+        }
+
+        /// <summary>
+        /// Confirms that reordering questions updates and saves appropriately
+        /// </summary>
+        [TestMethod]
+        public void ReorderQuestions()
+        {
+            this.ActiveBrowser.NavigateTo(
+                "http://discovery.rh.rit.edu/Production/Creation/Edit/" + theSurvey.Id);
+
+            string q1 = (from q in theSurvey.Questions where q.IndexInSurvey == 1 select q.Text)
+                            .SingleOrDefault();
+
+            string q2 = (from q in theSurvey.Questions where q.IndexInSurvey == 2 select q.Text)
+                            .SingleOrDefault();
+
+            EditSurveyPage editPage = new EditSurveyPage(this);
+
+            HtmlInputText question1Text = 
+                new HtmlInputText(editPage.GetQBody(1).Find.ById("~_Text"));
+
+            //Assert the question text shown is equal to what is in the DB before the reorder
+            Assert.IsTrue(editPage.GetDraggableQHeader(1).InnerText.Contains("Question1"));
+            Assert.AreEqual(q1, question1Text.Text);
+
+            //Reorder Questions
+            editPage.GetDraggableQHeader(1).DragTo
+                (ArtOfTest.Common.OffsetReference.TopLeftCorner, new System.Drawing.Point(),
+                editPage.GetQBody(2), ArtOfTest.Common.OffsetReference.BottomLeftCorner, new System.Drawing.Point());
+
+
+            //Refresh and check after drag
+            question1Text = new HtmlInputText(editPage.GetQBody(1).Find.ById("~_Text"));
+            
+
+            //Assert the question text shown for question1 now shows what the database says is question 2
+            Assert.IsTrue(editPage.GetDraggableQHeader(1).InnerText.Contains("Question1"));
+            Assert.AreEqual(q2, question1Text.Text);
+
+            Element btnSave = this.Find.ById("save");
+            this.ActiveBrowser.Actions.Click(btnSave);
+
+            //Refresh Entities from db
+            dbContext.Entry(theSurvey).Reload();
+            foreach (Question q in theSurvey.Questions)
+            {
+                dbContext.Entry(q).Reload();
+            }
+
+            //Assert that the reorder was saved to the database correctly
+            string newQ1 = (from q in theSurvey.Questions where q.IndexInSurvey == 1 select q.Text)
+                            .SingleOrDefault();
+            string newQ2 = (from q in theSurvey.Questions where q.IndexInSurvey == 2 select q.Text)
+                            .SingleOrDefault();
+
+            Assert.AreEqual(q2, newQ1);
+            Assert.AreEqual(q1, newQ2);        
+        }
+
+        #endregion
+
+        #region [HelperMethods]
+
+        #endregion
     }
 }

@@ -15,6 +15,7 @@ using ArtOfTest.WebAii.Silverlight;
 using ArtOfTest.WebAii.Silverlight.UI;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using DiscoveryCenterTests.ObjectRepository;
 
 namespace DiscoveryCenterTests
 {
@@ -24,7 +25,7 @@ namespace DiscoveryCenterTests
     [TestClass]
     public class AddSurveyTest : BaseTest
     {
-
+        private string surveyName = Guid.NewGuid().ToString();
         #region [Setup / TearDown]
 
         private TestContext testContextInstance = null;
@@ -88,35 +89,33 @@ namespace DiscoveryCenterTests
         public void ValidationErrors_EmptySurvey()
         {
             this.ActiveBrowser.NavigateTo("http://discovery.rh.rit.edu/Production/Creation/Create");
-            Element btnSaveSurvey = this.ActiveBrowser.Find.ById("save");
+            EditSurveyPage editPage = new EditSurveyPage(this);
 
             //Click the save button while survey empty
-            this.ActiveBrowser.Actions.Click(btnSaveSurvey);
+            editPage.SaveButton.Click();
 
             //Assert that it doesnt save and validation summary is correct
-            Element divValidationSummary = this.ActiveBrowser.Find.ById("valSum");
+            HtmlDiv divValidationSummary = editPage.ValidationSummary;
             Assert.IsTrue(divValidationSummary.InnerText.Contains("Survey contains errors."));
             Assert.IsTrue(divValidationSummary.InnerText.Contains("A survey name is required"));
             Assert.IsTrue(divValidationSummary.InnerText.Contains("Survey requires at least one question."));
 
             //Now add a question and confirm that the related error is now gone
-            Element btnAddQuestion = this.ActiveBrowser.Find.ById("addItem");
-            this.ActiveBrowser.Actions.Click(btnAddQuestion);
-            this.ActiveBrowser.Actions.Click(btnSaveSurvey);
+            editPage.AddQuestion.Click();
+            editPage.SaveButton.Click();
 
             //Have to refind Element if modified since last use.
-            divValidationSummary = this.ActiveBrowser.Find.ById("valSum");
+            divValidationSummary = editPage.ValidationSummary;
             Assert.IsTrue(divValidationSummary.InnerText.Contains("Survey contains errors."));
             Assert.IsTrue(divValidationSummary.InnerText.Contains("A survey name is required"));
             Assert.IsFalse(divValidationSummary.InnerText.Contains("Survey requires at least one question."));
 
             //Add a name to survey, confirm associated validation error is removed.
-            Element txtSurveyName = this.ActiveBrowser.Find.ById("Name");
-            Guid uniqueSurveyName = Guid.NewGuid();
-            this.ActiveBrowser.Actions.SetText(txtSurveyName, uniqueSurveyName.ToString());
-            this.ActiveBrowser.Actions.Click(btnSaveSurvey);
+            string uniqueSurveyName = Guid.NewGuid().ToString();
+            editPage.SurveyName.Text = uniqueSurveyName;
+            editPage.SaveButton.Click();
 
-            divValidationSummary = this.ActiveBrowser.Find.ById("valSum");
+            divValidationSummary = editPage.ValidationSummary;
             Assert.IsTrue(divValidationSummary.InnerText.Contains("Survey contains errors."));
             Assert.IsFalse(divValidationSummary.InnerText.Contains("A survey name is required"));
             Assert.IsFalse(divValidationSummary.InnerText.Contains("Survey requires at least one question."));
