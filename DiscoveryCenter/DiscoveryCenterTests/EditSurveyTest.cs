@@ -114,13 +114,14 @@ namespace DiscoveryCenterTests
             Settings settings = GetSettings();
 
             settings.Web.DefaultBrowser = BrowserType.Chrome;
-
+            settings.Web.RecycleBrowser = false;
+            settings.ExecutionDelay = 100;
             Initialize(settings);
             #endregion
 
-            //
-            // Place any additional initialization here
-            //
+            this.Manager.LaunchNewBrowser();
+            this.ActiveBrowser.Window.Maximize();
+            this.ActiveBrowser.NavigateTo("http://discovery.rh.rit.edu/Production");
 
         }
         /// <summary>
@@ -141,10 +142,6 @@ namespace DiscoveryCenterTests
         [TestMethod]
         public void EditSurveyNavigation()
         {
-            this.Manager.LaunchNewBrowser();
-            this.ActiveBrowser.Window.Maximize();
-            this.ActiveBrowser.NavigateTo("http://discovery.rh.rit.edu/Production");
-
             //Click to edit the newly added survey
             Element btnEdit = this.ActiveBrowser.Find.ById("edit_" + theSurvey.Id);
             this.ActiveBrowser.Actions.Click(btnEdit);
@@ -153,6 +150,45 @@ namespace DiscoveryCenterTests
 
             //Assert the Name of the survey is correct upon navigation
             Assert.AreEqual(theSurvey.Name, txtSurveyName.Text);
+        }
+
+        /// <summary>
+        /// Confirms that reordering questions updates the UI client side
+        /// </summary>
+        [TestMethod]
+        public void ReorderQuestionsClient()
+        {
+            this.ActiveBrowser.NavigateTo(
+                "http://discovery.rh.rit.edu/Production/Creation/Edit/" + theSurvey.Id);
+
+            HtmlUnorderedList divQuestionList = 
+                new HtmlUnorderedList(this.ActiveBrowser.Find.ById("draggablePanelList"));
+
+            var listPanels = divQuestionList.ChildNodes;
+
+            //Grab the draggable listPanel of of the Question and drag
+            HtmlDiv question1 = new HtmlDiv(listPanels[0].Children[0]);
+            HtmlDiv question2 = new HtmlDiv(listPanels[1].Children[0]);
+            HtmlDiv question1Body = new HtmlDiv(question1.BaseElement.GetNextSibling());
+
+            HtmlInputText question1Text = new HtmlInputText(question1Body.Find.ById("~_Text"));
+
+            Assert.IsTrue(question1.InnerText.Contains("Question1"));
+            Assert.AreEqual("This is a short answer.", question1Text.Text);
+
+            //Reorder Questions
+            question1.DragTo(ArtOfTest.Common.OffsetReference.TopLeftCorner,new System.Drawing.Point(),
+                question2, ArtOfTest.Common.OffsetReference.BottomLeftCorner, new System.Drawing.Point());
+
+            
+            //Refresh and check after drag
+            listPanels = divQuestionList.ChildNodes;
+            question1 = new HtmlDiv(listPanels[0].Children[0]);
+            question1Body = new HtmlDiv(question1.BaseElement.GetNextSibling());
+            question1Text = new HtmlInputText(question1Body.Find.ById("~_Text"));
+     
+            Assert.IsTrue(question1.InnerText.Contains("Question1"));
+            Assert.AreEqual("This is a multiple choice choose one.", question1Text.Text);
         }
 
         // Use TestCleanup to run code after each test has run
