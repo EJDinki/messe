@@ -23,7 +23,7 @@
             <div class="top-divider">
                 @if (!this.ViewData.ModelState.IsValid)
                 {
-                    @Html.ValidationSummary("Survey contains errors.", new { @class = "text-danger pull-right" })
+                    @Html.ValidationSummary("Survey contains errors.", new { id="valSum", @class = "text-danger pull-right" })
                 }
                 <center>
                     <a class="btn btn-default" href="@Url.Action("BlankQuestionRow", "Creation", new {id=Model.Id })" id="addItem">
