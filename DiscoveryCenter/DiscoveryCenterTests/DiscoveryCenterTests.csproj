@@ -72,12 +72,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EditSurveyTest.cs" />
+    <Compile Include="ObjectRepository\EditSurveyPage.cs" />
+    <Compile Include="ObjectRepository\SurveyListPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AddSurveyTest.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ObjectRepository\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DiscoveryCenter\DiscoveryCenter.csproj">
       <Project>{f294c0bc-9355-4b93-af84-ff7a85450031}</Project>
