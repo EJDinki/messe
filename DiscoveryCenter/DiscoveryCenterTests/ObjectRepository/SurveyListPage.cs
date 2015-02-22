@@ -28,6 +28,14 @@ namespace DiscoveryCenterTests.ObjectRepository
             testManager = test;
         }
 
+        public HtmlInputSubmit ConfirmDelete
+        {
+            get
+            {
+                return testManager.Find.ByAttributes<HtmlInputSubmit>("type=submit", "value=Delete");
+            }
+        }
+
         public HtmlAnchor GetEditFor(int surveyId)
         {
             return testManager.Find.ById<HtmlAnchor>("edit_" + surveyId);

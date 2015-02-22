@@ -71,11 +71,14 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common.cs" />
     <Compile Include="EditSurveyTest.cs" />
     <Compile Include="ObjectRepository\EditSurveyPage.cs" />
+    <Compile Include="ObjectRepository\SurveyTakePage.cs" />
     <Compile Include="ObjectRepository\SurveyListPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AddSurveyTest.cs" />
+    <Compile Include="TakeSurveyTest.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
