@@ -80,7 +80,7 @@
             <div class="col-md-5">
                 @if(Model.Type == Question.QuestionType.MultipleChoiceChooseMany || Model.Type == Question.QuestionType.MultipleChoiceChooseOne)
             {
-                    <button onclick="AppendChoiceBox(this, '@(allowDelete.ToString())');" class="btn btn-primary" type="button">
+                    <button id="addChoice" onclick="AppendChoiceBox(this, '@(allowDelete.ToString())');" class="btn btn-primary" type="button">
                         <span class="glyphicon glyphicon-plus"></span> Add Choice
                     </button>
             }
