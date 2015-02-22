@@ -166,8 +166,9 @@ namespace DiscoveryCenterTests
             //Assert All answers chosen were recorded in the appropriate submission
             Assert.AreEqual("ShortAnswer:" + theSurvey.Name,sub.Answers[0].Value);
             Assert.AreEqual("m1Choice2", sub.Answers[1].Value);
-            Assert.AreEqual("mMChoice;mMChoice2", sub.Answers[2].Value);
-            Assert.AreEqual("1", sub.Answers[3].Value);
+            Assert.AreEqual("mMChoice", sub.Answers[2].Value);
+            Assert.AreEqual("mMChoice2", sub.Answers[3].Value);
+            Assert.AreEqual("1", sub.Answers[4].Value);
         }
         #endregion
     }

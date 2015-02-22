@@ -14,15 +14,15 @@ namespace DiscoveryCenter.Models
             if (bindingContext.ModelType == typeof(SurveyViewModel))
             {
                 SurveyViewModel svm = BindSVM(request);
-                //bindingContext.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType( () => svm, typeof(SurveyViewModel));
+                
                 base.BindModel(controllerContext, bindingContext);
-                return base.BindModel(controllerContext, bindingContext);
+                return svm;
             }
             else if (bindingContext.ModelType == typeof(Survey))
             {
                 
                 Survey survey = BindSurvey(request);
-                //bindingContext.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => survey, typeof(Survey));
+               
                 base.BindModel(controllerContext, bindingContext);
                 return survey;
             }

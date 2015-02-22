@@ -27,7 +27,7 @@ namespace DiscoveryCenterTests
     [TestClass]
     public class EditSurveyTest : BaseTest
     {
-        private static Guid surveyName = Guid.NewGuid();
+        private static string surveyName;
 
         #region [Setup / TearDown]
 
@@ -58,6 +58,8 @@ namespace DiscoveryCenterTests
         public static void MyClassInitialize(TestContext testContext)
         {
             theSurvey = Common.AddSurveyToDB();
+            dbContext.Set<Survey>().Attach(theSurvey);
+            surveyName = theSurvey.Name;
         }
 
 
@@ -114,17 +116,6 @@ namespace DiscoveryCenterTests
         #endregion
 
         #region [Tests]
-        /// <summary>
-        /// Checks to see if created survey is in db before testing web app.
-        /// This test must be first. The order of all other tests do not matter.
-        /// </summary>
-        [TestMethod]
-        public void SurveyInDb()
-        {
-            Survey found = (from m in dbContext.Surveys where m.Name == surveyName.ToString() select m).SingleOrDefault();
-            Assert.IsNotNull(found);
-        }
-
         /// <summary>
         /// Confirms that clicking "Edit" from the survey list page brings you to the 
         /// appropriate edit survey page and it is properly filled in.

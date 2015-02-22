@@ -39,6 +39,14 @@ namespace DiscoveryCenterTests.ObjectRepository
             }
         }
 
+        public HtmlDiv TipDiv
+        {
+            get
+            {
+                return testManager.Find.ById<HtmlDiv>("tip");
+            }
+        }
+
         public HtmlButton SaveButton
         {
             get
@@ -65,9 +73,25 @@ namespace DiscoveryCenterTests.ObjectRepository
 
         public HtmlDiv GetDraggableQHeader(int questionIndex)
         {
+            divQuestionList.Refresh();
             var qList = divQuestionList.ChildNodes;
 
             return new HtmlDiv(qList[questionIndex - 1].Children[0]);
+        }
+
+        public HtmlAnchor GetDeleteForQuestion(int questionIndex)
+        {
+            return GetDraggableQHeader(questionIndex).Find.ByAttributes<HtmlAnchor>("class=~deleteRow");
+        }
+
+        public HtmlButton GetDeleteForQuestionChoice(int questionIndex, int choiceIndex)
+        {
+            return GetQBody(questionIndex).Find.AllByAttributes<HtmlButton>("id=deleteChoice")[choiceIndex];
+        }
+
+        public HtmlInputText GetInputForQuestionChoice(int questionIndex, int choiceIndex)
+        {
+            return GetQBody(questionIndex).Find.AllByAttributes<HtmlInputText>("id=~_Choice_")[choiceIndex];
         }
 
         public HtmlDiv GetQBody(int questionIndex)

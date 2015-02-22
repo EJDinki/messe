@@ -36,6 +36,14 @@ namespace DiscoveryCenterTests.ObjectRepository
             }
         }
 
+        public HtmlAnchor AddSurvey
+        {
+            get
+            {
+                return testManager.Find.ById<HtmlAnchor>("addItem");
+            }
+        }
+
         public HtmlAnchor GetEditFor(int surveyId)
         {
             return testManager.Find.ById<HtmlAnchor>("edit_" + surveyId);
