@@ -8,10 +8,11 @@
 
 <div class="jumbotron">
     <center>
-        
-        <h1>Welcome to the @Model.SurveyName Survey</h1>
-        <br/>
-        @Html.ActionLink("Start", "Survey", new { id = Model.SurveyId}, new { id = "Btn_Start", @class = "btn btn-default" })
+        <h1>Welcome to the @Model.SurveyName Survey!</h1>
+        <img src="~/Content/images/discovery.png" />
+        <!--Put description here-->
+        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+        <br />
+        @Html.ActionLink("Start", "Survey", new { id = Model.SurveyId }, new { id = "Btn_Start", @class = "btn btn-default" })
     </center>
 </div>
-
