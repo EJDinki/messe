@@ -39,6 +39,9 @@ namespace DiscoveryCenter.Models
         [Required(AllowEmptyStrings=true)]
         public string Choices { get; set; }
 
+        [Display(Name="Max Number of Choice Selections")]
+        public int MaxSelectedChoices { get; set; }
+
         [ScriptIgnore]
         public virtual List<Answer> Answers { get; set; }
 
