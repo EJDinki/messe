@@ -121,7 +121,7 @@ namespace DiscoveryCenter.Migrations
                         IndexInSurvey = 8,
                         Text = "Do you attend our special events?",
                         Type = Question.QuestionType.MultipleChoiceChooseOne,
-                        Choices = "Yes;NO",
+                        Choices = "Yes;No",
                         SurveyID = 1
                     },
                     new Question()

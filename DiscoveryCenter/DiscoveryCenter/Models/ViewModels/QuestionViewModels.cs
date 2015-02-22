@@ -24,6 +24,7 @@ namespace DiscoveryCenter.Models
 
     public class MultipleSelectViewModel : MultipleChoiceViewModel
     {
+        public int MaxSelectedChoices { get; set; }
         public List<Selection> Options { get; set; }
     }
 

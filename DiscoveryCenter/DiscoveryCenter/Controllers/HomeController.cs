@@ -33,6 +33,7 @@ namespace DiscoveryCenter.Controllers
                             mS.Question = question.Text;
                             mS.Type = question.Type;
                             mS.Choices = question.Choices.Split(';').ToList();
+                            mS.MaxSelectedChoices = question.MaxSelectedChoices;
                             mS.Options = new List<Selection>();
 
                             foreach(string choice in mS.Choices)
@@ -70,6 +71,7 @@ namespace DiscoveryCenter.Controllers
                             eM.Answer = "";
                             eM.Question = question.Text;
                             eM.Type = question.Type;
+                            eM.MaxSelectedChoices = question.MaxSelectedChoices;
                             eM.Choices = (from e in dbContext.Exhibits select e.Name).ToList();
                             eM.Options = new List<Selection>();
 

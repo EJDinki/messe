@@ -38,6 +38,9 @@
                             <a class="btn btn-default" type="button" href="@Url.Action("Edit", "Creation", new { id = item.Id})" id="@string.Format("edit_{0}",item.Id)">
                                 <span class="glyphicon glyphicon-edit"></span> Edit
                             </a>
+                            <a class="btn btn-default" type="button" href="@Url.Action("Duplicate", "Creation", new { id = item.Id})" id="@string.Format("duplicate{0}",item.Id)">
+                                <span class="glyphicon glyphicon-duplicate"></span> Duplicate
+                            </a>
                             <a class="btn btn-default" type="button" href="@Url.Action("Index", "Home", new { id = item.Id})" id="@string.Format("view_{0}",item.Id)">
                                 <span class="glyphicon glyphicon-eye-open"></span> View
                             </a>

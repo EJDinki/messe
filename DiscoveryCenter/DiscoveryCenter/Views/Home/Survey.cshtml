@@ -9,7 +9,7 @@
 {
     <div class="jumbotron" >
         <img src="~/Content/discovery.png"/>
-
+        <span id="alert" class="alert alert-danger top" role="alert" hidden style="position: absolute;"></span>
         <br />
 
         <!-- Left and right controls -->
@@ -114,6 +114,34 @@
                     console.log($("#" + id).val());
                 }, 10);
                 
+            }
+        }
+
+
+        //------limiting checkbox selection-------------------
+        var numClicks = 0;//makes it so that the alert shows for 5 secs after click no matter what
+        var alert = $("#alert").first();
+
+        function limitChecked(ele, max) {
+            var numChecked = 0;
+            var checkboxes = $(ele).closest(".checkboxes").find("input[type=checkbox]").each(
+                function (index, ele) {
+                    if (ele.checked)
+                        numChecked++;
+            });
+
+            if (max > 0 && numChecked > max) {
+                numClicks++;
+                $(ele).attr('checked', false);
+
+                $(alert).html("Cannot excede " + max + " selections.");
+                $(alert).show();
+                
+                setTimeout(function () {
+                    numClicks--;
+                    if (numClicks == 0)
+                        $(alert).hide();
+                }, 5000);
             }
         }
     </script>

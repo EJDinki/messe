@@ -27,6 +27,33 @@ namespace DiscoveryCenter.Controllers
             string nameAndId = String.Format("Questions[{0}].Choice[{1}]", guid, guid);
             return PartialView("_ChoiceBox", new ChoiceBoxViewModel() { NameAndId = nameAndId, Value = value, AllowDelete = allowDelete });
         }
+
+        public ActionResult Duplicate(int id)
+        {
+            Survey survey = db.Surveys.Find(id);
+            
+            if (survey == null)
+                return HttpNotFound();
+
+            do
+            {
+                survey.Name = survey.Name + " - Copy";
+            }
+            while (db.Surveys.Where(q => q.Name == survey.Name).SingleOrDefault() != null);
+
+            var questions = survey.Questions;
+
+            db.Surveys.Add(survey);
+
+            foreach (var question in questions)
+            {
+                question.SurveyID = survey.Id;
+                db.Questions.Add(question);
+            }
+            db.SaveChanges();
+
+            return RedirectToAction("index");
+        }
         public ViewResult BlankQuestionRow(int id)
         {
             Survey survey = (from s in db.Surveys where s.Id == id select s).FirstOrDefault();
@@ -117,25 +144,26 @@ namespace DiscoveryCenter.Controllers
 
             //check if there are any questions
             if (!survey.Questions.Any())
-                ModelState.AddModelError("Questions", "Survey requires at least one question.");
+                ModelState.AddModelError("Questions", "A survey requires at least one question.");
 
             foreach (var question in survey.Questions)
             {
                 //check if choices are invalid
-                if (question.Type != Question.QuestionType.ShortAnswer)
+                if (question.Type != Question.QuestionType.ShortAnswer && question.Type != Question.QuestionType.ExhibitsChooseMany)
                 {
                     var choices = question.Choices.Split(';');
                     for (int i = 0; i < choices.Length; i++)
                         if (String.IsNullOrWhiteSpace(choices[i]))
                         {
-                            ModelState.AddModelError(String.Format("Questions[{0}].Choices", question.IndexInSurvey, i), "A choice can not be whitespace.");
+                            ModelState.AddModelError(String.Format("Questions[{0}].Choices", question.IndexInSurvey, i),
+                                String.Format("Choice {0} for question {1} is blank.", i+1, question.IndexInSurvey));
                             break;
                         }
                 }
 
                 //check if question text is invalid
                 if (String.IsNullOrWhiteSpace(question.Text))
-                    ModelState.AddModelError(String.Format("Questions[{0}].Text", question.IndexInSurvey), "Question text can not be whitespace.");
+                    ModelState.AddModelError(String.Format("Questions[{0}].Text", question.IndexInSurvey), String.Format("Question text for question {0} is blank.", question.IndexInSurvey));
             }
 
             //-------------------------Update Survey----------------------------
@@ -163,6 +191,7 @@ namespace DiscoveryCenter.Controllers
                         q.Text = match.Text;
                         q.Type = match.Type;
                         q.Choices = match.Choices;
+                        q.MaxSelectedChoices = match.MaxSelectedChoices;
                         q.IndexInSurvey = match.IndexInSurvey;
                     }
                 }

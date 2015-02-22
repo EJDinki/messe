@@ -86,6 +86,10 @@ namespace DiscoveryCenter.Models
                 {
                     question.IndexInSurvey = Convert.ToInt32(request.Form.Get(key));
                 }
+                else if (key.Contains("MaxSelectedChoices"))
+                {
+                    question.MaxSelectedChoices = Convert.ToInt32(request.Form.Get(key));
+                }
                 else if(key.Contains(".Choice"))
                 {
                     choices.Add(request.Form.Get(key));
