@@ -72,6 +72,7 @@
             url: this.href,
             cache: false,
             success: function (html) {
+                html = FilterSomeeGarbage(html);
                 $("#draggablePanelList").append(html);
                 UpdatePanels();
                 NoQuestions()
@@ -88,6 +89,7 @@
                 url: myUrl,
                 cache: false,
                 success: function (html) {
+                    html = FilterSomeeGarbage(html);
                     $(ele).closest(".Choices").find(".AppendChoices").append(html);
                 }
             });
@@ -139,10 +141,16 @@
                 url: myUrl,
                 cache: false,
                 success: function (html) {
+                    html = FilterSomeeGarbage(html);
                     $(choicesEle).html(html);
                 }
             });
             return false;
+        }
+
+        function FilterSomeeGarbage(html)
+        {
+            return String(html).replace(/<!--[.\s\S\r\n]*/, "");
         }
 
         //---------------draggable panel---------------------
