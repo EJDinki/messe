@@ -116,6 +116,24 @@ namespace DiscoveryCenterTests
         #endregion
 
         #region [Tests]
+
+        [TestMethod]
+        public void DuplicateSurvey()
+        {
+            SurveyListPage sListPage = new SurveyListPage(this);
+
+            sListPage.GetDuplicateFor(theSurvey.Id).Click();
+
+            //Assert Change is shown in web browser
+            string copyName = theSurvey.Name + " - Copy";
+            Assert.IsTrue(ActiveBrowser.ContainsText(copyName));
+
+            //Assert the duplicate is in the database
+            Survey copy = (from s in dbContext.Surveys where s.Name == copyName select s).SingleOrDefault();
+            Assert.IsNotNull(copy);
+
+        }
+
         /// <summary>
         /// Confirms that clicking "Edit" from the survey list page brings you to the 
         /// appropriate edit survey page and it is properly filled in.

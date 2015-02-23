@@ -58,5 +58,10 @@ namespace DiscoveryCenterTests.ObjectRepository
         {
             return testManager.Find.ById<HtmlAnchor>("delete_" + surveyId);
         }
+
+        public HtmlAnchor GetDuplicateFor(int surveyId)
+        {
+            return testManager.Find.ById<HtmlAnchor>("duplicate" + surveyId);
+        }
     }
 }

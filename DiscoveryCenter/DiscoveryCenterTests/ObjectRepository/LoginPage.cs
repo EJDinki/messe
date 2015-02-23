@@ -59,5 +59,13 @@ namespace DiscoveryCenterTests.ObjectRepository
                 return testManager.Find.ById<HtmlInputCheckBox>("RememberMe");
             }
         }
+
+        public HtmlDiv ValidationSummary
+        {
+            get
+            {
+                return testManager.Find.ByAttributes<HtmlDiv>("class=validation-summary-errors");
+            }
+        }
     }
 }
