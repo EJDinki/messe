@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 using DiscoveryCenter.Models;
 using DiscoveryCenterTests.ObjectRepository;
+using ArtOfTest.WebAii.TestTemplates;
 
 namespace DiscoveryCenterTests
 {
     public class Common
     {
-        public static readonly string BaseUrl = "http://discovery.rh.rit.edu/Production";
+        public static readonly string BaseUrl = "http://museumsurvey.somee.com";
+
         /// <summary>
         /// Adds a survey with 1 of every question type to the database.
         /// The suvey has a Guid as its name for uniqueness
@@ -25,7 +27,8 @@ namespace DiscoveryCenterTests
                 theSurvey = new Survey()
                 {
                     Name = Guid.NewGuid().ToString(),
-                    CreateDate = DateTime.Now
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now
                 };
 
                 Question sAnswer = new Question()
@@ -73,6 +76,19 @@ namespace DiscoveryCenterTests
                 dbContext.SaveChanges();
             }
             return theSurvey;
+        }
+
+        public static void LogIn(BaseTest test, string username = "admin" , string password ="admin101" , bool rememberMe = false)
+        {
+            LoginPage lPage = new LoginPage(test);
+
+            lPage.Username.Text = username;
+            lPage.Password.Text = password;
+
+            if (rememberMe)
+                lPage.RememberMe.Check(true, true);
+
+            lPage.LogIn.Click();
         }
     }
 }

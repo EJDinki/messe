@@ -74,6 +74,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="EditSurveyTest.cs" />
     <Compile Include="ObjectRepository\EditSurveyPage.cs" />
+    <Compile Include="ObjectRepository\LoginPage.cs" />
     <Compile Include="ObjectRepository\SurveyTakePage.cs" />
     <Compile Include="ObjectRepository\SurveyListPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
