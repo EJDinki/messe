@@ -21,7 +21,11 @@ namespace DiscoveryCenter.Models
         [Required(ErrorMessage = "A survey name is required", AllowEmptyStrings = false)]
         public string Name { get; set; }
 
+        [Display(Name = "Create Date")]
         public DateTime CreateDate { get; set; }
+
+        [Display(Name = "Last Modified Date")]
+        public DateTime LastModifiedDate { get; set; }
 
         
         public virtual List<Question> Questions { get; set; }

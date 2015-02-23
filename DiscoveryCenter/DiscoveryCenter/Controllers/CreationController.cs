@@ -102,6 +102,7 @@ namespace DiscoveryCenter.Controllers
         {
             if (ModelState.IsValid)
             {
+                survey.LastModifiedDate = DateTime.Now;
                 db.Surveys.Add(survey);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -172,17 +173,21 @@ namespace DiscoveryCenter.Controllers
                 return View(survey);
 
             Survey oldVersion = (from s in db.Surveys where s.Id == survey.Id select s).SingleOrDefault();
-            if(oldVersion == null)
+            if (oldVersion == null)
+            {
+                survey.LastModifiedDate = DateTime.Now;
                 db.Surveys.Add(survey);
-            else {
+            }
+            else
+            {
                 oldVersion.Name = survey.Name;
-                oldVersion.CreateDate = DateTime.Now;
+                oldVersion.LastModifiedDate = DateTime.Now;
                 List<Question> deleteList = new List<Question>();
-                foreach(Question q in oldVersion.Questions)
+                foreach (Question q in oldVersion.Questions)
                 {
                     Question match = (from s in survey.Questions where s.Id == q.Id select s).SingleOrDefault();
 
-                    if(match == null)
+                    if (match == null)
                     {
                         deleteList.Add(q);
                     }
@@ -207,6 +212,7 @@ namespace DiscoveryCenter.Controllers
                         oldVersion.Questions.Add(newID);
                 }
             }
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }

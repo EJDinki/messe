@@ -43,6 +43,7 @@ namespace DiscoveryCenter.Migrations
                 { 
                     Id=1,
                     CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
                     Name = "Adult", 
 
                 }
