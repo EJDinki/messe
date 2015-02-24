@@ -220,6 +220,9 @@
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\jquery-ui.structure.min.css" />
     <Content Include="Content\jquery-ui.theme.min.css" />
+    <Content Include="Content\jquery.jqplot.css" />
+    <Content Include="Scripts\jqplot\jqplot.pieRenderer.min.js" />
+    <Content Include="Scripts\jqplot\jquery.jqplot.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -280,10 +283,10 @@
     <Content Include="Views\Creation\_ChoiceBox.cshtml" />
     <Content Include="Views\Home\ExhibitsChooseMany.cshtml" />
     <Content Include="Views\Home\ThankYou.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Report\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

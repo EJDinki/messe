@@ -35,9 +35,14 @@ namespace DiscoveryCenter.Controllers
                             report = new ReportViewModel();
                             report.QuestionIndex = question.IndexInSurvey;
                             report.Text = question.Text;
-                    
+
                             foreach (var answer in question.Answers)
-                                report.Counts[answer.Value]++;
+                            {
+                                if (!report.Counts.ContainsKey(answer.Value))
+                                    report.Counts.Add(answer.Value, 1);
+                                else
+                                    report.Counts[answer.Value]++;
+                            }
 
                             reports.Reports.Add(report);
                             break;
