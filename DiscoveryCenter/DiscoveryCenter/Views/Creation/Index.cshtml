@@ -6,7 +6,7 @@
 }
 
 <br />
-<div class="col-md-offset-3 col-md-6 panel panel-default">
+<div class="col-md-offset-2 col-md-8 panel panel-default">
     <div class="panel-body ">
         <h2>Surveys</h2>
         <p>
@@ -16,11 +16,17 @@
         </p>
         <table class="table">
             <tr>
-                <th class="col-md-4">
+                <th class="col-md-2">
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
-                <th class="col-md-4">
+                <th class="col-md-1">
+                    Number of Questions
+                </th>
+                <th class="col-md-2">
                     @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th class="col-md-2">
+                    @Html.DisplayNameFor(model => model.LastModifiedDate)
                 </th>
                 <th class="col-md-4"></th>
             </tr>
@@ -31,12 +37,21 @@
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
+                        @item.Questions.Count
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastModifiedDate)
                     </td>
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-default" type="button" href="@Url.Action("Edit", "Creation", new { id = item.Id})" id="@string.Format("edit_{0}",item.Id)">
                                 <span class="glyphicon glyphicon-edit"></span> Edit
+                            </a>
+                            <a class="btn btn-default" type="button" href="@Url.Action("Duplicate", "Creation", new { id = item.Id})" id="@string.Format("duplicate{0}",item.Id)">
+                                <span class="glyphicon glyphicon-duplicate"></span> Duplicate
                             </a>
                             <a class="btn btn-default" type="button" href="@Url.Action("Index", "Home", new { id = item.Id})" id="@string.Format("view_{0}",item.Id)">
                                 <span class="glyphicon glyphicon-eye-open"></span> View

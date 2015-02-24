@@ -28,6 +28,22 @@ namespace DiscoveryCenterTests.ObjectRepository
             testManager = test;
         }
 
+        public HtmlInputSubmit ConfirmDelete
+        {
+            get
+            {
+                return testManager.Find.ByAttributes<HtmlInputSubmit>("type=submit", "value=Delete");
+            }
+        }
+
+        public HtmlAnchor AddSurvey
+        {
+            get
+            {
+                return testManager.Find.ById<HtmlAnchor>("addItem");
+            }
+        }
+
         public HtmlAnchor GetEditFor(int surveyId)
         {
             return testManager.Find.ById<HtmlAnchor>("edit_" + surveyId);
@@ -41,6 +57,11 @@ namespace DiscoveryCenterTests.ObjectRepository
         public HtmlAnchor GetDeleteFor(int surveyId)
         {
             return testManager.Find.ById<HtmlAnchor>("delete_" + surveyId);
+        }
+
+        public HtmlAnchor GetDuplicateFor(int surveyId)
+        {
+            return testManager.Find.ById<HtmlAnchor>("duplicate" + surveyId);
         }
     }
 }

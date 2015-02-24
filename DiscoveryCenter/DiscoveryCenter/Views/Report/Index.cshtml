@@ -1,0 +1,87 @@
+﻿@model DiscoveryCenter.Models.ReportsViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Report For Survey: @Model.SurveyName</h2>
+<h3>Number of Reports: @Model.Reports.Count</h3>
+
+<script>
+    var dataForCharts = [];
+    var dataForChartsCount = @Model.Reports.Count;
+</script>
+
+@for (int i = 0; i < @Model.Reports.Count; i++)
+{
+    <h4>Text: @Model.Reports[i].Text</h4>
+    var entries = @Model.Reports[i].Counts.Select(d =>
+        string.Format("[\"{0}\", {1}]", d.Key, string.Join(",", d.Value)));
+    var result = "[" + string.Join(",", entries) + "]";
+    <h5>@result</h5>
+    var divId = "chartdiv" + @Model.Reports[i].QuestionIndex;
+    <div id="@divId" style="height:400px;width:300px; "></div>
+    <script>dataForCharts[@Model.Reports[i].QuestionIndex] = JSON.parse('@Html.Raw(result)');</script>
+}
+
+    <h4>Text: @Model.Reports[0].Text</h4>
+    @{
+    var e = @Model.Reports[0].Counts.Select(d =>
+        string.Format("[\"{0}\", {1}]", d.Key, string.Join(",", d.Value)));
+    var r = "[" + string.Join(",", e) + "]";
+    }
+    <h5>@r</h5>
+
+<div id="chartdiv" style="height:400px;width:300px; "></div>
+<div id="chartdiv2" style="height:400px;width:300px; "></div>
+
+<script>
+    $(document).ready(function(){
+        /*
+      var data = [
+        ['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14],
+        ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
+      ];
+      var plot1 = $.jqplot('chartdiv', [data],
+        {
+          seriesDefaults: {
+            // Make this a pie chart.
+            renderer: $.jqplot.PieRenderer,
+            rendererOptions: {
+              // Put data labels on the pie slices.
+              // By default, labels show the percentage of the slice.
+              showDataLabels: true
+            }
+          },
+          legend: { show:true, location: 'e' }
+        }
+      );
+      */
+        for(var i = 1; i < dataForChartsCount; i++)
+        {
+            var data = dataForCharts[i];
+            if (data.length == 0)
+            {
+                $('#chartdiv' + i).html('No Data for this question');
+            }
+            else
+            {
+                var plot = $.jqplot('chartdiv' + i, [data],
+                    {
+                        seriesDefaults: {
+                            // Make this a pie chart.
+                            renderer: $.jqplot.PieRenderer,
+                            rendererOptions: {
+                                // Put data labels on the pie slices.
+                                // By default, labels show the percentage of the slice.
+                                showDataLabels: true
+                            }
+                        },
+                        legend: { show:true, location: 'e' }
+                    }
+                );
+            }
+        }
+    });
+</script>

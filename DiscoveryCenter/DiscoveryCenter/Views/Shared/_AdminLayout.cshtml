@@ -7,6 +7,9 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/Admin")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/jqplot")
+    @Scripts.Render("~/bundles/jqplot")
 
 </head>
 <body>
@@ -29,7 +32,6 @@
     <div class="body body-content">
         @RenderBody()
     </div>
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/Admin")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

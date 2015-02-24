@@ -76,19 +76,36 @@ namespace DiscoveryCenterTests
         [TestMethod]
         public void AddSurveyNavigation()
         {
-            this.ActiveBrowser.NavigateTo("http://discovery.rh.rit.edu/Production");
-            Element btnAddSurvey = this.ActiveBrowser.Find.ById("addItem");
+            this.ActiveBrowser.NavigateTo(Common.BaseUrl);
+            
+            SurveyListPage sListPage = new SurveyListPage(this);
+            sListPage.AddSurvey.Click();
 
-            this.ActiveBrowser.Actions.Click(btnAddSurvey);
-
-            Element divTip = this.ActiveBrowser.Find.ById("tip");
-            Assert.IsTrue(divTip.InnerText.Contains("No Questions in survey."));
+            EditSurveyPage editPage = new EditSurveyPage(this);
+            Assert.IsTrue(editPage.TipDiv.InnerText.Contains("No Questions in survey."));
         }
+
+        [TestMethod]
+        public void AddDeleteQuestion()
+        {
+            this.ActiveBrowser.NavigateTo(Common.BaseUrl + "/Creation/Create");
+            EditSurveyPage editPage = new EditSurveyPage(this);
+
+            editPage.AddQuestion.Click();
+
+            Assert.IsNotNull(editPage.GetDraggableQHeader(1));
+
+            editPage.GetDeleteForQuestion(1).Click();
+
+            Assert.IsTrue(editPage.TipDiv.InnerText.Contains("No Questions in survey."));
+        }
+
+        
 
         [TestMethod]
         public void ValidationErrors_EmptySurvey()
         {
-            this.ActiveBrowser.NavigateTo("http://discovery.rh.rit.edu/Production/Creation/Create");
+            this.ActiveBrowser.NavigateTo(Common.BaseUrl+"/Creation/Create");
             EditSurveyPage editPage = new EditSurveyPage(this);
 
             //Click the save button while survey empty

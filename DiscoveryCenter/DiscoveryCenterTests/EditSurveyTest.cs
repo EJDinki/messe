@@ -17,6 +17,7 @@ using ArtOfTest.WebAii.Silverlight.UI;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DiscoveryCenter.Models;
 using DiscoveryCenterTests.ObjectRepository;
+using ArtOfTest.Common;
 
 namespace DiscoveryCenterTests
 {
@@ -26,7 +27,7 @@ namespace DiscoveryCenterTests
     [TestClass]
     public class EditSurveyTest : BaseTest
     {
-        private static Guid surveyName = Guid.NewGuid();
+        private static string surveyName;
 
         #region [Setup / TearDown]
 
@@ -56,55 +57,9 @@ namespace DiscoveryCenterTests
         [ClassInitialize()]
         public static void MyClassInitialize(TestContext testContext)
         {
-            theSurvey = new Survey()
-            {
-                Name = surveyName.ToString(),
-                CreateDate = DateTime.Now
-            };
-
-            Question sAnswer = new Question()
-            {
-                Text="This is a short answer.",
-                Type = Question.QuestionType.ShortAnswer,
-                IndexInSurvey = 1,
-                ParentSurvey = theSurvey
-            };
-
-            Question mChoose1 = new Question()
-            {
-                Text = "This is a multiple choice choose one.",
-                Type = Question.QuestionType.MultipleChoiceChooseOne,
-                IndexInSurvey = 2,
-                ParentSurvey = theSurvey,
-                Choices = "m1Choice;m1Choice2"
-            };
-
-            Question mChooseM = new Question()
-            {
-                Text = "This is a multiple choice choose many.",
-                Type = Question.QuestionType.MultipleChoiceChooseMany,
-                IndexInSurvey = 3,
-                ParentSurvey = theSurvey,
-                Choices = "mMChoice;mMChoice2"
-            };
-
-            Question sSlider = new Question()
-            {
-                Text = "This is a slider.",
-                Type = Question.QuestionType.Slider,
-                IndexInSurvey = 4,
-                ParentSurvey = theSurvey,
-                Choices = "sChoice;sChoice2;sChoice3"
-            };
-
-            theSurvey.Questions = new List<Question>();
-            theSurvey.Questions.Add(sAnswer);
-            theSurvey.Questions.Add(mChoose1);
-            theSurvey.Questions.Add(mChooseM);
-            theSurvey.Questions.Add(sSlider);
-
-            dbContext.Surveys.Add(theSurvey);
-            dbContext.SaveChanges();
+            theSurvey = Common.AddSurveyToDB();
+            dbContext.Set<Survey>().Attach(theSurvey);
+            surveyName = theSurvey.Name;
         }
 
 
@@ -125,7 +80,7 @@ namespace DiscoveryCenterTests
 
             this.Manager.LaunchNewBrowser();
             this.ActiveBrowser.Window.Maximize();
-            this.ActiveBrowser.NavigateTo("http://discovery.rh.rit.edu/Production");
+            this.ActiveBrowser.NavigateTo(Common.BaseUrl);
 
         }
        
@@ -161,15 +116,22 @@ namespace DiscoveryCenterTests
         #endregion
 
         #region [Tests]
-        /// <summary>
-        /// Checks to see if created survey is in db before testing web app.
-        /// This test must be first. The order of all other tests do not matter.
-        /// </summary>
+
         [TestMethod]
-        public void SurveyInDb()
+        public void DuplicateSurvey()
         {
-            Survey found = (from m in dbContext.Surveys where m.Name == surveyName.ToString() select m).SingleOrDefault();
-            Assert.IsNotNull(found);
+            SurveyListPage sListPage = new SurveyListPage(this);
+
+            sListPage.GetDuplicateFor(theSurvey.Id).Click();
+
+            //Assert Change is shown in web browser
+            string copyName = theSurvey.Name + " - Copy";
+            Assert.IsTrue(ActiveBrowser.ContainsText(copyName));
+
+            //Assert the duplicate is in the database
+            Survey copy = (from s in dbContext.Surveys where s.Name == copyName select s).SingleOrDefault();
+            Assert.IsNotNull(copy);
+
         }
 
         /// <summary>
@@ -195,8 +157,7 @@ namespace DiscoveryCenterTests
         [TestMethod]
         public void ReorderQuestions()
         {
-            this.ActiveBrowser.NavigateTo(
-                "http://discovery.rh.rit.edu/Production/Creation/Edit/" + theSurvey.Id);
+            this.ActiveBrowser.NavigateTo(Common.BaseUrl+"/Creation/Edit/" + theSurvey.Id);
 
             string q1 = (from q in theSurvey.Questions where q.IndexInSurvey == 1 select q.Text)
                             .SingleOrDefault();
@@ -215,8 +176,8 @@ namespace DiscoveryCenterTests
 
             //Reorder Questions
             editPage.GetDraggableQHeader(1).DragTo
-                (ArtOfTest.Common.OffsetReference.TopLeftCorner, new System.Drawing.Point(),
-                editPage.GetQBody(2), ArtOfTest.Common.OffsetReference.BottomLeftCorner, new System.Drawing.Point());
+                (OffsetReference.TopLeftCorner, new System.Drawing.Point(),
+                editPage.GetQBody(2), OffsetReference.BottomLeftCorner, new System.Drawing.Point());
 
 
             //Refresh and check after drag
@@ -227,8 +188,7 @@ namespace DiscoveryCenterTests
             Assert.IsTrue(editPage.GetDraggableQHeader(1).InnerText.Contains("Question1"));
             Assert.AreEqual(q2, question1Text.Text);
 
-            Element btnSave = this.Find.ById("save");
-            this.ActiveBrowser.Actions.Click(btnSave);
+            editPage.SaveButton.Click();
 
             //Refresh Entities from db
             dbContext.Entry(theSurvey).Reload();
