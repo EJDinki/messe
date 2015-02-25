@@ -97,39 +97,7 @@
 {
     <script>
         $(".slider").slider();
-        $(".draggable").draggable(
-            {
-                appendTo: 'body',
-                containment: 'window',
-                helper: 'clone',
-                scroll: false,
-                revert: 'invalid',
-                axis: 'x',
-                snap: 'dropable',
-                snapMode: 'inner'
-            });
-        $(".dropable").droppable({
-            accept: ".draggable",
-            activeClass: "ui-state-hover",
-            hoverClass: "ui-state-active",
-            drop: function (event, ui) {
-                $("#exhibitA_" + ui.draggable.context.id).val($("#exhibitA_" + ui.draggable.context.id).val() + ui.draggable.context.innerText + ";");
-                $(ui.draggable).detach().css({ top: 0, left: 0 }).appendTo(this);             
-            }
-        });
-
-        $(".dropable-revert").droppable({
-            accept: ".draggable",
-            activeClass: "ui-state-hover",
-            hoverClass: "ui-state-active",
-            drop: function (event, ui) {
-                var toRemove = ui.draggable.context.innerText + ";";
-                var curVal = $("#exhibitA_" + ui.draggable.context.id).val();
-                curVal = curVal.replace(toRemove, "");
-                $("#exhibitA_" + ui.draggable.context.id).val(curVal);
-                $(ui.draggable).detach().css({ top: 0, left: 0 }).appendTo(this);
-            }
-        });
+        
 
         function sliderChanged(ele)
         {
@@ -149,7 +117,6 @@
                 
             }
         }
-
 
         //------limiting checkbox selection-------------------
         var numClicks = 0;//makes it so that the alert shows for 5 secs after click no matter what

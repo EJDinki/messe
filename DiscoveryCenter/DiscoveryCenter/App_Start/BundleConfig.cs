@@ -28,6 +28,8 @@ namespace DiscoveryCenter
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/SurveyView").Include(
+                      "~/Scripts/jquery-ui.min.js",
+                      "~/Scripts/exhibit-draggable.js",
                       "~/Scripts/bootstrap-slider.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Admin").Include(
@@ -46,7 +48,10 @@ namespace DiscoveryCenter
 
             bundles.Add(new StyleBundle("~/Content/SurveyView").Include(
                       "~/Content/bootstrap-slider.css",
-                      "~/Content/SurveyView.css"));
+                      "~/Content/SurveyView.css",
+                      "~/Content/jquery-ui.min.css",
+                      "~/Content/jquery-ui.structure.min.css",
+                      "~/Content/jquery-ui.theme.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/jqplot").Include(
                       "~/Content/jquery.jqplot.css"));
