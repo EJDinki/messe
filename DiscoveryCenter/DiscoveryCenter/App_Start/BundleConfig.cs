@@ -29,6 +29,7 @@ namespace DiscoveryCenter
 
             bundles.Add(new ScriptBundle("~/bundles/SurveyView").Include(
                       "~/Scripts/jquery-ui.min.js",
+                      "~/Scripts/jquery-touch.js",
                       "~/Scripts/exhibit-draggable.js",
                       "~/Scripts/bootstrap-slider.js"));
 
