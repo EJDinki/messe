@@ -121,6 +121,18 @@ namespace DiscoveryCenter.Controllers
                             db.Answers.Add(answer);
                         }
                     }
+                    else if (qmodel.Type == Question.QuestionType.ExhibitsChooseMany)
+                    {
+                        string exhibitIds = "";
+                        foreach (string name in qmodel.Answer.Split(';'))
+                        {
+                            string trimmed = name.Trim();
+                            int? exhibit = (from e in db.Exhibits where e.Name.Contains(trimmed) select e.Id).FirstOrDefault();
+
+                            if(exhibit != null)
+                                exhibitIds += exhibit + ";";
+                        }
+                    }
                     else if (!String.IsNullOrWhiteSpace(qmodel.Answer))
                     {
                         answer = new Answer() { QuestionId = qmodel.QuestionId, Value = qmodel.Answer, Submission = submission };

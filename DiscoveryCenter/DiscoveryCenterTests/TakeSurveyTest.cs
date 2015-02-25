@@ -152,7 +152,7 @@ namespace DiscoveryCenterTests
             sTakePage.NextQuestion.Click();
 
             sTakePage.GetSliderHandle().DragTo
-                (OffsetReference.AbsoluteCenter, new System.Drawing.Point(),
+                (OffsetReference.TopLeftCorner, new System.Drawing.Point(),
                 sTakePage.GetSliderTrack(), OffsetReference.LeftCenter, new System.Drawing.Point());
 
 
