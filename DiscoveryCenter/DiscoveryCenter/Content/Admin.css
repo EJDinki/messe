@@ -357,3 +357,61 @@ div .top-divider{
     font-size: 63px;
   }
 }
+
+//---------selectable list------------
+
+.selectableList
+{
+    list-style:none;
+    list-style-type:none;
+    padding:0;
+    margin:0;
+}
+
+.selectableList li{
+    display:block;
+}
+
+.selectableList .ui-selecting { 
+    background: #FECA40; 
+}
+.selectableList .ui-selected { 
+    background: #F39814;
+    color: white; 
+    border: 1px solid #F39814;
+}
+.header{
+    background-color: darkgray;
+    border:none;
+    margin-left:0;
+    margin-bottom:5px;
+    padding: 5px;
+    -ms-text-align-last: center;
+    text-align-last: center;
+}
+
+.header div{
+    text-align:center;
+}
+
+.header span
+{
+    font-size: 25px;
+    line-height: 30px;
+}
+.ui-widget-content{
+    
+    margin-left:0;
+    margin-bottom:5px;
+    padding: 5px;
+    -ms-text-align-last: center;
+    text-align-last: center;
+}
+.ui-widget-content div{
+    text-align:center;
+}
+.ui-widget-content span{
+    display:inline-block;
+    position: relative;
+}
+
