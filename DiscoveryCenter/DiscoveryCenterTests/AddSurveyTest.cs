@@ -77,7 +77,7 @@ namespace DiscoveryCenterTests
         public void AddSurveyNavigation()
         {
             this.ActiveBrowser.NavigateTo(Common.BaseUrl);
-            
+
             SurveyListPage sListPage = new SurveyListPage(this);
             sListPage.AddSurvey.Click();
 
@@ -100,12 +100,12 @@ namespace DiscoveryCenterTests
             Assert.IsTrue(editPage.TipDiv.InnerText.Contains("No Questions in survey."));
         }
 
-        
+
 
         [TestMethod]
         public void ValidationErrors_EmptySurvey()
         {
-            this.ActiveBrowser.NavigateTo(Common.BaseUrl+"/Creation/Create");
+            this.ActiveBrowser.NavigateTo(Common.BaseUrl + "/Creation/Create");
             EditSurveyPage editPage = new EditSurveyPage(this);
 
             //Click the save button while survey empty
@@ -115,7 +115,7 @@ namespace DiscoveryCenterTests
             HtmlDiv divValidationSummary = editPage.ValidationSummary;
             Assert.IsTrue(divValidationSummary.InnerText.Contains("Survey contains errors."));
             Assert.IsTrue(divValidationSummary.InnerText.Contains("A survey name is required"));
-            Assert.IsTrue(divValidationSummary.InnerText.Contains("Survey requires at least one question."));
+            Assert.IsTrue(divValidationSummary.InnerText.Contains("A survey requires at least one question."));
 
             //Now add a question and confirm that the related error is now gone
             editPage.AddQuestion.Click();
@@ -125,7 +125,7 @@ namespace DiscoveryCenterTests
             divValidationSummary = editPage.ValidationSummary;
             Assert.IsTrue(divValidationSummary.InnerText.Contains("Survey contains errors."));
             Assert.IsTrue(divValidationSummary.InnerText.Contains("A survey name is required"));
-            Assert.IsFalse(divValidationSummary.InnerText.Contains("Survey requires at least one question."));
+            Assert.IsFalse(divValidationSummary.InnerText.Contains("A survey requires at least one question."));
 
             //Add a name to survey, confirm associated validation error is removed.
             string uniqueSurveyName = Guid.NewGuid().ToString();
@@ -135,7 +135,7 @@ namespace DiscoveryCenterTests
             divValidationSummary = editPage.ValidationSummary;
             Assert.IsTrue(divValidationSummary.InnerText.Contains("Survey contains errors."));
             Assert.IsFalse(divValidationSummary.InnerText.Contains("A survey name is required"));
-            Assert.IsFalse(divValidationSummary.InnerText.Contains("Survey requires at least one question."));
+            Assert.IsFalse(divValidationSummary.InnerText.Contains("A survey requires at least one question."));
         }
 
         // Use TestCleanup to run code after each test has run
