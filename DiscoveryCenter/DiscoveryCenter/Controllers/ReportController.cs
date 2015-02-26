@@ -10,10 +10,14 @@ namespace DiscoveryCenter.Controllers
     [Authorize]
     public class ReportController : Controller
     {
-
         // GET: Report
-        public ActionResult Index(int id)
+        public ActionResult Index(int id = 0)
         {
+            if (id <= 0)
+            {
+                return RedirectToAction("Index", "Creation");
+            }
+
             ReportsViewModel reports = new ReportsViewModel();
             ReportViewModel report;
 
