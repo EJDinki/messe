@@ -8,8 +8,11 @@
 @using (Html.BeginForm("Survey", "Home", FormMethod.Post))
 {
     <div class="jumbotron" >
-        <img src="~/Content/discovery.png"/>
+        @*<img src="~/Content/images/discovery.png" />*@
+        <img src="~/Content/images/discovery75.png" />
+        @*<img src="~/Content/images/discovery50.png" />*@
         <span id="alert" class="alert alert-danger top" role="alert" hidden style="position: absolute;"></span>
+
         <br />
 
         <!-- Left and right controls -->
@@ -97,6 +100,7 @@
 {
     <script>
         $(".slider").slider();
+        
 
         function sliderChanged(ele)
         {
@@ -116,7 +120,6 @@
                 
             }
         }
-
 
         //------limiting checkbox selection-------------------
         var numClicks = 0;//makes it so that the alert shows for 5 secs after click no matter what

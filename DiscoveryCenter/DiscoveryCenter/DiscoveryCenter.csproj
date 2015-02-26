@@ -201,7 +201,9 @@
     <Content Include="Content\bootstrap-slider.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\discovery.png" />
+    <Content Include="Content\images\discovery.png" />
+    <Content Include="Content\images\discovery50.png" />
+    <Content Include="Content\images\discovery75.png" />
     <Content Include="Content\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\images\ui-bg_flat_55_fbec88_40x100.png" />
     <Content Include="Content\images\ui-bg_glass_75_d0e5f5_1x400.png" />
@@ -221,6 +223,7 @@
     <Content Include="Content\jquery-ui.structure.min.css" />
     <Content Include="Content\jquery-ui.theme.min.css" />
     <Content Include="Content\jquery.jqplot.css" />
+    <Content Include="Scripts\exhibit-draggable.js" />
     <Content Include="Scripts\jqplot\jqplot.pieRenderer.min.js" />
     <Content Include="Scripts\jqplot\jquery.jqplot.min.js" />
     <Content Include="favicon.ico" />
@@ -236,6 +239,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-touch.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
