@@ -1,7 +1,7 @@
 ﻿@model DiscoveryCenter.Models.Survey
 @using DiscoveryCenter.Models;
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 @using (Html.BeginForm())
@@ -10,8 +10,7 @@
     <br />
     <div class="col-md-3 clearfix">
         <div class="panel panel-body panel-default fixed">
-            <h2>Edit Survey</h2>
-
+            <h2>Create Survey</h2>
             <div class="form-group clearfix">
                 @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -26,7 +25,7 @@
                 </center>
             </div>
             <div>
-                @Html.ActionLink("Back to List", "Index")
+                @Html.ActionLink("Back to Survey List", "Index")
             </div>
         </div>
     </div>

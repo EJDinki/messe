@@ -145,7 +145,6 @@ namespace DiscoveryCenter.Controllers
             return RedirectToAction("ThankYou", new { id = model.SurveyId });
         }
 
-        // Put this actionresult into the POST for survey abovs
         public ActionResult ThankYou(int id)
         {
             return View(id);
@@ -159,6 +158,7 @@ namespace DiscoveryCenter.Controllers
                 Survey survey = (from s in dbContext.Surveys where s.Id == id select s).Single();
                 model = new SurveyViewModel();
                 model.SurveyName = survey.Name;
+                model.SurveyDescription = survey.Description;
                 model.SurveyId = id;
             }
             return View(model);

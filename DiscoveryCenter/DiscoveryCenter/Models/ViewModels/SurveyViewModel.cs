@@ -10,6 +10,7 @@ namespace DiscoveryCenter.Models
         public List<QuestionViewModel> QuestionModels { get; set; }
         public int SurveyId { get; set; }
         public string SurveyName { get; set; }
+        public string SurveyDescription { get; set; }
         public Boolean isPreview { get; set; }
 
     }

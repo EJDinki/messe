@@ -36,6 +36,7 @@ namespace DiscoveryCenter.Models
         {
             int sId = Convert.ToInt32(request.Form.Get("Id"));
             string sName = request.Form.Get("Name");
+            string sDesc = request.Form.Get("Description");
             List<Question> questions = new List<Question>();
 
             //string question = "";
@@ -111,6 +112,7 @@ namespace DiscoveryCenter.Models
             {
                 Name = sName,
                 Id = sId,
+                Description = sDesc,
                 Questions = questions,
                 CreateDate = DateTime.Now
             };
@@ -121,6 +123,7 @@ namespace DiscoveryCenter.Models
             List<QuestionViewModel> models = new List<QuestionViewModel>();
 
             int sId = Convert.ToInt32(request.Form.Get("SurveyId"));
+            string sDesc = "";
             string question = "";
             int questionId = -1;
             string ans = "";
@@ -188,6 +191,7 @@ namespace DiscoveryCenter.Models
             return new SurveyViewModel
             {
                 SurveyId = sId,
+                SurveyDescription = sDesc,
                 QuestionModels = models
             };
         }

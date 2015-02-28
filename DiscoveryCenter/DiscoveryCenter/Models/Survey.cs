@@ -21,6 +21,10 @@ namespace DiscoveryCenter.Models
         [Required(ErrorMessage = "A survey name is required", AllowEmptyStrings = false)]
         public string Name { get; set; }
 
+        [Display(Name = "Survey Description")]
+        [Required(ErrorMessage = "A survey description is required", AllowEmptyStrings = false)]
+        public string Description { get; set; }
+
         [Display(Name = "Create Date")]
         public DateTime CreateDate { get; set; }
 

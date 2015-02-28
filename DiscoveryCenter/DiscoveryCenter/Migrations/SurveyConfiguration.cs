@@ -42,6 +42,7 @@ namespace DiscoveryCenter.Migrations
                 new Survey() 
                 { 
                     Id=1,
+                    Description = "This survey will only take 5 minutes to complete.",
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
                     Name = "Adult", 
