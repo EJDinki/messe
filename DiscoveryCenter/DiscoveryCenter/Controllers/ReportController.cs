@@ -37,6 +37,7 @@ namespace DiscoveryCenter.Controllers
                             break;
                         default:
                             report = new ReportViewModel();
+                            report.Type = question.Type;
                             report.QuestionIndex = question.IndexInSurvey;
                             report.Text = question.Text;
 

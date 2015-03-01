@@ -6,7 +6,7 @@
 }
 
 <h2>Report For Survey: @Model.SurveyName</h2>
-<h3>Number of Reports: @Model.Reports.Count</h3>
+<br/>
 
 <script>
     var dataForCharts = [];
@@ -15,35 +15,29 @@
 
 @for (int i = 0; i < @Model.Reports.Count; i++)
 {
-    <h4>Text: @Model.Reports[i].Text</h4>
+    <h4>Question: @Model.Reports[i].Text</h4>
+    // Transform the Dictionary<string,int> to JSON in [ "string", int ] form
     var entries = @Model.Reports[i].Counts.Select(d =>
         string.Format("[\"{0}\", {1}]", d.Key, string.Join(",", d.Value)));
     var result = "[" + string.Join(",", entries) + "]";
-    <h5>@result</h5>
+    
+    // Create the div for the chart for this question
     var divId = "chartdiv" + @Model.Reports[i].QuestionIndex;
-    <div id="@divId" style="height:400px;width:300px; "></div>
+    <div id="@divId" style="height:500px;width:500px; "></div>
+
+    // Add this data to the dataForCharts array to be referenced later. HTML.Raw is used to avoid encoding
     <script>dataForCharts[@Model.Reports[i].QuestionIndex] = JSON.parse('@Html.Raw(result)');</script>
 }
 
-    <h4>Text: @Model.Reports[0].Text</h4>
-    @{
-    var e = @Model.Reports[0].Counts.Select(d =>
-        string.Format("[\"{0}\", {1}]", d.Key, string.Join(",", d.Value)));
-    var r = "[" + string.Join(",", e) + "]";
-    }
-    <h5>@r</h5>
-
-<div id="chartdiv" style="height:400px;width:300px; "></div>
-<div id="chartdiv2" style="height:400px;width:300px; "></div>
-
 <script>
     $(document).ready(function(){
-        for(var i = 1; i < dataForChartsCount; i++)
+        // Questions were put into array based on their QuestionIndex value, which is >= 1 so start i=1
+        for(var i = 1; i < dataForCharts.length; i++)
         {
             var data = dataForCharts[i];
-            if (data.length == 0)
+            if (data == null || data.length == 0)
             {
-                $('#chartdiv' + i).html('No Data for this question');
+                $('#chartdiv' + i).replaceWith('<p>No Data for this question</p>');
             }
             else
             {

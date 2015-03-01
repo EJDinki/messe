@@ -21,6 +21,9 @@ namespace DiscoveryCenter.Models
         {
             Counts = new Dictionary<string, int>();
         }
+
+        public Question.QuestionType Type { get; set; }
+
         public string Text { get; set; }
 
         public int QuestionIndex { get; set; }
