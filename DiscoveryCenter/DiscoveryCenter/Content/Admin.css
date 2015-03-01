@@ -29,7 +29,7 @@ select {
 }
 
 textarea{
-    width:80%;
+    width:100%;
     resize:none;
     margin-left: auto;
     margin-right: auto;

@@ -90,7 +90,7 @@ namespace DiscoveryCenter.Controllers
         // GET: Creation/Create
         public ActionResult Create()
         {
-            return View("Edit", new Survey());
+            return View("Create", new Survey());
         }
 
         // POST: Creation/Create

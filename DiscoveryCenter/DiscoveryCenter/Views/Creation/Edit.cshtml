@@ -13,17 +13,20 @@
     <div class="col-md-3 clearfix">
         <div class="panel panel-body panel-default fixed">
             <h2>Edit Survey</h2>
-
             <div class="form-group clearfix">
-                <div class="col-md-10">
+                <div class="col-md-10" style="padding-left:0px">
+                    <h4>Survey Name</h4>
                     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" }) 
+                    <h4>Survey Description</h4>
+                    @Html.TextAreaFor(model => model.Description, 5, 80, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="top-divider">
                 @if (!this.ViewData.ModelState.IsValid)
                 {
-                    @Html.ValidationSummary("Survey contains errors.", new { id="valSum", @class = "text-danger pull-right" })
+                    @Html.ValidationSummary("Survey contains errors.", new { id = "valSum", @class = "text-danger pull-right" })
                 }
                 <center>
                     <a class="btn btn-default" href="@Url.Action("BlankQuestionRow", "Creation", new {id=Model.Id })" id="addItem">
@@ -33,7 +36,7 @@
                 </center>
             </div>
             <div>
-                @Html.ActionLink("Back to List", "Index")
+                @Html.ActionLink("Back to Survey List", "Index")
             </div>
         </div>
     </div>

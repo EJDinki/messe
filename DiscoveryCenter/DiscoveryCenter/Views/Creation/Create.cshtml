@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Creation", FormMethod.Post, new { @class = "clearfix" }))
 {
     @Html.AntiForgeryToken()
     <br />
@@ -12,16 +12,24 @@
         <div class="panel panel-body panel-default fixed">
             <h2>Create Survey</h2>
             <div class="form-group clearfix">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-10" style="padding-left:0px">
+                    <h4>Survey Name</h4>
                     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    <h4>Survey Description</h4>
+                    @Html.TextAreaFor(model => model.Description, 5, 80, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })*@
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                </div>            </div>
             <div class="top-divider">
+                @if (!this.ViewData.ModelState.IsValid)
+                {
+                    @Html.ValidationSummary("Survey contains errors.", new { id = "valSum", @class = "text-danger pull-right" })
+                }
                 <center>
-                    @Html.ActionLink("+Add Question", "BlankQuestionRow", new { id = 0 }, new { id = "addItem", @class = "btn btn-default" })
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <a class="btn btn-default" href="@Url.Action("BlankQuestionRow", "Creation", new {id=Model.Id })" id="addItem">
+                        <i class='glyphicon glyphicon-plus'></i> Add Question
+                    </a>
+                    <button id="save" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
                 </center>
             </div>
             <div>
@@ -31,33 +39,114 @@
     </div>
 
 
-    <div class="form-horizontal col-md-9 panel panel-body panel-default">
-        @Html.ValidationSummary(true, "", new { id="valSum", @class = "text-danger"})
+    <div class="form-horizontal col-md-8 panel panel-body panel-default clearfix">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.CreateDate)
 
         <div id="questionDivList">
+            <div id="tip">
+                @Html.ValidationMessage("Questions", new { @class = "text-danger" })
+                <h2>No Questions in survey.</h2>
+                <br>
+                <h3><span class="glyphicon glyphicon-arrow-left"></span> Press '+Add Question' to add a question</h3>
+            </div>
             <ul id="draggablePanelList" class="list-unstyled">
-
+                @for (int i = 0; i < Model.Questions.Count; i++)
+                {
+                    @Html.Partial("Question", Model.Questions[i])
+                }
             </ul>
         </div>
     </div>
 }
 
+
+
 @section scripts
 {
     <script>
-        $("#addItem").click(function() {
-        $.ajax({
-            url: this.href,
-            cache: false,
-            success: function (html) {
-                $("#draggablePanelList").append(html);
-                UpdatePanels();
+
+        $("#addItem").click(function () {
+            $.ajax({
+                url: this.href,
+                cache: false,
+                success: function (html) {
+                    html = FilterSomeeGarbage(html);
+                    $("#draggablePanelList").append(html);
+                    UpdatePanels();
+                    NoQuestions()
+                }
+            });
+            return false;
+        });
+
+        function AppendChoiceBox(ele, allowDelete) {
+            myUrl = '@Url.Action("BlankChoiceBox", "Creation")?allowDelete=' + allowDelete;
+
+            $.ajax({
+                url: myUrl,
+                cache: false,
+                success: function (html) {
+                    html = FilterSomeeGarbage(html);
+                    $(ele).closest(".Choices").find(".AppendChoices").append(html);
+                }
+            });
+            return false;
+        }
+
+        NoQuestions();
+        function NoQuestions() {
+            if ($("#draggablePanelList").html().trim() == "") {
+                $(tip).show();
+                $(addItem).removeClass("btn-default");
+                $(addItem).addClass("btn-success");
+
+                $("#save").removeClass("btn-success");
+                $("#save").addClass("btn-default");
             }
-        });
-        return false;
-        });
+            else {
+                $(tip).hide();
+                $(addItem).removeClass("btn-success");
+                $(addItem).addClass("btn-default");
+
+                $("#save").removeClass("btn-default");
+                $("#save").addClass("btn-success");
+            }
+        }
+
+        function DeleteChoice(ele) {
+            $(ele).closest(".Choice").remove();
+        }
+
+        function UpdateChoices(ele) {
+            var choicesEle = $(ele).closest(".panel-body").find(".Choices").first();
+            var choices = [];
+            var index = $(ele).val();
+
+
+            $(choicesEle).find("input").each(function (index, elem) {
+                choices.push($(elem).val());
+            });
+
+            var joinedChoices = choices.join(";");
+            var myUrl = '@Url.Action("RefreshChoices", "Creation")?typeIndex=' + index + '&choices=' + joinedChoices;
+
+
+            $.ajax({
+                url: myUrl,
+                cache: false,
+                success: function (html) {
+                    html = FilterSomeeGarbage(html);
+                    $(choicesEle).html(html);
+                }
+            });
+            return false;
+        }
+
+        function FilterSomeeGarbage(html) {
+            return String(html).replace(/<!--[.\s\S\r\n]*/, "");
+        }
 
         //---------------draggable panel---------------------
         var panelList = $('#draggablePanelList');
