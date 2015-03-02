@@ -88,7 +88,7 @@
                 }
                 else
                 {
-                    <input type="submit" class="btn btn-default" value="Complete Survey" />
+                    <input type="submit" class="btn btn-default" value="Complete Survey" id="CompleteSurvey"/>
                     @Html.ActionLink("Exit Survey", "Index", "Home", new { id = Model.SurveyId }, new { @class = "btn btn-default" })
                 }
             }
@@ -147,6 +147,31 @@
                 }, 5000);
             }
         }
+
+        //Code for autoredirect after a certain time limit
+        var idleTime = 0;
+        $(document).ready(function () {
+            var idleInterval = setInterval(timerIncrement, 60000);
+
+            //checks for mouse input
+            $(this).mousemove(function (e) {
+                idleTime = 0;
+            });
+            //checks for keyboard input
+            $(this).keypress(function (e) {
+                idleTime = 0;
+            });
+        });
+
+        //Increments the timer and if the value is greater than 3, submits the survey
+        function timerIncrement() {
+            idleTime = idleTime + 1;
+            if (idleTime > 3) {
+                document.getElementById("CompleteSurvey").click();
+                
+            }
+        }
+
     </script>
 }
 
