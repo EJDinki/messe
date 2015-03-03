@@ -13,7 +13,7 @@ namespace DiscoveryCenterTests
     public class Common
     {
         public static readonly string BaseUrl = "http://museumsurvey.somee.com";
-
+        //public static readonly string BaseUrl = "http://localhost:19509";
         /// <summary>
         /// Adds a survey with 1 of every question type to the database.
         /// The suvey has a Guid as its name for uniqueness
@@ -28,7 +28,8 @@ namespace DiscoveryCenterTests
                 {
                     Name = Guid.NewGuid().ToString(),
                     CreateDate = DateTime.Now,
-                    LastModifiedDate = DateTime.Now
+                    LastModifiedDate = DateTime.Now,
+                    Description = "The survey to use in functional unit testing"
                 };
 
                 Question sAnswer = new Question()
@@ -66,11 +67,21 @@ namespace DiscoveryCenterTests
                     Choices = "sChoice;sChoice2;sChoice3"
                 };
 
+                Question sExhibit = new Question()
+                {
+                    Text = "This is a Select Exhibit question.",
+                    Type = Question.QuestionType.ExhibitsChooseMany,
+                    IndexInSurvey = 5,
+                    ParentSurvey = theSurvey,
+                    MaxSelectedChoices = 4
+                };
+
                 theSurvey.Questions = new List<Question>();
                 theSurvey.Questions.Add(sAnswer);
                 theSurvey.Questions.Add(mChoose1);
                 theSurvey.Questions.Add(mChooseM);
                 theSurvey.Questions.Add(sSlider);
+                theSurvey.Questions.Add(sExhibit);
 
                 dbContext.Surveys.Add(theSurvey);
                 dbContext.SaveChanges();

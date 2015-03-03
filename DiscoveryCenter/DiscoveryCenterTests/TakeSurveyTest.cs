@@ -117,7 +117,9 @@ namespace DiscoveryCenterTests
         public void ViewSurvey()
         {
             SurveyListPage sListPage = new SurveyListPage(this);
-            sListPage.GetViewFor(theSurvey.Id).Click();
+            
+            sListPage.GetSurveyRow(theSurvey.Id).MouseClick();
+            sListPage.ViewSurvey.Click();
 
             HtmlDiv welcomeDiv = this.Find.ByAttributes<HtmlDiv>("class=jumbotron");
             Assert.IsTrue(welcomeDiv.InnerText.Contains(theSurvey.Name));

@@ -44,24 +44,41 @@ namespace DiscoveryCenterTests.ObjectRepository
             }
         }
 
-        public HtmlAnchor GetEditFor(int surveyId)
+        public HtmlAnchor EditSurvey
         {
-            return testManager.Find.ById<HtmlAnchor>("edit_" + surveyId);
+            get
+            {
+                return testManager.Find.ById<HtmlAnchor>("editSurvey");
+            }
         }
 
-        public HtmlAnchor GetViewFor(int surveyId)
+        public HtmlAnchor ViewSurvey
         {
-            return testManager.Find.ById<HtmlAnchor>("view_" + surveyId);
+            get
+            {
+                return testManager.Find.ById<HtmlAnchor>("viewSurvey");
+            }
         }
 
-        public HtmlAnchor GetDeleteFor(int surveyId)
+        public HtmlAnchor DeleteSurvey
         {
-            return testManager.Find.ById<HtmlAnchor>("delete_" + surveyId);
+            get
+            {
+                return testManager.Find.ById<HtmlAnchor>("deleteSurvey");
+            }
         }
 
-        public HtmlAnchor GetDuplicateFor(int surveyId)
+        public HtmlAnchor DuplicateSurvey
         {
-            return testManager.Find.ById<HtmlAnchor>("duplicate" + surveyId);
+            get
+            {
+                return testManager.Find.ById<HtmlAnchor>("duplicateSurvey");
+            }
+        }
+
+        public HtmlListItem GetSurveyRow(int surveyId)
+        {
+            return testManager.Find.ById<HtmlListItem>("selectRow_" + surveyId);
         }
     }
 }
