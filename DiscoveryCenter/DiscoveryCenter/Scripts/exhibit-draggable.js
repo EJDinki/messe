@@ -39,6 +39,7 @@
         drop: function (event, ui) {
             $("#exhibitA_" + ui.draggable.context.id).val($("#exhibitA_" + ui.draggable.context.id).val() + ui.draggable.context.innerText + ";");
             $(ui.draggable).detach().css({ top: 0, left: 0 }).appendTo(this);
+            clicked = false;
         }
     });
 
