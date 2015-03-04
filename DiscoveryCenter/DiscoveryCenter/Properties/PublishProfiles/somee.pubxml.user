@@ -14,10 +14,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
     <File Include="bin/cs/DiscoveryCenter.resources.dll">
-      <publishTime>02/23/2015 17:56:25</publishTime>
+      <publishTime>03/04/2015 14:36:03</publishTime>
     </File>
     <File Include="bin/DiscoveryCenter.dll">
-      <publishTime>02/23/2015 17:56:25</publishTime>
+      <publishTime>03/04/2015 14:36:03</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>02/07/2015 17:55:51</publishTime>
@@ -98,7 +98,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/07/2015 17:55:53</publishTime>
     </File>
     <File Include="Content/Admin.css">
-      <publishTime>02/08/2015 20:10:06</publishTime>
+      <publishTime>03/04/2015 14:28:17</publishTime>
     </File>
     <File Include="Content/bootstrap-slider.css">
       <publishTime>02/07/2015 17:55:51</publishTime>
@@ -111,6 +111,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/discovery.png">
       <publishTime>02/07/2015 17:55:51</publishTime>
+    </File>
+    <File Include="Content/images/discovery.png">
+      <publishTime>02/26/2015 18:55:19</publishTime>
+    </File>
+    <File Include="Content/images/discovery50.png">
+      <publishTime>02/26/2015 18:55:19</publishTime>
+    </File>
+    <File Include="Content/images/discovery75.png">
+      <publishTime>02/26/2015 18:55:19</publishTime>
     </File>
     <File Include="Content/images/ui-bg_flat_0_aaaaaa_40x100.png">
       <publishTime>02/07/2015 17:55:51</publishTime>
@@ -166,6 +175,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/jquery-ui.theme.min.css">
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
+    <File Include="Content/jquery.jqplot.css">
+      <publishTime>02/24/2015 19:10:25</publishTime>
+    </File>
     <File Include="Content/SurveyView.css">
       <publishTime>02/10/2015 00:37:23</publishTime>
     </File>
@@ -199,6 +211,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/bootstrap.min.js">
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
+    <File Include="Scripts/exhibit-draggable.js">
+      <publishTime>03/04/2015 14:28:17</publishTime>
+    </File>
+    <File Include="Scripts/jqplot/jqplot.pieRenderer.min.js">
+      <publishTime>02/24/2015 19:10:25</publishTime>
+    </File>
+    <File Include="Scripts/jqplot/jquery.jqplot.min.js">
+      <publishTime>02/24/2015 19:10:25</publishTime>
+    </File>
     <File Include="Scripts/jquery-1.10.2.js">
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
@@ -207,6 +228,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/jquery-1.10.2.min.map">
       <publishTime>02/07/2015 17:55:51</publishTime>
+    </File>
+    <File Include="Scripts/jquery-touch.js">
+      <publishTime>02/26/2015 19:23:17</publishTime>
     </File>
     <File Include="Scripts/jquery-ui.min.js">
       <publishTime>02/07/2015 17:55:51</publishTime>
@@ -233,13 +257,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>02/19/2015 12:37:50</publishTime>
+      <publishTime>02/26/2015 18:55:19</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
       <publishTime>02/07/2015 23:25:56</publishTime>
     </File>
     <File Include="Views/Creation/Create.cshtml">
-      <publishTime>02/21/2015 00:46:42</publishTime>
+      <publishTime>03/04/2015 14:28:17</publishTime>
     </File>
     <File Include="Views/Creation/Delete.cshtml">
       <publishTime>02/07/2015 17:55:51</publishTime>
@@ -248,19 +272,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
     <File Include="Views/Creation/Edit.cshtml">
-      <publishTime>02/23/2015 18:00:54</publishTime>
+      <publishTime>03/04/2015 14:28:17</publishTime>
     </File>
     <File Include="Views/Creation/Index.cshtml">
-      <publishTime>02/23/2015 17:29:39</publishTime>
+      <publishTime>03/04/2015 14:28:17</publishTime>
     </File>
     <File Include="Views/Creation/Question.cshtml">
-      <publishTime>02/10/2015 00:34:18</publishTime>
+      <publishTime>02/26/2015 18:55:19</publishTime>
     </File>
     <File Include="Views/Creation/_ChoiceBox.cshtml">
-      <publishTime>02/23/2015 17:29:39</publishTime>
+      <publishTime>02/26/2015 18:55:19</publishTime>
     </File>
     <File Include="Views/Creation/_ChoicesInputGroup.cshtml">
-      <publishTime>02/23/2015 17:29:39</publishTime>
+      <publishTime>02/26/2015 18:55:19</publishTime>
     </File>
     <File Include="Views/Exhibits/Create.cshtml">
       <publishTime>02/09/2015 18:52:32</publishTime>
@@ -278,10 +302,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/09/2015 18:52:32</publishTime>
     </File>
     <File Include="Views/Home/ExhibitsChooseMany.cshtml">
-      <publishTime>02/10/2015 00:37:23</publishTime>
+      <publishTime>03/04/2015 14:28:17</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>02/21/2015 21:06:30</publishTime>
+      <publishTime>03/04/2015 14:28:17</publishTime>
     </File>
     <File Include="Views/Home/MultipleChoiceChooseMany.cshtml">
       <publishTime>02/21/2015 20:55:15</publishTime>
@@ -296,16 +320,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/10/2015 00:37:23</publishTime>
     </File>
     <File Include="Views/Home/Survey.cshtml">
-      <publishTime>02/21/2015 22:17:30</publishTime>
+      <publishTime>03/04/2015 14:28:17</publishTime>
     </File>
     <File Include="Views/Home/ThankYou.cshtml">
-      <publishTime>02/19/2015 12:37:50</publishTime>
+      <publishTime>03/04/2015 14:28:17</publishTime>
+    </File>
+    <File Include="Views/Report/Index.cshtml">
+      <publishTime>03/04/2015 14:28:17</publishTime>
     </File>
     <File Include="Views/Shared/_AdminLayout.cshtml">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>03/04/2015 14:28:17</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>03/04/2015 14:28:17</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>02/07/2015 17:55:51</publishTime>
@@ -314,13 +341,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/09/2015 23:06:49</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>02/24/2015 19:10:17</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/23/2015 18:01:37</publishTime>
+      <publishTime>03/04/2015 14:36:26</publishTime>
     </File>
   </ItemGroup>
 </Project>
