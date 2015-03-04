@@ -10,7 +10,7 @@ namespace DiscoveryCenter.Controllers
     public class HomeController : Controller
     {
         [HttpGet]
-        public  ActionResult Survey(int id = 1, Boolean preview = false)
+        public  ActionResult Survey(int id = 1)
         {
             SurveyViewModel model = null;
             using(SurveyContext dbContext = new SurveyContext())
@@ -20,7 +20,6 @@ namespace DiscoveryCenter.Controllers
                 model.QuestionModels = new List<QuestionViewModel>();
                 model.SurveyId = survey.Id;
                 model.SurveyName = survey.Name;
-                if (preview) model.isPreview = true;
                 
                 foreach(var question in survey.Questions.OrderBy(x => x.IndexInSurvey))
                 {
