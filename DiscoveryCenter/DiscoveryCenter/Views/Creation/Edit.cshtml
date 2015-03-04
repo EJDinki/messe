@@ -19,7 +19,7 @@
                     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                     <h4>Survey Description</h4>
                     @Html.TextAreaFor(model => model.Description, 5, 80, new { htmlAttributes = new { @class = "form-control" } })
-                    @*@Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })*@
+
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -181,5 +181,14 @@
                 
             });
         }
+
+        $(document).on({
+            mouseenter: function () {
+                $(this).addClass("highlight");
+            },
+            mouseleave: function () {
+                $(this).removeClass("highlight");
+            }
+        }, ".panel-heading");
     </script>
 }
