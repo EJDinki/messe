@@ -107,6 +107,7 @@ namespace DiscoveryCenterTests
         [ClassCleanup()]
         public static void MyClassCleanup()
         {
+            Common.TruncateDbTables();
             // This will shut down all browsers if
             // recycleBrowser is turned on. Else
             // will do nothing.
@@ -212,8 +213,5 @@ namespace DiscoveryCenterTests
 
         #endregion
 
-        #region [HelperMethods]
-
-        #endregion
     }
 }

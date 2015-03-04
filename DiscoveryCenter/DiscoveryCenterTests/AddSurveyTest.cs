@@ -160,6 +160,7 @@ namespace DiscoveryCenterTests
         [ClassCleanup()]
         public static void MyClassCleanup()
         {
+            Common.TruncateDbTables();
             ShutDown();
         }
 
