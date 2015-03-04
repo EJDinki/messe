@@ -19,76 +19,25 @@
             </div>
             <div class="col-md-8 selection-buttons " style="padding-right:0px">
                 <div class="btn-group pull-right">
-                    <a class="btn btn-default" type="button" href="@Url.Action("Edit", "Creation", new { id = "" })">
+                    <a id="editSurvey" class="btn btn-default" type="button" href="@Url.Action("Edit", "Creation", new { id = "" })">
                         <span class="glyphicon glyphicon-edit"></span> Edit
                     </a>
-                    <a class="btn btn-default" type="button" href="@Url.Action("Duplicate", "Creation", new { id = "" })">
+                    <a id="duplicateSurvey" class="btn btn-default" type="button" href="@Url.Action("Duplicate", "Creation", new { id = "" })">
                         <span class="glyphicon glyphicon-duplicate"></span> Duplicate
                     </a>
-                    <a class="btn btn-default" type="button" href="@Url.Action("Index", "Home", new { id = "" })">
+                    <a id="viewSurvey" class="btn btn-default" type="button" href="@Url.Action("Index", "Home", new { id = "" })">
                         <span class="glyphicon glyphicon-eye-open"></span> View Survey
                     </a>
-                    <a class="btn btn-default" type="button" href="@Url.Action("Index", "Report", new { id = "" })">
+                    <a id="reportSurvey" class="btn btn-default" type="button" href="@Url.Action("Index", "Report", new { id = "" })">
                         View Report
                     </a>
-                    <a class="btn btn-danger" type="button" href="@Url.Action("Delete", "Creation", new { id = ""})">
+                    <a id="deleteSurvey" class="btn btn-danger" type="button" href="@Url.Action("Delete", "Creation", new { id = ""})">
                         <span class="glyphicon glyphicon-remove"></span> Delete
                     </a>
                 </div>
             </div>
         </div>
         
-        @*<table class="table">
-            <tr>
-                <th class="col-md-2">
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th class="col-md-1">
-                    Number of Questions
-                </th>
-                <th class="col-md-2">
-                    @Html.DisplayNameFor(model => model.CreateDate)
-                </th>
-                <th class="col-md-2">
-                    @Html.DisplayNameFor(model => model.LastModifiedDate)
-                </th>
-                <th class="col-md-4"></th>
-            </tr>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @item.Questions.Count
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreateDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastModifiedDate)
-                    </td>
-                    <td>
-                        <div class="btn-group">
-                            <a class="btn btn-default" type="button" href="@Url.Action("Edit", "Creation", new { id = item.Id})" id="@string.Format("edit_{0}",item.Id)">
-                                <span class="glyphicon glyphicon-edit"></span> Edit
-                            </a>
-                            <a class="btn btn-default" type="button" href="@Url.Action("Duplicate", "Creation", new { id = item.Id})" id="@string.Format("duplicate{0}",item.Id)">
-                                <span class="glyphicon glyphicon-duplicate"></span> Duplicate
-                            </a>
-                            <a class="btn btn-default" type="button" href="@Url.Action("Index", "Home", new { id = item.Id})" id="@string.Format("view_{0}",item.Id)">
-                                <span class="glyphicon glyphicon-eye-open"></span> View
-                            </a>
-                            <a class="btn btn-danger" type="button" href="@Url.Action("Delete", "Creation", new { id = item.Id})" id="@string.Format("delete_{0}",item.Id)">
-                                <span class="glyphicon glyphicon-remove"></span> Delete
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </table>*@
-
         <ul style="list-style-type: none; margin: 0;padding:0;">
             <li class="header clearfix">
                 <div class="col-md-3">
@@ -109,7 +58,7 @@
             
             @foreach (var item in Model)
             {
-                <li class="ui-widget-content clearfix">
+                <li class="ui-widget-content clearfix" id="selectRow_@item.Id">
                     @Html.HiddenFor(modelItem => item.Id, new { @class="id"})
                     <div class="col-md-3">
                         <span>@Html.DisplayFor(modelItem => item.Name)</span>
