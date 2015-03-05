@@ -1,7 +1,7 @@
 ﻿@model DiscoveryCenter.Models.MultipleSelectViewModel
 
 @Html.Hidden("Exhibit"+Model.QuestionId+".Answer","",new {id="exhibitA_"+Model.QuestionId})
-<div class="pull-left dropable-revert" style="height:50vh;overflow-y:scroll;width:40%">
+<div id="exhibitList_@Model.QuestionId"class="pull-left dropable-revert" style="height:50vh;overflow-y:scroll;width:40%">
 @for (int z = 0; z < @Model.Choices.Count; z++)
 {
     <div class="panel draggable" id="@Model.QuestionId">
@@ -16,6 +16,6 @@
 
 </div>
 
-<div class="panel dropable pull-right"style="height:50vh;overflow-y:scroll;width:40%">
+<div id="dropArea_@Model.QuestionId"class="panel dropable pull-right"style="height:50vh;overflow-y:scroll;width:40%">
 
 </div>

@@ -107,6 +107,7 @@ namespace DiscoveryCenterTests
         [ClassCleanup()]
         public static void MyClassCleanup()
         {
+            Common.TruncateDbTables();
             // This will shut down all browsers if
             // recycleBrowser is turned on. Else
             // will do nothing.
@@ -122,7 +123,8 @@ namespace DiscoveryCenterTests
         {
             SurveyListPage sListPage = new SurveyListPage(this);
 
-            sListPage.GetDuplicateFor(theSurvey.Id).Click();
+            sListPage.GetSurveyRow(theSurvey.Id).MouseClick();
+            sListPage.DuplicateSurvey.Click();
 
             //Assert Change is shown in web browser
             string copyName = theSurvey.Name + " - Copy";
@@ -143,7 +145,9 @@ namespace DiscoveryCenterTests
         {
             //Click to edit the newly added survey
             SurveyListPage sListPage = new SurveyListPage(this);
-            sListPage.GetEditFor(theSurvey.Id).Click();
+
+            sListPage.GetSurveyRow(theSurvey.Id).MouseClick();
+            sListPage.EditSurvey.Click();
 
             EditSurveyPage editPage = new EditSurveyPage(this);
 
@@ -209,8 +213,5 @@ namespace DiscoveryCenterTests
 
         #endregion
 
-        #region [HelperMethods]
-
-        #endregion
     }
 }

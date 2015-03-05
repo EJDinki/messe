@@ -5,9 +5,9 @@
 }
 
 <li class="panel panel-info">
-    <div class="panel-heading">
+    <div title="Drag panel to reorder questions." class="panel-heading" style="cursor:pointer;">
         Question <span class="IndexInSurvey">@Model.IndexInSurvey</span>
-        <div class="pull-right">
+        <div title="" class="pull-right">
             <a href="javascript:void(0)" class="deleteRow btn-sm btn-danger" onclick="$(this).closest('li').remove(); NoQuestions(); UpdatePanels();">
                 <span class="glyphicon glyphicon-remove"></span>
                 Delete Question

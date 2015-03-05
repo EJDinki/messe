@@ -10,7 +10,7 @@ namespace DiscoveryCenter.Controllers
     public class HomeController : Controller
     {
         [HttpGet]
-        public  ActionResult Survey(int id = 1, Boolean preview = false)
+        public  ActionResult Survey(int id = 1)
         {
             SurveyViewModel model = null;
             using(SurveyContext dbContext = new SurveyContext())
@@ -20,7 +20,6 @@ namespace DiscoveryCenter.Controllers
                 model.QuestionModels = new List<QuestionViewModel>();
                 model.SurveyId = survey.Id;
                 model.SurveyName = survey.Name;
-                if (preview) model.isPreview = true;
                 
                 foreach(var question in survey.Questions.OrderBy(x => x.IndexInSurvey))
                 {
@@ -124,13 +123,24 @@ namespace DiscoveryCenter.Controllers
                     else if (qmodel.Type == Question.QuestionType.ExhibitsChooseMany)
                     {
                         string exhibitIds = "";
+
+                        //change exhibit name to Id
                         foreach (string name in qmodel.Answer.Split(';'))
                         {
                             string trimmed = name.Trim();
                             int? exhibit = (from e in db.Exhibits where e.Name.Contains(trimmed) select e.Id).FirstOrDefault();
 
-                            if(exhibit != null)
+                            if (exhibit != null)
                                 exhibitIds += exhibit + ";";
+                            else
+                                throw new NullReferenceException("Could not find exhibit with name: " + trimmed);
+                        }
+
+                        //Create new Answer for each selected exhibit Id
+                        foreach (string ex in exhibitIds.Split(';'))
+                        {
+                            answer = new Answer() {QuestionId=qmodel.QuestionId, Value=ex, Submission = submission };
+                            db.Answers.Add(answer);
                         }
                     }
                     else if (!String.IsNullOrWhiteSpace(qmodel.Answer))

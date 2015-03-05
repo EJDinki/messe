@@ -129,5 +129,40 @@ namespace DiscoveryCenterTests.ObjectRepository
         {
             return ActiveQuestionDiv.Find.ById<HtmlTextArea>("~_Answer");
         }
+
+
+        public HtmlDiv GetExhibitDraggable(string exhibitName, bool inDropArea = false)
+        {
+            if (inDropArea)
+            {
+                var draggables = ExhibitDropArea.Find.AllByAttributes<HtmlDiv>("class=~draggable");
+                HtmlDiv exhibit = (from e in draggables where e.InnerText.Contains(exhibitName) select e).SingleOrDefault();
+                return exhibit;
+            }
+
+            var allDraggables = ExhibitListDiv.Find.AllByAttributes<HtmlDiv>("class=~draggable");
+            HtmlDiv selectedExhibit = (from e in allDraggables where e.InnerText.Contains(exhibitName) select e).SingleOrDefault();
+            return selectedExhibit;
+        }
+
+        public HtmlDiv ExhibitDropArea
+        {
+            get
+            {
+                HtmlDiv dropArea = ActiveQuestionDiv.Find.ById<HtmlDiv>("~dropArea_");
+                dropArea.Refresh();
+                return dropArea;
+            }
+        }
+
+        public HtmlDiv ExhibitListDiv
+        {
+            get
+            {
+                HtmlDiv exhibitList = ActiveQuestionDiv.Find.ById<HtmlDiv>("~exhibitList_");
+                exhibitList.Refresh();
+                return exhibitList;
+            }
+        }
     }
 }

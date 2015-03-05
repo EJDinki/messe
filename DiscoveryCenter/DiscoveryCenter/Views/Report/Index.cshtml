@@ -23,7 +23,7 @@
     
     // Create the div for the chart for this question
     var divId = "chartdiv" + @Model.Reports[i].QuestionIndex;
-    <div id="@divId" style="height:500px;width:500px; "></div>
+    <div id="@divId" style="height:400px;width:400px; "></div>
 
     // Add this data to the dataForCharts array to be referenced later. HTML.Raw is used to avoid encoding
     <script>dataForCharts[@Model.Reports[i].QuestionIndex] = JSON.parse('@Html.Raw(result)');</script>
@@ -52,7 +52,11 @@
                                 showDataLabels: true
                             }
                         },
-                        legend: { show:true, location: 'e' }
+                        legend: { 
+                            show:true,
+                            location: 'e',
+                            placement: 'outside'
+                        }
                     }
                 );
             }

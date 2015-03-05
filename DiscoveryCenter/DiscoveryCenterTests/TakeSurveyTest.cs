@@ -102,6 +102,9 @@ namespace DiscoveryCenterTests
         [ClassCleanup()]
         public static void MyClassCleanup()
         {
+            //Truncate db to not bloat it from added surveys
+            Common.TruncateDbTables();
+
             // This will shut down all browsers if
             // recycleBrowser is turned on. Else
             // will do nothing.
@@ -117,7 +120,9 @@ namespace DiscoveryCenterTests
         public void ViewSurvey()
         {
             SurveyListPage sListPage = new SurveyListPage(this);
-            sListPage.GetViewFor(theSurvey.Id).Click();
+            
+            sListPage.GetSurveyRow(theSurvey.Id).MouseClick();
+            sListPage.ViewSurvey.Click();
 
             HtmlDiv welcomeDiv = this.Find.ByAttributes<HtmlDiv>("class=jumbotron");
             Assert.IsTrue(welcomeDiv.InnerText.Contains(theSurvey.Name));
@@ -152,9 +157,27 @@ namespace DiscoveryCenterTests
             sTakePage.NextQuestion.Click();
 
             sTakePage.GetSliderHandle().DragTo
-                (OffsetReference.TopLeftCorner, new System.Drawing.Point(),
+                (OffsetReference.AbsoluteCenter, new System.Drawing.Point(),
                 sTakePage.GetSliderTrack(), OffsetReference.LeftCenter, new System.Drawing.Point());
+            sTakePage.NextQuestion.Click();
 
+            //Drag Fire Station to selected
+            sTakePage.GetExhibitDraggable("Fire Station").DragTo
+                (OffsetReference.AbsoluteCenter, new System.Drawing.Point(),
+                sTakePage.ExhibitDropArea, OffsetReference.AbsoluteCenter, new System.Drawing.Point());
+
+            //Drag Widgets & Gadgets to selected
+            sTakePage.GetExhibitDraggable("Widgets & Gadgets").DragTo
+                (OffsetReference.AbsoluteCenter, new System.Drawing.Point(),
+                sTakePage.ExhibitDropArea, OffsetReference.AbsoluteCenter, new System.Drawing.Point());
+
+            //Remove Fire Station from Selected to confirm that removing works and only Widgets panel is left
+            sTakePage.GetExhibitDraggable("Fire Station",true).DragTo
+                (OffsetReference.AbsoluteCenter, new System.Drawing.Point(),
+                sTakePage.ExhibitListDiv, OffsetReference.AbsoluteCenter, new System.Drawing.Point());
+
+            Exhibit fireStation = (from e in dbContext.Exhibits where e.Name.Contains("Fire Station") select e).FirstOrDefault();
+            Exhibit widgets = (from e in dbContext.Exhibits where e.Name.Contains("Widgets & Gadgets") select e).FirstOrDefault();
 
             DateTime submissionTime = DateTime.Now;
 
@@ -169,6 +192,7 @@ namespace DiscoveryCenterTests
             Assert.AreEqual("mMChoice", sub.Answers[2].Value);
             Assert.AreEqual("mMChoice2", sub.Answers[3].Value);
             Assert.AreEqual("1", sub.Answers[4].Value);
+            Assert.AreEqual(widgets.Id, Convert.ToInt32(sub.Answers[5].Value));
         }
         #endregion
     }

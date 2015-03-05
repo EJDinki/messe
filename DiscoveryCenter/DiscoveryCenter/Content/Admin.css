@@ -41,9 +41,6 @@ input[type=text]{
     resize:none;
 }
 
-
-
-
 div .top-divider{
     margin-top:10px;
     padding-top:10px;
@@ -414,4 +411,16 @@ div .top-divider{
     display:inline-block;
     position: relative;
 }
+
+
+//---------selectable list------------
+
+
+.highlight{
+    background-color: gold !important;
+}
+
+
+
+
 
