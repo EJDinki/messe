@@ -7,10 +7,13 @@
 }
 @using (Html.BeginForm("Survey", "Home", FormMethod.Post))
 {
-    <div class="jumbotron" >
-        @*<img src="~/Content/images/discovery.png" />*@
+    <div class="jumbotron">
+
         <img src="~/Content/images/discovery75.png" />
-        @*<img src="~/Content/images/discovery50.png" />*@
+        
+        <a id="quitSurey" class="btn btn-lg pull-right" type="button" href="#" onclick="confirmExit();">
+            <span class="glyphicon glyphicon-remove-circle pull-right" style="font-size:4em; color:red"></span>
+        </a>
         <span id="alert" class="alert alert-danger top" role="alert" hidden style="position: absolute;"></span>
 
         <br />
@@ -27,16 +30,6 @@
 
         @Html.HiddenFor(m => m.SurveyId)
         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-            <!-- Indicators -->
-            <div class="carousel-controls center">
-                <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    @for (int i = 1; i < @Model.QuestionModels.Count; i++)
-                    {
-                        <li data-target="#myCarousel" data-slide-to="@i"></li>
-                    }
-                </ol>
-            </div>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
@@ -73,26 +66,32 @@
                                 @Html.HiddenFor(m => m.QuestionModels[i].Answer)
                                 break;
                         }
+
                         @Html.HiddenFor(m => m.QuestionModels[i].Type)
+
+                        @if (i == Model.QuestionModels.Count - 1)
+                        {
+                            <center>
+                                <input type="submit" class="btn btn-default" value="Complete Survey" id="CompleteSurvey" style="margin-top:15%" />
+                            </center>
+                        }
                     </div>
                 }
             </div>
-        </div>
-        <center>
-            @{
-                if (@Model.isPreview)
+
+            <br>
+            <!-- Indicators -->
+            <div class="carousel-controls center">
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    @for (int i = 1; i < @Model.QuestionModels.Count; i++)
                 {
-                    <!-- TODO Change where these two buttons redirect to -->
-                    @Html.ActionLink("Finish Editing and Save Survey", "Index", null, new { @class = "btn btn-default" })
-                    @Html.ActionLink("Return to Editing", "Index", null, new { @class = "btn btn-default" })
-                }
-                else
-                {
-                    <input type="submit" class="btn btn-default" value="Complete Survey" id="CompleteSurvey"/>
-                    @Html.ActionLink("Exit Survey", "Index", "Home", new { id = Model.SurveyId }, new { @class = "btn btn-default" })
-                }
+                        <li data-target="#myCarousel" data-slide-to="@i"></li>
             }
-        </center>
+                </ol>
+            </div>
+
+        </div>
     </div>
 }
 
@@ -159,6 +158,13 @@
                 
             }
         }
+
+
+        function confirmExit() {
+            if(confirm("Are you sure you wish to exit without submitting your answers?"))
+                window.location.replace("@Url.Action("Index", "Home", new {id=Model.SurveyId},Request.Url.Scheme)");
+        }
+
 
     </script>
 }
