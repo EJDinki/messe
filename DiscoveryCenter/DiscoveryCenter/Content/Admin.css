@@ -102,16 +102,6 @@ div .top-divider{
     margin-right:15px;
 }
 
-.slider-container{
-    width:70%;
-    margin-left:10%;
-    margin-right:10%;
-}
-
-.slider.slider-horizontal{
-    width:100%;
-}
-
 /*carousel controls*/
 
 .carousel {
@@ -360,8 +350,15 @@ div .top-divider{
 
 //---------selectable list------------
 
-.selectableList
+.selectableList, .ui-selectable
 {
+    list-style:none;
+    list-style-type:none;
+    padding:0;
+    margin:0;
+}
+
+ul{
     list-style:none;
     list-style-type:none;
     padding:0;
@@ -372,14 +369,20 @@ div .top-divider{
     display:block;
 }
 
-.selectableList .ui-selecting { 
+.selectableList li.ui-selecting { 
     background: #FECA40; 
 }
-.selectableList .ui-selected { 
+.selectableList li.ui-selected { 
     background: #F39814;
     color: white; 
     border: 1px solid #F39814;
 }
+
+.selectableList li.ui-selectee:hover
+{
+    background: #FECA40;
+}
+
 .header{
     background-color: darkgray;
     border:none;
