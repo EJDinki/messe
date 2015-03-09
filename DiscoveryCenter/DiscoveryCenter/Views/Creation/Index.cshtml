@@ -54,12 +54,12 @@
                 </div>
             </li>
         </ul>
-        <ul class="selectableList">
-            
+        <ul class="indexSelectableList">
+
             @foreach (var item in Model)
             {
                 <li class="ui-widget-content clearfix" id="selectRow_@item.Id" style="cursor:pointer">
-                    @Html.HiddenFor(modelItem => item.Id, new { @class="id"})
+                    @Html.HiddenFor(modelItem => item.Id, new { @class = "id" })
                     <div class="col-md-3">
                         <span>@Html.DisplayFor(modelItem => item.Name)</span>
                     </div>
@@ -81,7 +81,7 @@
 @section scripts
 {
     <script>
-        $(".selectableList").selectable({
+        $(".indexSelectableList").selectable({
             stop:function(event, ui){
                 $(event.target).children('.ui-selected').not(':first').removeClass('ui-selected');
                 refreshButtons(event.target);
