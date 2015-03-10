@@ -99,16 +99,6 @@ div .top-divider{
     margin-right:15px;
 }
 
-.slider-container{
-    width:70%;
-    margin-left:10%;
-    margin-right:10%;
-}
-
-.slider.slider-horizontal{
-    width:100%;
-}
-
 /*carousel controls*/
 
 .carousel {
@@ -357,7 +347,7 @@ div .top-divider{
 
 //---------selectable list------------
 
-.selectableList
+.indexSelectableList, .ui-selectable
 {
     list-style:none;
     list-style-type:none;
@@ -365,18 +355,31 @@ div .top-divider{
     margin:0;
 }
 
-.selectableList li{
+ul{
+    list-style:none;
+    list-style-type:none;
+    padding:0;
+    margin:0;
+}
+
+.indexSelectableList li{
     display:block;
 }
 
-.selectableList .ui-selecting { 
+.indexSelectableList li.ui-selecting { 
     background: #FECA40; 
 }
-.selectableList .ui-selected { 
+.indexSelectableList li.ui-selected { 
     background: #F39814;
     color: white; 
     border: 1px solid #F39814;
 }
+
+.indexSelectableList li.ui-selectee:hover
+{
+    background: #FECA40;
+}
+
 .header{
     background-color: darkgray;
     border:none;
@@ -412,15 +415,13 @@ div .top-divider{
     position: relative;
 }
 
-
-//---------selectable list------------
-
-
-.highlight{
-    background-color: gold !important;
+/*---------edit page selectable list panels------------*/
+.panel-info > .panel-heading{
+    background-color: #ADCDEE;
+    color: #455C73;
+    font-size: 1.6rem;
 }
 
-
-
-
-
+.panel-heading.highlight{
+    background-color: gold !important;
+}

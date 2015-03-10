@@ -30,8 +30,9 @@ namespace DiscoveryCenter
             bundles.Add(new ScriptBundle("~/bundles/SurveyView").Include(
                       "~/Scripts/jquery-ui.min.js",
                       "~/Scripts/jquery-touch.js",
-                      "~/Scripts/exhibit-draggable.js",
-                      "~/Scripts/bootstrap-slider.js"));
+                      "~/Scripts/sliderExtension.js",
+                      "~/Scripts/exhibit-draggable.js"
+                      ));
 
             bundles.Add(new ScriptBundle("~/bundles/Admin").Include(
                 "~/Scripts/jquery-ui.min.js"));
@@ -48,11 +49,11 @@ namespace DiscoveryCenter
                       "~/Content/jquery-ui.theme.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/SurveyView").Include(
-                      "~/Content/bootstrap-slider.css",
                       "~/Content/SurveyView.css",
                       "~/Content/jquery-ui.min.css",
                       "~/Content/jquery-ui.structure.min.css",
-                      "~/Content/jquery-ui.theme.min.css"));
+                      "~/Content/jquery-ui.theme.min.css",
+                      "~/Content/sliderExtension.css"));
 
             bundles.Add(new StyleBundle("~/Content/jqplot").Include(
                       "~/Content/jquery.jqplot.css"));
@@ -61,7 +62,7 @@ namespace DiscoveryCenter
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
-            BundleTable.EnableOptimizations = true;
+            //BundleTable.EnableOptimizations = false;
         }
     }
 }

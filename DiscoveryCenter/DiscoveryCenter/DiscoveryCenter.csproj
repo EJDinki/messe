@@ -198,7 +198,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Admin.css" />
-    <Content Include="Content\bootstrap-slider.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\discovery.png" />
@@ -223,6 +222,7 @@
     <Content Include="Content\jquery-ui.structure.min.css" />
     <Content Include="Content\jquery-ui.theme.min.css" />
     <Content Include="Content\jquery.jqplot.css" />
+    <Content Include="Content\sliderExtension.css" />
     <Content Include="Scripts\exhibit-draggable.js" />
     <Content Include="Scripts\jqplot\jqplot.pieRenderer.min.js" />
     <Content Include="Scripts\jqplot\jquery.jqplot.min.js" />
@@ -248,6 +248,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\sliderExtension.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

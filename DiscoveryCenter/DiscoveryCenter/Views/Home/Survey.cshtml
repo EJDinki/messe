@@ -19,7 +19,7 @@
         <br />
 
         <!-- Left and right controls -->
-        <a class="left carousel-control pull-left" href="#myCarousel" role="button" data-slide="prev">
+        <a class="left carousel-control pull-left disabled" href="#myCarousel" role="button" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
@@ -36,7 +36,7 @@
                 @for (int i = 0; i < @Model.QuestionModels.Count; i++)
                 {
                     string val = i == 0 ? "item active" : "item";
-                    <div class="@val">
+                    <div class="@val" id="slide_@i">
                         @Html.HiddenFor(m => m.QuestionModels[i].Question)
                         @Html.HiddenFor(m => m.QuestionModels[i].QuestionId)
                         <p><b>@Model.QuestionModels[i].Question</b></p>
@@ -47,23 +47,23 @@
                                 break;
 
                             case (Question.QuestionType.MultipleChoiceChooseMany):
-                            @(Html.Partial("MultipleChoiceChooseMany", Model.QuestionModels[i]))
+                                @(Html.Partial("MultipleChoiceChooseMany", Model.QuestionModels[i]))
                                 break;
 
                             case (Question.QuestionType.ShortAnswer):
-                            @Html.TextAreaFor(m => m.QuestionModels[i].Answer)
+                                @Html.TextAreaFor(m => m.QuestionModels[i].Answer)
                                 break;
 
                             case (Question.QuestionType.Slider):
-                            @(Html.Partial("SliderQuestion", Model.QuestionModels[i]))
+                                @(Html.Partial("SliderQuestion", Model.QuestionModels[i]))
                                 break;
 
                             case (Question.QuestionType.ExhibitsChooseMany):
-                            @(Html.Partial("ExhibitsChooseMany", Model.QuestionModels[i]))
+                                @(Html.Partial("ExhibitsChooseMany", Model.QuestionModels[i]))
                                 break;
 
                             default:
-                            @Html.HiddenFor(m => m.QuestionModels[i].Answer)
+                                @Html.HiddenFor(m => m.QuestionModels[i].Answer)
                                 break;
                         }
 
@@ -83,10 +83,10 @@
             <!-- Indicators -->
             <div class="carousel-controls center">
                 <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" class="active" style="cursor:default"></li>
                     @for (int i = 1; i < @Model.QuestionModels.Count; i++)
                     {
-                        <li data-target="#myCarousel" data-slide-to="@i"></li>
+                        <li data-target="#myCarousel" style="cursor:default"></li>
                     }
                 </ol>
             </div>
@@ -98,84 +98,101 @@
 @section scripts
 {
     <script>
-        $(".slider").slider();
+    $(".slider").labeledslider({ min: 1, max: 5, tickInterval: 1, value: 3, stop: sliderChanged})
 
-        function sliderChanged(ele) {
-            if (document.readyState === "complete") {
 
-                //we have to delay so that the value has time to set to its end value
-                setTimeout(function () {
-                    console.log(ele.id);
-                    var id = ele.id.replace("Slider", "Answer");
-                    var newval = $("#" + ele.id).val();
-                    console.log($("#" + id));
-                    console.log(ele.value);
-                    console.log(newval);
-                    $("#" + id).val(ele.value);
-                    console.log($("#" + id).val());
-                }, 10);
+    function sliderChanged(event, ui)
+    {
+        var id = this.id.replace("Slider", "Answer");
+        console.log($("#" + id));
+        $("#" + id).val(ui.value);
+    }
 
-            }
+    //------limiting checkbox selection-------------------
+    var numClicks = 0;//makes it so that the alert shows for 5 secs after click no matter what
+    var alert = $("#alert").first();
+
+    function limitChecked(ele, max) {
+        var numChecked = 0;
+        var checkboxes = $(ele).closest(".checkboxes").find("input[type=checkbox]").each(
+            function (index, ele) {
+                if (ele.checked)
+                    numChecked++;
+            });
+
+        if (max > 0 && numChecked > max) {
+            numClicks++;
+            $(ele).attr('checked', false);
+
+            $(alert).html("Cannot excede " + max + " selections.");
+            $(alert).show();
+
+            setTimeout(function () {
+                numClicks--;
+                if (numClicks == 0)
+                    $(alert).hide();
+            }, 5000);
+        }
+    }
+
+    //Code for autoredirect after a certain time limit
+    var idleTime = 0;
+    $(document).ready(function () {
+        var idleInterval = setInterval(timerIncrement, 60000);
+
+        //checks for mouse input
+        $(this).mousemove(function (e) {
+            idleTime = 0;
+        });
+        //checks for keyboard input
+        $(this).keypress(function (e) {
+            idleTime = 0;
+        });
+    });
+
+    //Increments the timer and if the value is greater than 3, submits the survey
+    function timerIncrement() {
+        idleTime = idleTime + 1;
+        if (idleTime > 3) {
+            document.getElementById("CompleteSurvey").click();
+
+        }
+    }
+
+
+    function confirmExit() {
+        if(confirm("Are you sure you wish to exit without submitting your answers?"))
+            window.location.replace("@Url.Action("Index", "Home", new {id=Model.SurveyId},Request.Url.Scheme)");
         }
 
-        //------limiting checkbox selection-------------------
-        var numClicks = 0;//makes it so that the alert shows for 5 secs after click no matter what
-        var alert = $("#alert").first();
+        var numSlides = @Model.QuestionModels.Count -1;
 
-        function limitChecked(ele, max) {
-            var numChecked = 0;
-            var checkboxes = $(ele).closest(".checkboxes").find("input[type=checkbox]").each(
-                function (index, ele) {
-                    if (ele.checked)
-                        numChecked++;
-                });
+        $('body').on('click', 'a.left.carousel-control', function (e) {
+            var slideID = $('div.item.active').attr("id");
+            console.log(slideID);
 
-            if (max > 0 && numChecked > max) {
-                numClicks++;
-                $(ele).attr('checked', false);
-
-                $(alert).html("Cannot excede " + max + " selections.");
-                $(alert).show();
-
-                setTimeout(function () {
-                    numClicks--;
-                    if (numClicks == 0)
-                        $(alert).hide();
-                }, 5000);
+            if (slideID == "slide_1") {
+                $('a.left').addClass("disabled");
             }
-        }
 
-        //Code for autoredirect after a certain time limit
-        var idleTime = 0;
-        $(document).ready(function () {
-            var idleInterval = setInterval(timerIncrement, 60000);
-
-            //checks for mouse input
-            $(this).mousemove(function (e) {
-                idleTime = 0;
-            });
-            //checks for keyboard input
-            $(this).keypress(function (e) {
-                idleTime = 0;
-            });
+            $('a.right').removeClass("disabled");
         });
 
-        //Increments the timer and if the value is greater than 3, submits the survey
-        function timerIncrement() {
-            idleTime = idleTime + 1;
-            if (idleTime > 3) {
-                document.getElementById("CompleteSurvey").click();
+        $('body').on('click', 'a.right.carousel-control', function (e) {
+            var slideID = $('div.item.active').attr("id");
+            console.log(slideID);
 
+            if (slideID == "slide_" + (numSlides - 1)) {
+                $('a.right').addClass("disabled");
             }
-        }
 
+            $('a.left').removeClass("disabled");
+        });
 
-        function confirmExit() {
-            if(confirm("Are you sure you wish to exit without submitting your answers?"))
-                window.location.replace("@Url.Action("Index", "Home", new {id=Model.SurveyId},Request.Url.Scheme)");
-        }
-
-
+        $('body').on('click', 'a.disabled', function (e) {
+            e.preventDefault();
+            return false;
+        });
     </script>
 }
 
