@@ -12,7 +12,7 @@ namespace DiscoveryCenter.Models
 
         [ForeignKey("ParentSurvey")]
         public int? SurveyId { get; set; }
-
+        public int CompletionTime { get; set; }
         public DateTime Timestamp { get; set; }
 
         public virtual Survey ParentSurvey { get; set; }
