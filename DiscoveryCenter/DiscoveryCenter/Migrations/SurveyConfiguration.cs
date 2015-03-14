@@ -32,11 +32,16 @@ namespace DiscoveryCenter.Migrations
                 IdentityResult res = manager.Create(user1, "admin101");
                 identityContext.SaveChanges();
             }
-            catch(Exception ex)
-            {
+            catch (Exception ex) { }
 
-            }
+            //--------------------Themes------------------------
+            Theme adultTheme = new Theme() { Id = 0, Name = "Adult", CssBundleName = "~/bundles/AdultSurvey", JsBundleName = "~/Content/AdultSurvey" };
+            Theme childTheme = new Theme() { Id = 1, Name = "Child", CssBundleName = "~/bundles/ChildSurvey", JsBundleName = "~/Content/ChildSurvey" };
+            context.Themes.Add(adultTheme);
+            context.Themes.Add(childTheme);
 
+
+            //--------------------Surveys------------------------
             new List<Survey>
             {
                 new Survey() 
@@ -45,15 +50,26 @@ namespace DiscoveryCenter.Migrations
                     Description = "This survey will only take 5 minutes to complete.",
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
+                    Theme = adultTheme,
                     Name = "Adult", 
 
+                },
+                new Survey() 
+                { 
+                    Id=2,
+                    Description = "This survey will only take 5 minutes to complete.",
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
+                    Theme = childTheme,
+                    Name = "Child", 
                 }
+
             }.ForEach(survey => context.Surveys.AddOrUpdate(survey));
             context.SaveChanges();
 
-
             new List<Question>
                 {
+                    //Adult Questions
                     new Question()
                     {
                         Id = 1,
@@ -233,7 +249,49 @@ namespace DiscoveryCenter.Migrations
                         Type = Question.QuestionType.ShortAnswer,
                         Choices = "",
                         SurveyID = 1
-                    }
+                    },
+
+
+
+                    //Child Questions
+                    new Question()
+                    {
+                        Id = 21,
+                        IndexInSurvey = 1,
+                        Text = "How old are you?",
+                        Type = Question.QuestionType.Spinner,
+                        Choices = "",
+                        SurveyID = 2
+                    },
+                    new Question()
+                    {
+                        Id = 22,
+                        IndexInSurvey = 2,
+                        Text = "What are your 3 favorite exhibits?",
+                        MaxSelectedChoices = 3,
+                        Type = Question.QuestionType.ExhibitsChooseMany,
+                        Choices = "",
+                        SurveyID = 2
+                    },
+                    new Question()
+                    {
+                        Id = 23,
+                        IndexInSurvey = 3,
+                        Text = "Are you a boy or a girl?",
+                        Type = Question.QuestionType.MultipleChoiceChooseOne,
+                        Choices = "Boy;Girl",
+                        SurveyID = 2
+                    },
+                    new Question()
+                    {
+                        Id = 24,
+                        IndexInSurvey = 4,
+                        Text = "Are you from rochester?",
+                        Type = Question.QuestionType.MultipleChoiceChooseOne,
+                        Choices = "Yes;No",
+                        SurveyID = 2
+                    },
+                    
                 }.ForEach(question => context.Questions.AddOrUpdate(question));
             context.SaveChanges();
 

@@ -20,7 +20,8 @@ namespace DiscoveryCenter.Models
             MultipleChoiceChooseMany = 1,
             ShortAnswer = 2,
             Slider = 3,
-            ExhibitsChooseMany = 4
+            ExhibitsChooseMany = 4,
+            Spinner = 5
         }
 
         [Required(ErrorMessage = "Question text is required", AllowEmptyStrings = false)]

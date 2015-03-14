@@ -14,10 +14,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
     <File Include="bin/cs/DiscoveryCenter.resources.dll">
-      <publishTime>03/04/2015 14:36:03</publishTime>
+      <publishTime>03/11/2015 16:27:09</publishTime>
     </File>
     <File Include="bin/DiscoveryCenter.dll">
-      <publishTime>03/04/2015 14:36:03</publishTime>
+      <publishTime>03/11/2015 16:27:09</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>02/07/2015 17:55:51</publishTime>
@@ -98,7 +98,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/07/2015 17:55:53</publishTime>
     </File>
     <File Include="Content/Admin.css">
-      <publishTime>03/04/2015 14:28:17</publishTime>
+      <publishTime>03/09/2015 00:54:31</publishTime>
     </File>
     <File Include="Content/bootstrap-slider.css">
       <publishTime>02/07/2015 17:55:51</publishTime>
@@ -167,19 +167,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
     <File Include="Content/jquery-ui.min.css">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>03/07/2015 18:12:09</publishTime>
     </File>
     <File Include="Content/jquery-ui.structure.min.css">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>03/07/2015 18:12:09</publishTime>
     </File>
     <File Include="Content/jquery-ui.theme.min.css">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>03/07/2015 18:12:09</publishTime>
     </File>
     <File Include="Content/jquery.jqplot.css">
       <publishTime>02/24/2015 19:10:25</publishTime>
     </File>
+    <File Include="Content/sliderExtension.css">
+      <publishTime>03/09/2015 00:49:16</publishTime>
+    </File>
     <File Include="Content/SurveyView.css">
-      <publishTime>02/10/2015 00:37:23</publishTime>
+      <publishTime>03/07/2015 20:22:32</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>02/07/2015 17:55:51</publishTime>
@@ -233,7 +236,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/26/2015 19:23:17</publishTime>
     </File>
     <File Include="Scripts/jquery-ui.min.js">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>03/07/2015 18:12:38</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
       <publishTime>02/07/2015 17:55:51</publishTime>
@@ -256,8 +259,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/respond.min.js">
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
+    <File Include="Scripts/sliderExtension.js">
+      <publishTime>03/07/2015 20:03:32</publishTime>
+    </File>
     <File Include="Scripts/_references.js">
-      <publishTime>02/26/2015 18:55:19</publishTime>
+      <publishTime>03/07/2015 19:40:37</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
       <publishTime>02/07/2015 23:25:56</publishTime>
@@ -272,13 +278,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
     <File Include="Views/Creation/Edit.cshtml">
-      <publishTime>03/04/2015 14:28:17</publishTime>
+      <publishTime>03/08/2015 13:35:52</publishTime>
     </File>
     <File Include="Views/Creation/Index.cshtml">
-      <publishTime>03/04/2015 14:28:17</publishTime>
+      <publishTime>03/09/2015 00:53:00</publishTime>
     </File>
     <File Include="Views/Creation/Question.cshtml">
-      <publishTime>02/26/2015 18:55:19</publishTime>
+      <publishTime>03/08/2015 13:35:52</publishTime>
     </File>
     <File Include="Views/Creation/_ChoiceBox.cshtml">
       <publishTime>02/26/2015 18:55:19</publishTime>
@@ -317,7 +323,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
     <File Include="Views/Home/SliderQuestion.cshtml">
-      <publishTime>02/10/2015 00:37:23</publishTime>
+      <publishTime>03/07/2015 20:07:35</publishTime>
     </File>
     <File Include="Views/Home/Survey.cshtml">
       <publishTime>03/04/2015 14:28:17</publishTime>
@@ -347,7 +353,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/04/2015 14:36:26</publishTime>
+      <publishTime>03/11/2015 16:27:33</publishTime>
     </File>
   </ItemGroup>
 </Project>
