@@ -35,10 +35,26 @@ namespace DiscoveryCenter.Migrations
             catch (Exception ex) { }
 
             //--------------------Themes------------------------
-            Theme adultTheme = new Theme() { Id = 1, Name = "Adult", CssBundleName = "~/bundles/AdultSurvey", JsBundleName = "~/Content/AdultSurvey" };
-            Theme childTheme = new Theme() { Id = 2, Name = "Child", CssBundleName = "~/bundles/ChildSurvey", JsBundleName = "~/Content/ChildSurvey" };
-            context.Themes.Add(adultTheme);
-            context.Themes.Add(childTheme);
+            Theme adultTheme = new Theme() 
+            { 
+                Id = 1, 
+                Name = ThemeName.Adult, 
+                CssBundleName = "~/bundles/AdultSurvey", 
+                JsBundleName = "~/Content/AdultSurvey",
+                SurveyView = "Survey",
+                WelcomeView = "Index"
+            };
+            Theme childTheme = new Theme() 
+            { 
+                Id = 2,
+                Name = ThemeName.Child,
+                CssBundleName = "~/bundles/ChildSurvey",
+                JsBundleName = "~/Content/ChildSurvey",
+                SurveyView = "ChildSurvey",
+                WelcomeView = "ChildWelcome"
+            };
+            context.Themes.AddOrUpdate(adultTheme);
+            context.Themes.AddOrUpdate(childTheme);
             context.SaveChanges();
 
 

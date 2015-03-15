@@ -1,0 +1,16 @@
+﻿@model DiscoveryCenter.Models.SurveyViewModel
+@using DiscoveryCenter.Models
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_SurveyLayout.cshtml";
+}
+
+<div class="jumbotron">
+    <center>
+        <h1>Hello Children, lets have fun!</h1>
+        <img src="~/Content/images/discovery.png" />
+        <h2>@Model.SurveyDescription</h2>
+        @Html.ActionLink("Have Fun!", "Survey", new { id = Model.SurveyId }, new { id = "Btn_Start", @class = "btn btn-default" })
+    </center>
+</div>

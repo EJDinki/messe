@@ -136,7 +136,7 @@ namespace DiscoveryCenter.Controllers
         public CreationEditViewModel MakeCreationEditVM(Survey survey)
         {
             List<SelectListItem> themes = new List<SelectListItem>(); ;
-            db.Themes.ToList().ForEach(t => themes.Add(new SelectListItem() { Value = t.Id.ToString(), Text = t.Name }));
+            db.Themes.ToList().ForEach(t => themes.Add(new SelectListItem() { Value = t.Id.ToString(), Text = t.Name.Value }));
 
             return new CreationEditViewModel() { Survey = survey, Themes = themes };
         }
@@ -195,6 +195,7 @@ namespace DiscoveryCenter.Controllers
             else
             {
                 oldVersion.Name = survey.Name;
+                oldVersion.ThemeId = survey.ThemeId;
                 oldVersion.LastModifiedDate = DateTime.Now;
                 List<Question> deleteList = new List<Question>();
                 foreach (Question q in oldVersion.Questions)

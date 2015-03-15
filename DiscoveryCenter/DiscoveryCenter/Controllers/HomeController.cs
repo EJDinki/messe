@@ -13,13 +13,16 @@ namespace DiscoveryCenter.Controllers
         public  ActionResult Survey(int id = 1)
         {
             SurveyViewModel model = null;
+            Survey survey;
+            string surveyView = "Survey";
             using(SurveyContext dbContext = new SurveyContext())
             {
-                Survey survey = (from s in dbContext.Surveys where s.Id == id select s).Single();
+                survey = (from s in dbContext.Surveys where s.Id == id select s).Single();
                 model = new SurveyViewModel();
                 model.QuestionModels = new List<QuestionViewModel>();
                 model.SurveyId = survey.Id;
                 model.SurveyName = survey.Name;
+                surveyView = survey.Theme.SurveyView;
                 
                 foreach(var question in survey.Questions.OrderBy(x => x.IndexInSurvey))
                 {
@@ -98,7 +101,7 @@ namespace DiscoveryCenter.Controllers
                     }
                 }
             }
-            return View(model);
+            return View(surveyView, model);
         }
 
         [HttpPost]
@@ -163,6 +166,7 @@ namespace DiscoveryCenter.Controllers
         public ActionResult Index(int id = 1)
         {
             SurveyViewModel model = null;
+            string welcomeView = "Index";
             using (SurveyContext dbContext = new SurveyContext())
             {
                 Survey survey = (from s in dbContext.Surveys where s.Id == id select s).Single();
@@ -170,8 +174,9 @@ namespace DiscoveryCenter.Controllers
                 model.SurveyName = survey.Name;
                 model.SurveyDescription = survey.Description;
                 model.SurveyId = id;
+                welcomeView = survey.Theme.WelcomeView;
             }
-            return View(model);
+            return View(welcomeView, model);
         }
       
     }

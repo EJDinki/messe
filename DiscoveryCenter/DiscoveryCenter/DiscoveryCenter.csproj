@@ -291,6 +291,8 @@
     <Content Include="Views\Home\ExhibitsChooseMany.cshtml" />
     <Content Include="Views\Home\ThankYou.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Home\ChildWelcome.cshtml" />
+    <Content Include="Views\Home\ChildSurvey.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
