@@ -35,10 +35,11 @@ namespace DiscoveryCenter.Migrations
             catch (Exception ex) { }
 
             //--------------------Themes------------------------
-            Theme adultTheme = new Theme() { Id = 0, Name = "Adult", CssBundleName = "~/bundles/AdultSurvey", JsBundleName = "~/Content/AdultSurvey" };
-            Theme childTheme = new Theme() { Id = 1, Name = "Child", CssBundleName = "~/bundles/ChildSurvey", JsBundleName = "~/Content/ChildSurvey" };
+            Theme adultTheme = new Theme() { Id = 1, Name = "Adult", CssBundleName = "~/bundles/AdultSurvey", JsBundleName = "~/Content/AdultSurvey" };
+            Theme childTheme = new Theme() { Id = 2, Name = "Child", CssBundleName = "~/bundles/ChildSurvey", JsBundleName = "~/Content/ChildSurvey" };
             context.Themes.Add(adultTheme);
             context.Themes.Add(childTheme);
+            context.SaveChanges();
 
 
             //--------------------Surveys------------------------
@@ -50,7 +51,7 @@ namespace DiscoveryCenter.Migrations
                     Description = "This survey will only take 5 minutes to complete.",
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Theme = adultTheme,
+                    ThemeId = 1,
                     Name = "Adult", 
 
                 },
@@ -60,7 +61,7 @@ namespace DiscoveryCenter.Migrations
                     Description = "This survey will only take 5 minutes to complete.",
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Theme = childTheme,
+                    ThemeId = 2,
                     Name = "Child", 
                 }
 
@@ -290,7 +291,7 @@ namespace DiscoveryCenter.Migrations
                         Type = Question.QuestionType.MultipleChoiceChooseOne,
                         Choices = "Yes;No",
                         SurveyID = 2
-                    },
+                    }
                     
                 }.ForEach(question => context.Questions.AddOrUpdate(question));
             context.SaveChanges();

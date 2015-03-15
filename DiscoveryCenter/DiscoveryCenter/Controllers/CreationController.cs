@@ -90,7 +90,7 @@ namespace DiscoveryCenter.Controllers
         // GET: Creation/Create
         public ActionResult Create()
         {
-            return View("Create", new Survey());
+            return View("Edit", MakeCreationEditVM(new Survey()));
         }
 
         // POST: Creation/Create
@@ -98,8 +98,10 @@ namespace DiscoveryCenter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([ModelBinder(typeof(SurveyModelBinder))] Survey survey)
+        public ActionResult Create([ModelBinder(typeof(SurveyModelBinder))] CreationEditViewModel cevm)
         {
+            Survey survey = cevm.Survey;
+
             if (ModelState.IsValid)
             {
                 survey.LastModifiedDate = DateTime.Now;
@@ -108,7 +110,7 @@ namespace DiscoveryCenter.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(survey);
+            return View("Edit", MakeCreationEditVM(survey));
         }
 
         // GET: Creation/Edit/5
@@ -126,7 +128,17 @@ namespace DiscoveryCenter.Controllers
             {
                 return HttpNotFound();
             }
-            return View(survey);
+
+
+            return View(MakeCreationEditVM(survey));
+        }
+
+        public CreationEditViewModel MakeCreationEditVM(Survey survey)
+        {
+            List<SelectListItem> themes = new List<SelectListItem>(); ;
+            db.Themes.ToList().ForEach(t => themes.Add(new SelectListItem() { Value = t.Id.ToString(), Text = t.Name }));
+
+            return new CreationEditViewModel() { Survey = survey, Themes = themes };
         }
 
         // POST: Creation/Edit/5
@@ -134,9 +146,9 @@ namespace DiscoveryCenter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([ModelBinder(typeof(SurveyModelBinder))] Survey survey)
+        public ActionResult Edit([ModelBinder(typeof(SurveyModelBinder))] CreationEditViewModel cevm)
         {
-            
+            Survey survey = cevm.Survey;
 
             //--------------------------Validation----------------------------
             //clear errors
@@ -150,7 +162,9 @@ namespace DiscoveryCenter.Controllers
             foreach (var question in survey.Questions)
             {
                 //check if choices are invalid
-                if (question.Type != Question.QuestionType.ShortAnswer && question.Type != Question.QuestionType.ExhibitsChooseMany)
+                if (question.Type != Question.QuestionType.ShortAnswer &&
+                    question.Type != Question.QuestionType.ExhibitsChooseMany &&
+                    question.Type != Question.QuestionType.Spinner)
                 {
                     var choices = question.Choices.Split(';');
                     for (int i = 0; i < choices.Length; i++)
@@ -170,7 +184,7 @@ namespace DiscoveryCenter.Controllers
             //-------------------------Update Survey----------------------------
 
             if (!ModelState.IsValid)
-                return View(survey);
+                return View(MakeCreationEditVM(survey));
 
             Survey oldVersion = (from s in db.Surveys where s.Id == survey.Id select s).SingleOrDefault();
             if (oldVersion == null)

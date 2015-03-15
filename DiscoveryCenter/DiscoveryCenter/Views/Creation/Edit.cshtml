@@ -1,4 +1,4 @@
-﻿@model DiscoveryCenter.Models.Survey
+﻿@model DiscoveryCenter.Models.CreationEditViewModel
 @using DiscoveryCenter.Models;
 
 @{
@@ -16,11 +16,14 @@
             <div class="form-group clearfix">
                 <div class="col-md-10" style="padding-left:0px">
                     <h4>Survey Name</h4>
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Survey.Name, new { htmlAttributes = new { @class = "form-control" } })
                     <h4>Survey Description</h4>
-                    @Html.TextAreaFor(model => model.Description, 5, 80, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextAreaFor(model => model.Survey.Description, 5, 80, new { htmlAttributes = new { @class = "form-control" } })
 
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    <h4>Theme</h4>
+                    @Html.DropDownListFor(model => model.Survey.ThemeId, Model.Themes, new { @class = "form-control" })
+
+                    @Html.ValidationMessageFor(model => model.Survey.Name, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="top-divider">
@@ -29,7 +32,7 @@
                     @Html.ValidationSummary("Survey contains errors.", new { id = "valSum", @class = "text-danger pull-right" })
                 }
                 <center>
-                    <a class="btn btn-default" href="@Url.Action("BlankQuestionRow", "Creation", new {id=Model.Id })" id="addItem">
+                    <a class="btn btn-default" href="@Url.Action("BlankQuestionRow", "Creation", new {id=Model.Survey.Id })" id="addItem">
                         <i class='glyphicon glyphicon-plus'></i> Add Question
                     </a>
                     <button id="save" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
@@ -44,8 +47,8 @@
 
     <div class="form-horizontal col-md-8 panel panel-body panel-default clearfix">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.CreateDate)
+        @Html.HiddenFor(model => model.Survey.Id)
+        @Html.HiddenFor(model => model.Survey.CreateDate)
 
         <div id="questionDivList">
             <div id="tip">
@@ -55,9 +58,9 @@
                 <h3><span class="glyphicon glyphicon-arrow-left"></span> Press '+Add Question' to add a question</h3>
             </div>
             <ul id="draggablePanelList" class="list-unstyled">
-                @for (int i = 0; i < Model.Questions.Count; i++)
+                @for (int i = 0; i < Model.Survey.Questions.Count; i++)
                 {
-                    @Html.Partial("Question", Model.Questions[i])
+                    @Html.Partial("Question", Model.Survey.Questions[i])
                 }
             </ul>
         </div>

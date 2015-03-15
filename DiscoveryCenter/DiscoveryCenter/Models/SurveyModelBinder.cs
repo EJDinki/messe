@@ -18,13 +18,13 @@ namespace DiscoveryCenter.Models
                 base.BindModel(controllerContext, bindingContext);
                 return svm;
             }
-            else if (bindingContext.ModelType == typeof(Survey))
+            else if (bindingContext.ModelType == typeof(CreationEditViewModel))
             {
-                
-                Survey survey = BindSurvey(request);
+
+                CreationEditViewModel cevm = BindCreationEditViewModel(request);
                
                 base.BindModel(controllerContext, bindingContext);
-                return survey;
+                return cevm;
             }
             else
             {
@@ -32,11 +32,12 @@ namespace DiscoveryCenter.Models
             }
         }
 
-        private Survey BindSurvey(HttpRequestBase request)
+        private CreationEditViewModel BindCreationEditViewModel(HttpRequestBase request)
         {
-            int sId = Convert.ToInt32(request.Form.Get("Id"));
-            string sName = request.Form.Get("Name");
-            string sDesc = request.Form.Get("Description");
+            int sId = Convert.ToInt32(request.Form.Get("Survey.Id"));
+            string sName = request.Form.Get("Survey.Name");
+            string sDesc = request.Form.Get("Survey.Description");
+            int themeId = Convert.ToInt32(request.Form.Get("Survey.ThemeId"));
             List<Question> questions = new List<Question>();
 
             //string question = "";
@@ -52,7 +53,7 @@ namespace DiscoveryCenter.Models
             foreach (string key in request.Form.Keys)
             {
 
-                if (key.Contains(".Id"))
+                if (key.Contains("].Id"))
                 {
                     if(question != null)
                     {
@@ -108,14 +109,17 @@ namespace DiscoveryCenter.Models
                 questions.Add(question);
             }
 
-            return new Survey()
+            Survey survey = new Survey()
             {
                 Name = sName,
                 Id = sId,
                 Description = sDesc,
                 Questions = questions,
-                CreateDate = DateTime.Now
+                CreateDate = DateTime.Now,
+                ThemeId = themeId
             };
+
+            return new CreationEditViewModel() { Survey = survey, Themes = null };
         }
 
         private SurveyViewModel BindSVM(HttpRequestBase request)

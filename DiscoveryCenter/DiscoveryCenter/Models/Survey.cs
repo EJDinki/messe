@@ -32,7 +32,9 @@ namespace DiscoveryCenter.Models
         [Display(Name = "Last Modified Date")]
         public DateTime LastModifiedDate { get; set; }
 
+        [ForeignKey("Theme")]
         public int ThemeId { get; set; }
+        [ScriptIgnore]
         public virtual Theme Theme { get; set; }
 
         
