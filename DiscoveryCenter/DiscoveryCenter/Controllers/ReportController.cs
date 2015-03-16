@@ -91,11 +91,13 @@ namespace DiscoveryCenter.Controllers
 
             foreach (var question in survey.Questions.OrderBy(q => q.IndexInSurvey))
             {
+                // TODO handle exhibits better
                 switch (question.Type)
                 {
-                    case Question.QuestionType.ShortAnswer:
-                        builder.Append("Question Type: " + question.Type + "\n");
+                    //case Question.QuestionType.ShortAnswer:
+                    default:
                         builder.Append("Question Number: " + question.IndexInSurvey + "\n");
+                        builder.Append("Question Type: " + question.Type + "\n");
                         builder.Append("Question Text: " + question.Text + "\n");
                         if (question.Answers.Count == 0)
                         {
@@ -110,9 +112,6 @@ namespace DiscoveryCenter.Controllers
                             }
                         }
                         builder.Append("\n");
-                        break;
-                    default:
-                        // TODO convert the rest of the questions
                         break;
                 }
             }
