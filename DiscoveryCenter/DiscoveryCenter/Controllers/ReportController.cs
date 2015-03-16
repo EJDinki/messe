@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -81,8 +82,42 @@ namespace DiscoveryCenter.Controllers
 
         private string ConvertSurveyToCSV(Survey survey)
         {
-            // TODO convert the survey into a string
-            return "test1, test2, test3";
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Export for Survey: " + survey.Name + "\n");
+            builder.Append("Date: " + DateTime.Today.ToString("MM/dd/yyyy") + "\n");
+            builder.Append("Number of Questions: " + survey.Questions.Count + "\n");
+            builder.Append("Number of Submissions: " + survey.Submissions.Count + "\n");
+            builder.Append("\n");
+
+            foreach (var question in survey.Questions.OrderBy(q => q.IndexInSurvey))
+            {
+                switch (question.Type)
+                {
+                    case Question.QuestionType.ShortAnswer:
+                        builder.Append("Question Type: " + question.Type + "\n");
+                        builder.Append("Question Number: " + question.IndexInSurvey + "\n");
+                        builder.Append("Question Text: " + question.Text + "\n");
+                        if (question.Answers.Count == 0)
+                        {
+                            builder.Append("There are no submitted answers for this question\n");
+                        }
+                        else
+                        {
+                            builder.Append("Answers Below\n");
+                            foreach (var answer in question.Answers)
+                            {
+                                builder.Append(answer.Value + "\n");
+                            }
+                        }
+                        builder.Append("\n");
+                        break;
+                    default:
+                        // TODO convert the rest of the questions
+                        break;
+                }
+            }
+
+            return builder.ToString(); 
         }
     }
 }
