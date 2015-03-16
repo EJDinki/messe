@@ -8,6 +8,8 @@
 <h2>Report For Survey: @Model.SurveyName</h2>
 <br/>
 
+<a id="ExportToCSV" class="btn btn-default" type="button" href="@Url.Action("ExportToCSV", "Report", new { id = @Model.SurveyId })">Download This Report</a>
+
 <script>
     var dataForCharts = [];
     var dataForChartsCount = @Model.Reports.Count;
@@ -20,6 +22,7 @@
     var entries = @Model.Reports[i].Counts.Select(d =>
         string.Format("[\"{0}\", {1}]", d.Key, string.Join(",", d.Value)));
     var result = "[" + string.Join(",", entries) + "]";
+    //<p>DEBUG result: @result</p>
     
     // Create the div for the chart for this question
     var divId = "chartdiv" + @Model.Reports[i].QuestionIndex;

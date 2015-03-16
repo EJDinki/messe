@@ -12,6 +12,7 @@ namespace DiscoveryCenter.Models
             Reports = new List<ReportViewModel>();
         }
         public string SurveyName { get; set; }
+        public int SurveyId { get; set; }
         public List<ReportViewModel> Reports { get; set; }
     }
 
