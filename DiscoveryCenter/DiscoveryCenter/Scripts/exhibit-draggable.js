@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-
+    clicked = false;
     $(".draggable").draggable(
                 {
                     appendTo: 'body',
@@ -8,11 +8,11 @@
                     scroll: false,
                     revert: 'invalid',
                     snap: 'dropable',
-                    snapMode: 'inner',
-                    drag: function (event, ui) {
+                    snapMode: 'inner'
+                    /*, drag: function (event, ui) {
                         $(ui).scrollParent().scroll(10, 0);
                         console.log(event.originalEvent);
-                    }
+                    }*/
                 });
 
     $(".draggable").on({
