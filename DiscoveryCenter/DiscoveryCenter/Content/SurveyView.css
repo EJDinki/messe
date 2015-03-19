@@ -352,3 +352,20 @@ textarea{
 	width: 100%;
 	display: inline-block;
     }
+
+.carousel-control-caption-next {
+  position: absolute;
+  /*color:black;*/
+  top: 52%;
+  left: 40%;
+  z-index: 5;
+  display: inline-block;
+}
+.carousel-control-caption-prev {
+  position: absolute;
+  /*color:black;*/
+  top: 52%;
+  left: 10%;
+  z-index: 5;
+  display: inline-block;
+}
