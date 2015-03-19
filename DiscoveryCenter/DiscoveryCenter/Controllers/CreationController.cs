@@ -67,9 +67,20 @@ namespace DiscoveryCenter.Controllers
             return View("Question", q);
         }
         // GET: Creation
-        public ActionResult Index()
+        public ActionResult Index(int id = 0)
         {
-            return View(db.Surveys.ToList());
+            int numPages = (db.Surveys.Count() / 10) + 1;
+
+            //Handle out of bounds cases
+            if (id < 0)
+                id = 0;
+            else if (id >= numPages)
+                id = numPages - 1;
+
+            var currentPageList = (from s in db.Surveys orderby s.Id select s).Skip(id * 10).Take(10).ToList();              
+            Tuple<IEnumerable<Survey>, int, int> tuple = new Tuple<IEnumerable<Survey>, int, int>(currentPageList, numPages, id);
+
+            return View(tuple);
         }
 
         // GET: Creation/Details/5
