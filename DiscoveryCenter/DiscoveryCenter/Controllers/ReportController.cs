@@ -75,7 +75,8 @@ namespace DiscoveryCenter.Controllers
                     return HttpNotFound();
 
                 string csv = ConvertSurveyToCSV(survey);
-                string fileName = survey.Name + "-" + DateTime.Today.ToString("MM/dd/yyyy");
+                // TODO change this .txt to .csv, set to txt for faster debugging
+                string fileName = survey.Name + "-" + DateTime.Today.ToString("MM/dd/yyyy") + ".txt";
                 return File(new System.Text.UTF8Encoding().GetBytes(csv), "text/csv", fileName);
             }
         }
@@ -92,28 +93,34 @@ namespace DiscoveryCenter.Controllers
             foreach (var question in survey.Questions.OrderBy(q => q.IndexInSurvey))
             {
                 // TODO handle exhibits better
-                switch (question.Type)
+                builder.Append("Question Number: " + question.IndexInSurvey + "\n");
+                builder.Append("Question Type: " + question.Type + "\n");
+                builder.Append("Question Text: " + question.Text + "\n");
+                if (question.Answers.Count == 0)
                 {
-                    //case Question.QuestionType.ShortAnswer:
-                    default:
-                        builder.Append("Question Number: " + question.IndexInSurvey + "\n");
-                        builder.Append("Question Type: " + question.Type + "\n");
-                        builder.Append("Question Text: " + question.Text + "\n");
-                        if (question.Answers.Count == 0)
-                        {
-                            builder.Append("There are no submitted answers for this question\n");
-                        }
-                        else
-                        {
-                            builder.Append("Answers Below\n");
+                    builder.Append("There are no submitted answers for this question");
+                }
+                else
+                {
+                    builder.Append("Answers Below\n");
+                    switch (question.Type)
+                    {
+                        case Question.QuestionType.ShortAnswer:
+                        case Question.QuestionType.MultipleChoiceChooseMany:
+                        case Question.QuestionType.MultipleChoiceChooseOne:
+                        case Question.QuestionType.Slider:
+                        case Question.QuestionType.ExhibitsChooseMany:
+                        case Question.QuestionType.Spinner:
+                        default:
                             foreach (var answer in question.Answers)
                             {
+                                builder.Append(answer.Submission.Timestamp + ",");
                                 builder.Append(answer.Value + "\n");
                             }
-                        }
-                        builder.Append("\n");
-                        break;
+                            break;
+                    }
                 }
+                builder.Append("\n");
             }
 
             return builder.ToString(); 
