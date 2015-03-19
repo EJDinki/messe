@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DiscoveryCenter.Models.Survey>
+﻿@*Tuple<SurveyList, TotalPages, CurrentIndex>*@
+@model Tuple<IEnumerable<DiscoveryCenter.Models.Survey>, int, int>
 
 @{
     ViewBag.Title = "Index";
@@ -41,22 +42,22 @@
         <ul>
             <li class="header clearfix">
                 <div class="col-md-3">
-                    <span>@Html.DisplayNameFor(model => model.Name)</span>
+                    <span>Name</span>
                 </div>
                 <div class="col-md-3">
                     <span>Number of Questions</span>
                 </div>
                 <div class="col-md-3">
-                    <span>@Html.DisplayNameFor(model => model.CreateDate)</span>
+                    <span>Create Date</span>
                 </div>
                 <div class="col-md-3">
-                    <span>@Html.DisplayNameFor(model => model.LastModifiedDate)</span>
+                    <span>Last Modified</span>
                 </div>
             </li>
         </ul>
         <ul class="indexSelectableList">
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.Item1)
             {
                 <li class="ui-widget-content clearfix" id="selectRow_@item.Id" style="cursor:pointer">
                     @Html.HiddenFor(modelItem => item.Id, new { @class = "id" })
@@ -75,6 +76,18 @@
                 </li>
             }
         </ul>
+        <center>
+            <ul class="list-inline">
+                @{
+                    <li><a class="btn btn-primary" href="?id=@(Model.Item3 - 1)"><</a></li>
+                    for (int i = 0; i < Model.Item2; i++)
+                    {
+                       <li><a class="btn btn-primary" href="?id=@i">@i</a></li>
+                    }
+                    <li><a class="btn btn-primary" href="?id=@(Model.Item3 + 1)">></a></li>
+}
+            </ul>
+        </center>
     </div>
 </div>
 
