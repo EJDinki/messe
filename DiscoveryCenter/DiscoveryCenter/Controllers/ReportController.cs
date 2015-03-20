@@ -108,8 +108,7 @@ namespace DiscoveryCenter.Controllers
                         case Question.QuestionType.MultipleChoiceChooseOne:
                         case Question.QuestionType.Slider:
                             builder.Append("Question Choices: " + question.Choices + "\n");
-                            ConvertAnswersToCSV(question, builder);
-                            break;
+                            goto default;
                         case Question.QuestionType.Spinner:
                         case Question.QuestionType.ExhibitsChooseMany:
                         case Question.QuestionType.ShortAnswer:
