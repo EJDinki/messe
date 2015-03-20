@@ -102,21 +102,19 @@ namespace DiscoveryCenter.Controllers
                 }
                 else
                 {
-                    builder.Append("Answers Below\n");
                     switch (question.Type)
                     {
-                        case Question.QuestionType.ShortAnswer:
                         case Question.QuestionType.MultipleChoiceChooseMany:
                         case Question.QuestionType.MultipleChoiceChooseOne:
                         case Question.QuestionType.Slider:
-                        case Question.QuestionType.ExhibitsChooseMany:
+                            builder.Append("Question Choices: " + question.Choices + "\n");
+                            ConvertAnswersToCSV(question, builder);
+                            break;
                         case Question.QuestionType.Spinner:
+                        case Question.QuestionType.ExhibitsChooseMany:
+                        case Question.QuestionType.ShortAnswer:
                         default:
-                            foreach (var answer in question.Answers)
-                            {
-                                builder.Append(answer.Submission.Timestamp + ",");
-                                builder.Append(answer.Value + "\n");
-                            }
+                            ConvertAnswersToCSV(question, builder);
                             break;
                     }
                 }
@@ -124,6 +122,16 @@ namespace DiscoveryCenter.Controllers
             }
 
             return builder.ToString(); 
+        }
+
+        private void ConvertAnswersToCSV(Question question, StringBuilder builder)
+        {
+            builder.Append("Answers Below\n");
+            foreach (var answer in question.Answers)
+            {
+                builder.Append(answer.Submission.Timestamp + ",");
+                builder.Append(answer.Value + "\n");
+            }
         }
     }
 }
