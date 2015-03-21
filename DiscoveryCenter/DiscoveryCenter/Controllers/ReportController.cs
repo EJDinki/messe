@@ -61,7 +61,7 @@ namespace DiscoveryCenter.Controllers
         }
 
         //public FileContentResult ExportToCSV(int id = 0)
-        public ActionResult ExportToCSV(int id = 0)
+        public ActionResult ExportToCSV(int id = 0, bool exportRawData = true)
         {
             if (id <= 0)
             {
@@ -74,14 +74,13 @@ namespace DiscoveryCenter.Controllers
                 if (survey == null)
                     return HttpNotFound();
 
-                string csv = ConvertSurveyToCSV(survey);
-                // TODO change this .txt to .csv, set to txt for faster debugging
-                string fileName = survey.Name + "-" + DateTime.Today.ToString("MM/dd/yyyy") + ".txt";
+                string csv = ConvertSurveyToCSV(survey, exportRawData);
+                string fileName = survey.Name + "-" + DateTime.Today.ToString("MM/dd/yyyy") + ".csv";
                 return File(new System.Text.UTF8Encoding().GetBytes(csv), "text/csv", fileName);
             }
         }
 
-        private string ConvertSurveyToCSV(Survey survey)
+        private string ConvertSurveyToCSV(Survey survey, bool exportRawData)
         {
             StringBuilder builder = new StringBuilder();
             builder.Append("\"Export for Survey: " + survey.Name + "\"\n");
@@ -92,7 +91,7 @@ namespace DiscoveryCenter.Controllers
 
             foreach (var question in survey.Questions.OrderBy(q => q.IndexInSurvey))
             {
-                // TODO handle exhibits better
+                // TODO handle exhibits better or make exhibits save name instead of ID
                 builder.Append("Question Number: " + question.IndexInSurvey + "\n");
                 builder.Append("Question Type: " + question.Type + "\n");
                 builder.Append("\"Question Text: " + question.Text + "\"\n");
@@ -107,13 +106,17 @@ namespace DiscoveryCenter.Controllers
                         case Question.QuestionType.MultipleChoiceChooseMany:
                         case Question.QuestionType.MultipleChoiceChooseOne:
                         case Question.QuestionType.Slider:
-                            builder.Append("\"Question Choices: " + question.Choices + "\"\n");
+                            builder.Append("\"Question Choices (At Time of Export): " + question.Choices + "\"\n");
+                            goto case Question.QuestionType.ExhibitsChooseMany;
+                        case Question.QuestionType.ExhibitsChooseMany:
+                            ConvertAnswersToCondensedCSV(question, builder);
+                            builder.Append("\n");
                             goto default;
                         case Question.QuestionType.Spinner:
-                        case Question.QuestionType.ExhibitsChooseMany:
                         case Question.QuestionType.ShortAnswer:
                         default:
-                            ConvertAnswersToCSV(question, builder);
+                            if (exportRawData)
+                                ConvertAnswersToCSV(question, builder);
                             break;
                     }
                 }
@@ -122,10 +125,27 @@ namespace DiscoveryCenter.Controllers
 
             return builder.ToString(); 
         }
+        private void ConvertAnswersToCondensedCSV(Question question, StringBuilder builder)
+        {
+            var Counts = new Dictionary<string, int>();
+            foreach (var answer in question.Answers)
+            {
+                if (!Counts.ContainsKey(answer.Value))
+                    Counts.Add(answer.Value, 1);
+                else
+                    Counts[answer.Value]++;
+            }
+            builder.Append("Choice,Number of Selections\n");
+            foreach (KeyValuePair<string, int> entry in Counts)
+            {
+                builder.Append("\"" + entry.Key + "\"," + entry.Value + "\n");
+            }
+        }
 
         private void ConvertAnswersToCSV(Question question, StringBuilder builder)
         {
-            builder.Append("Answers Below\n");
+            builder.Append("Raw Data Below\n");
+            builder.Append("Date,Answer\n");
             foreach (var answer in question.Answers)
             {
                 builder.Append(answer.Submission.Timestamp + ",");
