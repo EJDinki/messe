@@ -84,7 +84,7 @@ namespace DiscoveryCenter.Controllers
         private string ConvertSurveyToCSV(Survey survey)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("Export for Survey: " + survey.Name + "\n");
+            builder.Append("\"Export for Survey: " + survey.Name + "\"\n");
             builder.Append("Date: " + DateTime.Today.ToString("MM/dd/yyyy") + "\n");
             builder.Append("Number of Questions: " + survey.Questions.Count + "\n");
             builder.Append("Number of Submissions: " + survey.Submissions.Count + "\n");
@@ -95,7 +95,7 @@ namespace DiscoveryCenter.Controllers
                 // TODO handle exhibits better
                 builder.Append("Question Number: " + question.IndexInSurvey + "\n");
                 builder.Append("Question Type: " + question.Type + "\n");
-                builder.Append("Question Text: " + question.Text + "\n");
+                builder.Append("\"Question Text: " + question.Text + "\"\n");
                 if (question.Answers.Count == 0)
                 {
                     builder.Append("There are no submitted answers for this question");
@@ -107,7 +107,7 @@ namespace DiscoveryCenter.Controllers
                         case Question.QuestionType.MultipleChoiceChooseMany:
                         case Question.QuestionType.MultipleChoiceChooseOne:
                         case Question.QuestionType.Slider:
-                            builder.Append("Question Choices: " + question.Choices + "\n");
+                            builder.Append("\"Question Choices: " + question.Choices + "\"\n");
                             goto default;
                         case Question.QuestionType.Spinner:
                         case Question.QuestionType.ExhibitsChooseMany:
@@ -129,7 +129,7 @@ namespace DiscoveryCenter.Controllers
             foreach (var answer in question.Answers)
             {
                 builder.Append(answer.Submission.Timestamp + ",");
-                builder.Append(answer.Value + "\n");
+                builder.Append("\"" + answer.Value + "\"\n");
             }
         }
     }
