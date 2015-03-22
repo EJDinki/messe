@@ -31,7 +31,8 @@ namespace DiscoveryCenter
                       "~/Scripts/jquery-ui.min.js",
                       "~/Scripts/jquery-touch.js",
                       "~/Scripts/sliderExtension.js",
-                      "~/Scripts/exhibit-draggable.js"
+                      "~/Scripts/exhibit-draggable.js",
+                      "~/Scripts/Survey.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/Admin").Include(

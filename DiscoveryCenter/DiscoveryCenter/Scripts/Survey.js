@@ -1,10 +1,10 @@
-﻿$(".slider").labeledslider({ min: 1, max: 5, tickInterval: 1, value: 3, stop: sliderChanged})
+﻿$(".slider").labeledslider({ min: 1, max: 5, tickInterval: 1, value: 3, stop: sliderChanged })
+$(".spinner").spinner({min:2, max: 20, value:5}).val(5);
 
 
 function sliderChanged(event, ui)
 {
     var id = this.id.replace("Slider", "Answer");
-    console.log($("#" + id));
     $("#" + id).val(ui.value);
 }
 
@@ -53,43 +53,41 @@ $(document).ready(function () {
 //Increments the timer and if the value is greater than 3, submits the survey
 function timerIncrement() {
     idleTime = idleTime + 1;
-    if (idleTime > 3) {
-        document.getElementById("CompleteSurvey").click();
 
+    if (idleTime > 2) {
+        document.forms[0].submit();
     }
 }
 
 
-function confirmExit() {
-    if(confirm("Are you sure you wish to exit without submitting your answers?"))
-        window.location.replace("@Url.Action("Index", "Home", new {id=Model.SurveyId},Request.Url.Scheme)");
-}
+//-----------enable/disable carousel controls-------------------------------
+var numSlides = 1;//init, but redclare value in the view
 
-var numSlides = @Model.QuestionModels.Count -1;
-
-$('body').on('click', 'a.left.carousel-control', function (e) {
+function leftCarouselClicked() {
     var slideID = $('div.item.active').attr("id");
     console.log(slideID);
 
     if (slideID == "slide_1") {
-        $('a.left').addClass("disabled");
+        $('a.left').hide();
+        $('a.right.carousel-control').show();
     }
+    else {
+        $('a.carousel-control').show();
+    }
+}
 
-    $('a.right').removeClass("disabled");
-});
-
-$('body').on('click', 'a.right.carousel-control', function (e) {
+function rightCarouselClicked() {
     var slideID = $('div.item.active').attr("id");
     console.log(slideID);
 
     if (slideID == "slide_" + (numSlides - 1)) {
-        $('a.right').addClass("disabled");
+        $('a.right').hide();
+        $('a.left.carousel-control').show();
     }
+    else {
+        $('a.carousel-control').show();
+    }
+}
 
-    $('a.left').removeClass("disabled");
-});
-
-$('body').on('click', 'a.disabled', function (e) {
-    e.preventDefault();
-    return false;
-});
+$('body').on('click', 'a.left.carousel-control', leftCarouselClicked);
+$('body').on('click', 'a.right.carousel-control', rightCarouselClicked);

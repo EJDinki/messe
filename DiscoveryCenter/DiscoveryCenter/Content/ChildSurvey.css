@@ -69,3 +69,31 @@ h1,h2,h3,h4,h5{
 {
     margin-left:25px;
 }
+
+a.carousel-control{
+    background-color: #abdc28;
+    border: 1px solid black;
+}
+
+.ui-spinner{
+    margin-top:30px;
+    margin-left:150px;
+    height: 200px;
+    width: 300px
+}
+
+.ui-spinner input{
+    height: 186px;
+    font-size: 36px;
+    width:75px;
+}
+
+.ui-spinner a.ui-spinner-button{
+    width:150px;
+    border-top: 1px solid white;
+}
+
+.ui-spinner-button .ui-button-text .ui-icon{
+    margin-left: 48%;
+    margin-right: 48%;
+}
