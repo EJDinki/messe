@@ -10,6 +10,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Styles.Render("~/Content/jqplot")
     @Scripts.Render("~/bundles/jqplot")
+    @Scripts.Render("~/bundles/Admin")
+    @Scripts.Render("~/bundles/bootstrap")
 
 </head>
 <body>
@@ -32,8 +34,6 @@
     <div class="body body-content">
         @RenderBody()
     </div>
-    @Scripts.Render("~/bundles/Admin")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
