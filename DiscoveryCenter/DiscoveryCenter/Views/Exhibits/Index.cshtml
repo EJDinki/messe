@@ -1,34 +1,114 @@
 ﻿@model IEnumerable<DiscoveryCenter.Models.Exhibit>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Exhibits";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<br/>
+<div class="col-md-offset-2 col-md-8 panel panel-default">
+    <div class="panel-body ">
+        <h2>Exhibits</h2>
+        <div class="clearfix">
+            <div class="col-md-4" style="padding-left:0px">
+                <p>
+                    <a class="btn btn-primary" href="@Url.Action("Create","Exhibits")" id="addItem">
+                        <i class='glyphicon glyphicon-plus'></i> Create New Exhibit
+                    </a>
+                </p>
+            </div>
+            <div class="col-md-8 selection-buttons " style="padding-right:0px">
+                <div class="btn-group pull-right">
+                    <a id="editSurvey" class="btn btn-default" type="button" href="@Url.Action("Edit", "Exhibits", new { id = "" })">
+                        <span class="glyphicon glyphicon-edit"></span> Edit
+                    </a>
+                    <a id="duplicateSurvey" class="btn btn-default" type="button" href="@Url.Action("Details", "Exhibits", new { id = "" })">
+                        <span class="glyphicon glyphicon-duplicate"></span> Details
+                    </a>
+                    <!--<a id="viewSurvey" class="btn btn-default" type="button" href="" @*@Url.Action("Index", "Home", new { id = "" })*@>
+                        <span class="glyphicon glyphicon-eye-open"></span> View Exhibit
+                    </a>-->
+                    <a id="deleteSurvey" class="btn btn-danger" type="button" href="@Url.Action("Delete", "Exhibits", new { id = ""})">
+                        <span class="glyphicon glyphicon-remove"></span> Delete
+                    </a>
+                </div>
+            </div>
+        </div>
 
-<h2>Index</h2>
+        <ul>
+                <li class="header clearfix">
+                    <div class="col-md-3">
+                        <span>@Html.DisplayNameFor(model => model.Name)</span>
+                    </div>
+                    @*
+                <div class="col-md-3">
+                    <span>@Html.DisplayNameFor(model => model.CreateDate)</span>
+                </div>
+                <div class="col-md-3">
+                    <span>@Html.DisplayNameFor(model => model.LastModifiedDate)</span>
+                </div>*@
+                </li>
+        </ul>
+        <ul class="indexSelectableList">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th></th>
-    </tr>
+            @foreach (var item in Model)
+            {
+                <li class="ui-widget-content clearfix" id="selectRow_@item.Id" style="cursor:pointer">
+                    @Html.HiddenFor(modelItem => item.Id, new { @class = "id" })
+                    <div class="col-md-3">
+                        <span>@Html.DisplayFor(modelItem => item.Name)</span>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+@section scripts
+{
+    <script>
+        $(".indexSelectableList").selectable({
+            stop:function(event, ui){
+                $(event.target).children('.ui-selected').not(':first').removeClass('ui-selected');
+                refreshButtons(event.target);
+            }
+        });
+
+        $(document).ready(refreshButtons(null));
+
+        function refreshButtons(target)
+        {
+            if (target != null)
+                var selected = $(target).children('.ui-selected').first();
+            else
+                var selected = null;
+
+            if (selected != null) {
+                console.log(selected);
+                var id = $(selected).find("input.id").first().val();
+                console.log(id);
+                $(".selection-buttons a").each(function (index, ele) {
+                    $(ele).attr('href', function (i, a) {
+
+                        if (/id=[0-9]*&/.test(a))
+                            return a.replace(/id=[0-9]*&/ig, "id=" + id);
+                        else {
+                            a = a.replace(/\?.*$/, "");
+                            return a + "?id=" + id;
+                        }
+                    });
+                    $(ele).removeAttr('disabled');
+                    console.log(ele);
+                });
+
+            }
+            else
+            {
+                $(".selection-buttons a").each(function (index, ele) {
+                    console.log(ele);
+                    $(ele).attr("disabled", "disabled");
+                });
+            }
+
+        }
+    </script>
 }
-
-</table>

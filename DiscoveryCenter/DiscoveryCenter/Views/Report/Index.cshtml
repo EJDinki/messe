@@ -8,7 +8,8 @@
 <h2>Report For Survey: @Model.SurveyName</h2>
 <br/>
 
-<a id="ExportToCSV" class="btn btn-default" type="button" href="@Url.Action("ExportToCSV", "Report", new { id = @Model.SurveyId })">Download This Report</a>
+<a id="ExportToCSV" class="btn btn-default" type="button" href="@Url.Action("ExportToCSV", "Report", new { id = @Model.SurveyId, exportRawData = true})">Download This Report With Summarized AND Raw Data</a>
+<a id="ExportToCSV" class="btn btn-default" type="button" href="@Url.Action("ExportToCSV", "Report", new { id = @Model.SurveyId, exportRawData = false})">Download This Report With Summarized Data Only</a>
 
 <script>
     var dataForCharts = [];
