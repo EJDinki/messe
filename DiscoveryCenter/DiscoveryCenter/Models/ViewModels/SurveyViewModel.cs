@@ -11,5 +11,7 @@ namespace DiscoveryCenter.Models
         public int SurveyId { get; set; }
         public string SurveyName { get; set; }
         public string SurveyDescription { get; set; }
+
+        public Theme Theme { get; set; }
     }
 }

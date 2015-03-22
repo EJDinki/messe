@@ -22,6 +22,7 @@ namespace DiscoveryCenter.Controllers
                 model.QuestionModels = new List<QuestionViewModel>();
                 model.SurveyId = survey.Id;
                 model.SurveyName = survey.Name;
+                model.Theme = survey.Theme;
                 surveyView = survey.Theme.SurveyView;
                 
                 foreach(var question in survey.Questions.OrderBy(x => x.IndexInSurvey))

@@ -58,6 +58,9 @@ namespace DiscoveryCenter
             bundles.Add(new StyleBundle("~/Content/jqplot").Include(
                       "~/Content/jquery.jqplot.css"));
 
+            bundles.Add(new StyleBundle("~/Content/ChildSurvey").Include(
+                      "~/Content/ChildSurvey.css"));
+
             
 
             // Set EnableOptimizations to false for debugging. For more information,
