@@ -1,15 +1,15 @@
 ﻿@model DiscoveryCenter.Models.ReportsViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Report for " + @Model.SurveyName;
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+@Scripts.Render("~/bundles/Admin")
 
 <h2>Report For Survey: @Model.SurveyName</h2>
 <br/>
 
-<a id="ExportToCSV" class="btn btn-default" type="button" href="@Url.Action("ExportToCSV", "Report", new { id = @Model.SurveyId, exportRawData = true})">Download This Report With Summarized AND Raw Data</a>
-<a id="ExportToCSV" class="btn btn-default" type="button" href="@Url.Action("ExportToCSV", "Report", new { id = @Model.SurveyId, exportRawData = false})">Download This Report With Summarized Data Only</a>
+<a id="ExportDialog" class="btn btn-default">Download This Report</a>
 
 <script>
     var dataForCharts = [];
@@ -31,6 +31,26 @@
 
     // Add this data to the dataForCharts array to be referenced later. HTML.Raw is used to avoid encoding
     <script>dataForCharts[@Model.Reports[i].QuestionIndex] = JSON.parse('@Html.Raw(result)');</script>
+}
+
+@using(Html.BeginForm("ExportToCSV", "Report", FormMethod.Post, new { @id="dialog-form", @title="Download Options" }))
+{
+    @Html.Hidden("id", @Model.SurveyId)
+    @Html.RadioButton("dateRadio", "noDate", true, new { @id = "noDate" })
+    @Html.Label("Export All Data") <br />
+
+    @Html.RadioButton("dateRadio", "date", false, new { @id = "date" })
+    @Html.Label("Only Export Data in Date Range") <br />
+    <div style="padding-left:2em">
+        <span style="float:left">Start Date</span>
+        @Html.TextBox("startDate")
+        <span style="float:left">End Date</span>
+        @Html.TextBox("endDate")
+    </div>
+
+    @Html.CheckBox("exportRawData", true)
+    @Html.Label("Include Raw Data") <br />
+    <input type="submit" value="Download Report" id="submitBtn"/>
 }
 
 <script>
@@ -65,5 +85,53 @@
                 );
             }
         }
+        dialog = $( "#dialog-form" ).dialog({
+            autoOpen: false,
+            height: 300,
+            width: 350,
+            modal: true
+        });
+
+        $( "#ExportDialog" ).on( "click", function() {
+            dialog.dialog( "open" );
+        });
+
+        // Enable Date Picker
+        $( "#startDate" ).datepicker();
+        $( "#endDate" ).datepicker();
+
+        // Today
+        var defaultEndDate = new Date();
+        // 30 Days ago
+        var defaultStartDate = new Date();
+        defaultStartDate.setDate(defaultStartDate.getDate() - 30);
+
+        $( "#startDate" ).val($.datepicker.formatDate('m/dd/yy', defaultStartDate));
+        $( "#endDate" ).val($.datepicker.formatDate('m/dd/yy', defaultEndDate));
+
+        // Make sure the dates are initially disabled, since "no date range" is selected by default
+        $( "#startDate" ).prop('disabled', true);
+        $( "#endDate" ).prop('disabled', true);
+
+        // Radio buttons
+        // When date is checked, enable date picking
+        $( "#date" ).change(function () {
+            if ($( "#date" ).is(':checked')) {
+                $( "#startDate" ).prop('disabled', false)
+                $( "#endDate" ).prop('disabled', false)
+            }
+        });
+
+        // When noDate is checked, disable date picking
+        $( "#noDate" ).change(function () {
+            if ($( "#noDate" ).is(':checked')) {
+                $( "#startDate" ).prop('disabled', true)
+                $( "#endDate" ).prop('disabled', true)
+            }
+        });
+
+        $( '#dialog-form' ).submit(function() {
+            dialog.dialog("close");
+        });
     });
 </script>
