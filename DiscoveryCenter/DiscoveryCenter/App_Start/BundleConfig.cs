@@ -50,7 +50,7 @@ namespace DiscoveryCenter
                       "~/Content/jquery-ui.theme.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/SurveyView").Include(
-                      "~/Content/SurveyView.css",
+                      "~/Content/AllSurveys.css",
                       "~/Content/jquery-ui.min.css",
                       "~/Content/jquery-ui.structure.min.css",
                       "~/Content/jquery-ui.theme.min.css",
