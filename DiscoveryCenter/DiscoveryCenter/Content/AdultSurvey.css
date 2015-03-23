@@ -1,12 +1,13 @@
 ﻿body {
-    font-family: 'Comic Sans MS';
-    background: url(images/childbackground.jpg) repeat-x left top #7cc8d6;
-    font-size: 21px;
+    font-family: Garamond;
+    background-color: #4477AA;
+    font-size: 25px;
     line-height: 2.1428571435;
+    color: black;
 }
 
 h1,h2,h3,h4,h5{
-    font-family: 'Comic Sans MS';
+    font-family: Garamond;
 }
 
 .panel.thankyou{
@@ -21,18 +22,14 @@ h1,h2,h3,h4,h5{
 }
 
 .panel{
+    border-radius: 0px;
     margin-top: 10px;
     padding: 5px;
+    background-color: #FFFFDB
 }
 
 .panel-heading{
-    background: #69c120; /* Old browsers */
-    background: -moz-linear-gradient(top,  #69c120 0%, #abdc28 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#69c120), color-stop(100%,#abdc28)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #69c120 0%,#abdc28 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #69c120 0%,#abdc28 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #69c120 0%,#abdc28 100%); /* IE10+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#69c120', endColorstr='#abdc28',GradientType=0 ); /* IE6-9 */
+    background-color: #FFFFDB;
 }
 
 .panel-heading.childheading img{
@@ -58,7 +55,7 @@ h1,h2,h3,h4,h5{
     border-radius: 0px;
     border: 1px solid black;
     width:auto;
-    background-color: #7cc8d6;
+    background-color: #BBDDFF;
     height:12px;
 }
 
@@ -67,17 +64,16 @@ h1,h2,h3,h4,h5{
     border-radius: 0px;
     height:12px;
     display:table-cell;
-    background-color: #00CC00;
+    background-color: #667788;
     border: 1px solid black;
 }
 
 .btn.btn-default{
     font-size: 24px;
-    border-radius:15px;
-    padding:20px;
-    background: -ms-linear-gradient(top,  #69c120 0%,#abdc28 100%);/* IE10+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#69c120), color-stop(100%,#abdc28)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #69c120 0%,#abdc28 100%); /* Chrome10+,Safari5.1+ */
+    border-radius:0px;
+    padding: 10px 20px 10px 20px;
+    background-color: #667788;
+    color: white;
 }
 
 .radio input[type="radio"]
@@ -86,7 +82,7 @@ h1,h2,h3,h4,h5{
 }
 
 a.carousel-control{
-    background-color: #abdc28;
+    background-color: #556666;
     border: 1px solid black;
 }
 

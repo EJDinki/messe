@@ -13,13 +13,9 @@ namespace DiscoveryCenter.Models
 
         public ThemeName Name { get; set; }
 
-        public string CssBundleName { get; set; }
+        public string CssFileName { get; set; }
 
-        public string JsBundleName { get; set; }
-
-        public string SurveyView { get; set; }
-
-        public string WelcomeView { get; set; }
+        public string JsFileName { get; set; }
 
     }
 

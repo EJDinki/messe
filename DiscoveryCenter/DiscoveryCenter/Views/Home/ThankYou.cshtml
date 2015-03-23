@@ -1,11 +1,11 @@
-﻿@using DiscoveryCenter.Models
+﻿@model DiscoveryCenter.Models.ThankYouViewModel
+@using DiscoveryCenter.Models
 
 @{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_SurveyLayout.cshtml";
+    string url = Url.Action("Index", "Home", new { id = Model.SurveyId });
 }
-
-@{string url = Url.Action("Index", "Home", new { id = (int)Model });}
 
 <script>
     var count = 5;
@@ -24,8 +24,13 @@
 </script>
 
 <meta http-equiv="refresh" content="5; url=@url" />
-    <div class="jumbotron">
+    <div class="panel thankyou">
         <img src="~/Content/images/discovery.png" />
         <h1> Thank you for taking our survey! </h1>
         <h3> This page will autoredirect to the start in <span id="timer">5</span> seconds</h3>
     </div>
+
+@section Styles
+{
+    <link href="@Url.Content("~/Content/" + Model.Theme.CssFileName)" rel="stylesheet" type="text/css" />
+}

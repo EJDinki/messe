@@ -14,7 +14,7 @@ namespace DiscoveryCenter.Controllers
         {
             SurveyViewModel model = null;
             Survey survey;
-            string surveyView = "Survey";
+
             using(SurveyContext dbContext = new SurveyContext())
             {
                 survey = (from s in dbContext.Surveys where s.Id == id select s).Single();
@@ -23,7 +23,6 @@ namespace DiscoveryCenter.Controllers
                 model.SurveyId = survey.Id;
                 model.SurveyName = survey.Name;
                 model.Theme = survey.Theme;
-                surveyView = survey.Theme.SurveyView;
                 
                 foreach(var question in survey.Questions.OrderBy(x => x.IndexInSurvey))
                 {
@@ -102,12 +101,14 @@ namespace DiscoveryCenter.Controllers
                     }
                 }
             }
-            return View(surveyView, model);
+            return View("Survey", model);
         }
 
         [HttpPost]
         public ActionResult Survey([ModelBinder(typeof(SurveyModelBinder))]SurveyViewModel model)
         {
+            ThankYouViewModel ret = new ThankYouViewModel();
+
             using (SurveyContext db = new SurveyContext())
             {
                 Submission submission = new Submission() { Timestamp = DateTime.Now, SurveyId = model.SurveyId };
@@ -155,19 +156,18 @@ namespace DiscoveryCenter.Controllers
                 }
 
                 db.SaveChanges();
-            }
-            return RedirectToAction("ThankYou", new { id = model.SurveyId });
-        }
 
-        public ActionResult ThankYou(int id)
-        {
-            return View(id);
+                ret.Theme = db.Surveys.Find(model.SurveyId).Theme;
+                ret.SurveyId = model.SurveyId;
+            }
+
+            return View("ThankYou", ret);
         }
 
         public ActionResult Index(int id = 1)
         {
             SurveyViewModel model = null;
-            string welcomeView = "Index";
+
             using (SurveyContext dbContext = new SurveyContext())
             {
                 Survey survey = (from s in dbContext.Surveys where s.Id == id select s).Single();
@@ -175,9 +175,9 @@ namespace DiscoveryCenter.Controllers
                 model.SurveyName = survey.Name;
                 model.SurveyDescription = survey.Description;
                 model.SurveyId = id;
-                welcomeView = survey.Theme.WelcomeView;
+                model.Theme = survey.Theme;
             }
-            return View(welcomeView, model);
+            return View("Index", model);
         }
       
     }

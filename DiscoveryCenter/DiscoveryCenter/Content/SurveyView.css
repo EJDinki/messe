@@ -29,32 +29,6 @@ textarea{
     margin-right: auto;
 }
 
-.jumbo-medium{
-    height: 500px;
-}
-
-.jumbo-large{
-    height: 100%;
-}
-
-.carousel-indicators{
-   width:100%;
-   margin-left:-50%;
-   bottom:0px;
-}
-
-.carousel-indicators li{
-   border-color:black; 
-   height:17px;
-   width:17px;
-}
-
-.carousel-indicators .active{
-   background-color:teal; 
-   height:20px;
-   width:20px;
-}
-
 .carousel-inner
 {
     min-height:400px;
@@ -170,30 +144,6 @@ textarea{
   /*filter: alpha(opacity=50);*/
 }
 
-.carousel-control.left {
-  /*background-color: black;*/
-  
-  background-image: -webkit-gradient(linear, 0 top, 100% top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.0001)));
-  background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.5) 0), color-stop(rgba(0, 0, 0, 0.0001) 100%));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0.0001) 100%);
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0.0001) 100%);
-  background-repeat: repeat-x;
-  
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
-}
-
-.carousel-control.right {
-  /*right: 0;
-  left: auto;*/
-  /*background-color: blue;*/
-  background-image: -webkit-gradient(linear, 0 top, 100% top, from(rgba(0, 0, 0, 0.0001)), to(rgba(0, 0, 0, 0.5)));
-  background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.0001) 0), color-stop(rgba(0, 0, 0, 0.5) 100%));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0, rgba(0, 0, 0, 0.5) 100%);
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0, rgba(0, 0, 0, 0.5) 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
-}
-
 .carousel-control:hover,
 .carousel-control:focus {
   color: #ffffff;
@@ -278,63 +228,8 @@ textarea{
   text-shadow: none;
 }
 
-@media screen and (min-width: 768px) {
-  .carousel-control .icon-prev,
-  .carousel-control .icon-next {
-    width: 30px;
-    height: 30px;
-    margin-top: -15px;
-    margin-left: -15px;
-    font-size: 30px;
-  }
-  .carousel-caption {
-    right: 20%;
-    left: 20%;
-    padding-bottom: 30px;
-  }
-  .carousel-indicators {
-    bottom: 20px;
-  }
-}
-
 /*end carousel*/
 
-.jumbotron {
-  padding: 10px;
-  margin-bottom: 30px;
-  font-size: 21px;
-  font-weight: 200;
-  line-height: 2.1428571435;
-  color: inherit;
-  background-color: #eeeeee;
-}
-
-.jumbotron h1 {
-  line-height: 1;
-  color: inherit;
-}
-
-.jumbotron p {
-  line-height: 1.4;
-}
-
-.container .jumbotron {
-  border-radius: 6px;
-}
-
-@media screen and (min-width: 768px) {
-  .jumbotron {
-    padding-top: 48px;
-    padding-bottom: 48px;
-  }
-  .container .jumbotron {
-    padding-right: 60px;
-    padding-left: 60px;
-  }
-  .jumbotron h1 {
-    font-size: 63px;
-  }
-}
 .slider-choices {
 	text-align: justify;
 }

@@ -32,26 +32,22 @@ namespace DiscoveryCenter.Migrations
                 IdentityResult res = manager.Create(user1, "admin101");
                 identityContext.SaveChanges();
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
 
             //--------------------Themes------------------------
             Theme adultTheme = new Theme() 
             { 
                 Id = 1, 
                 Name = ThemeName.Adult, 
-                CssBundleName = "~/bundles/AdultSurvey", 
-                JsBundleName = "~/Content/AdultSurvey",
-                SurveyView = "Survey",
-                WelcomeView = "Index"
+                CssFileName = "AdultSurvey.css", 
+                JsFileName = "AdultSurvey.js",
             };
             Theme childTheme = new Theme() 
             { 
                 Id = 2,
                 Name = ThemeName.Child,
-                CssBundleName = "~/bundles/ChildSurvey",
-                JsBundleName = "~/Content/ChildSurvey",
-                SurveyView = "ChildSurvey",
-                WelcomeView = "ChildWelcome"
+                CssFileName = "ChildSurvey.css",
+                JsFileName = "ChildSurvey.js",
             };
             context.Themes.AddOrUpdate(adultTheme);
             context.Themes.AddOrUpdate(childTheme);
