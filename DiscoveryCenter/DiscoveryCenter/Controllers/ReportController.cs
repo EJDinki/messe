@@ -158,7 +158,7 @@ namespace DiscoveryCenter.Controllers
                 builder.Append("\"Question Text: " + question.Text + "\"\n");
                 if (question.Answers.Count == 0)
                 {
-                    builder.Append("There are no submitted answers for this question");
+                    builder.Append("There are no submitted answers for this question\n");
                 }
                 else
                 {
