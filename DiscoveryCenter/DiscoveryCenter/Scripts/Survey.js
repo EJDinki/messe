@@ -65,7 +65,6 @@ var numSlides = 1;//init, but redclare value in the view
 
 function leftCarouselClicked() {
     var slideID = $('div.item.active').attr("id");
-    console.log(slideID);
 
     if (slideID == "slide_1") {
         $('a.left').hide();
@@ -78,7 +77,6 @@ function leftCarouselClicked() {
 
 function rightCarouselClicked() {
     var slideID = $('div.item.active').attr("id");
-    console.log(slideID);
 
     if (slideID == "slide_" + (numSlides - 1)) {
         $('a.right').hide();

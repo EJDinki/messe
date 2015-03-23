@@ -19,3 +19,8 @@
 {
     <link href="@Url.Content("~/Content/" + Model.Theme.CssFileName)" rel="stylesheet" type="text/css" />
 }
+
+@section scripts
+{
+    <script src="/Scripts/@(Model.Theme.JsFileName)"></script>
+}

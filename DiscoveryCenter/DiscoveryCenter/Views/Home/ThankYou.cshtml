@@ -7,22 +7,6 @@
     string url = Url.Action("Index", "Home", new { id = Model.SurveyId });
 }
 
-<script>
-    var count = 5;
-
-    var counter = setInterval(timer, 1000);
-
-    function timer() {
-        count = count - 1;
-        if (count <= 0) {
-            clearInterval(counter);
-            return;
-        }
-
-        document.getElementById("timer").innerHTML = count;
-    }
-</script>
-
 <meta http-equiv="refresh" content="5; url=@url" />
     <div class="panel thankyou">
         <img src="~/Content/images/discovery.png" />
@@ -33,4 +17,25 @@
 @section Styles
 {
     <link href="@Url.Content("~/Content/" + Model.Theme.CssFileName)" rel="stylesheet" type="text/css" />
+}
+
+@section scripts
+{
+    <script src="/Scripts/@(Model.Theme.JsFileName)"></script>
+
+    <script>
+        var count = 5;
+
+        var counter = setInterval(timer, 1000);
+
+        function timer() {
+            count = count - 1;
+            if (count <= 0) {
+                clearInterval(counter);
+                return;
+            }
+
+            document.getElementById("timer").innerHTML = count;
+        }
+    </script>
 }

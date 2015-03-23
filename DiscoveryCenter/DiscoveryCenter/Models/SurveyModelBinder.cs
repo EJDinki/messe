@@ -48,8 +48,6 @@ namespace DiscoveryCenter.Models
             Question question = null;
             List<string> choices = new List<string>();
 
-            Question.QuestionType type = Question.QuestionType.ShortAnswer;
-
             foreach (string key in request.Form.Keys)
             {
 

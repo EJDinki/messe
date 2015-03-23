@@ -109,8 +109,8 @@
 
 @section scripts
 {
+    <script src="/Scripts/@(Model.Theme.JsFileName)"></script>
     <script>
-
         function confirmExit() {
         if(confirm("Are you sure you wish to exit without submitting your answers?"))
             window.location.replace("@Url.Action("Index", "Home", new {id=Model.SurveyId},Request.Url.Scheme)");
