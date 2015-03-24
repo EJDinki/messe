@@ -9,13 +9,6 @@ h1,h2,h3,h4,h5{
     font-family: 'Comic Sans MS';
 }
 
-.panel.thankyou{
-    padding-right: 60px;
-    padding-left: 60px;
-    padding-top: 48px;
-    padding-bottom: 48px;
-}
-
 .panel-middle-inner{
     border-radius: 20px;
 }

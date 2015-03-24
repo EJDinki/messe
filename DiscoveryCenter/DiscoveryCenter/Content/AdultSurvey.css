@@ -10,12 +10,6 @@ h1,h2,h3,h4,h5{
     font-family: Garamond;
 }
 
-.panel.thankyou{
-    padding-right: 60px;
-    padding-left: 60px;
-    padding-top: 48px;
-    padding-bottom: 48px;
-}
 
 .panel.thankyou h1{
     font-size: 63px;

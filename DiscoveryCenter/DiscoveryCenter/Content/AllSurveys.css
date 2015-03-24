@@ -9,6 +9,8 @@
     padding-top: 5vh;
 }
 
+
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -37,6 +39,13 @@ textarea{
     height: 90vh;
     margin-bottom:0;
     padding: 0px;
+}
+
+.panel.thankyou{
+    padding-right: 60px;
+    padding-left: 60px;
+    padding-top: 10px;
+    padding-bottom: 10px;  
 }
 
 .panel-middle-outer{
