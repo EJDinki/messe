@@ -8,34 +8,39 @@
 }
 
 <meta http-equiv="refresh" content="5; url=@url" />
-    <div class="panel panel-middle thankyou">
-    <img src="~/Content/images/discovery.png" />
-    <h1> Thank you for taking our survey! </h1>
-    <h3> This page will autoredirect to the start in <span id="timer">5</span> seconds</h3>
+<div class="panel-middle-outer">
+    <div class="panel-middle">
+        <div class="panel panel-middle-inner thankyou">
+
+            <img src="~/Content/images/discovery.png" />
+            <h1> Thank you for taking our survey! </h1>
+            <h3> This page will autoredirect to the start in <span id="timer">5</span> seconds</h3>
+        </div>
+    </div>
 </div>
 
-@section Styles
+    @section Styles
 {
-    <link href="@Url.Content("~/Content/" + Model.Theme.CssFileName)" rel="stylesheet" type="text/css" />
-}
+        <link href="@Url.Content("~/Content/" + Model.Theme.CssFileName)" rel="stylesheet" type="text/css" />
+    }
 
-@section scripts
+    @section scripts
 {
-    <script src="/Scripts/@(Model.Theme.JsFileName)"></script>
+        <script src="/Scripts/@(Model.Theme.JsFileName)"></script>
 
-    <script>
-        var count = 5;
+        <script>
+            var count = 5;
 
-        var counter = setInterval(timer, 1000);
+            var counter = setInterval(timer, 1000);
 
-        function timer() {
-            count = count - 1;
-            if (count <= 0) {
-                clearInterval(counter);
-                return;
+            function timer() {
+                count = count - 1;
+                if (count <= 0) {
+                    clearInterval(counter);
+                    return;
+                }
+
+                document.getElementById("timer").innerHTML = count;
             }
-
-            document.getElementById("timer").innerHTML = count;
-        }
-    </script>
-}
+        </script>
+    }

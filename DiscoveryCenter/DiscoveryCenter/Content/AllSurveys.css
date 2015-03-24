@@ -39,10 +39,22 @@ textarea{
     padding: 0px;
 }
 
+.panel-middle-outer{
+    display:table;
+    height:90vh;
+    width: 100%;
+}
+
 .panel-middle{
-    height: auto;
-    transform: translateY(50%);
+    display:table-cell;
+    vertical-align:middle;
+}
+
+.panel-middle-inner{
+    text-align:center;
     padding:30px;
+    width: 80%;
+    height: auto;
 }
 
 .panel-heading{

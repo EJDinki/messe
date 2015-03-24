@@ -16,6 +16,10 @@ h1,h2,h3,h4,h5{
     padding-bottom: 48px;
 }
 
+.panel-middle-inner{
+    border-radius: 20px;
+}
+
 .panel.thankyou h1{
     font-size: 63px;
 }
