@@ -23,8 +23,6 @@ h1,h2,h3,h4,h5{
 
 .panel{
     border-radius: 0px;
-    margin-top: 10px;
-    padding: 5px;
     background-color: #FFFFDB
 }
 
@@ -107,4 +105,16 @@ a.carousel-control{
 .ui-spinner-button .ui-button-text .ui-icon{
     margin-left: 48%;
     margin-right: 48%;
+}
+
+/*----------------------exhibits---------------------*/
+
+.exhibit-container{
+    background-color: #667788;
+    border-radius:0px;
+}
+
+.exhibit{
+    background-color:white;
+    border-radius:0px;
 }

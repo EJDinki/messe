@@ -1,21 +1,19 @@
 ﻿@model DiscoveryCenter.Models.MultipleSelectViewModel
 
-@Html.Hidden("Exhibit"+Model.QuestionId+".Answer","",new {id="exhibitA_"+Model.QuestionId})
-<div id="exhibitList_@Model.QuestionId"class="pull-left dropable-revert" style="height:50vh;overflow-y:scroll;width:40%">
-@for (int z = 0; z < @Model.Choices.Count; z++)
-{
-    <div class="panel draggable" id="@Model.QuestionId">
+@Html.Hidden("Exhibit" + Model.QuestionId + ".Answer", "", new { id = "exhibitA_" + Model.QuestionId })
+<div id="exhibitList_@Model.QuestionId" class="pull-left dropable-revert exhibit-container">
+    @for (int z = 0; z < @Model.Choices.Count; z++)
+    {
+        <div class="panel draggable exhibit" id="@Model.QuestionId">
             @Html.Hidden(String.Format("{0}_Options[{1}].text", Model.QuestionId, z), Model.Options[z].text)
             <img src=@Model.Options[z].image height="64" width="64">
             <label>
                 @Model.Choices[z]
             </label>
             <br />
-    </div>
-}
+        </div>
+    }
 
 </div>
 
-<div id="dropArea_@Model.QuestionId"class="panel dropable pull-right"style="height:50vh;overflow-y:scroll;width:40%">
-
-</div>
+<div id="dropArea_@Model.QuestionId" class="dropable pull-right exhibit-container"></div>

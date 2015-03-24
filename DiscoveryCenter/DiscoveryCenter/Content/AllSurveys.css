@@ -1,5 +1,4 @@
 ﻿.body {
-    padding-top: 50px;
     padding-bottom: 50px;
 }
 
@@ -7,6 +6,7 @@
 .body-content {
     padding-left: 1%;
     padding-right: 1%;
+    padding-top: 5vh;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -29,9 +29,34 @@ textarea{
     margin-right: auto;
 }
 
-.carousel-inner
-{
-    min-height:400px;
+.panel{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    height: 90vh;
+    margin-bottom:0;
+    padding: 0px;
+}
+
+.panel-middle{
+    height: auto;
+    transform: translateY(50%);
+    padding:30px;
+}
+
+.panel-heading{
+    position:relative;
+    height:150px;
+}
+
+.panel-body{
+    position:absolute;
+    padding: 0 30px 0 30px;
+    top: 149px;/*panel-heading height with border*/
+    bottom: 40px;
+    left: 0px;
+    right: 0;
 }
 
 .checkbox input[type="checkbox"]
@@ -68,20 +93,33 @@ textarea{
 
 .carousel {
   position: relative;
+  height:100%;
 }
 
-.carousel-inner {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
+.carousel-inner
+{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 100%
 }
 
 .carousel-inner > .item {
   position: relative;
+  height:100%;
   display: none;
+  overflow: hidden;
   -webkit-transition: 0.6s ease-in-out left;
           transition: 0.6s ease-in-out left;
 }
+
+.carousel-inner .item .question-text{
+    height:auto;
+} 
+
+.carousel-inner .item .question-choices{
+    height:80%;
+} 
 
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
@@ -97,9 +135,6 @@ textarea{
   display: block;
 }
 
-.carousel-inner > .active {
-  left: 0;
-}
 
 .carousel-inner > .next,
 .carousel-inner > .prev {
@@ -133,15 +168,9 @@ textarea{
   position: absolute;
   top: 0;
   bottom: 0;
-  /*left: 0;*/
-  width: 7%;
   font-size: 20px;
-  /*color: #ffffff;*/
   color: black;
   text-align: center;
-  /*text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);*/
-  /*opacity: 0.5;*/
-  /*filter: alpha(opacity=50);*/
 }
 
 .carousel-control:hover,
@@ -182,10 +211,10 @@ textarea{
 
 .carousel-indicators {
   position: absolute;
-  bottom: 1px;
   left: 50%;
   z-index: 15;
   width: 80%;
+  bottom: -30px;
   padding-left: 0;
   margin-left: -40%;
   text-align: center;
@@ -252,15 +281,40 @@ textarea{
   position: absolute;
   /*color:black;*/
   top: 52%;
-  left: 40%;
+  left: 50%;
+  width:100%;
+  margin-left:-50%;
   z-index: 5;
-  display: inline-block;
+  display: block;
 }
 .carousel-control-caption-prev {
   position: absolute;
   /*color:black;*/
   top: 52%;
-  left: 10%;
+  left: 50%;
+  width:100%;
+  margin-left:-50%;
   z-index: 5;
-  display: inline-block;
+  display: block;
+}
+
+/*----------------------exhibits---------------------*/
+
+.exhibit-container{
+    border: 1px solid black;
+    background: grey;
+    width:49%;
+    height:100%;
+    margin: 0;
+    overflow-y:hidden;
+    border-radius:5px;
+}
+
+.exhibit{
+    border: 1px solid black;
+    background: white;
+    height: auto;
+    width: auto;
+    max-width: 400px;
+    margin: 5px;
 }

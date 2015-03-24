@@ -7,18 +7,7 @@
 }
 @using (Html.BeginForm("Survey", "Home", FormMethod.Post))
 {
-    <div class="panel">
-        <div class="panel-heading">
-            <img src="~/Content/images/discovery75.png" />
-            <a id="quitSurey" class="btn btn-lg pull-right" type="button" href="#" onclick="confirmExit();">
-                <span class="glyphicon glyphicon-remove-circle pull-right" style="font-size:4em"></span>
-            </a>
-        </div>
-        <div class="panel-body">
-            
-            <span id="alert" class="alert alert-danger top" role="alert" hidden style="position: absolute;"></span>
-
-            <!-- Left and right controls -->
+    <!-- Left and right controls -->
             <a class="left carousel-control pull-left " href="#myCarousel" role="button" data-slide="prev" hidden>
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
@@ -29,6 +18,17 @@
                 <span class="sr-only">Next</span>
                 <span class="carousel-control-caption-next">Next</span>
             </a>
+    
+    <div class="panel">
+        <div class="panel-heading">
+            <img src="~/Content/images/discovery75.png" />
+            <a id="quitSurey" class="btn btn-lg pull-right" type="button" href="#" onclick="confirmExit();">
+                <span class="glyphicon glyphicon-remove-circle pull-right" style="font-size:4em"></span>
+            </a>
+        </div>
+        <div class="panel-body">
+            
+            <span id="alert" class="alert alert-danger top" role="alert" hidden style="position: absolute;"></span>
 
             @Html.HiddenFor(m => m.SurveyId)
             <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
@@ -41,64 +41,66 @@
                         <div class="@val" id="slide_@i">
                             @Html.HiddenFor(m => m.QuestionModels[i].Question)
                             @Html.HiddenFor(m => m.QuestionModels[i].QuestionId)
-                            <p><b>@Model.QuestionModels[i].Question</b></p>
-                            @switch (Model.QuestionModels[i].Type)
-                        {
-                            case (Question.QuestionType.MultipleChoiceChooseOne):
-                                    @(Html.Partial("MultipleChoiceChooseOne", Model.QuestionModels[i]))
-                                break;
 
-                            case (Question.QuestionType.MultipleChoiceChooseMany):
-                            @(Html.Partial("MultipleChoiceChooseMany", Model.QuestionModels[i]))
-                                break;
+                            <div class="question-text">
+                                <p><b>@Model.QuestionModels[i].Question</b></p>
+                            </div>
+                            <div class="question-choices">
+                                @switch (Model.QuestionModels[i].Type)
+                                {
+                                    case (Question.QuestionType.MultipleChoiceChooseOne):
+                                        @(Html.Partial("MultipleChoiceChooseOne", Model.QuestionModels[i]))
+                                        break;
 
-                            case (Question.QuestionType.ShortAnswer):
-                            @Html.TextArea(String.Format("QuestionModels[{0}].Answer", Model.QuestionModels[i].QuestionId))
-                                break;
+                                    case (Question.QuestionType.MultipleChoiceChooseMany):
+                                    @(Html.Partial("MultipleChoiceChooseMany", Model.QuestionModels[i]))
+                                        break;
 
-                            case (Question.QuestionType.Slider):
-                            @(Html.Partial("SliderQuestion", Model.QuestionModels[i]))
-                                break;
+                                    case (Question.QuestionType.ShortAnswer):
+                                    @Html.TextArea(String.Format("QuestionModels[{0}].Answer", Model.QuestionModels[i].QuestionId))
+                                        break;
 
-                            case (Question.QuestionType.ExhibitsChooseMany):
-                            @(Html.Partial("ExhibitsChooseMany", Model.QuestionModels[i]))
-                                break;
+                                    case (Question.QuestionType.Slider):
+                                    @(Html.Partial("SliderQuestion", Model.QuestionModels[i]))
+                                        break;
 
-                            case (Question.QuestionType.Spinner):
-                                <input class="spinner" name=@(String.Format(" QuestionModels[{0}].Answer", i) ) />
-                                break;
+                                    case (Question.QuestionType.ExhibitsChooseMany):
+                                    @(Html.Partial("ExhibitsChooseMany", Model.QuestionModels[i]))
+                                        break;
 
-                            default:
-                            @Html.HiddenFor(m => m.QuestionModels[i].Answer)
-                                break;
-                        }
+                                    case (Question.QuestionType.Spinner):
+                                    <input class="spinner" name=@(String.Format(" QuestionModels[{0}].Answer", i) ) />
+                                        break;
 
-                            @Html.HiddenFor(m => m.QuestionModels[i].Type)
+                                    default:
+                                    @Html.HiddenFor(m => m.QuestionModels[i].Answer)
+                                        break;
+                                }
 
-                            @if (i == Model.QuestionModels.Count - 1)
-                        {
-                                <center>
-                                    <input type="submit" class="btn btn-default" value="Complete Survey" id="CompleteSurvey" style="margin-top:15%" />
-                                </center>
-                        }
+                                @Html.HiddenFor(m => m.QuestionModels[i].Type)
+
+                                @if (i == Model.QuestionModels.Count - 1)
+                                {
+                                    <center>
+                                        <input type="submit" class="btn btn-default" value="Complete Survey" id="CompleteSurvey" style="margin-top:15%" />
+                                    </center>
+                                }
+                            </div>
                         </div>
                 }
                 </div>
-
-                <br>
                 <!-- Indicators -->
-                <div class="carousel-controls center">
-                    <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" class="active" style="cursor:default"></li>
-                        @for (int i = 1; i < @Model.QuestionModels.Count; i++)
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" class="active" style="cursor:default"></li>
+                    @for (int i = 1; i < @Model.QuestionModels.Count; i++)
                     {
-                            <li data-target="#myCarousel" style="cursor:default"></li>
+                        <li data-target="#myCarousel" style="cursor:default"></li>
                     }
-                    </ol>
-                </div>
-
+                </ol>
             </div>
         </div>
+        
+
     </div>
 }
 
