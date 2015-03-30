@@ -64,6 +64,9 @@ function timerIncrement() {
 var numSlides = 1;//init, but redclare value in the view
 
 function leftCarouselClicked() {
+    var audioPrevious = $('#onPreviousSound').get(0);
+    audioPrevious.play();
+
     var slideID = $('div.item.active').attr("id");
 
     if (slideID == "slide_1") {
@@ -76,6 +79,9 @@ function leftCarouselClicked() {
 }
 
 function rightCarouselClicked() {
+    var audioNext = $('#onNextSound').get(0);
+    audioNext.play();
+
     var slideID = $('div.item.active').attr("id");
 
     if (slideID == "slide_" + (numSlides - 1)) {

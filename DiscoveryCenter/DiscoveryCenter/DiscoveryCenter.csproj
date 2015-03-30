@@ -202,6 +202,9 @@
   <ItemGroup>
     <Content Include="Content\Admin.css" />
     <Content Include="Content\AdultSurvey.css" />
+    <Content Include="Content\audio\CheckoutScanner.mp3" />
+    <Content Include="Content\audio\green_beep.mp3" />
+    <Content Include="Content\audio\Victory.mp3" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\ChildSurvey.css" />
