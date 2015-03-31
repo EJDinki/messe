@@ -50,6 +50,8 @@ namespace DiscoveryCenter.Controllers
         {
             if (ModelState.IsValid)
             {
+                exhibit.CreateDate = DateTime.Now;
+                exhibit.LastModifiedDate = DateTime.Now;
                 db.Exhibits.Add(exhibit);
                 db.SaveChanges();
                 return RedirectToAction("Index");

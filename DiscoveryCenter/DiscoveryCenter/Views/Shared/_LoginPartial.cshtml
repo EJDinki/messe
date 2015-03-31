@@ -8,11 +8,11 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @*<a href="">Hello @(User.Identity.Name)!</a>*@
-                <a>Hello @(User.Identity.Name)!</a>
+                @Html.ActionLink("Exhibits", "Index", "Exhibits", null, new { @class = "navbar-brand" })
             </li>
+            
             <li>
-                <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="navbar-brand">Log off</a>
             </li>
         </ul>
     }
@@ -20,6 +20,9 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>
+            @Html.ActionLink("Exhibits", "Index", "Exhibits", null, new { @class = "navbar-brand" })
+        </li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class="navbar-brand" })</li>
     </ul>
 }

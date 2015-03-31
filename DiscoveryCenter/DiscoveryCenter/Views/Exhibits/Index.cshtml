@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<DiscoveryCenter.Models.Exhibit>
 
 @{
-    ViewBag.Title = "Exhibits";
+    ViewBag.Title = "Admin Console - Exhibits";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <br/>
@@ -36,16 +36,15 @@
 
         <ul>
                 <li class="header clearfix">
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                         <span>@Html.DisplayNameFor(model => model.Name)</span>
                     </div>
-                    @*
-                <div class="col-md-3">
-                    <span>@Html.DisplayNameFor(model => model.CreateDate)</span>
-                </div>
-                <div class="col-md-3">
-                    <span>@Html.DisplayNameFor(model => model.LastModifiedDate)</span>
-                </div>*@
+                    <div class="col-md-3">
+                        <span>@*@Html.DisplayNameFor(model => model.CreateDate)*@Create Date</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span>@*@Html.DisplayNameFor(model => model.LastModifiedDate)*@Last Modified Date</span>
+                    </div>
                 </li>
         </ul>
         <ul class="indexSelectableList">
@@ -54,8 +53,14 @@
             {
                 <li class="ui-widget-content clearfix" id="selectRow_@item.Id" style="cursor:pointer">
                     @Html.HiddenFor(modelItem => item.Id, new { @class = "id" })
+                    <div class="col-md-5">
+                        <span style="float:left">@Html.DisplayFor(modelItem => item.Name)</span>
+                    </div>
                     <div class="col-md-3">
-                        <span>@Html.DisplayFor(modelItem => item.Name)</span>
+                        <span>@Html.DisplayFor(modelItem => item.CreateDate)</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span>@Html.DisplayFor(modelItem => item.LastModifiedDate)</span>
                     </div>
                 </li>
             }

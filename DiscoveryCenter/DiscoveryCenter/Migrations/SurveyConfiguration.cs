@@ -313,84 +313,112 @@ namespace DiscoveryCenter.Migrations
                 new Exhibit() 
                 { 
                     Id=1,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
                     Name = "Fire Station"
 
                 },
                 new Exhibit() 
                 { 
                     Id=2,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
                     Name = "Widgets & Gadgets"
 
                 },
                 new Exhibit() 
                 { 
                     Id=3,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
                     Name = "Take Flight"
 
                 },
                 new Exhibit() 
                 { 
                     Id=4,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
                     Name = "Hospital"
 
                 },
                 new Exhibit() 
                 { 
                     Id=5,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
                     Name = "Dental"
 
                 },
                 new Exhibit() 
                 { 
                     Id=6,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
                     Name = "Power of Play"
 
                 },
                 new Exhibit() 
                 { 
                     Id=7,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
                     Name = "Weis Markets"
 
                 },
                 new Exhibit() 
                 { 
                     Id=8,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
                     Name = "Eco Kids"
 
                 },
                 new Exhibit() 
                 { 
                     Id=9,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
                     Name = "Music Alley"
 
                 },
                 new Exhibit() 
                 { 
                     Id=10,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
                     Name = "Chenango Canal Alley"
 
                 },
                 new Exhibit() 
                 { 
                     Id=11,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
                     Name = "Susquhanna Meets The Chesapeake"
 
                 },
                 new Exhibit() 
                 { 
                     Id=12,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
                     Name = "Studio 60"
 
                 },
                 new Exhibit() 
                 { 
                     Id=13,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
                     Name = "Action News"
 
                 },
                 new Exhibit() 
                 { 
                     Id=14,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
                     Name = "You've Got Game"
 
                 }
