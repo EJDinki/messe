@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Script.Serialization;
 
+
 namespace DiscoveryCenter.Models
 {
     public class Exhibit
@@ -21,5 +22,10 @@ namespace DiscoveryCenter.Models
 
         [Display(Name = "Last Modified Date")]
         public DateTime LastModifiedDate { get; set; }
+
+        public string ImageLocation { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase Image { get; set; }
     }
 }

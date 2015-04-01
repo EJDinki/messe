@@ -73,18 +73,19 @@ namespace DiscoveryCenter.Controllers
                             eM.Answer = "";
                             eM.Question = question.Text;
                             eM.Type = question.Type;
+
+                            
                             eM.MaxSelectedChoices = question.MaxSelectedChoices;
-                            eM.Choices = (from e in dbContext.Exhibits select e.Name).ToList();
+                            eM.Choices = new List<string>();
                             eM.Options = new List<Selection>();
 
-                            foreach(string choice in eM.Choices)
+                            foreach (Exhibit e in dbContext.Exhibits.ToList())
                             {
+                                eM.Choices.Add(e.Name);
                                 Selection select = new Selection();
                                 select.IsSelected = false;
-                                select.text = choice;
-                                // TODO Don't hardcode this
-                                select.image = "http://placekitten.com/g/64/64";
-
+                                select.text = e.Name;    
+                                select.image = e.ImageLocation;
                                 eM.Options.Add(select);
                             }
 

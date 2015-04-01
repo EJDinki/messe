@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DiscoveryCenter.Models;
+using System.IO;
 
 namespace DiscoveryCenter.Controllers
 {
@@ -46,12 +47,36 @@ namespace DiscoveryCenter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Exhibit exhibit)
+        public ActionResult Create([Bind(Include = "Id,Name,Image")] Exhibit exhibit)
         {
+            string imagePartial = "/Content/images/exhibits/";
+            string filename = null;
+
+            if(exhibit.Image != null)
+                filename = Path.GetFileName(exhibit.Image.FileName);
+            
+            //Save partial path to use as src
+            exhibit.ImageLocation = imagePartial + filename;
+
+            Exhibit existing = (from e in db.Exhibits where e.ImageLocation == exhibit.ImageLocation select e).FirstOrDefault();
+
+            if(existing != null && filename!=null)
+                ModelState.AddModelError("Image", "An image already exists with the file name chosen. Please rename this file or delete the previous.");
+
+            exhibit = (from e in db.Exhibits where e.Name == exhibit.Name select e).FirstOrDefault();
+
+            if (existing != null)
+                ModelState.AddModelError("Name", "An exhibt already exists with the name chosen. Please the exhibit.");
+            
             if (ModelState.IsValid)
             {
                 exhibit.CreateDate = DateTime.Now;
                 exhibit.LastModifiedDate = DateTime.Now;
+           
+                //Use full path to save to server
+                if(filename !=null)
+                    exhibit.Image.SaveAs(Path.Combine(Server.MapPath("~/Content/images/exhibits"), filename));
+                
                 db.Exhibits.Add(exhibit);
                 db.SaveChanges();
                 return RedirectToAction("Index");
