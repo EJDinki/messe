@@ -15,6 +15,8 @@ namespace DiscoveryCenter.Models
         [Required(ErrorMessage = "An exhibit name is required", AllowEmptyStrings = false)]
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public int Id { get; set; }
 
         [Display(Name = "Create Date")]
@@ -25,7 +27,12 @@ namespace DiscoveryCenter.Models
 
         public string ImageLocation { get; set; }
 
+        public string ShowcaseImageLocation { get; set; }
+
         [NotMapped]
         public HttpPostedFileBase Image { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ShowcaseImage { get; set; }
     }
 }

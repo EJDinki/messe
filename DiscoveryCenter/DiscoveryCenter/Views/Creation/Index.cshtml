@@ -83,7 +83,14 @@
                     <li><a class="btn btn-primary" href="?id=@(Model.Item3 - 1)"><</a></li>
                     for (int i = 0; i < Model.Item2; i++)
                     {
-                       <li><a class="btn btn-primary" href="?id=@i">@i</a></li>
+                       if (i != Model.Item3) 
+                        { 
+                            <li><a class="btn btn-primary" href="?id=@i">@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a class="btn btn-info" href="?id=@i">@i</a></li>
+                        }
                     }
                     <li><a class="btn btn-primary" href="?id=@(Model.Item3 + 1)">></a></li>
 }

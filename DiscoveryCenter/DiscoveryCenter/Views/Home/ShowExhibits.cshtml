@@ -1,0 +1,46 @@
+﻿@model List<DiscoveryCenter.Models.Exhibit>
+
+@{
+    ViewBag.Title = "Exhibit Page";
+    Layout = "~/Views/Shared/_SurveyLayout.cshtml";
+}
+
+
+
+    <!-- Left and right controls -->
+    <a id="pExhibit" class="left carousel-control pull-left " href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+        <span class="carousel-control-caption-prev">Previous</span>
+    </a>
+    <a id="nExhibit" class="right carousel-control pull-right" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+        <span class="carousel-control-caption-next">Next</span>
+    </a>
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            @for (int i = 0; i < @Model.Count(); i++)
+            {
+                string val = i == 0 ? "item active" : "item";
+                <div class="@val" id="slide_@i">
+
+                 <h1>@Model[i].Name</h1>
+                 <img src="@Model[i].ShowcaseImageLocation" />
+                 <p>@Model[i].Description</p>
+
+                </div>
+            }
+        </div>
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" class="active" style="cursor:default"></li>
+            @for (int i = 1; i < Model.Count(); i++)
+            {
+                <li data-target="#myCarousel" style="cursor:default"></li>
+            }
+        </ol>
+    </div>

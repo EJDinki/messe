@@ -15,6 +15,7 @@ namespace DiscoveryCenter.Controllers
     public class CreationController : Controller
     {
         private SurveyContext db = new SurveyContext();
+        private static readonly int surveyPerPage = 10;
 
         public PartialViewResult RefreshChoices(int typeIndex, string choices)
         {
@@ -69,7 +70,7 @@ namespace DiscoveryCenter.Controllers
         // GET: Creation
         public ActionResult Index(int id = 0)
         {
-            int numPages = (db.Surveys.Count() / 10) + 1;
+            int numPages = (db.Surveys.Count() / surveyPerPage) + 1;
 
             //Handle out of bounds cases
             if (id < 0)
@@ -77,7 +78,7 @@ namespace DiscoveryCenter.Controllers
             else if (id >= numPages)
                 id = numPages - 1;
 
-            var currentPageList = (from s in db.Surveys orderby s.Id select s).Skip(id * 10).Take(10).ToList();              
+            var currentPageList = (from s in db.Surveys orderby s.Name select s).Skip(id * surveyPerPage).Take(surveyPerPage).ToList();              
             Tuple<IEnumerable<Survey>, int, int> tuple = new Tuple<IEnumerable<Survey>, int, int>(currentPageList, numPages, id);
 
             return View(tuple);

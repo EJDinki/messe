@@ -23,8 +23,17 @@
                         @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                     </div>
                 </div>
+
                 <div class="form-group">
-                    <label for="file" class="control-label col-md-2">Upload Image</label>
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="file" class="control-label col-md-2">Upload Icon</label>
                     <div class="col-md-6">
                         <input type="file" name="Image" id="Image" style="width: 100%;" accept="image/*"/>
                         @Html.ValidationMessage("Image", new { @class = "text-danger" })                       
@@ -34,8 +43,16 @@
                         <label for="icon" class="control-label">Icon Preview</label>
                         <img id="icon" src="" height="64" width="64">
                     </div>
-
                 </div>
+
+                <div class="form-group">
+                    <label for="file" class="control-label col-md-2">Upload Showcase Image</label>
+                    <div class="col-md-6">
+                        <input type="file" name="ShowcaseImage" id="ShowcaseImage" style="width: 100%;" accept="image/*" />
+                        @Html.ValidationMessage("ShowcaseImage", new { @class = "text-danger" })
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Create" class="btn btn-default" />

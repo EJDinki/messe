@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DiscoveryCenter.Models.Exhibit>
+﻿@*Tuple<ExhibitList, TotalPages, CurrentIndex>*@
+@model Tuple<IEnumerable<DiscoveryCenter.Models.Exhibit>, int, int>
 
 @{
     ViewBag.Title = "Admin Console - Exhibits";
@@ -18,16 +19,10 @@
             </div>
             <div class="col-md-8 selection-buttons " style="padding-right:0px">
                 <div class="btn-group pull-right">
-                    <a id="editSurvey" class="btn btn-default" type="button" href="@Url.Action("Edit", "Exhibits", new { id = "" })">
+                    <a id="editExhibit" class="btn btn-default" type="button" href="@Url.Action("Edit", "Exhibits", new { id = "" })">
                         <span class="glyphicon glyphicon-edit"></span> Edit
                     </a>
-                    <a id="duplicateSurvey" class="btn btn-default" type="button" href="@Url.Action("Details", "Exhibits", new { id = "" })">
-                        <span class="glyphicon glyphicon-duplicate"></span> Details
-                    </a>
-                    <!--<a id="viewSurvey" class="btn btn-default" type="button" href="" @*@Url.Action("Index", "Home", new { id = "" })*@>
-                        <span class="glyphicon glyphicon-eye-open"></span> View Exhibit
-                    </a>-->
-                    <a id="deleteSurvey" class="btn btn-danger" type="button" href="@Url.Action("Delete", "Exhibits", new { id = ""})">
+                    <a id="deleteExhibit" class="btn btn-danger" type="button" href="@Url.Action("Delete", "Exhibits", new { id = ""})">
                         <span class="glyphicon glyphicon-remove"></span> Delete
                     </a>
                 </div>
@@ -37,24 +32,25 @@
         <ul>
                 <li class="header clearfix">
                     <div class="col-md-5">
-                        <span>@Html.DisplayNameFor(model => model.Name)</span>
+                        <span>Name</span>
                     </div>
                     <div class="col-md-3">
-                        <span>@*@Html.DisplayNameFor(model => model.CreateDate)*@Create Date</span>
+                        <span>Create Date</span>
                     </div>
                     <div class="col-md-4">
-                        <span>@*@Html.DisplayNameFor(model => model.LastModifiedDate)*@Last Modified Date</span>
+                        <span>Last Modified Date</span>
                     </div>
                 </li>
         </ul>
         <ul class="indexSelectableList">
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.Item1)
             {
                 <li class="ui-widget-content clearfix" id="selectRow_@item.Id" style="cursor:pointer">
                     @Html.HiddenFor(modelItem => item.Id, new { @class = "id" })
                     <div class="col-md-5">
-                        <span style="float:left">@Html.DisplayFor(modelItem => item.Name)</span>
+                        <img style="float:left" src="@item.ImageLocation" height="64" width="64">
+                        <span>@Html.DisplayFor(modelItem => item.Name)</span>
                     </div>
                     <div class="col-md-3">
                         <span>@Html.DisplayFor(modelItem => item.CreateDate)</span>
@@ -65,6 +61,26 @@
                 </li>
             }
         </ul>
+
+        <center>
+            <ul class="list-inline">
+                @{
+                    <li><a class="btn btn-primary" href="?id=@(Model.Item3 - 1)"><</a></li>
+                    for (int i = 0; i < Model.Item2; i++)
+                    {
+                        if (i != Model.Item3) 
+                        { 
+                            <li><a class="btn btn-primary" href="?id=@i">@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a class="btn btn-info" href="?id=@i">@i</a></li>
+                        }
+                    }
+                    <li><a class="btn btn-primary" href="?id=@(Model.Item3 + 1)">></a></li>
+                }
+            </ul>
+        </center>
     </div>
 </div>
 

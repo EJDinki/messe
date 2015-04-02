@@ -16,26 +16,23 @@ namespace DiscoveryCenter.Controllers
     {
         private SurveyContext db = new SurveyContext();
         private static readonly string exhibitImagePartial = "/Content/images/exhibits/";
+        private static readonly int exhibitsPerPage = 8;
 
         // GET: Exhibits
-        public ActionResult Index()
+        public ActionResult Index(int id = 0)
         {
-            return View(db.Exhibits.ToList());
-        }
+            int numPages = (db.Exhibits.Count() / exhibitsPerPage) + 1;
 
-        // GET: Exhibits/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Exhibit exhibit = db.Exhibits.Find(id);
-            if (exhibit == null)
-            {
-                return HttpNotFound();
-            }
-            return View(exhibit);
+            //Handle out of bounds cases
+            if (id < 0)
+                id = 0;
+            else if (id >= numPages)
+                id = numPages - 1;
+
+            var currentPageList = (from s in db.Exhibits orderby s.Name select s).Skip(id * exhibitsPerPage).Take(exhibitsPerPage).ToList();
+            Tuple<IEnumerable<Exhibit>, int, int> tuple = new Tuple<IEnumerable<Exhibit>, int, int>(currentPageList, numPages, id);
+
+            return View(tuple);
         }
 
         // GET: Exhibits/Create
@@ -49,12 +46,15 @@ namespace DiscoveryCenter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Image")] Exhibit exhibit)
+        public ActionResult Create(Exhibit exhibit)
         {
 
 
             if (exhibit.Image != null)
                 exhibit.ImageLocation = exhibitImagePartial + Path.GetFileName(exhibit.Image.FileName);
+
+            if (exhibit.ShowcaseImage != null)
+                exhibit.ShowcaseImageLocation = exhibitImagePartial + Path.GetFileName(exhibit.ShowcaseImage.FileName);
 
             if (!ValidateExhibit(exhibit))
                 return View(exhibit);
@@ -65,6 +65,9 @@ namespace DiscoveryCenter.Controllers
             //Use full path to save to server
             if(exhibit.ImageLocation !=null)
                 exhibit.Image.SaveAs(Path.Combine(Server.MapPath("~/Content/images/exhibits"), Path.GetFileName(exhibit.Image.FileName)));
+
+            if (exhibit.ShowcaseImageLocation != null)
+                exhibit.ShowcaseImage.SaveAs(Path.Combine(Server.MapPath("~/Content/images/exhibits"), Path.GetFileName(exhibit.ShowcaseImage.FileName)));
                 
             db.Exhibits.Add(exhibit);
             db.SaveChanges();
@@ -96,6 +99,10 @@ namespace DiscoveryCenter.Controllers
             if (exhibit.Image != null)
                 exhibit.ImageLocation = exhibitImagePartial + Path.GetFileName(exhibit.Image.FileName);
 
+            if (exhibit.ShowcaseImage != null)
+                exhibit.ShowcaseImageLocation = exhibitImagePartial + Path.GetFileName(exhibit.ShowcaseImage.FileName);
+                
+
             if (!ValidateExhibit(exhibit, true))
             {
                 return View(exhibit);
@@ -104,6 +111,9 @@ namespace DiscoveryCenter.Controllers
             if(exhibit.Image != null)
                 exhibit.Image.SaveAs(Path.Combine(Server.MapPath("~/Content/images/exhibits"), Path.GetFileName(exhibit.Image.FileName)));
 
+            if (exhibit.ShowcaseImageLocation != null)
+                exhibit.ShowcaseImage.SaveAs(Path.Combine(Server.MapPath("~/Content/images/exhibits"), Path.GetFileName(exhibit.ShowcaseImage.FileName)));
+              
             exhibit.LastModifiedDate = DateTime.Now;
             db.Entry(exhibit).State = EntityState.Modified;
             db.SaveChanges();
@@ -169,7 +179,8 @@ namespace DiscoveryCenter.Controllers
                 passed = false;
             }
 
-            existing = (from e in db.Exhibits where e.Name == ex.Name select e).FirstOrDefault();
+            if (!isEdit)
+                existing = (from e in db.Exhibits where e.Name == ex.Name select e).FirstOrDefault();
 
             if (existing != null)
             {
