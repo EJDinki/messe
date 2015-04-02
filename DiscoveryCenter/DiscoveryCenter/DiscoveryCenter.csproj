@@ -183,6 +183,7 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\Exhibit.cs" />
+    <Compile Include="Models\Choice.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Submission.cs" />
     <Compile Include="Models\Survey.cs" />
@@ -305,8 +306,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\images\choiceImage\" />
     <Folder Include="Content\images\exhibits\" />
-    <Folder Include="Content\images\theme\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

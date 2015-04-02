@@ -1,10 +1,22 @@
 ﻿@model DiscoveryCenter.Models.ChoiceBoxViewModel
 
+@{
+    var item = Model.AvailableImages.Where(m => m.Value == Model.ImageName).FirstOrDefault();
 
+    if (item != null) 
+    { 
+        item.Selected = true;
+    }
+}
 <div class="clearfix Choice" style="margin-bottom:5px;">
     <div class="col-md-9">
         @Html.TextBox(Model.NameAndId, Model.Value, new { @class = "form-control" })
     </div>
+
+    <div class="col-md-9">
+        @Html.DropDownList(Model.ImgChoiceId, Model.AvailableImages, new { @class = "form-control" })
+    </div>
+
     @if(Model.AllowDelete)
     { 
         <button id="deleteChoice" type="button" class="btn btn-danger" onclick="DeleteChoice(this)"><span class="glyphicon glyphicon-remove-sign"></span></button>

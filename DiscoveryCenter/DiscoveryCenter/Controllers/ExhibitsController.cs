@@ -64,10 +64,10 @@ namespace DiscoveryCenter.Controllers
 
             //Use full path to save to server
             if(exhibit.ImageLocation !=null)
-                exhibit.Image.SaveAs(Path.Combine(Server.MapPath("~/Content/images/exhibits"), Path.GetFileName(exhibit.Image.FileName)));
+                exhibit.Image.SaveAs(Path.Combine(Server.MapPath("~"+exhibitImagePartial), Path.GetFileName(exhibit.Image.FileName)));
 
             if (exhibit.ShowcaseImageLocation != null)
-                exhibit.ShowcaseImage.SaveAs(Path.Combine(Server.MapPath("~/Content/images/exhibits"), Path.GetFileName(exhibit.ShowcaseImage.FileName)));
+                exhibit.ShowcaseImage.SaveAs(Path.Combine(Server.MapPath("~" + exhibitImagePartial), Path.GetFileName(exhibit.ShowcaseImage.FileName)));
                 
             db.Exhibits.Add(exhibit);
             db.SaveChanges();
@@ -109,10 +109,10 @@ namespace DiscoveryCenter.Controllers
             }
             
             if(exhibit.Image != null)
-                exhibit.Image.SaveAs(Path.Combine(Server.MapPath("~/Content/images/exhibits"), Path.GetFileName(exhibit.Image.FileName)));
+                exhibit.Image.SaveAs(Path.Combine(Server.MapPath("~" + exhibitImagePartial), Path.GetFileName(exhibit.Image.FileName)));
 
             if (exhibit.ShowcaseImageLocation != null)
-                exhibit.ShowcaseImage.SaveAs(Path.Combine(Server.MapPath("~/Content/images/exhibits"), Path.GetFileName(exhibit.ShowcaseImage.FileName)));
+                exhibit.ShowcaseImage.SaveAs(Path.Combine(Server.MapPath("~" + exhibitImagePartial), Path.GetFileName(exhibit.ShowcaseImage.FileName)));
               
             exhibit.LastModifiedDate = DateTime.Now;
             db.Entry(exhibit).State = EntityState.Modified;

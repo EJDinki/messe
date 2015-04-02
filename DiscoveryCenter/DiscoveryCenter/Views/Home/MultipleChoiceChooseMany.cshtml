@@ -3,9 +3,9 @@
     @for (int z = 0; z < @Model.Choices.Count; z++)
     {
         <div class="checkbox">
-            @Html.Hidden(String.Format("{0}_Options[{1}].text", Model.QuestionId, z), Model.Options[z].text)
+            @Html.Hidden(String.Format("{0}_Options[{1}].text", Model.QuestionId, z), Model.Choices[z].Text)
             <label>
-                @Html.CheckBox(String.Format("{0}_Options[{1}].IsSelected", Model.QuestionId, z), Model.Options[z].IsSelected,
+                @Html.CheckBox(String.Format("{0}_Options[{1}].IsSelected", Model.QuestionId, z), Model.Choices[z].IsSelected,
                 new { onclick = "limitChecked(this, " + Model.MaxSelectedChoices + ");" })
                 @Model.Choices[z]
             </label>

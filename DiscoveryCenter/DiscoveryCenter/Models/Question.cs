@@ -12,8 +12,9 @@ namespace DiscoveryCenter.Models
     {
         public Question()
         {
-            Choices = "";
+            Choices = new List<Choice>();
         }
+
         public enum QuestionType
         {
             MultipleChoiceChooseOne = 0,
@@ -37,14 +38,13 @@ namespace DiscoveryCenter.Models
         [ScriptIgnore]
         public Survey ParentSurvey { get; set; }
 
-        [Required(AllowEmptyStrings=true)]
-        public string Choices { get; set; }
-
         [Display(Name="Max Number of Choice Selections")]
         public int MaxSelectedChoices { get; set; }
 
         [ScriptIgnore]
         public virtual List<Answer> Answers { get; set; }
+
+        public virtual List<Choice> Choices { get; set; }
 
         public int IndexInSurvey { get; set; }
     }

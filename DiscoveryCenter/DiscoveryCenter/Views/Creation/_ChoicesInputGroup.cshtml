@@ -3,24 +3,7 @@
 
 @{
     string guid = Guid.NewGuid().ToString();
-    string[] choices;
     bool allowDelete = true;
-    if(!String.IsNullOrEmpty(Model.Choices))
-    {
-        choices = Model.Choices.Split(';');
-        if (Model.Type == Question.QuestionType.Slider)
-        {
-            choices = choices.Take(3).ToArray();
-        }
-    }
-    else if(Model.Type == Question.QuestionType.Slider)
-    {
-        choices = new string[] { "", "", ""};
-    }
-    else
-    {
-        choices = new string[] { "" };
-    }
     
     if(Model.Type == Question.QuestionType.Slider)
     {
@@ -48,7 +31,16 @@
             item.Selected = true;
         }
         maxSelectedChoicesList.Add(item);
-    }    
+    }
+
+    List<SelectListItem> storedImageNames = new List<SelectListItem>();
+    storedImageNames.Add(new SelectListItem() { Text = "None", Value = "" });
+
+    foreach (string image in Directory.GetFiles(Server.MapPath("~/Content/images/choiceImage")))
+    {
+        string val = "/Content/images/choiceImage/" + Path.GetFileName(image);
+        storedImageNames.Add(new SelectListItem() { Text = Path.GetFileName(image), Value = val});
+    } 
 }
 
 @if (Model.Type == Question.QuestionType.MultipleChoiceChooseMany || Model.Type == Question.QuestionType.ExhibitsChooseMany)
@@ -69,12 +61,15 @@
         @Html.LabelFor(m => m.Choices, new { @class = "col-md-3 control-label" })
         <div class="col-md-9" style="padding-left:0px">
             <div class="AppendChoices">
-                @for (int i = 0; i < choices.Length; i++)
+                @for (int i = 0; i < Model.Choices.Count; i++)
                 {
                     @Html.Partial("_ChoiceBox", new ChoiceBoxViewModel()
             {
                 NameAndId = String.Format("Questions[{0}].Choice[{1}]", guid, i),
-                Value = choices[i],
+                ImgChoiceId = String.Format("Questions[{0}].Img[{1}]", guid, i),
+                Value = Model.Choices[i].Text,
+                ImageName = Model.Choices[i].ImageName,
+                AvailableImages = storedImageNames,
                 AllowDelete = allowDelete
             })
                 }

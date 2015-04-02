@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DiscoveryCenter.Models;
 using System.Drawing;
+using System.IO;
 
 namespace DiscoveryCenter.Controllers
 {
@@ -16,17 +17,32 @@ namespace DiscoveryCenter.Controllers
     {
         private SurveyContext db = new SurveyContext();
         private static readonly int surveyPerPage = 10;
+        private static readonly string choiceImagePartial = "/Content/images/choiceImage/";
 
         public PartialViewResult RefreshChoices(int typeIndex, string choices)
         {
-            return PartialView("_ChoicesInputGroup", new Question() { Type = (Question.QuestionType)typeIndex, Choices = choices });
+            throw new NotImplementedException();
+            //return PartialView("_ChoicesInputGroup", new Question() { Type = (Question.QuestionType)typeIndex, Choices = choices });
         }
 
-        public PartialViewResult BlankChoiceBox(string value, bool allowDelete)
+        public PartialViewResult BlankChoiceBox(string value, string imageName ,bool allowDelete)
         {
             string guid = Guid.NewGuid().ToString();
             string nameAndId = String.Format("Questions[{0}].Choice[{1}]", guid, guid);
-            return PartialView("_ChoiceBox", new ChoiceBoxViewModel() { NameAndId = nameAndId, Value = value, AllowDelete = allowDelete });
+
+            List<SelectListItem> storedImageNames = new List<SelectListItem>();
+            storedImageNames.Add(new SelectListItem() { Text = "None", Value = "" });
+
+            foreach(string image in Directory.GetFiles(Server.MapPath("~"+choiceImagePartial)))
+            {
+                storedImageNames.Add(new SelectListItem() { Text = Path.GetFileName(image), Value = choiceImagePartial + Path.GetFileName(image) });
+            }
+
+            return PartialView("_ChoiceBox", new ChoiceBoxViewModel() { 
+                NameAndId = nameAndId, 
+                Value = value,
+                AvailableImages=storedImageNames ,
+                AllowDelete = allowDelete });
         }
 
         public ActionResult Duplicate(int id)
@@ -178,9 +194,9 @@ namespace DiscoveryCenter.Controllers
                     question.Type != Question.QuestionType.ExhibitsChooseMany &&
                     question.Type != Question.QuestionType.Spinner)
                 {
-                    var choices = question.Choices.Split(';');
-                    for (int i = 0; i < choices.Length; i++)
-                        if (String.IsNullOrWhiteSpace(choices[i]))
+                    var choices = question.Choices;
+                    for (int i = 0; i < choices.Count; i++)
+                        if (String.IsNullOrWhiteSpace(choices[i].Text))
                         {
                             ModelState.AddModelError(String.Format("Questions[{0}].Choices", question.IndexInSurvey, i),
                                 String.Format("Choice {0} for question {1} is blank.", i+1, question.IndexInSurvey));
@@ -222,7 +238,12 @@ namespace DiscoveryCenter.Controllers
                     {
                         q.Text = match.Text;
                         q.Type = match.Type;
-                        q.Choices = match.Choices;
+                        q.Choices = new List<Choice>();
+                        for(int i=0; i < match.Choices.Count; i++)
+                        {
+                            q.Choices[i].Text = match.Choices[i].Text;
+                            q.Choices[i].ImageName = match.Choices[i].ImageName;
+                        }
                         q.MaxSelectedChoices = match.MaxSelectedChoices;
                         q.IndexInSurvey = match.IndexInSurvey;
                     }

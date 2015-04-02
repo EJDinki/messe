@@ -19,24 +19,15 @@ namespace DiscoveryCenter.Models
 
     public class MultipleChoiceViewModel : QuestionViewModel
     {
-        public List<String> Choices { get; set; }    
+        public List<Choice> Choices { get; set; }    
     }
 
     public class MultipleSelectViewModel : MultipleChoiceViewModel
     {
         public int MaxSelectedChoices { get; set; }
-        public List<Selection> Options { get; set; }
     }
 
-    public class SliderViewModel : QuestionViewModel
+    public class SliderViewModel : MultipleChoiceViewModel
     {
-        public List<String> Choices { get; set; }
-    }
-
-    public class Selection
-    {
-        public bool IsSelected;
-        public string text;
-        public string image;
     }
 }

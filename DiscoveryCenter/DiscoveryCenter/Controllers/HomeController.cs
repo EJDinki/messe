@@ -45,19 +45,8 @@ namespace DiscoveryCenter.Controllers
                             mS.Answer = "";
                             mS.Question = question.Text;
                             mS.Type = question.Type;
-                            mS.Choices = question.Choices.Split(';').ToList();
+                            mS.Choices = question.Choices;
                             mS.MaxSelectedChoices = question.MaxSelectedChoices;
-                            mS.Options = new List<Selection>();
-
-                            foreach(string choice in mS.Choices)
-                            {
-                                Selection select = new Selection();
-                                select.IsSelected = false;
-                                select.text = choice;
-
-                                mS.Options.Add(select);
-                            }
-
                             model.QuestionModels.Add(mS);
                             break;
                         case (Question.QuestionType.Slider):
@@ -66,7 +55,7 @@ namespace DiscoveryCenter.Controllers
                             s.Answer = "";
                             s.Question = question.Text;
                             s.Type = question.Type;
-                            s.Choices = question.Choices.Split(';').ToList();
+                            s.Choices = question.Choices;
                             model.QuestionModels.Add(s);
                             break;
                         case(Question.QuestionType.MultipleChoiceChooseOne):
@@ -75,7 +64,7 @@ namespace DiscoveryCenter.Controllers
                             mC.Answer = "";
                             mC.Question = question.Text;
                             mC.Type = question.Type;
-                            mC.Choices = question.Choices.Split(';').ToList();
+                            mC.Choices = question.Choices;
                             model.QuestionModels.Add(mC);
                             break;
                         case(Question.QuestionType.ExhibitsChooseMany):
@@ -83,21 +72,13 @@ namespace DiscoveryCenter.Controllers
                             eM.QuestionId = question.Id;
                             eM.Answer = "";
                             eM.Question = question.Text;
-                            eM.Type = question.Type;
-
-                            
+                            eM.Type = question.Type;                       
                             eM.MaxSelectedChoices = question.MaxSelectedChoices;
-                            eM.Choices = new List<string>();
-                            eM.Options = new List<Selection>();
+                            eM.Choices = new List<Choice>();
 
-                            foreach (Exhibit e in dbContext.Exhibits.ToList())
+                            foreach (Exhibit ex in dbContext.Exhibits)
                             {
-                                eM.Choices.Add(e.Name);
-                                Selection select = new Selection();
-                                select.IsSelected = false;
-                                select.text = e.Name;    
-                                select.image = e.ImageLocation;
-                                eM.Options.Add(select);
+                                eM.Choices.Add(new Choice() { Text = ex.Name, ImageName = ex.ImageLocation });
                             }
 
                             model.QuestionModels.Add(eM);
@@ -131,9 +112,9 @@ namespace DiscoveryCenter.Controllers
                     Answer answer;
                     if (qmodel is MultipleSelectViewModel)
                     {
-                        foreach (var selection in ((MultipleSelectViewModel)qmodel).Options.Where(c => c.IsSelected))
+                        foreach (var selection in ((MultipleSelectViewModel)qmodel).Choices.Where(c => c.IsSelected))
                         {
-                            answer = new Answer() { QuestionId = qmodel.QuestionId, Value = selection.text, Submission = submission };
+                            answer = new Answer() { QuestionId = qmodel.QuestionId, Value = selection.Text, Submission = submission };
                             db.Answers.Add(answer);
                         }
                     }

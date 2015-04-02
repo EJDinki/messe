@@ -40,13 +40,9 @@ namespace DiscoveryCenter.Models
             int themeId = Convert.ToInt32(request.Form.Get("Survey.ThemeId"));
             List<Question> questions = new List<Question>();
 
-            //string question = "";
-            //int questionId = -1;
-            //string choices = "";
-            //int indexInSurvey = 0;
-
             Question question = null;
-            List<string> choices = new List<string>();
+            Choice currentChoice = null;
+            List<Choice> choices = new List<Choice>();
 
             foreach (string key in request.Form.Keys)
             {
@@ -55,12 +51,13 @@ namespace DiscoveryCenter.Models
                 {
                     if(question != null)
                     {
-                        if (choices.Any() && String.IsNullOrWhiteSpace(question.Choices))
-                            question.Choices = String.Join(";", choices);
+                        //if (choices.Any() && String.IsNullOrWhiteSpace(question.Choices))
+                        //    question.Choices = String.Join(";", choices);
+                        question.Choices = choices;
                         questions.Add(question);
                     }
                     question = new Question();
-                    choices = new List<string>();
+                    choices = new List<Choice>();
                     question.Id = Convert.ToInt32(request.Form.Get(key));
                 }
                 else if (key.Contains(".Text"))
@@ -69,12 +66,13 @@ namespace DiscoveryCenter.Models
                     {
                         if (question != null)
                         {
-                            if (choices.Any() && String.IsNullOrWhiteSpace(question.Choices))
-                                question.Choices = String.Join(";", choices);
+                            //if (choices.Any() && String.IsNullOrWhiteSpace(question.Choices))
+                            //    question.Choices = String.Join(";", choices);
+
                             questions.Add(question);
                         }
                         question = new Question();
-                        choices = new List<string>();
+                        choices = new List<Choice>();
                     }
                     question.Text = request.Form.Get(key);
                 }
@@ -92,18 +90,27 @@ namespace DiscoveryCenter.Models
                 }
                 else if(key.Contains(".Choice"))
                 {
-                    choices.Add(request.Form.Get(key));
+                    currentChoice = new Choice(){Text=request.Form.Get(key), IsSelected=false, ParentQuestion=question};
+                    
+                    
+                }
+                else if (key.Contains(".Img"))
+                {
+                    currentChoice.ImageName = request.Form.Get(key);
+                    choices.Add(currentChoice);
                 }
                 else if (key.Contains(".Choices"))
                 {
-                    question.Choices = request.Form.Get(key);
+                    Console.WriteLine(request.Form.Get(key));
+                    //question.Choices = request.Form.Get(key);
                 } 
             }
 
             if (question != null && question.Text != null)
             {
-                if (choices.Any() && String.IsNullOrWhiteSpace(question.Choices))
-                    question.Choices = String.Join(";", choices);
+                //if (choices.Any() && String.IsNullOrWhiteSpace(question.Choices))
+                //    question.Choices = String.Join(";", choices);
+                question.Choices = choices;
                 questions.Add(question);
             }
 
@@ -129,11 +136,11 @@ namespace DiscoveryCenter.Models
             string question = "";
             int questionId = -1;
             string ans = "";
-            List<Selection> options = new List<Selection>();
             bool isSelected = false;
             string selectionText = "";
             Question.QuestionType type;
             QuestionViewModel model;
+            List<Choice> qChoices = null;
 
             foreach (string key in request.Form.Keys)
             {
@@ -144,7 +151,6 @@ namespace DiscoveryCenter.Models
                 }
                 else if (key.Contains(".Question"))
                 {
-                    options = new List<Selection>();
                     question = request.Form.Get(key);
                 }
                 else if (key.Contains(".Answer"))
@@ -158,10 +164,6 @@ namespace DiscoveryCenter.Models
                 else if (key.Contains(".IsSelected"))
                 {
                     isSelected = Boolean.Parse(request.Form.Get(key).Split(',')[0]);
-                    Selection select = new Selection();
-                    select.text = selectionText;
-                    select.IsSelected = isSelected;
-                    options.Add(select);
                 }
                 else if (key.Contains(".Type"))
                 {
@@ -174,7 +176,6 @@ namespace DiscoveryCenter.Models
                             model.QuestionId = questionId;
                             model.Type = type;
                             model.Answer = "";
-                            ((MultipleSelectViewModel)model).Options = options;
                             models.Add(model);
                             break;
                         default:

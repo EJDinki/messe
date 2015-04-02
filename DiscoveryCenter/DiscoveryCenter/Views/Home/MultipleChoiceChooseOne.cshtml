@@ -1,11 +1,16 @@
 ﻿@model DiscoveryCenter.Models.MultipleChoiceViewModel
 @for(int z = 0; z < @Model.Choices.Count; z++)
 {
+    string buttonId = String.Format("QuestionModels[{0}].Answer[{1}]", Model.QuestionId,Model.Choices[z].Id);
     <div class="radio">
         <label>
-            @Html.RadioButton(String.Format("QuestionModels[{0}].Answer", Model.QuestionId), @Model.Choices[z])
-            @Model.Choices[z]
+            @Html.RadioButton(String.Format("QuestionModels[{0}].Answer",Model.QuestionId), @Model.Choices[z].Text, false, new {id=buttonId})
+            @Model.Choices[z].Text
         </label>
+        @if (Model.Choices[z].ImageName != "" && Model.Choices[z].ImageName != null)
+        {
+            <img onclick="getElementById('@buttonId').checked=true;"class="col-md-offset-2" src="@Model.Choices[z].ImageName" height="128" width="128">
+        }
         <br />
     </div>
 }
