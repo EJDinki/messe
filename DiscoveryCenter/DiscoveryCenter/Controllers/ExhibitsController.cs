@@ -8,12 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using DiscoveryCenter.Models;
 using System.IO;
+using System.Drawing;
 
 namespace DiscoveryCenter.Controllers
 {
     public class ExhibitsController : Controller
     {
         private SurveyContext db = new SurveyContext();
+        private static readonly string exhibitImagePartial = "/Content/images/exhibits/";
 
         // GET: Exhibits
         public ActionResult Index()
@@ -49,40 +51,24 @@ namespace DiscoveryCenter.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Image")] Exhibit exhibit)
         {
-            string imagePartial = "/Content/images/exhibits/";
-            string filename = null;
 
-            if(exhibit.Image != null)
-                filename = Path.GetFileName(exhibit.Image.FileName);
-            
-            //Save partial path to use as src
-            exhibit.ImageLocation = imagePartial + filename;
 
-            Exhibit existing = (from e in db.Exhibits where e.ImageLocation == exhibit.ImageLocation select e).FirstOrDefault();
+            if (exhibit.Image != null)
+                exhibit.ImageLocation = exhibitImagePartial + Path.GetFileName(exhibit.Image.FileName);
 
-            if(existing != null && filename!=null)
-                ModelState.AddModelError("Image", "An image already exists with the file name chosen. Please rename this file or delete the previous.");
+            if (!ValidateExhibit(exhibit))
+                return View(exhibit);
 
-            exhibit = (from e in db.Exhibits where e.Name == exhibit.Name select e).FirstOrDefault();
+            exhibit.CreateDate = DateTime.Now;
+            exhibit.LastModifiedDate = DateTime.Now;
 
-            if (existing != null)
-                ModelState.AddModelError("Name", "An exhibt already exists with the name chosen. Please the exhibit.");
-            
-            if (ModelState.IsValid)
-            {
-                exhibit.CreateDate = DateTime.Now;
-                exhibit.LastModifiedDate = DateTime.Now;
-           
-                //Use full path to save to server
-                if(filename !=null)
-                    exhibit.Image.SaveAs(Path.Combine(Server.MapPath("~/Content/images/exhibits"), filename));
+            //Use full path to save to server
+            if(exhibit.ImageLocation !=null)
+                exhibit.Image.SaveAs(Path.Combine(Server.MapPath("~/Content/images/exhibits"), Path.GetFileName(exhibit.Image.FileName)));
                 
-                db.Exhibits.Add(exhibit);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(exhibit);
+            db.Exhibits.Add(exhibit);
+            db.SaveChanges();
+            return RedirectToAction("Index");    
         }
 
         // GET: Exhibits/Edit/5
@@ -105,15 +91,25 @@ namespace DiscoveryCenter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Exhibit exhibit)
+        public ActionResult Edit(Exhibit exhibit)
         {
-            if (ModelState.IsValid)
+            if (exhibit.Image != null)
+                exhibit.ImageLocation = exhibitImagePartial + Path.GetFileName(exhibit.Image.FileName);
+
+            if (!ValidateExhibit(exhibit, true))
             {
-                db.Entry(exhibit).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return View(exhibit);
             }
-            return View(exhibit);
+            
+            if(exhibit.Image != null)
+                exhibit.Image.SaveAs(Path.Combine(Server.MapPath("~/Content/images/exhibits"), Path.GetFileName(exhibit.Image.FileName)));
+
+            exhibit.LastModifiedDate = DateTime.Now;
+            db.Entry(exhibit).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
+  
         }
 
         // GET: Exhibits/Delete/5
@@ -140,6 +136,48 @@ namespace DiscoveryCenter.Controllers
             db.Exhibits.Remove(exhibit);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private bool ValidateExhibit(Exhibit ex, bool isEdit = false)
+        {
+            string filename = null;
+            bool passed = true;
+
+            if (ex.Image != null)
+            {
+                filename = Path.GetFileName(ex.Image.FileName);
+
+                try
+                {
+                    Image.FromStream(ex.Image.InputStream);
+                }
+                catch
+                {
+                    ModelState.AddModelError("Image", "The file uploaded was not a valid image format.");
+                    passed = false;
+                }
+            }
+
+            Exhibit existing = null;
+            
+            if(!isEdit)
+                existing = (from e in db.Exhibits where e.ImageLocation == ex.ImageLocation select e).FirstOrDefault();
+
+            if (existing != null && ex.ImageLocation != null)
+            {
+                ModelState.AddModelError("Image", "An image already exists with the file name chosen. Please rename this file or delete the previous.");
+                passed = false;
+            }
+
+            existing = (from e in db.Exhibits where e.Name == ex.Name select e).FirstOrDefault();
+
+            if (existing != null)
+            {
+                ModelState.AddModelError("Name", "An exhibt already exists with the name chosen. Please the exhibit.");
+                passed = false;
+            }
+
+            return passed;
         }
 
         protected override void Dispose(bool disposing)
