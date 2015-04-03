@@ -153,6 +153,7 @@ namespace DiscoveryCenter.Controllers
             foreach (var question in survey.Questions.OrderBy(q => q.IndexInSurvey))
             {
                 // TODO handle exhibits better or make exhibits save name instead of ID
+                builder.Append("------------------------------\n");
                 builder.Append("Question Number: " + question.IndexInSurvey + "\n");
                 builder.Append("Question Type: " + question.Type + "\n");
                 builder.Append("\"Question Text: " + question.Text + "\"\n");
@@ -167,19 +168,22 @@ namespace DiscoveryCenter.Controllers
                         case Question.QuestionType.MultipleChoiceChooseMany:
                         case Question.QuestionType.MultipleChoiceChooseOne:
                         case Question.QuestionType.Slider:
-                            builder.Append("\"Question Choices (At Time of Export): " + question.Choices + "\"\n");
+                            ConvertChoicesToCSV(question, builder);
                             goto case Question.QuestionType.ExhibitsChooseMany;
                         case Question.QuestionType.ExhibitsChooseMany:
+                            builder.Append("\n");
+                            builder.Append("Summarized Data Below\n");
                             if (useDates)
                                 ConvertAnswersToCondensedCSV(question, builder, startDate.Value, endDate.Value);
                             else
                                 ConvertAnswersToCondensedCSV(question, builder);
-                            builder.Append("\n");
                             goto default;
                         case Question.QuestionType.Spinner:
                         case Question.QuestionType.ShortAnswer:
                         default:
                             if (exportRawData)
+                                builder.Append("\n");
+                                builder.Append("Raw Data Below\n");
                                 if (useDates)
                                     ConvertAnswersToCSV(question, builder, startDate.Value, endDate.Value);
                                 else
@@ -232,7 +236,6 @@ namespace DiscoveryCenter.Controllers
 
         private void ConvertAnswersToCSV(Question question, StringBuilder builder)
         {
-            builder.Append("Raw Data Below\n");
             builder.Append("Date,Answer\n");
             foreach (var answer in question.Answers)
             {
@@ -242,7 +245,6 @@ namespace DiscoveryCenter.Controllers
         }
         private void ConvertAnswersToCSV(Question question, StringBuilder builder, DateTime startDate, DateTime endDate)
         {
-            builder.Append("Raw Data Below\n");
             builder.Append("Date,Answer\n");
             foreach (var answer in question.Answers)
             {
@@ -252,6 +254,16 @@ namespace DiscoveryCenter.Controllers
                     builder.Append("\"" + answer.Value + "\"\n");
                 }
             }
+        }
+        private void ConvertChoicesToCSV(Question question, StringBuilder builder)
+        {
+            String choices = "";
+            foreach (var choice in question.Choices)
+            {
+                if (choices != "") choices = choices + ",";
+                choices = choices + "\"" + choice.Text + "\"" ;
+            }
+            builder.Append("Question Choices (At Time of Export):," + choices + "\n");
         }
 
         private int CalcNumSubmissions(Survey survey, DateTime startDate, DateTime endDate)
