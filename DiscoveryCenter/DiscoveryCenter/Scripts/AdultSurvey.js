@@ -1,1 +1,1 @@
-﻿console.log("Adult:its working");
+console.log("Adult:its working");

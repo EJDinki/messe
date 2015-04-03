@@ -5,9 +5,12 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@using (Html.BeginForm("Edit", "Creation", FormMethod.Post, new {@class="clearfix"}))
+@using (Html.BeginForm("Edit", "Theme", FormMethod.Post, new { @class = "clearfix" }))
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Theme.Id);
+    @Html.HiddenFor(model => model.Theme.CssFileName);
+    @Html.HiddenFor(model => model.Theme.JsFileName);
     <br />
     <div class="col-md-offset-3 col-md-6 panel panel-body">
         <div class="col-md-2"><h4 class="pull-right">Theme Name</h4></div>
@@ -36,9 +39,18 @@
     <div class="col-md-7 panel text-center">
         <h3>Preview</h3>
         <div class="panel " style="height: 70vh; position:relative">
-            <iframe class="preview" style="height:100%; width:100%" src="/Theme/Preview/@Model.Theme.Id"></iframe>
-            <div id="iframeBlocker" style="position: absolute; top: 0; left: 0; right:0; bottom:0; padding:5%; text-align:center">
+            @if (Model.Theme.CssFileName != null && Model.Theme.JsFileName != null)
+            {
+                <iframe class="preview" style="height:100%; width:100%" src="/Theme/Preview/@Model.Theme.Id"></iframe>
+                <div id="iframeBlocker" style="position: absolute; top: 0; left: 0; right:0; bottom:0; padding:5%; text-align:center">
             </div>
+            }
+            else
+            {
+                <div id="iframeBlocker" style="position: absolute; top: 0; left: 0; right:0; bottom:0; padding:5%; text-align:center; opacity: .7; background-color:black">
+                    <h3 style="color:white;">Save the theme to generate a preview</h3>
+                </div>
+            }
         </div>
     </div>
 }

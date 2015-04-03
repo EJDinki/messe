@@ -58,9 +58,6 @@ namespace DiscoveryCenter.Controllers
                 themeVM.Theme.CssFileName = System.IO.Path.GetRandomFileName() + ".css";
 
             cssPath = Server.MapPath(@"~/Content/" + themeVM.Theme.CssFileName);
-
-            if (System.IO.File.Exists(cssPath))
-                System.IO.File.Create(cssPath);
             System.IO.File.WriteAllText(cssPath, themeVM.CssText);
 
             //JS
@@ -68,19 +65,21 @@ namespace DiscoveryCenter.Controllers
                 themeVM.Theme.JsFileName = System.IO.Path.GetRandomFileName() + ".js";
                 
             jsPath = Server.MapPath(@"~/Scripts/" + themeVM.Theme.JsFileName);
-
-            if (System.IO.File.Exists(jsPath))
-                System.IO.File.Create(jsPath);
             System.IO.File.WriteAllText(jsPath, themeVM.JsText);
 
             //update record
-            Theme theme = db.Themes.FirstOrDefault(t => t.Id == themeVM.Theme.Id);
-            theme.Name = themeVM.Theme.Name;
-            theme.JsFileName = themeVM.Theme.JsFileName;
-            theme.CssFileName = themeVM.Theme.CssFileName;
+            Theme theme = db.Themes.Find(themeVM.Theme.Id);
+            if (theme == null)
+            {
+                theme = themeVM.Theme;
+                db.Themes.Add(theme);
+            }
+            else
+                theme = themeVM.Theme;
+
             db.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit", new {id = theme.Id});
         }
 
         public ActionResult Delete(int id = 0)

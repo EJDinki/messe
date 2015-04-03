@@ -32,7 +32,7 @@
 
         <ul>
             <li class="header clearfix">
-                <div class="col-md-3">
+                <div class="col-md-12">
                     <span>Name</span>
                 </div>
             </li>
@@ -43,7 +43,7 @@
             {
                 <li class="ui-widget-content clearfix" id="selectRow_@item.Id" style="cursor:pointer">
                     @Html.HiddenFor(modelItem => item.Id, new { @class = "id" })
-                    <div class="col-md-3">
+                    <div class="col-md-12">
                         <span>@Html.DisplayFor(modelItem => item.Name)</span>
                     </div>
                 </li>
