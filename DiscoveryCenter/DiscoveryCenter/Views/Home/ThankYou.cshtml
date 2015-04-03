@@ -6,9 +6,12 @@
     Layout = "~/Views/Shared/_SurveyLayout.cshtml";
     string url = Url.Action("Index", "Home", new { id = Model.SurveyId });
 }
+
+@if (!Model.Muted) { 
 <audio id="onCompleteSound" autoplay>
     <source src="~/Content/audio/Victory.mp3" type="audio/mpeg" />
 </audio>
+}
 
 <meta http-equiv="refresh" content="5; url=@url" />
 <div class="panel-middle-outer">

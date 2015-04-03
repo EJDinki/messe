@@ -141,6 +141,7 @@ namespace DiscoveryCenter.Models
             Question.QuestionType type;
             QuestionViewModel model;
             List<Choice> qChoices = new List<Choice>();
+            bool muted = false;
 
             foreach (string key in request.Form.Keys)
             {
@@ -148,6 +149,10 @@ namespace DiscoveryCenter.Models
                 if (key.Contains(".QuestionId"))
                 {
                     questionId = Convert.ToInt32(request.Form.Get(key));
+                }
+                else if (key.Contains("Muted"))
+                {
+                    muted = Boolean.Parse(request.Form.Get(key).Split(',')[0]);
                 }
                 else if (key.Contains(".Question"))
                 {
@@ -198,7 +203,8 @@ namespace DiscoveryCenter.Models
             {
                 SurveyId = sId,
                 SurveyDescription = sDesc,
-                QuestionModels = models
+                QuestionModels = models,
+                Muted = muted
             };
         }
 
