@@ -9,5 +9,7 @@ namespace DiscoveryCenter.Models
     {
         public int SurveyId { get; set; }
         public Theme Theme { get; set; }
+
+        public bool Muted { get; set; }
     }
 }

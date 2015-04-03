@@ -1,25 +1,36 @@
 ﻿@model DiscoveryCenter.Models.ChoiceBoxViewModel
 
 @{
-    var item = Model.AvailableImages.Where(m => m.Value == Model.ImageName).FirstOrDefault();
-
+    var item = Model.AvailableImages.Where(m => m.Value == Model.ImageName).SingleOrDefault();
+    var theSrc = "";
+    
     if (item != null) 
     { 
         item.Selected = true;
+        theSrc = item.Value;
     }
 }
 <div class="clearfix Choice" style="margin-bottom:5px;">
-    <div class="col-md-9">
+    <div class="col-md-5">
+        @Html.LabelFor(m => m.Value)
         @Html.TextBox(Model.NameAndId, Model.Value, new { @class = "form-control" })
     </div>
 
-    <div class="col-md-9">
-        @Html.DropDownList(Model.ImgChoiceId, Model.AvailableImages, new { @class = "form-control" })
+    <div class="col-md-3">
+        @Html.LabelFor(m => m.ImageName)
+        @Html.DropDownList(Model.ImgChoiceId, Model.AvailableImages, new { @class = "form-control", onChange = "updateIconSrc(\"icon_" + Model.ImgChoiceId + "\",this)", id = Model.ImgChoiceId })
+    </div>
+
+    <div class="col-md-2">
+        <img id="icon_@Model.ImgChoiceId" src="@theSrc" height="64" width="64">
     </div>
 
     @if(Model.AllowDelete)
     { 
-        <button id="deleteChoice" type="button" class="btn btn-danger" onclick="DeleteChoice(this)"><span class="glyphicon glyphicon-remove-sign"></span></button>
+        <div class="col-md-2">
+            <button id="deleteChoice" type="button" class="btn btn-danger" onclick="DeleteChoice(this)"><span class="glyphicon glyphicon-remove-sign"></span></button>
+        </div>
     }
 </div>
+
 

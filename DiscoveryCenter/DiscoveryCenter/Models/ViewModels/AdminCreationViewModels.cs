@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -20,11 +21,13 @@ namespace DiscoveryCenter.Models
         /// <summary>
         /// Value of the Choice Text
         /// </summary>
+        [Display(Name = "Text")]
         public string Value { get; set; }
 
         /// <summary>
         /// Src to locate the related image
         /// </summary>
+        [Display(Name = "Image")]
         public string ImageName { get; set; }
 
         /// <summary>

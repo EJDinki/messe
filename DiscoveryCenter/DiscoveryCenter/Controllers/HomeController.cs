@@ -152,6 +152,7 @@ namespace DiscoveryCenter.Controllers
 
                 ret.Theme = db.Surveys.Find(model.SurveyId).Theme;
                 ret.SurveyId = model.SurveyId;
+                ret.Muted = model.Muted;
             }
 
             return View("ThankYou", ret);

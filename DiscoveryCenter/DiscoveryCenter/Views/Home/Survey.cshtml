@@ -30,8 +30,13 @@
 <div class="panel">
     <div class="panel-heading">
         <img src="~/Content/images/discovery75.png" />
+        
         <a id="quitSurey" class="btn btn-lg pull-right" type="button" href="#" onclick="confirmExit();">
             <span class="glyphicon glyphicon-remove-circle pull-right" style="font-size:4em"></span>
+        </a>
+
+        <a id="muteSurey" class="btn btn-lg pull-right" type="button" href="#" onclick="">
+            <span id="muteIcon" class="glyphicon glyphicon-volume-off pull-right" style="font-size:4em"></span>
         </a>
     </div>
     <div class="panel-body">
@@ -39,6 +44,8 @@
         <span id="alert" class="alert alert-danger top" role="alert" hidden style="position: absolute;"></span>
 
         @Html.HiddenFor(m => m.SurveyId)
+        @Html.HiddenFor(m => m.Muted, new {id="Muted"})
+
         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
 
             <!-- Wrapper for slides -->
@@ -121,7 +128,31 @@
 {
     <script src="/Scripts/@(Model.Theme.JsFileName)"></script>
     <script>
-        
+        var isMuted = false;
+
+        $('#muteSurey').on('click', function () {
+            muteAll();
+        });
+
+        function muteAll() {
+            console.log("mute Clicked");
+            isMuted = !isMuted;
+            $('#Muted').val(isMuted);
+
+            if (isMuted) {
+                $('#muteIcon').addClass("glyphicon-volume-up");
+                $('#muteIcon').removeClass("glyphicon-volume-off");
+            }
+            else {
+                $('#muteIcon').removeClass("glyphicon-volume-up");
+                $('#muteIcon').addClass("glyphicon-volume-off");
+            }
+
+            $('#onPreviousSound').prop("muted", isMuted);
+            $('#onNextSound').prop("muted", isMuted);
+
+        }
+
         function confirmExit() {
         if(confirm("Are you sure you wish to exit without submitting your answers?"))
             window.location.replace("@Url.Action("Index", "Home", new {id=Model.SurveyId},Request.Url.Scheme)");

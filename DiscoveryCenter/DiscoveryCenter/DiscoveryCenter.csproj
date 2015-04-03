@@ -213,9 +213,11 @@
     <Content Include="Content\ChildSurvey.css" />
     <Content Include="Content\images\childbodybg.jpg" />
     <Content Include="Content\images\childbackground.jpg" />
+    <Content Include="Content\images\choiceImage\smiley.jpeg" />
     <Content Include="Content\images\discovery.png" />
     <Content Include="Content\images\discovery50.png" />
     <Content Include="Content\images\discovery75.png" />
+    <Content Include="Content\images\exhibits\smiley.jpeg" />
     <Content Include="Content\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\images\ui-bg_flat_55_fbec88_40x100.png" />
     <Content Include="Content\images\ui-bg_glass_75_d0e5f5_1x400.png" />
@@ -310,8 +312,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\choiceImage\" />
-    <Folder Include="Content\images\exhibits\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
