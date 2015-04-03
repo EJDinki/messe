@@ -19,16 +19,30 @@ namespace DiscoveryCenter.Controllers
         private static readonly int surveyPerPage = 10;
         private static readonly string choiceImagePartial = "/Content/images/choiceImage/";
 
-        public PartialViewResult RefreshChoices(int typeIndex, string choices)
+        public PartialViewResult RefreshChoices(int typeIndex, string choices, string images)
         {
-            throw new NotImplementedException();
-            //return PartialView("_ChoicesInputGroup", new Question() { Type = (Question.QuestionType)typeIndex, Choices = choices });
+            var listChoices = new List<Choice>();
+            var listText = choices.Split(';');
+            var listImage = images.Split(';');
+
+            for(int i=0; i < listText.Length; i ++)
+            {
+                Choice c = new Choice();
+                c.Text = listText[i];
+
+                if(i < listImage.Length)
+                    c.ImageName = listImage[i];
+
+                listChoices.Add(c);
+            }
+            return PartialView("_ChoicesInputGroup", new Question() { Type = (Question.QuestionType)typeIndex, Choices = listChoices });
         }
 
         public PartialViewResult BlankChoiceBox(string value, string imageName ,bool allowDelete)
         {
             string guid = Guid.NewGuid().ToString();
             string nameAndId = String.Format("Questions[{0}].Choice[{1}]", guid, guid);
+            string imgId = String.Format("Questions[{0}].Img[{1}]", guid, guid);
 
             List<SelectListItem> storedImageNames = new List<SelectListItem>();
             storedImageNames.Add(new SelectListItem() { Text = "None", Value = "" });
@@ -39,7 +53,8 @@ namespace DiscoveryCenter.Controllers
             }
 
             return PartialView("_ChoiceBox", new ChoiceBoxViewModel() { 
-                NameAndId = nameAndId, 
+                NameAndId = nameAndId,
+                ImgChoiceId = imgId,
                 Value = value,
                 AvailableImages=storedImageNames ,
                 AllowDelete = allowDelete });

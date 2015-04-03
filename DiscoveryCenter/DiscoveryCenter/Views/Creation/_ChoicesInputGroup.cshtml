@@ -72,6 +72,10 @@
                 AvailableImages = storedImageNames,
                 AllowDelete = allowDelete
             })
+                    foreach (SelectListItem selItem in storedImageNames)
+                    {
+                        selItem.Selected = false;
+                    }
                 }
             </div>
             <div class="col-md-5">

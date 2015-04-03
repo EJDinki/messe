@@ -122,6 +122,7 @@
         function UpdateChoices(ele) {
             var choicesEle = $(ele).closest(".panel-body").find(".Choices").first();
             var choices = [];
+            var images = [];
             var index = $(ele).val();
 
 
@@ -129,8 +130,16 @@
                 choices.push($(elem).val());
             });
 
+            $(choicesEle).find("select").each(function (index, elem) {
+
+                if (elem.id.indexOf(".Img") > -1) {
+                    images.push($(elem).val());
+                }
+            });
+
             var joinedChoices = choices.join(";");
-            var myUrl = '@Url.Action("RefreshChoices", "Creation")?typeIndex=' + index + '&choices=' + joinedChoices;
+            var joinedImages = images.join(";");
+            var myUrl = '@Url.Action("RefreshChoices", "Creation")?typeIndex=' + index + '&choices=' + joinedChoices + '&images=' + joinedImages;
 
 
             $.ajax({

@@ -140,7 +140,7 @@ namespace DiscoveryCenter.Models
             string selectionText = "";
             Question.QuestionType type;
             QuestionViewModel model;
-            List<Choice> qChoices = null;
+            List<Choice> qChoices = new List<Choice>();
 
             foreach (string key in request.Form.Keys)
             {
@@ -164,6 +164,7 @@ namespace DiscoveryCenter.Models
                 else if (key.Contains(".IsSelected"))
                 {
                     isSelected = Boolean.Parse(request.Form.Get(key).Split(',')[0]);
+                    qChoices.Add(new Choice() { Text = selectionText, IsSelected = isSelected });
                 }
                 else if (key.Contains(".Type"))
                 {
@@ -174,6 +175,7 @@ namespace DiscoveryCenter.Models
                             model = new MultipleSelectViewModel();
                             model.Question = question;
                             model.QuestionId = questionId;
+                            ((MultipleChoiceViewModel)model).Choices = qChoices;
                             model.Type = type;
                             model.Answer = "";
                             models.Add(model);
@@ -188,6 +190,7 @@ namespace DiscoveryCenter.Models
                             ans = "";
                             break;
                     }
+                    qChoices = new List<Choice>();
                 }
             }
 
