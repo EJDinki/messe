@@ -38,14 +38,14 @@ namespace DiscoveryCenter.Migrations
             Theme adultTheme = new Theme() 
             { 
                 Id = 1, 
-                Name = ThemeName.Adult, 
+                Name = ThemeName.Adult.Value, 
                 CssFileName = "AdultSurvey.css", 
                 JsFileName = "AdultSurvey.js",
             };
             Theme childTheme = new Theme() 
             { 
                 Id = 2,
-                Name = ThemeName.Child,
+                Name = ThemeName.Child.Value,
                 CssFileName = "ChildSurvey.css",
                 JsFileName = "ChildSurvey.js",
             };

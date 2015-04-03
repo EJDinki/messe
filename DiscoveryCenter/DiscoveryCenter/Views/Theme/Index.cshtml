@@ -1,0 +1,130 @@
+﻿@model Tuple<IEnumerable<DiscoveryCenter.Models.Theme>, int, int>
+
+@{
+    ViewBag.Title = "Admin Console - Themes";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<div class="col-md-offset-1 col-md-3 panel panel-default">
+    <div class="panel-body ">
+        <h2>Themes</h2>
+        <div class="clearfix">
+            <div class="col-md-4" style="padding-left:0px">
+                <p>
+                    <a class="btn btn-primary" href="@Url.Action("Edit","Theme")" id="addItem">
+                        <i class='glyphicon glyphicon-plus'></i> Create New Theme
+                    </a>
+                </p>
+            </div>
+
+            <div class="col-md-8 selection-buttons " style="padding-right:0px">
+                <div class="btn-group pull-right">
+                    <a id="editSurvey" class="btn btn-default" type="button" href="@Url.Action("Edit", "Theme", new { id = "" })">
+                        <span class="glyphicon glyphicon-edit"></span> Edit
+                    </a>
+                    <a id="deleteSurvey" class="btn btn-danger" type="button" href="@Url.Action("Delete", "Theme", new { id = "" })">
+                        <span class="glyphicon glyphicon-remove"></span> Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <ul>
+            <li class="header clearfix">
+                <div class="col-md-3">
+                    <span>Name</span>
+                </div>
+            </li>
+        </ul>
+        <ul class="indexSelectableList">
+
+            @foreach (var item in Model.Item1)
+            {
+                <li class="ui-widget-content clearfix" id="selectRow_@item.Id" style="cursor:pointer">
+                    @Html.HiddenFor(modelItem => item.Id, new { @class = "id" })
+                    <div class="col-md-3">
+                        <span>@Html.DisplayFor(modelItem => item.Name)</span>
+                    </div>
+                </li>
+            }
+        </ul>
+        <center>
+            <ul class="list-inline">
+                @{
+                    <li><a class="btn btn-primary" href="?id=@(Model.Item3 - 1)"><</a></li>
+                    for (int i = 0; i < Model.Item2; i++)
+                    {
+                        if (i != Model.Item3)
+                        {
+                            <li><a class="btn btn-primary" href="?id=@i">@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a class="btn btn-info" href="?id=@i">@i</a></li>
+                        }
+                    }
+                    <li><a class="btn btn-primary" href="?id=@(Model.Item3 + 1)">></a></li>
+                }
+            </ul>
+        </center>
+    </div>
+    
+</div>
+<div class="col-md-7">
+    <div class="panel " style="height: 70vh; position:relative">
+        <iframe class="preview" style="height:100%; width:100%"></iframe>
+        <div id="iframeBlocker" style="position: absolute; top: 0; left: 0; right:0; bottom:0; padding:5%">
+            <h3 style="position: absolute; top: 22%"><span class="glyphicon glyphicon-arrow-left"></span> Select a theme to preview!</h3>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        $(".indexSelectableList").selectable({
+            stop: function (event, ui) {
+                $(event.target).children('.ui-selected').not(':first').removeClass('ui-selected');
+                refreshButtons(event.target);
+            }
+        });
+
+        $(document).ready(refreshButtons(null));
+
+        function refreshButtons(target) {
+            if (target != null)
+                var selected = $(target).children('.ui-selected').first();
+            else
+                var selected = null;
+
+            if (selected != null) {
+                var id = $(selected).find("input.id").first().val();
+                $(".selection-buttons a").each(function (index, ele) {
+                    $(ele).attr('href', function (i, a) {
+
+                        if (/id=[0-9]*&/.test(a))
+                            return a.replace(/id=[0-9]*&/ig, "id=" + id);
+                        else {
+                            a = a.replace(/\?.*$/, "");
+                            return a + "?id=" + id;
+                        }
+                    });
+                    $(ele).removeAttr('disabled');
+                });
+                loadPreview(id);
+            }
+            else {
+                $(".selection-buttons a").each(function (index, ele) {
+                    $(ele).attr("disabled", "disabled");
+                });
+            }
+
+        }
+        
+        function loadPreview(themeId)
+        {
+            $(".preview").attr("src", "/Theme/Preview/" + themeId);
+            $("#iframeBlocker").html("");
+        }
+    </script>
+}

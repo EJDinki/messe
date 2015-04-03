@@ -172,6 +172,11 @@ namespace DiscoveryCenter.Controllers
             }
             return View("Index", model);
         }
-      
+
+        public ActionResult Index(SurveyViewModel model)
+        {
+            return View("Index", model);
+        }
+
     }
 }

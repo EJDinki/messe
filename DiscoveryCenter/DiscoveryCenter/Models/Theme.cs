@@ -11,7 +11,7 @@ namespace DiscoveryCenter.Models
         [Key]
         public int Id { get; set; }
 
-        public ThemeName Name { get; set; }
+        public String Name { get; set; }
 
         public string CssFileName { get; set; }
 

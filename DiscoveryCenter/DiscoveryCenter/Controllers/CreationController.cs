@@ -164,7 +164,7 @@ namespace DiscoveryCenter.Controllers
         public CreationEditViewModel MakeCreationEditVM(Survey survey)
         {
             List<SelectListItem> themes = new List<SelectListItem>(); ;
-            db.Themes.ToList().ForEach(t => themes.Add(new SelectListItem() { Value = t.Id.ToString(), Text = t.Name.Value }));
+            db.Themes.ToList().ForEach(t => themes.Add(new SelectListItem() { Value = t.Id.ToString(), Text = t.Name }));
 
             return new CreationEditViewModel() { Survey = survey, Themes = themes };
         }
