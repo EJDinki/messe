@@ -2,5 +2,5 @@
 
 <div class="slider-container">
     @Html.Hidden(String.Format("QuestionModels[{0}].Answer", Model.QuestionId), "")
-    <div class="slider" id="QuestionModels_@(Model.QuestionId)__Slider" name="QuestionModels[@(Model.QuestionId)].Slider" labels='["@Model.Choices[0]", " ", "@Model.Choices[1]" , " " , "@Model.Choices[2]" ]'> </div>
+    <div class="slider" id="QuestionModels_@(Model.QuestionId)__Slider" name="QuestionModels[@(Model.QuestionId)].Slider" labels='["@Model.Choices[0].Text", " ", "@Model.Choices[1].Text" , " " , "@Model.Choices[2].Text" ]'> </div>
 </div>
