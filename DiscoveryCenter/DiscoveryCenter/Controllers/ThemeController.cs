@@ -15,7 +15,11 @@ namespace DiscoveryCenter.Controllers
         // GET: Theme
         public ActionResult Index(int id = 0)
         {
+            return View(getTuple(id));
+        }
 
+        public Tuple<IEnumerable<Theme>, int, int> getTuple(int id)
+        {
             int numPages = (db.Themes.Count() / themesPerPage) + 1;
 
             //Handle out of bounds cases
@@ -26,8 +30,7 @@ namespace DiscoveryCenter.Controllers
 
             var currentPageList = (from s in db.Themes orderby s.Name select s).Skip(id * themesPerPage).Take(themesPerPage).ToList();
             Tuple<IEnumerable<Theme>, int, int> tuple = new Tuple<IEnumerable<Theme>, int, int>(currentPageList, numPages, id);
-
-            return View(tuple);
+            return tuple;
         }
 
         public ActionResult Edit(int? id)
@@ -69,13 +72,20 @@ namespace DiscoveryCenter.Controllers
 
             //update record
             Theme theme = db.Themes.Find(themeVM.Theme.Id);
-            if (theme == null)
+            bool noEntries = theme == null;
+            if (noEntries)
             {
-                theme = themeVM.Theme;
-                db.Themes.Add(theme);
+                theme = new Theme();
             }
-            else
-                theme = themeVM.Theme;
+
+            theme.CssFileName = themeVM.Theme.CssFileName;
+            theme.JsFileName = themeVM.Theme.JsFileName;
+            theme.Name = themeVM.Theme.Name;
+
+            if (noEntries)
+                db.Themes.Add(theme);
+            
+
 
             db.SaveChanges();
 
@@ -85,6 +95,28 @@ namespace DiscoveryCenter.Controllers
         public ActionResult Delete(int id = 0)
         {
             Theme theme = db.Themes.Find(id);
+            var surveys = db.Surveys.Where(s => s.ThemeId == id).ToList();
+            if (surveys.Any())
+            {
+                string errorMessage = "Cannot delete because the following surveys use this theme: ";
+
+                foreach(var survey in surveys)
+                {
+                    errorMessage += survey.Name + ", ";
+                }
+
+                ModelState.AddModelError("Theme", errorMessage);
+            }
+
+            if (!ModelState.IsValid)
+                return View("Index", getTuple(0));
+
+            String cssPath = Server.MapPath(@"~/Content/" + theme.CssFileName);
+            String jsPath = Server.MapPath(@"~/Scripts/" + theme.JsFileName);
+
+            System.IO.File.Delete(cssPath);
+            System.IO.File.Delete(jsPath);
+
             db.Themes.Remove(theme);
             db.SaveChanges();
 
