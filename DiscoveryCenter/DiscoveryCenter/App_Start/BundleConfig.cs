@@ -35,8 +35,11 @@ namespace DiscoveryCenter
                       "~/Scripts/Survey.js"
                       ));
 
-            bundles.Add(new ScriptBundle("~/bundles/Admin").Include(
+            bundles.Add(new ScriptBundle("~/bundles/jquery_ui").Include(
                 "~/Scripts/jquery-ui.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/Admin").Include(
+               "~/Scripts/AdminScripts.js"));
 
 
             //styles

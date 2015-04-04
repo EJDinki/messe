@@ -101,7 +101,9 @@ namespace DiscoveryCenter.Controllers
         // GET: Creation
         public ActionResult Index(int id = 0)
         {
-            int numPages = (db.Surveys.Count() / surveyPerPage) + 1;
+            int numPages = (db.Surveys.Count() / surveyPerPage);
+
+            numPages += (db.Surveys.Count() % surveyPerPage > 0) ? 1 : 0;
 
             //Handle out of bounds cases
             if (id < 0)

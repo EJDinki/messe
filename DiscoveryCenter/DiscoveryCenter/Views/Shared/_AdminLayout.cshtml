@@ -9,9 +9,9 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Styles.Render("~/Content/jqplot")
-    @Scripts.Render("~/bundles/jqplot")
-    @Scripts.Render("~/bundles/Admin")
+    @Scripts.Render("~/bundles/jqplot")  
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery_ui")
 
 </head>
 <body>
@@ -32,11 +32,8 @@
     <div class="body body-content">
         @RenderBody()
     </div>
-    <script>
-        function updateIconSrc(id, val) {
-            document.getElementById(id).setAttribute('src', val.options[val.selectedIndex].value);
-        }
-    </script>
+
+    @Scripts.Render("~/bundles/Admin")
     @RenderSection("scripts", required: false)
 </body>
 </html>
