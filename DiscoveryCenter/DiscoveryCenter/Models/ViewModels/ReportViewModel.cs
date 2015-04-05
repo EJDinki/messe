@@ -23,6 +23,8 @@ namespace DiscoveryCenter.Models
             Counts = new Dictionary<string, int>();
         }
 
+        public int Id { get; set; }
+
         public Question.QuestionType Type { get; set; }
 
         public string Text { get; set; }
@@ -30,5 +32,7 @@ namespace DiscoveryCenter.Models
         public int QuestionIndex { get; set; }
 
         public Dictionary<string, int> Counts { get; set; }
+
+        public String ChartJSON { get; set; }
     }
 }

@@ -38,7 +38,7 @@ function AppendChoiceBox(ele, allowDelete) {
     return false;
 }
 
-NoQuestions();
+
 function NoQuestions() {
  
     if ($("#draggablePanelList").html().trim() == "") {
@@ -83,7 +83,7 @@ function UpdateChoices(ele) {
 
     var joinedChoices = choices.join(";");
     var joinedImages = images.join(";");
-    var myUrl = '@Url.Action("RefreshChoices", "Creation")?typeIndex=' + index + '&choices=' + joinedChoices + '&images=' + joinedImages;
+    var myUrl = '/Creation/RefreshChoices?typeIndex=' + index + '&choices=' + joinedChoices + '&images=' + joinedImages;
 
 
     $.ajax({
@@ -132,3 +132,43 @@ function updateIconSrc(id, val) {
 }
 
     
+$(".indexSelectableList").selectable({
+    stop: function (event, ui) {
+        $(event.target).children('.ui-selected').not(':first').removeClass('ui-selected');
+        refreshButtons(event.target);
+    }
+});
+
+$(document).ready(refreshButtons(null));
+
+function refreshButtons(target, callback) {
+    if (target != null)
+        var selected = $(target).children('.ui-selected').first();
+    else
+        var selected = null;
+
+    if (selected != null) {
+        var id = $(selected).find("input.id").first().val();
+        $(".selection-buttons a").each(function (index, ele) {
+            $(ele).attr('href', function (i, a) {
+
+                if (/id=[0-9]*&/.test(a))
+                    return a.replace(/id=[0-9]*&/ig, "id=" + id);
+                else {
+                    a = a.replace(/\?.*$/, "");
+                    return a + "?id=" + id;
+                }
+            });
+            $(ele).removeAttr('disabled');
+        });
+        if(callback != undefined && callback != null)
+            callback(id);
+    }
+    else {
+        $(".selection-buttons a").each(function (index, ele) {
+            $(ele).attr("disabled", "disabled");
+        });
+    }
+
+}
+

@@ -39,6 +39,7 @@ namespace DiscoveryCenter.Controllers
                             break;
                         default:
                             report = new ReportViewModel();
+                            report.Id = question.Id;
                             report.Type = question.Type;
                             report.QuestionIndex = question.IndexInSurvey;
                             report.Text = question.Text;
@@ -58,6 +59,43 @@ namespace DiscoveryCenter.Controllers
             }
 
             return View(reports);
+        }
+
+        public ActionResult Details(int id)//question id
+        {
+            ReportViewModel report = new ReportViewModel();
+            using(SurveyContext db = new SurveyContext())
+            {
+                Question question = db.Questions.Find(id);
+                
+                switch (question.Type)
+                {
+                    case Question.QuestionType.ShortAnswer:
+                        break;
+                    default:
+                        report = new ReportViewModel();
+                        report.Id = question.Id;
+                        report.Type = question.Type;
+                        report.QuestionIndex = question.IndexInSurvey;
+                        report.Text = question.Text;
+
+                        foreach (var answer in question.Answers)
+                        {
+                            if (!report.Counts.ContainsKey(answer.Value))
+                                report.Counts.Add(answer.Value, 1);
+                            else
+                                report.Counts[answer.Value]++;
+                        }
+
+                        var entries = report.Counts.Select(d =>
+                            string.Format("[\"{0}\", {1}]", d.Key, string.Join(",", d.Value)));
+                        report.ChartJSON = "[" + string.Join(",", entries) + "]";
+
+                        break;
+                }
+            }
+
+            return View(report);
         }
 
         public ActionResult ExportToCSV(int id = 0, bool exportRawData = true, string dateRadio = "", DateTime? startDate = null, DateTime? endDate = null)

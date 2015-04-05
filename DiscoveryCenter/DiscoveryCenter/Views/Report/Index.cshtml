@@ -4,34 +4,30 @@
     ViewBag.Title = "Report for " + @Model.SurveyName;
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@Scripts.Render("~/bundles/Admin")
+<br />
+<div class="col-md-offset-1 col-md-3 panel panel-default">
+    <div class="panel-body ">
+        <a id="ExportDialog" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-download-alt"></span> Download This Report</a>
+        <h2>Questions</h2>
+        <ul class="indexSelectableList">
 
-<h2>Report For Survey: @Model.SurveyName</h2>
-<br/>
-
-<a id="ExportDialog" class="btn btn-default">Download This Report</a>
-
-<script>
-    var dataForCharts = [];
-    var dataForChartsCount = @Model.Reports.Count;
-</script>
-
-@for (int i = 0; i < @Model.Reports.Count; i++)
-{
-    <h4>Question: @Model.Reports[i].Text</h4>
-    // Transform the Dictionary<string,int> to JSON in [ "string", int ] form
-    var entries = @Model.Reports[i].Counts.Select(d =>
-        string.Format("[\"{0}\", {1}]", d.Key, string.Join(",", d.Value)));
-    var result = "[" + string.Join(",", entries) + "]";
-    //<p>DEBUG result: @result</p>
-    
-    // Create the div for the chart for this question
-    var divId = "chartdiv" + @Model.Reports[i].QuestionIndex;
-    <div id="@divId" style="height:400px;width:400px; "></div>
-
-    // Add this data to the dataForCharts array to be referenced later. HTML.Raw is used to avoid encoding
-    <script>dataForCharts[@Model.Reports[i].QuestionIndex] = JSON.parse('@Html.Raw(result)');</script>
-}
+            @foreach (var item in Model.Reports)
+            {
+                <li class="ui-widget-content clearfix text-center" id="selectRow_@item.Id" style="cursor:pointer">
+                    @Html.HiddenFor(modelItem => item.Id, new { @class = "id" })
+                    <div class="col-md-12">
+                        <span>@item.Text</span>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+<div class="col-md-7">
+    <div id="report" class="panel panel-body">
+        <h3 style="position: absolute; top: 22%"><span class="glyphicon glyphicon-arrow-left"></span> Select a question to view the report!</h3>
+    </div>
+</div>
 
 @using(Html.BeginForm("ExportToCSV", "Report", FormMethod.Post, new { @id="dialog-form", @title="Download Options" }))
 {
@@ -53,38 +49,27 @@
     <input type="submit" value="Download Report" id="submitBtn"/>
 }
 
+@section scripts{
 <script>
-    $(document).ready(function(){
-        // Questions were put into array based on their QuestionIndex value, which is >= 1 so start i=1
-        for(var i = 1; i < dataForCharts.length; i++)
-        {
-            var data = dataForCharts[i];
-            if (data == null || data.length == 0)
-            {
-                $('#chartdiv' + i).replaceWith('<p>No Data for this question</p>');
+    function loadReport(questionId) {
+        $.ajax({
+            url: "/Report/Details/" + questionId,
+            type: 'GET'
+        }).done(function (html) {
+            $("#report").html(html);
+        });
+    }
+
+    
+
+    $(document).ready(function () {
+        $(".indexSelectableList").selectable({
+            stop: function (event, ui) {
+                $(event.target).children('.ui-selected').not(':first').removeClass('ui-selected');
+                refreshButtons(event.target, loadReport);
             }
-            else
-            {
-                var plot = $.jqplot('chartdiv' + i, [data],
-                    {
-                        seriesDefaults: {
-                            // Make this a pie chart.
-                            renderer: $.jqplot.PieRenderer,
-                            rendererOptions: {
-                                // Put data labels on the pie slices.
-                                // By default, labels show the percentage of the slice.
-                                showDataLabels: true
-                            }
-                        },
-                        legend: { 
-                            show:true,
-                            location: 'e',
-                            placement: 'outside'
-                        }
-                    }
-                );
-            }
-        }
+        });
+        
         dialog = $( "#dialog-form" ).dialog({
             autoOpen: false,
             height: 300,
@@ -135,3 +120,4 @@
         });
     });
 </script>
+}

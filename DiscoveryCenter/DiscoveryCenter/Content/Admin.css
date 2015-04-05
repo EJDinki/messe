@@ -451,10 +451,10 @@ ul{
     margin-bottom: 0;
 }
 
-/*.editor-panel textarea{
-    position: absolute;
-    bottom:0;
-    top:5px;
-    left:0;
-    right:0;
-}*/
+
+/*---------------Report stuff----------------------------*/
+
+#report{
+    position:relative;
+    min-height: 300px;
+}
