@@ -46,7 +46,7 @@
 
             @foreach (var item in Model.Item1)
             {
-                <li class="ui-widget-content clearfix" id="selectRow_@item.Id" style="cursor:pointer">
+                <li class="ui-widget-content clearfix text-center" id="selectRow_@item.Id" style="cursor:pointer">
                     @Html.HiddenFor(modelItem => item.Id, new { @class = "id" })
                     <div class="col-md-5">
                         <img style="float:left" src="@item.ImageLocation" height="64" width="64">

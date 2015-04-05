@@ -42,7 +42,7 @@
 
             @foreach (var item in Model.Item1)
             {
-                <li class="ui-widget-content clearfix" id="selectRow_@item.Id" style="cursor:pointer">
+                <li class="ui-widget-content clearfix text-center" id="selectRow_@item.Id" style="cursor:pointer">
                     @Html.HiddenFor(modelItem => item.Id, new { @class = "id" })
                     <div class="col-md-12">
                         <span>@Html.DisplayFor(modelItem => item.Name)</span>
@@ -124,7 +124,7 @@
         
         function loadPreview(themeId)
         {
-            $(".preview").attr("src", "/Theme/Preview/" + themeId);
+            $(".preview").attr("src", "/Home/PreviewTheme/" + themeId);
             $("#iframeBlocker").html("");
         }
     </script>
