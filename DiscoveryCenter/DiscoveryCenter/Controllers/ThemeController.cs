@@ -123,17 +123,5 @@ namespace DiscoveryCenter.Controllers
 
             return RedirectToAction("Index");
         }
-
-        public ActionResult Preview(int id)
-        {
-            SurveyViewModel model = null;
-
-            model = new SurveyViewModel();
-            model.SurveyName = "Test Survey";
-            model.SurveyDescription = "This is a test survey to preview the page styling";
-            model.Theme = db.Themes.Find(id);
-
-            return View("../Home/Index", model);
-        }
     }
 }

@@ -174,8 +174,18 @@ namespace DiscoveryCenter.Controllers
             return View("Index", model);
         }
 
-        public ActionResult Index(SurveyViewModel model)
+        public ActionResult PreviewTheme(int id = 1)
         {
+            SurveyViewModel model = null;
+
+            using (SurveyContext db = new SurveyContext())
+            {
+                model = new SurveyViewModel();
+                model.SurveyName = "Test Survey";
+                model.SurveyDescription = "This is a test survey to preview the page styling";
+                model.Theme = db.Themes.Find(id);
+            }
+
             return View("Index", model);
         }
 

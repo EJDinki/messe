@@ -1,0 +1,35 @@
+﻿@model DiscoveryCenter.Models.ReportViewModel
+
+<div id="piechartdiv"style=" height:400px;width:400px; "></div>
+
+<script>
+    $(document).ready(function(){
+        var data = JSON.parse('@Html.Raw(Model.ChartJSON)');
+        console.log(data);
+        if (data == null || data.length == 0)
+        {
+            $(piechartdiv).html('<p>No Data for this question</p>');
+        }
+        else
+        {
+            var plot = $.jqplot('piechartdiv', [data],
+                {
+                    seriesDefaults: {
+                        // Make this a pie chart.
+                        renderer: $.jqplot.PieRenderer,
+                        rendererOptions: {
+                            // Put data labels on the pie slices.
+                            // By default, labels show the percentage of the slice.
+                            showDataLabels: true
+                        }
+                    },
+                    legend: {
+                        show:true,
+                        location: 'e',
+                        placement: 'outside'
+                    }
+                }
+            );
+        }
+    });
+</script>
