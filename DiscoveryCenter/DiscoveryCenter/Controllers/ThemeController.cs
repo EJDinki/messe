@@ -20,7 +20,8 @@ namespace DiscoveryCenter.Controllers
 
         public Tuple<IEnumerable<Theme>, int, int> getTuple(int id)
         {
-            int numPages = (db.Themes.Count() / themesPerPage) + 1;
+            int numPages = (db.Themes.Count() / themesPerPage);
+            numPages += (db.Themes.Count() % themesPerPage > 0) ? 1 : 0;
 
             //Handle out of bounds cases
             if (id < 0)
