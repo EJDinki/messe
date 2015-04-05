@@ -165,6 +165,7 @@
     <Compile Include="Controllers\CreationController.cs" />
     <Compile Include="Controllers\ExhibitsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -310,6 +311,7 @@
     <Content Include="Views\Home\ShowExhibits.cshtml" />
     <Content Include="Views\Theme\Index.cshtml" />
     <Content Include="Views\Theme\Edit.cshtml" />
+    <Content Include="Views\Images\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

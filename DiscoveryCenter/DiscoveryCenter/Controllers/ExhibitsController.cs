@@ -15,7 +15,6 @@ namespace DiscoveryCenter.Controllers
     public class ExhibitsController : Controller
     {
         private SurveyContext db = new SurveyContext();
-        private static readonly string exhibitImagePartial = "/Content/images/exhibits/";
         private static readonly int exhibitsPerPage = 8;
 
         // GET: Exhibits
@@ -49,27 +48,12 @@ namespace DiscoveryCenter.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Exhibit exhibit)
         {
-
-
-            if (exhibit.Image != null)
-                exhibit.ImageLocation = exhibitImagePartial + Path.GetFileName(exhibit.Image.FileName);
-
-            if (exhibit.ShowcaseImage != null)
-                exhibit.ShowcaseImageLocation = exhibitImagePartial + Path.GetFileName(exhibit.ShowcaseImage.FileName);
-
             if (!ValidateExhibit(exhibit))
                 return View(exhibit);
 
             exhibit.CreateDate = DateTime.Now;
             exhibit.LastModifiedDate = DateTime.Now;
-
-            //Use full path to save to server
-            if(exhibit.ImageLocation !=null)
-                exhibit.Image.SaveAs(Path.Combine(Server.MapPath("~"+exhibitImagePartial), Path.GetFileName(exhibit.Image.FileName)));
-
-            if (exhibit.ShowcaseImageLocation != null)
-                exhibit.ShowcaseImage.SaveAs(Path.Combine(Server.MapPath("~" + exhibitImagePartial), Path.GetFileName(exhibit.ShowcaseImage.FileName)));
-                
+          
             db.Exhibits.Add(exhibit);
             db.SaveChanges();
             return RedirectToAction("Index");    
@@ -83,6 +67,7 @@ namespace DiscoveryCenter.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Exhibit exhibit = db.Exhibits.Find(id);
+
             if (exhibit == null)
             {
                 return HttpNotFound();
@@ -97,24 +82,11 @@ namespace DiscoveryCenter.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Exhibit exhibit)
         {
-            if (exhibit.Image != null)
-                exhibit.ImageLocation = exhibitImagePartial + Path.GetFileName(exhibit.Image.FileName);
-
-            if (exhibit.ShowcaseImage != null)
-                exhibit.ShowcaseImageLocation = exhibitImagePartial + Path.GetFileName(exhibit.ShowcaseImage.FileName);
-                
-
             if (!ValidateExhibit(exhibit, true))
             {
                 return View(exhibit);
             }
-            
-            if(exhibit.Image != null)
-                exhibit.Image.SaveAs(Path.Combine(Server.MapPath("~" + exhibitImagePartial), Path.GetFileName(exhibit.Image.FileName)));
-
-            if (exhibit.ShowcaseImageLocation != null)
-                exhibit.ShowcaseImage.SaveAs(Path.Combine(Server.MapPath("~" + exhibitImagePartial), Path.GetFileName(exhibit.ShowcaseImage.FileName)));
-              
+            exhibit.ImageLocation = exhibit.BrokenWorkaround;
             exhibit.LastModifiedDate = DateTime.Now;
             db.Entry(exhibit).State = EntityState.Modified;
             db.SaveChanges();
@@ -151,35 +123,10 @@ namespace DiscoveryCenter.Controllers
 
         private bool ValidateExhibit(Exhibit ex, bool isEdit = false)
         {
-            string filename = null;
             bool passed = true;
-
-            if (ex.Image != null)
-            {
-                filename = Path.GetFileName(ex.Image.FileName);
-
-                try
-                {
-                    Image.FromStream(ex.Image.InputStream);
-                }
-                catch
-                {
-                    ModelState.AddModelError("Image", "The file uploaded was not a valid image format.");
-                    passed = false;
-                }
-            }
 
             Exhibit existing = null;
             
-            if(!isEdit)
-                existing = (from e in db.Exhibits where e.ImageLocation == ex.ImageLocation select e).FirstOrDefault();
-
-            if (existing != null && ex.ImageLocation != null)
-            {
-                ModelState.AddModelError("Image", "An image already exists with the file name chosen. Please rename this file or delete the previous.");
-                passed = false;
-            }
-
             if (!isEdit)
                 existing = (from e in db.Exhibits where e.Name == ex.Name select e).FirstOrDefault();
 

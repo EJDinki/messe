@@ -1,0 +1,73 @@
+﻿@model Tuple<List<string>,List<string>>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="container">
+    
+    <div class="col-md-5">
+        <h2>Choice Icons</h2>
+        <p id="messages"></p>
+        <div class="panel panel-body ">
+            <div class="row">
+                @using (Html.BeginForm("Upload", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("location", "choices");
+                    <div class="col-md-offset-1 col-md-4">
+                        <input type="file" id="fileselect" name="file" />
+                    </div>
+
+                    <div class="col-md-offset-3 col-md-4">
+                        <input id="submitbutton" type="submit" value="Upload Image" class="btn btn-default" />
+                    </div>
+                }
+            </div>
+            <div class="row">
+                @foreach (string s in Model.Item1)
+                {
+                    <div class ="col-md-4">
+                        <img src="@s" height="128" width="128" />
+                        @Html.ActionLink("Delete Image", "DeleteImage", new { location = s })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-offset-2 col-md-5">
+        <h2>Exhibit Icons</h2>
+        <div class="panel panel-body">
+            <div class="row">
+                @using (Html.BeginForm("Upload", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("location", "exhibits");
+                    <div class="col-md-offset-1 col-md-4">
+                        <input type="file" id="fileselect2" name="file" />
+                    </div>
+
+                    <div class="col-md-offset-3 col-md-4">
+                        <input id="submitbutton2" type="submit" value="Upload Image" class="btn btn-default" />
+                    </div>
+                }
+            </div>
+            <div class="row">
+                @foreach (string s in Model.Item2)
+                {
+                    <div class="col-md-4">
+                        <img src="@s" height="128" width="128" />
+                        @Html.ActionLink("Delete Image", "DeleteImage", new { location = s })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
