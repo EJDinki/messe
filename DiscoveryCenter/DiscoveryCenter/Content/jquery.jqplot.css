@@ -86,7 +86,7 @@
 
 .jqplot-xaxis-label {
     margin-top: 10px;
-    font-size: 11pt;
+    font-size:  11pt;
     position: absolute;
 }
 
@@ -126,17 +126,17 @@
 }
 
 table.jqplot-table-legend {
-    margin-top: 12px;
-    margin-bottom: 12px;
-    margin-left: 12px;
-    margin-right: 12px;
+    margin-top: 48px;
+    margin-bottom: 48px;
+    margin-left: 48px;
+    margin-right: 48px;
 }
 
 table.jqplot-table-legend, table.jqplot-cursor-legend {
     background-color: rgba(255,255,255,0.6);
     border: 1px solid #cccccc;
     position: absolute;
-    font-size: 0.75em;
+    font-size: 1.75em;
 }
 
 td.jqplot-table-legend {
@@ -175,10 +175,10 @@ div.jqplot-table-legend-swatch-outline {
 div.jqplot-table-legend-swatch {
     width:0px;
     height:0px;
-    border-top-width: 5px;
-    border-bottom-width: 5px;
-    border-left-width: 6px;
-    border-right-width: 6px;
+    border-top-width: 8px;
+    border-bottom-width: 8px;
+    border-left-width: 9px;
+    border-right-width: 9px;
     border-top-style: solid;
     border-bottom-style: solid;
     border-left-style: solid;
