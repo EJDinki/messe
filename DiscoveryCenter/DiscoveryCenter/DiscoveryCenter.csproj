@@ -241,6 +241,7 @@
     <Content Include="Content\jquery-ui.theme.min.css" />
     <Content Include="Content\jquery.jqplot.css" />
     <Content Include="Content\sliderExtension.css" />
+    <Content Include="Scripts\AdminScripts.js" />
     <Content Include="Scripts\AdultSurvey.js" />
     <Content Include="Scripts\ChildSurvey.js" />
     <Content Include="Scripts\codemirror.js" />

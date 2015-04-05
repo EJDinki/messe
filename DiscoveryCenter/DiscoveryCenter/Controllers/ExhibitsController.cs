@@ -21,7 +21,8 @@ namespace DiscoveryCenter.Controllers
         // GET: Exhibits
         public ActionResult Index(int id = 0)
         {
-            int numPages = (db.Exhibits.Count() / exhibitsPerPage) + 1;
+            int numPages = (db.Exhibits.Count() / exhibitsPerPage);
+            numPages += (db.Exhibits.Count() % exhibitsPerPage > 0) ? 1 : 0;
 
             //Handle out of bounds cases
             if (id < 0)

@@ -13,7 +13,7 @@
         <div class="clearfix">
             <div class="col-md-4" style="padding-left:0px">
                 <p>
-                    <a class="btn btn-primary" href="@Url.Action("Create","Creation")" id="addItem">
+                    <a class="btn btn-primary" href="@Url.Action("Create","Creation")" id="createSurvey">
                         <i class='glyphicon glyphicon-plus'></i> Create New Survey
                     </a>
                 </p>
@@ -119,9 +119,7 @@
                 var selected = null;
 
             if (selected != null) {
-                console.log(selected);
                 var id = $(selected).find("input.id").first().val();
-                console.log(id);
                 $(".selection-buttons a").each(function (index, ele) {
                     $(ele).attr('href', function (i, a) {
                         
@@ -133,14 +131,12 @@
                         }
                     });
                     $(ele).removeAttr('disabled');
-                    console.log(ele);
                 });
                 
             }
             else
             {
                 $(".selection-buttons a").each(function (index, ele) {
-                    console.log(ele);
                     $(ele).attr("disabled", "disabled");
                 });
             }
