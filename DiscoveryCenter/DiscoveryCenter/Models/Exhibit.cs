@@ -5,6 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Script.Serialization;
+using System.Web.Mvc;
 
 
 namespace DiscoveryCenter.Models
@@ -28,11 +29,13 @@ namespace DiscoveryCenter.Models
         public string ImageLocation { get; set; }
 
         public string ShowcaseImageLocation { get; set; }
-
+        
+        /// <summary>
+        /// Please help. This is used because on the Exhibit edit page, the ImageLocation wasn't being bound to the model.
+        /// Even though the same code from the creation page was used and it was bound correctly there. If we have time before release,
+        /// fix this HACK workaround.
+        /// </summary>
         [NotMapped]
-        public HttpPostedFileBase Image { get; set; }
-
-        [NotMapped]
-        public HttpPostedFileBase ShowcaseImage { get; set; }
+        public string BrokenWorkaround { get; set; }
     }
 }

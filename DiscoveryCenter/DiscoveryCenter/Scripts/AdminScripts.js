@@ -38,9 +38,8 @@ function AppendChoiceBox(ele, allowDelete) {
     return false;
 }
 
-
 function NoQuestions() {
- 
+ try{
     if ($("#draggablePanelList").html().trim() == "") {
         $(tip).show();
         $(addItem).removeClass("btn-default");
@@ -56,6 +55,10 @@ function NoQuestions() {
 
         $("#save").removeClass("btn-default");
         $("#save").addClass("btn-success");
+    }
+}
+    catch(e){
+        console.log("NoQuestions couldn't find a draggablePanelList.");
     }
 }
 
@@ -171,4 +174,4 @@ function refreshButtons(target, callback) {
     }
 
 }
-
+    

@@ -8,13 +8,16 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
+                @Html.ActionLink("Surveys", "Index", "Creation", null, new { @class = "navbar-brand" })
+            </li>
+            <li>
                 @Html.ActionLink("Exhibits", "Index", "Exhibits", null, new { @class = "navbar-brand" })
             </li>
             <li>
                 @Html.ActionLink("Themes", "Index", "Theme", null, new { @class = "navbar-brand" })
             </li>
             <li>
-                @Html.ActionLink("Surveys", "Index", "Creation", null, new { @class = "navbar-brand" })
+                @Html.ActionLink("Images", "Index", "Images", null, new { @class = "navbar-brand" })
             </li>
             <li>
                 <a href="javascript:document.getElementById('logoutForm').submit()" class="navbar-brand">Log off</a>
@@ -26,13 +29,16 @@ else
 {
     <ul class="nav navbar-nav navbar-right">
         <li>
+            @Html.ActionLink("Surveys", "Index", "Creation", null, new { @class = "navbar-brand" })
+        </li>
+        <li>
             @Html.ActionLink("Exhibits", "Index", "Exhibits", null, new { @class = "navbar-brand" })
         </li>
         <li>
             @Html.ActionLink("Themes", "Index", "Theme", null, new { @class = "navbar-brand" })
         </li>
         <li>
-            @Html.ActionLink("Surveys", "Index", "Creation", null, new { @class = "navbar-brand" })
+            @Html.ActionLink("Images", "Index", "Images", null, new { @class = "navbar-brand" })
         </li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class="navbar-brand" })</li>
     </ul>
