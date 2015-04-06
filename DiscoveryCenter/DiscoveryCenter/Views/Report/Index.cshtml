@@ -16,7 +16,7 @@
                 <li class="ui-widget-content clearfix text-center" id="selectRow_@item.Id" style="cursor:pointer">
                     @Html.HiddenFor(modelItem => item.Id, new { @class = "id" })
                     <div class="col-md-12">
-                        <span>@item.Text</span>
+                        <span>@("\"" + item.Text + "\"")</span>
                     </div>
                 </li>
             }
@@ -63,13 +63,17 @@
     
 
     $(document).ready(function () {
+        $(".indexSelectableList li:first").addClass('ui-selected');
+
         $(".indexSelectableList").selectable({
             stop: function (event, ui) {
                 $(event.target).children('.ui-selected').not(':first').removeClass('ui-selected');
                 refreshButtons(event.target, loadReport);
             }
         });
+        refreshButtons($(".indexSelectableList:first"), loadReport);
         
+
         dialog = $( "#dialog-form" ).dialog({
             autoOpen: false,
             height: 300,

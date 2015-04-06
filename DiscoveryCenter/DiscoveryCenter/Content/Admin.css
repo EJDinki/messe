@@ -458,3 +458,17 @@ ul{
     position:relative;
     min-height: 300px;
 }
+
+.short-answer-report{
+    background-color: lightgray;
+    height: 50vh;
+    padding: 5px;
+}
+
+.short-answer-report li{
+    margin-bottom: 8px;
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 17px;
+}

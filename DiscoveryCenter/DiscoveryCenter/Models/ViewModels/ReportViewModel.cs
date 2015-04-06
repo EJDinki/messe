@@ -33,6 +33,8 @@ namespace DiscoveryCenter.Models
 
         public Dictionary<string, int> Counts { get; set; }
 
+        public List<String> ShortAnswers { get; set; }
+
         public String ChartJSON { get; set; }
     }
 }

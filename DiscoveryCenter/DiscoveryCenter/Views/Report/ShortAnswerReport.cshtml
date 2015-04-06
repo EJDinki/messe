@@ -1,0 +1,22 @@
+﻿@model DiscoveryCenter.Models.ReportViewModel
+<div class="text-center">
+    <h2>Question @Model.QuestionIndex</h2>
+</div>
+<div>
+    @if (Model.ShortAnswers.Any())
+    {
+        <div class="top-divider text-center"><h3>Short Answers</h3></div>
+        <div class="short-answer-report">
+            <ul>
+                @foreach (var answer in Model.ShortAnswers)
+                {
+                    <li>"@answer"</li>
+                }
+            </ul>
+        </div>
+    }
+    else
+    {
+        <div class="text-center"><h2>There are no responses.</h2></div>
+    }
+</div>

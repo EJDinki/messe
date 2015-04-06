@@ -315,7 +315,8 @@
     <Content Include="Views\Home\ShowExhibits.cshtml" />
     <Content Include="Views\Theme\Index.cshtml" />
     <Content Include="Views\Theme\Edit.cshtml" />
-    <Content Include="Views\Report\Details.cshtml" />
+    <Content Include="Views\Report\ChartReport.cshtml" />
+    <Content Include="Views\Report\ShortAnswerReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
