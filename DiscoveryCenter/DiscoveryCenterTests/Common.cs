@@ -22,6 +22,25 @@ namespace DiscoveryCenterTests
         public static Survey AddSurveyToDB()
         {
             Survey theSurvey = null;
+            Choice choice1 = new Choice();
+            choice1.Text = "m1Choice";
+            Choice choice2 = new Choice();
+            choice2.Text = "m1Choice2";
+
+            Choice choice3 = new Choice();
+            choice3.Text = "mMChoice";
+            Choice choice4 = new Choice();
+            choice4.Text = "mMChoice2";
+
+            Choice choice5 = new Choice();
+            choice5.Text = "sChoice";
+            Choice choice6 = new Choice();
+            choice6.Text = "sChoice2";
+            Choice choice7 = new Choice();
+            choice7.Text = "sChoice3";
+
+
+
             using (SurveyContext dbContext = new SurveyContext())
             {
                 theSurvey = new Survey()
@@ -46,7 +65,7 @@ namespace DiscoveryCenterTests
                     Type = Question.QuestionType.MultipleChoiceChooseOne,
                     IndexInSurvey = 2,
                     ParentSurvey = theSurvey,
-                    Choices = "m1Choice;m1Choice2"
+                    Choices = new List<Choice>() {choice1,choice2}
                 };
 
                 Question mChooseM = new Question()
@@ -55,7 +74,7 @@ namespace DiscoveryCenterTests
                     Type = Question.QuestionType.MultipleChoiceChooseMany,
                     IndexInSurvey = 3,
                     ParentSurvey = theSurvey,
-                    Choices = "mMChoice;mMChoice2"
+                    Choices = new List<Choice>() { choice3, choice4 }
                 };
 
                 Question sSlider = new Question()
@@ -64,7 +83,7 @@ namespace DiscoveryCenterTests
                     Type = Question.QuestionType.Slider,
                     IndexInSurvey = 4,
                     ParentSurvey = theSurvey,
-                    Choices = "sChoice;sChoice2;sChoice3"
+                    Choices = new List<Choice>() { choice5, choice6, choice7 }
                 };
 
                 Question sExhibit = new Question()
