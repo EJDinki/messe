@@ -3,7 +3,9 @@
     <h2>Question @Model.QuestionIndex</h2>
 </div>
 <div class="top-divider"></div>
-<div id="piechartdiv" style=" height:400px;width:400px; "></div>
+<div id="piechartdiv"></div>
+<div id="bargraphdiv"></div>
+<div id="noData" class="text-center" hidden><h3>No data! =( Take the survey to gather data.</h3></div>
 
 <script>
     $(document).ready(function(){
@@ -11,7 +13,8 @@
         console.log(data);
         if (data == null || data.length == 0)
         {
-            $(piechartdiv).html('<p>No Data for this question</p>');
+            $("#noData").show();
+            $("#piechartdiv").hide();
         }
         else
         {
@@ -19,7 +22,7 @@
                 {
                     seriesDefaults: {
                         // Make this a pie chart.
-                        renderer: $.jqplot.PieRenderer,
+                        renderer: $.jqplot.Bar,
                         rendererOptions: {
                             // Put data labels on the pie slices.
                             // By default, labels show the percentage of the slice.
@@ -29,7 +32,28 @@
                     legend: {
                         show:true,
                         location: 'e',
-                        placement: 'outside'
+                        placement: 'outside',
+                        xoffset: 10
+                    }
+                }
+            );
+
+            var bargraph = $.jqplot('bargraphdiv', [data],
+                {
+                    seriesDefaults: {
+                        // Make this a pie chart.
+                        renderer: $.jqplot.,
+                        rendererOptions: {
+                            // Put data labels on the pie slices.
+                            // By default, labels show the percentage of the slice.
+                            showDataLabels: true
+                        }
+                    },
+                    legend: {
+                        show: true,
+                        location: 'e',
+                        placement: 'outside',
+                        xoffset: 10
                     }
                 }
             );

@@ -4,8 +4,8 @@
     color: #666666;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     font-size: 1em;
-/*    height: 300px;
-    width: 400px;*/
+    width: 50%;
+    margin-right: 50%;
 }
 
 /*rules applied to all axes*/
@@ -126,10 +126,10 @@
 }
 
 table.jqplot-table-legend {
-    margin-top: 48px;
-    margin-bottom: 48px;
-    margin-left: 48px;
-    margin-right: 48px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 table.jqplot-table-legend, table.jqplot-cursor-legend {
