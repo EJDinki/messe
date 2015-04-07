@@ -25,7 +25,7 @@ namespace DiscoveryCenter.Controllers
         {
             SurveyViewModel model = null;
             Survey survey;
-
+            Session["startTime"] = DateTime.Now;
             using(SurveyContext dbContext = new SurveyContext())
             {
                 survey = (from s in dbContext.Surveys where s.Id == id select s).Single();
@@ -101,6 +101,7 @@ namespace DiscoveryCenter.Controllers
         public ActionResult Survey([ModelBinder(typeof(SurveyModelBinder))]SurveyViewModel model)
         {
             ThankYouViewModel ret = new ThankYouViewModel();
+            System.Diagnostics.Debug.WriteLine(Session["startTime"]);
 
             using (SurveyContext db = new SurveyContext())
             {
