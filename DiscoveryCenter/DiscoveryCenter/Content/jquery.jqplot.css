@@ -8,6 +8,12 @@
     margin-right: 50%;
 }
 
+.bargraph.jqplot-target
+{
+    width:100%;
+    margin-right: 0%;
+}
+
 /*rules applied to all axes*/
 .jqplot-axis {
     font-size: 0.75em;

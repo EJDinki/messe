@@ -473,6 +473,15 @@ ul{
     font-size: 17px;
 }
 
+.bargraph{
+    position: relative;
+}
+
+.piechart{
+    position: relative;
+    width:100%;
+}
+
 /*---------------Help stuff----------------------------*/
 
 .accordion-toggle{
