@@ -130,27 +130,6 @@ namespace DiscoveryCenter.Controllers
             }
         }
 
-        /*
-        public ActionResult ExportToCSV(int id = 0, bool exportRawData = true)
-        {
-            if (id <= 0)
-            {
-                return new HttpNotFoundResult();
-            }
-
-            using (SurveyContext db = new SurveyContext())
-            {
-                Survey survey = db.Surveys.Find(id);
-                if (survey == null)
-                    return HttpNotFound();
-
-                string csv = ConvertSurveyToCSV(survey, exportRawData);
-                string fileName = survey.Name + "-" + DateTime.Today.ToString("MM/dd/yyyy") + ".csv";
-                return File(new System.Text.UTF8Encoding().GetBytes(csv), "text/csv", fileName);
-            }
-        }
-        */
-
         private string ConvertSurveyToCSV(Survey survey, bool exportRawData, DateTime? startDate = null, DateTime? endDate = null)
         {
             bool useDates = (startDate != null && endDate != null);

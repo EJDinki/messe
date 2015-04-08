@@ -463,6 +463,7 @@ ul{
     background-color: lightgray;
     height: 50vh;
     padding: 5px;
+    overflow: auto;
 }
 
 .short-answer-report li{
