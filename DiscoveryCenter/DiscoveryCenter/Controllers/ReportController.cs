@@ -130,32 +130,11 @@ namespace DiscoveryCenter.Controllers
             }
         }
 
-        /*
-        public ActionResult ExportToCSV(int id = 0, bool exportRawData = true)
-        {
-            if (id <= 0)
-            {
-                return new HttpNotFoundResult();
-            }
-
-            using (SurveyContext db = new SurveyContext())
-            {
-                Survey survey = db.Surveys.Find(id);
-                if (survey == null)
-                    return HttpNotFound();
-
-                string csv = ConvertSurveyToCSV(survey, exportRawData);
-                string fileName = survey.Name + "-" + DateTime.Today.ToString("MM/dd/yyyy") + ".csv";
-                return File(new System.Text.UTF8Encoding().GetBytes(csv), "text/csv", fileName);
-            }
-        }
-        */
-
         private string ConvertSurveyToCSV(Survey survey, bool exportRawData, DateTime? startDate = null, DateTime? endDate = null)
         {
             bool useDates = (startDate != null && endDate != null);
             StringBuilder builder = new StringBuilder();
-            builder.Append("\"Export for Survey: " + survey.Name + "\"\n");
+            builder.Append("\"Export for Survey: " + ReplaceQuotes(survey.Name) + "\"\n");
             builder.Append("Date: " + DateTime.Today.ToString("MM/dd/yyyy") + "\n");
 
             if (useDates)
@@ -176,7 +155,7 @@ namespace DiscoveryCenter.Controllers
                 builder.Append("------------------------------\n");
                 builder.Append("Question Number: " + question.IndexInSurvey + "\n");
                 builder.Append("Question Type: " + question.Type + "\n");
-                builder.Append("\"Question Text: " + question.Text + "\"\n");
+                builder.Append("\"Question Text: " + ReplaceQuotes(question.Text) + "\"\n");
                 if (question.Answers.Count == 0)
                 {
                     builder.Append("There are no submitted answers for this question\n");
@@ -230,7 +209,7 @@ namespace DiscoveryCenter.Controllers
             builder.Append("Choice,Number of Selections\n");
             foreach (KeyValuePair<string, int> entry in Counts)
             {
-                builder.Append("\"" + entry.Key + "\"," + entry.Value + "\n");
+                builder.Append("\"" + ReplaceQuotes(entry.Key) + "\"," + entry.Value + "\n");
             }
         }
 
@@ -250,7 +229,7 @@ namespace DiscoveryCenter.Controllers
             builder.Append("Choice,Number of Selections\n");
             foreach (KeyValuePair<string, int> entry in Counts)
             {
-                builder.Append("\"" + entry.Key + "\"," + entry.Value + "\n");
+                builder.Append("\"" + ReplaceQuotes(entry.Key) + "\"," + entry.Value + "\n");
             }
         }
 
@@ -260,7 +239,7 @@ namespace DiscoveryCenter.Controllers
             foreach (var answer in question.Answers)
             {
                 builder.Append(answer.Submission.Timestamp + ",");
-                builder.Append("\"" + answer.Value + "\"\n");
+                builder.Append("\"" + ReplaceQuotes(answer.Value) + "\"\n");
             }
         }
         private void ConvertAnswersToCSV(Question question, StringBuilder builder, DateTime startDate, DateTime endDate)
@@ -271,7 +250,7 @@ namespace DiscoveryCenter.Controllers
                 if (answer.Submission.Timestamp >= startDate && answer.Submission.Timestamp <= endDate)
                 {
                     builder.Append(answer.Submission.Timestamp + ",");
-                    builder.Append("\"" + answer.Value + "\"\n");
+                    builder.Append("\"" + ReplaceQuotes(answer.Value) + "\"\n");
                 }
             }
         }
@@ -281,7 +260,7 @@ namespace DiscoveryCenter.Controllers
             foreach (var choice in question.Choices)
             {
                 if (choices != "") choices = choices + ",";
-                choices = choices + "\"" + choice.Text + "\"" ;
+                choices = choices + "\"" + ReplaceQuotes(choice.Text) + "\"" ;
             }
             builder.Append("Question Choices (At Time of Export):," + choices + "\n");
         }
@@ -295,6 +274,11 @@ namespace DiscoveryCenter.Controllers
                     count++;
             }
             return count;
+        }
+
+        private string ReplaceQuotes(string s)
+        {
+            return s.Replace('"', '\'');
         }
     }
 }

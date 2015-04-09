@@ -25,7 +25,7 @@ $(document).on({
 
 
 function AppendChoiceBox(ele, allowDelete) {
-    myUrl = '@Url.Action("BlankChoiceBox", "Creation")?allowDelete=' + allowDelete;
+    myUrl = "/Creation/BlankChoiceBox?allowDelete=" + allowDelete;
 
     $.ajax({
         url: myUrl,

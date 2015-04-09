@@ -3,15 +3,19 @@
     <h2>Question @Model.QuestionIndex</h2>
 </div>
 <div class="top-divider"></div>
-<div id="piechartdiv" style=" height:400px;width:400px; "></div>
+<div id="piechartdiv" class="piechart"></div>
+<div id="bargraphdiv" class="bargraph"></div>
+<div id="noData" class="text-center" hidden><h3>No data! =( Take the survey to gather data.</h3></div>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
+        $.jqplot.config.enablePlugins = true;
         var data = JSON.parse('@Html.Raw(Model.ChartJSON)');
         console.log(data);
         if (data == null || data.length == 0)
         {
-            $(piechartdiv).html('<p>No Data for this question</p>');
+            $("#noData").show();
+            $("#piechartdiv").hide();
         }
         else
         {
@@ -24,12 +28,66 @@
                             // Put data labels on the pie slices.
                             // By default, labels show the percentage of the slice.
                             showDataLabels: true
-                        }
+                        },
+                        barWidth: 15,
+                        pointLabels: { show: true, location: 'n', edgeTolerance: -15 },
                     },
                     legend: {
                         show:true,
                         location: 'e',
-                        placement: 'outside'
+                        placement: 'outside',
+                        xoffset: 10
+                    }
+                }
+            );
+
+            //barchart data
+            var labels = new Array();
+            var counts = new Array();
+            var labelsplit;
+
+            for (var key in data) {
+                labelsplit = data[key][0].match(/.{1,55}/g);
+                if(labelsplit)
+                    labels.push(labelsplit.join("<br>"));
+                else
+                    labels.push("");
+                counts.push(data[key][1]);
+            }
+
+            var bargraph = $.jqplot('bargraphdiv', [counts],
+                {
+                    animate: !$.jqplot.use_excanvas,
+                    seriesDefaults: {
+                        renderer: $.jqplot.BarRenderer,
+                        pointLabels: { show: true},
+                        shadowAngle: 135,
+                        rendererOptions: {
+                            barDirection: 'horizontal',
+                            animation:
+                            {
+                                speed: 1000
+                            },
+                            varyBarColor: true
+                        }
+                    },
+                    axes: {
+                        yaxis: {
+                            renderer: $.jqplot.CategoryAxisRenderer,
+                            ticks: labels,
+                            tickOptions: {
+                                fontFamily: 'Georgia',
+                                fontSize: '16pt',
+                                showGridline: true
+                            }
+                        },
+                        xaxis: {
+                            min: 0,
+                            tickInterval: 1,
+                            tickOptions: {
+                                formatString: '%d'
+                            }
+                        }
                     }
                 }
             );

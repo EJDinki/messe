@@ -16,7 +16,12 @@ namespace DiscoveryCenter
 
             bundles.Add(new ScriptBundle("~/bundles/jqplot").Include(
                         "~/Scripts/jqplot/jquery.jqplot.min.js",
-                        "~/Scripts/jqplot/jqplot.pieRenderer.min.js"));
+                        "~/Scripts/jqplot/jqplot.pieRenderer.min.js",
+                        "~/Scripts/jqplot/jqplot.barRenderer.min.js",
+                        "~/Scripts/jqplot/jqplot.categoryAxisRenderer.min.js",
+                        "~/Scripts/jqplot/jqplot.canvasAxisTickRenderer.min.js",
+                        "~/Scripts/jqplot/jqplot.canvasTextRenderer.min.js",
+                        "~/Scripts/jqplot/jqplot.pointLabels.min.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

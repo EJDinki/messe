@@ -5,13 +5,11 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <br />
-<div class="col-md-offset-5 col-md-2 panel clearfix">
-    <div class="panel-body">
+<div class="panel login clearfix">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <hr />
                 @Html.ValidationSummary(true)
                 <div class="form-group">
                     @Html.LabelFor(m => m.UserName, new { @class = "control-label" })
@@ -27,22 +25,19 @@
                         @Html.ValidationMessageFor(m => m.Password)
                     </div>
                 </div>
-                <div class="form-group col-md-offset-2">
-                    <div>
-                        <div class="checkbox col-md-offset-2">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="text-center">
+                <div class="clearfix">
+                    <div class="loginButton">
                         <input type="submit" value="Log in" class="btn btn-default" />
+                    </div>
+                    <div class="rememberMe pull-right">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            <span>Remember me?</span>
+                        </div>
                     </div>
                 </div>
             }
         </section>
-    </div>
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

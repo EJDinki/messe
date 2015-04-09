@@ -12,6 +12,9 @@
     background-color:lightgray;
     padding-left: 1%;
     padding-right: 1%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -427,6 +430,43 @@ ul{
 
 
 /*---------------Theme stuff----------------------------*/
+
+.indexPreview{
+    
+    height: 80vh; 
+    position:relative
+}
+.indexPreview iframe{
+    height:133%; 
+    width:133%;
+    -ms-zoom: 0.75;
+    -moz-transform: scale(0.75);
+    -moz-transform-origin: 0 0;
+    -o-transform: scale(0.75);
+    -o-transform-origin: 0 0;
+    -webkit-transform: scale(0.75);
+    -webkit-transform-origin: 0 0;
+}
+
+.editPreview{
+    
+    height: 71vh; 
+    position:relative
+}
+.editPreview iframe{
+    height:160%; 
+    width:182%;
+    margin-top: 4vh;
+    margin-bottom: 2vh;
+    -ms-zoom: 0.55;
+    -moz-transform: scale(0.55);
+    -moz-transform-origin: 0 0;
+    -o-transform: scale(0.55);
+    -o-transform-origin: 0 0;
+    -webkit-transform: scale(0.55);
+    -webkit-transform-origin: 0 0;
+}
+
 .editor-container{
     position:relative;
     display:block;
@@ -463,6 +503,7 @@ ul{
     background-color: lightgray;
     height: 50vh;
     padding: 5px;
+    overflow: auto;
 }
 
 .short-answer-report li{
@@ -473,6 +514,15 @@ ul{
     font-size: 17px;
 }
 
+.bargraph{
+    position: relative;
+}
+
+.piechart{
+    position: relative;
+    width:100%;
+}
+
 /*---------------Help stuff----------------------------*/
 
 .accordion-toggle{
@@ -481,4 +531,26 @@ ul{
 
 .accordion-body{
     padding-left:15px;
+}
+
+/*---------------Login---------------------------------*/
+
+.login{
+    margin-top:10vh;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 0;
+    padding-bottom: 10px;
+    padding-left: 25px;
+    padding-right:25px;
+}
+
+.loginButton{
+    display:inline-block;
+}
+
+.rememberMe{
+    display:inline-block;
+    text-align: right;
 }
