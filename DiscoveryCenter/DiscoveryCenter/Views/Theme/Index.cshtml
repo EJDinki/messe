@@ -6,19 +6,19 @@
 }
 
 <br />
-<div class="col-md-offset-1 col-md-3 panel panel-default">
+<div class="col-md-4 panel panel-default">
     <div class="panel-body ">
         <h2>Themes</h2>
         <div class="clearfix">
-            <div class="col-md-4" style="padding-left:0px">
+            <div class="col-md-5" style="padding-left:0px">
                 <p>
                     <a class="btn btn-primary" href="@Url.Action("Edit","Theme")">
-                        <i class='glyphicon glyphicon-plus'></i> Create New Theme
+                        <i class='glyphicon glyphicon-plus'></i> Create Theme
                     </a>
                 </p>
             </div>
 
-            <div class="col-md-8 selection-buttons " style="padding-right:0px">
+            <div class="col-md-7 selection-buttons " style="padding-right:0px">
                 <div class="btn-group pull-right">
                     <a id="editSurvey" class="btn btn-default" type="button" href="@Url.Action("Edit", "Theme", new { id = "" })">
                         <span class="glyphicon glyphicon-edit"></span> Edit
@@ -72,9 +72,9 @@
     </div>
     
 </div>
-<div class="col-md-7">
-    <div class="panel " style="height: 70vh; position:relative">
-        <iframe class="preview" style="height:100%; width:100%"></iframe>
+<div class="col-md-8">
+    <div class="panel indexPreview">
+        <iframe class="preview"></iframe>
         <div id="iframeBlocker" style="position: absolute; top: 0; left: 0; right:0; bottom:0; padding:5%">
             <h3 style="position: absolute; top: 22%"><span class="glyphicon glyphicon-arrow-left"></span> Select a theme to preview!</h3>
         </div>

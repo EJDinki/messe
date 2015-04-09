@@ -13,14 +13,14 @@
     @Html.HiddenFor(model => model.Theme.JsFileName);
     <br />
     <div class="col-md-offset-3 col-md-6 panel panel-body">
-        <div class="col-md-2"><h4 class="pull-right">Theme Name</h4></div>
+        <div class="col-md-3"><h4 class="pull-right">Theme Name</h4></div>
         
         <div class="col-md-6">
             @Html.EditorFor(model => model.Theme.Name, new { htmlAttributes = new { @class = "form-control" } })
         </div>
             <button id="save" type="submit" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
     </div>
-    <div class="editor-container col-md-5">
+    <div class="editor-container col-md-6">
         <div class="tabs">
             <ul>
                 <li><a href="#tabs-1">Theme Css</a></li>
@@ -39,14 +39,16 @@
         </div>
     </div>
 
-    <div class="col-md-7 panel text-center">
+    <div class="col-md-6 panel text-center">
         <h3>Preview</h3>
-        <div class="panel " style="height: 70vh; position:relative">
+        <div class="top-divider"></div>
+
+        <div class="panel editPreview">
             @if (Model.Theme.CssFileName != null && Model.Theme.JsFileName != null)
             {
-                <iframe class="preview" style="height:100%; width:100%" src="/Home/PreviewTheme/@Model.Theme.Id"></iframe>
+                <iframe class="preview" src="/Home/PreviewTheme/@Model.Theme.Id"></iframe>
                 <div id="iframeBlocker" style="position: absolute; top: 0; left: 0; right:0; bottom:0; padding:5%; text-align:center">
-            </div>
+                </div>
             }
             else
             {
