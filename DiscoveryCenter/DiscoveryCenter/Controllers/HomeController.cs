@@ -100,12 +100,13 @@ namespace DiscoveryCenter.Controllers
         [HttpPost]
         public ActionResult Survey([ModelBinder(typeof(SurveyModelBinder))]SurveyViewModel model)
         {
+            DateTime endingTime = DateTime.Now;
+            int totalTime = (int) (endingTime - DateTime.Parse(Session["startTime"].ToString())).TotalSeconds;
             ThankYouViewModel ret = new ThankYouViewModel();
-            System.Diagnostics.Debug.WriteLine(Session["startTime"]);
 
             using (SurveyContext db = new SurveyContext())
             {
-                Submission submission = new Submission() { Timestamp = DateTime.Now, SurveyId = model.SurveyId };
+                Submission submission = new Submission() { Timestamp = endingTime, SurveyId = model.SurveyId, CompletionTime = totalTime};
                 db.Submissions.Add(submission);
 
                 foreach (var qmodel in model.QuestionModels)
