@@ -48,7 +48,10 @@
 
             for (var key in data) {
                 labelsplit = data[key][0].match(/.{1,55}/g);
-                labels.push(labelsplit.join("<br>"));
+                if(labelsplit)
+                    labels.push(labelsplit.join("<br>"));
+                else
+                    labels.push("");
                 counts.push(data[key][1]);
             }
 
