@@ -121,25 +121,13 @@ namespace DiscoveryCenter.Controllers
                     }
                     else if (qmodel.Type == Question.QuestionType.ExhibitsChooseMany)
                     {
-                        string exhibitIds = "";
-
-                        //change exhibit name to Id
-                        foreach (string name in qmodel.Answer.Split(';'))
+                        foreach (string ex in qmodel.Answer.Split(';'))
                         {
-                            string trimmed = name.Trim();
-                            int? exhibit = (from e in db.Exhibits where e.Name.Contains(trimmed) select e.Id).FirstOrDefault();
-
-                            if (exhibit != null)
-                                exhibitIds += exhibit + ";";
-                            else
-                                throw new NullReferenceException("Could not find exhibit with name: " + trimmed);
-                        }
-
-                        //Create new Answer for each selected exhibit Id
-                        foreach (string ex in exhibitIds.Split(';'))
-                        {
-                            answer = new Answer() {QuestionId=qmodel.QuestionId, Value=ex, Submission = submission };
-                            db.Answers.Add(answer);
+                            if (ex != null && ex.Length != 0)
+                            {
+                                answer = new Answer() { QuestionId = qmodel.QuestionId, Value = ex.Trim(), Submission = submission };
+                                db.Answers.Add(answer);
+                            }
                         }
                     }
                     else if (!String.IsNullOrWhiteSpace(qmodel.Answer))
