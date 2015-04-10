@@ -1,6 +1,6 @@
 ﻿@model DiscoveryCenter.Models.MultipleSelectViewModel
 
-@Html.Hidden("Exhibit" + Model.QuestionId + ".Answer", "", new { id = "exhibitA_" + Model.QuestionId })
+@Html.Hidden("Exhibit" + Model.QuestionId + ".Answer", "", new {id = "exhibitA_" + Model.QuestionId })
 <div id="exhibitList_@Model.QuestionId" class="pull-left dropable-revert exhibit-container">
     @for (int z = 0; z < @Model.Choices.Count; z++)
     {
@@ -18,4 +18,5 @@
 
 </div>
 
+@Html.Hidden("MaxChoices_" + Model.MaxSelectedChoices, Model.MaxSelectedChoices, new { id = "MaxChoices_" + Model.MaxSelectedChoices })
 <div id="dropArea_@Model.QuestionId" class="dropable pull-right exhibit-container"></div>
