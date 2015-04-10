@@ -73,7 +73,7 @@ namespace DiscoveryCenter.Controllers
                             report.Counts[answer.Value]++;
                     }
                     var entries = report.Counts.Select(d =>
-                    string.Format("[\"{0}\", {1}]", d.Key, string.Join(",", d.Value)));
+                        string.Format("[\"{0}\", {1}]", d.Key.Replace("\"","&quot").Replace("'","&quot"), string.Join(",", d.Value)));
                     report.ChartJSON = "[" + string.Join(",", entries) + "]";
                     return View("ChartReport", report);
                 }
