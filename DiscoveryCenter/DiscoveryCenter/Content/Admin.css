@@ -559,7 +559,8 @@ ul{
 }
 
 .edit-main-panel{
-    width: 75%;
-    margin-left:25%
+    position: absolute;
+    width: 70%;
+    margin-left:23%
 }
 
