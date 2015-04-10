@@ -49,10 +49,7 @@ div .top-divider{
     border-top: 1px solid lightgray;
 }
 
-.fixed{
-    width:20%;
-    position:fixed;
-}
+
 
 
 
@@ -554,3 +551,16 @@ ul{
     display:inline-block;
     text-align: right;
 }
+
+/*----------------------Edit page-----------------------------*/
+.fixed-sidebar{
+    width:20%;
+    position:fixed;
+}
+
+.edit-main-panel{
+    position: absolute;
+    width: 70%;
+    margin-left:22%
+}
+
