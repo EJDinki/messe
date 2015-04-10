@@ -84,7 +84,7 @@ function rightCarouselClicked() {
 
     var slideID = $('div.item.active').attr("id");
 
-    if (slideID == "slide_" + (numSlides - 1)) {
+    if (slideID == "slide_" + numSlides) {
         $('a.right').hide();
         $('a.left.carousel-control').show();
     }
