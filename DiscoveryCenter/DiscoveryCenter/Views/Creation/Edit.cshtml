@@ -11,7 +11,7 @@
     @Html.AntiForgeryToken()
     <br />
     <div class="col-md-3 clearfix">
-        <div class="panel panel-body panel-default fixed">
+        <div class="panel panel-body panel-default fixed-sidebar">
             <h2>Edit Survey</h2>
             <div class="form-group clearfix">
                 <div class="col-md-12" style="padding-left:0px">
@@ -45,7 +45,7 @@
     </div>
 
 
-    <div class="form-horizontal col-md-9 panel panel-body panel-default clearfix">
+    <div class="form-horizontal panel panel-body edit-main-panel clearfix">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Survey.Id)
         @Html.HiddenFor(model => model.Survey.CreateDate)
