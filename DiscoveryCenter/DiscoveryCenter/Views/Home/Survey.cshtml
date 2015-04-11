@@ -9,6 +9,9 @@
 <audio id="onNextSound">
     <source src="~/Content/audio/CheckoutScanner.mp3" type="audio/mpeg" />
 </audio>
+<div class="selection-alert-wrapper">
+    <div id="alert" class="alert alert-danger selection-alert" role="alert" hidden>Please pick only 3 choices.</div>
+</div>
 
 <audio  id="onPreviousSound">
     <source src="~/Content/audio/green_beep.mp3" type="audio/mpeg" />
@@ -41,7 +44,6 @@
     </div>
     <div class="panel-body">
 
-        <span id="alert" class="alert alert-danger top" role="alert" hidden style="position: absolute;"></span>
 
         @Html.HiddenFor(m => m.SurveyId)
         @Html.HiddenFor(m => m.Muted, new {id="Muted"})
