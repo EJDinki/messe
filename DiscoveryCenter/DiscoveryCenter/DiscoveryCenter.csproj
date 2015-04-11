@@ -326,6 +326,7 @@
     <Content Include="Views\Help\Help.cshtml" />
     <Content Include="Views\Report\ChartReport.cshtml" />
     <Content Include="Views\Report\ShortAnswerReport.cshtml" />
+    <Content Include="Views\Shared\_Pagination.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

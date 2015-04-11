@@ -43,7 +43,7 @@
             var numChildren = $(this).children().length;
             var maxChildren = parseInt($($(this).siblings('input[id*="MaxChoices"]')[0]).val());
 
-            if (numChildren >= maxChildren) {
+            if (numChildren >= maxChildren && maxChildren > 0) {
                 $(alert).html("Cannot excede " + maxChildren + " selections.");
                 $(alert).show();
                 clicked = false;

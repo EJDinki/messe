@@ -50,25 +50,8 @@
                 </li>
             }
         </ul>
-        <center>
-            <ul class="list-inline">
-                @{
-                    <li><a class="btn btn-primary" href="?id=@(Model.Item3 - 1)"><</a></li>
-                    for (int i = 0; i < Model.Item2; i++)
-                    {
-                        if (i != Model.Item3)
-                        {
-                            <li><a class="btn btn-primary" href="?id=@i">@i</a></li>
-                        }
-                        else
-                        {
-                            <li><a class="btn btn-info" href="?id=@i">@i</a></li>
-                        }
-                    }
-                    <li><a class="btn btn-primary" href="?id=@(Model.Item3 + 1)">></a></li>
-                }
-            </ul>
-        </center>
+
+        @Html.Partial("_Pagination", new Tuple<int, int>(Model.Item2, Model.Item3))
     </div>
     
 </div>
