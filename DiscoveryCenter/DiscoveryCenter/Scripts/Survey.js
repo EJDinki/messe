@@ -24,7 +24,7 @@ function limitChecked(ele, max) {
         numClicks++;
         $(ele).attr('checked', false);
 
-        $(alert).html("Cannot excede " + max + " selections.");
+        $(alert).html("Please pick only " + max + " choices.");
         $(alert).show();
 
         setTimeout(function () {

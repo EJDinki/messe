@@ -339,3 +339,21 @@ textarea{
     max-width: 400px;
     margin: 5px;
 }
+
+/*------------------alert div-----------------*/
+
+.selection-alert-wrapper{
+    position: absolute;
+    z-index: 400;
+    top: 15vh;
+    left: 25%;
+    width: 50%;
+    text-align: center;
+}
+.selection-alert{
+    position: relative;
+    width: 400px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
