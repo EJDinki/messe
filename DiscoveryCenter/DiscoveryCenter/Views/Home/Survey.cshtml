@@ -96,15 +96,14 @@
 
                             @Html.HiddenFor(m => m.QuestionModels[i].Type)
 
-                            @if (i == Model.QuestionModels.Count - 1)
-                            {
-                                <center>
-                                    <input type="submit" class="btn btn-default" value="Complete Survey" id="CompleteSurvey" style="margin-top:15%" />
-                                </center>
-                            }
                         </div>
                     </div>
             }
+                <div class="item" id="slide_@Model.QuestionModels.Count">
+                    <center>
+                        <input type="submit" class="btn btn-default" value="Complete Survey" id="CompleteSurvey" style="margin-top:15%" />
+                    </center>
+                </div>
             </div>
             <!-- Indicators -->
             <ol class="carousel-indicators">
