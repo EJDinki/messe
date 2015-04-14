@@ -10,17 +10,6 @@ namespace DiscoveryCenter.Controllers
     public class HomeController : Controller
     {
         [HttpGet]
-        public ActionResult ShowExhibits()
-        {
-            List<Exhibit> list = new List<Exhibit>();
-            using(SurveyContext dbContext = new SurveyContext())
-            {
-               list  = (from e in dbContext.Exhibits select e).ToList();
-            }
-            return View(list);
-        }
-
-        [HttpGet]
         public  ActionResult Survey(int id = 1)
         {
             SurveyViewModel model = null;
