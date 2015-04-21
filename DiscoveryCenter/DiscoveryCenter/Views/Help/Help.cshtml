@@ -7,7 +7,7 @@
 <div class="col-md-offset-2 col-md-8 panel panel-default">
     <div class="panel-body ">
         <h2>Help</h2>
-        <p>This is the help section. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis iaculis ex. Ut ac justo vel orci lobortis efficitur. Proin eu congue tellus. Phasellus posuere quam tortor, ut scelerisque velit tempus at. Nullam consectetur lacus sed nibh semper, eget cursus quam venenatis. Nulla quis faucibus sapien, et interdum sem. Donec venenatis ligula ut mauris laoreet, vitae luctus tellus mollis.</p>
+        <p>This is the help section. Here you will find answers to how to use the Museum Survey Experience administrative console. Make sure you're logged into the system before using it. Click on the appropriate question to see a detailed how-to answer, and click on the question to close it.</p>
         <h3>Surveys</h3>
         <!--Reminder when adding new sections:
             - change accordion id to whatever section it is eg surveyAccordion
@@ -22,7 +22,32 @@
                 </div>
                 <div id="sq1" class="accordion-body collapse">
                     <div class="accordion-inner">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis iaculis ex. Ut ac justo vel orci lobortis efficitur. Proin eu congue tellus. Phasellus posuere quam tortor, ut scelerisque velit tempus at. Nullam consectetur lacus sed nibh semper, eget cursus quam venenatis. Nulla quis faucibus sapien, et interdum sem. Donec venenatis ligula ut mauris laoreet, vitae luctus tellus mollis.
+                        To create a Survey:
+                        <ol>
+                            <li class="help-li">Navigate to the Surveys screen and click on the blue button labeled "Create New Survey"<br /><img class="help-img" src="~/Content/images/faq/create1.png" /></li>
+                            <li class="help-li">Enter a Survey Name, a Survey Description, and select a theme from the drop down menu. Survey Names and Description will appear on the welcome screen to the surveys, see the image below to see how they're used. Note that Survey Name will be put between "Welcome to the" and "Survey!", so keep that in mind when making a survey name.<br /><img src="~/Content/images/faq/create2.png" class="help-img" /></li>
+                            <li class="help-li">Click the button labeled "+Add Question" to add a question to the survey. Surveys require at least one question.</li>
+                            <li class="help-li">In the box marked "Text", enter a question.</li>
+                            <li class="help-li">
+                                Select a question type from the dropdown marked "Type". The different question types are as follows:
+                                <br />&bull; MultipleChoiceChooseMany - A multiple choice question that allows the user to select as many options as they want. An option is available to limit the number of options selected.
+                                <br />&bull; MultipleChoiceChooseOne - A multiple choice question that only allows one answer from the user.
+                                <br />&bull; ShortAnswer - A free-form text box for users to enter text into.
+                                <br />&bull; Slider - A slider that allows the user to select an option between a range of values. Requires three choices.
+                                <br />&bull; ExhibitsChooseMany - A special question type that allows users to select their favorite exhibits.
+                                <br />&bull; Spinner - A number input question that gives the user up and down buttons to select their response.
+                            </li>
+                            <li class="help-li">For questions that require at least one choice (MultipleChoiceChooseMany, MultipleChoiceChooseOne, Slider), click the button marked "+Add Choice" and fill out the required information. <br /><img src="~/Content/images/faq/create4.png" class="help-img"><br />"The "Image" option allows you to add an image that appears next to the choice text in the survey.<br /><img src="~/Content/images/faq/create3.png" class="help-img" /></li>
+                            <li class="help-li">To delete a choice, click the red X to the right of the choice.</li>
+                            <li class="help-li">To delete a question, click the red X at the top right corner of the question box.</li>
+                            <li class="help-li">To change the order of the questions, click the title of the question you want to move and drag it to the location you want.<br /><img src="~/Content/images/faq/create5.png" class="help-img" /></li>
+                            <li class="help-li">Save the survey by clicking the green button labeled "Save".</li>
+                            <li class="help-li">You have now completed a survey!</li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#sq1">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
                     </div>
                 </div>
             </div>
@@ -35,7 +60,15 @@
                 </div>
                 <div id="sq2" class="accordion-body collapse">
                     <div class="accordion-inner">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis iaculis ex. Ut ac justo vel orci lobortis efficitur. Proin eu congue tellus. Phasellus posuere quam tortor, ut scelerisque velit tempus at. Nullam consectetur lacus sed nibh semper, eget cursus quam venenatis. Nulla quis faucibus sapien, et interdum sem. Donec venenatis ligula ut mauris laoreet, vitae luctus tellus mollis.
+                        <ol>
+                            <li class="help-li">Navigate to the Surveys page, click the survey you want to edit, and click the button labeled "Edit".<br/><img src="~/Content/images/faq/edit_survey1.png" class="help-img"></li>
+                            <li class="help-li">From this screen, edit anything that needs to be changed. If you need help with what options on this screen do what, please see the above question.</li>
+                            <li class="help-li">When done, make sure to hit the button labeled "Save" to save your changes.</li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#sq2">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr/>
                     </div>
                 </div>
             </div>
@@ -48,33 +81,56 @@
                 </div>
                 <div id="sq3" class="accordion-body collapse">
                     <div class="accordion-inner">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis iaculis ex. Ut ac justo vel orci lobortis efficitur. Proin eu congue tellus. Phasellus posuere quam tortor, ut scelerisque velit tempus at. Nullam consectetur lacus sed nibh semper, eget cursus quam venenatis. Nulla quis faucibus sapien, et interdum sem. Donec venenatis ligula ut mauris laoreet, vitae luctus tellus mollis.
+                        Duplicating a survey allows you to create a copy of a survey. This should be done if you want to make a new survey that's similar to another survey, but don't want to make any changes to the original survey.
+                        To duplicate a survey:
+                        <ol>
+                            <li class="help-li">Select the survey you wish to duplicate and click the button labeled "Duplicate".<br/><img src="~/Content/images/faq/duplicate1.png" class="help-img" /></li>
+                            <li class="help-li">After clicking, the survey will be duplicated!<br/><img src="~/Content/images/faq/duplicate2.png" class="help-img" /></li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#sq3">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
                     </div>
                 </div>
             </div>
 
             <div class="accordion-group">
                 <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#sq6">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#sq4">
                         How do I delete a survey?
                     </a>
                 </div>
-                <div id="sq6" class="accordion-body collapse">
+                <div id="sq4" class="accordion-body collapse">
                     <div class="accordion-inner">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis iaculis ex. Ut ac justo vel orci lobortis efficitur. Proin eu congue tellus. Phasellus posuere quam tortor, ut scelerisque velit tempus at. Nullam consectetur lacus sed nibh semper, eget cursus quam venenatis. Nulla quis faucibus sapien, et interdum sem. Donec venenatis ligula ut mauris laoreet, vitae luctus tellus mollis.
+                        <ol>
+                            <li class="help-li">Select the survey you wish to delete from the list, and click the button labeled "Delete". <br/><img src="~/Content/images/faq/delete1.png" class="help-img"/></li>
+                            <li class="help-li">You will be taken to a confirmation screen, click the button labeled "Delete" to permanently delete the survey or "Back to list" to go back to the survey list.</li>
+                            <li class="help-li">The survey is now deleted!<img src="~/Content/images/faq/delete2.png" class="help-img"/></li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#sq4">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
                     </div>
                 </div>
             </div>
 
             <div class="accordion-group">
                 <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#sq7">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#sq5">
                         How do I deploy a survey to a tablet?
                     </a>
                 </div>
-                <div id="sq7" class="accordion-body collapse">
+                <div id="sq5" class="accordion-body collapse">
                     <div class="accordion-inner">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis iaculis ex. Ut ac justo vel orci lobortis efficitur. Proin eu congue tellus. Phasellus posuere quam tortor, ut scelerisque velit tempus at. Nullam consectetur lacus sed nibh semper, eget cursus quam venenatis. Nulla quis faucibus sapien, et interdum sem. Donec venenatis ligula ut mauris laoreet, vitae luctus tellus mollis.
+                        <ol>
+                            <li class="help-li">i have no clue lol</li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#sq5">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
                     </div>
                 </div>
             </div>
@@ -82,33 +138,48 @@
         </div>
 
         <h3>Reports</h3>
-           <div class="accordion" id="reportsAccordion">
-               <div class="accordion-group">
-                   <div class="accordion-heading">
-                       <a class="accordion-toggle" data-toggle="collapse" data-parent="#reportsAccordion" href="#rq1">
-                           How do I see the collected data and answers from a survey?
-                       </a>
-                   </div>
-                   <div id="rq1" class="accordion-body collapse">
-                       <div class="accordion-inner">
-                           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis iaculis ex. Ut ac justo vel orci lobortis efficitur. Proin eu congue tellus. Phasellus posuere quam tortor, ut scelerisque velit tempus at. Nullam consectetur lacus sed nibh semper, eget cursus quam venenatis. Nulla quis faucibus sapien, et interdum sem. Donec venenatis ligula ut mauris laoreet, vitae luctus tellus mollis.
-                       </div>
-                   </div>
-               </div>
-
-               <div class="accordion-group">
-                   <div class="accordion-heading">
-                       <a class="accordion-toggle" data-toggle="collapse" data-parent="#reportsAccordion" href="#rq2">
-                           How do I download the data and answers from a survey?
-                       </a>
-                   </div>
-                   <div id="rq2" class="accordion-body collapse">
-                       <div class="accordion-inner">
-                           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis iaculis ex. Ut ac justo vel orci lobortis efficitur. Proin eu congue tellus. Phasellus posuere quam tortor, ut scelerisque velit tempus at. Nullam consectetur lacus sed nibh semper, eget cursus quam venenatis. Nulla quis faucibus sapien, et interdum sem. Donec venenatis ligula ut mauris laoreet, vitae luctus tellus mollis.
-                       </div>
-                   </div>
-               </div>
+        <div class="accordion" id="reportsAccordion">
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#reportsAccordion" href="#rq1">
+                        How do I see the collected data and answers from a survey?
+                    </a>
+                </div>
+                <div id="rq1" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <ol>
+                            <li class="help-li">Select the survey from the survey list you would like to view data from, and click the.<br/><img src="~/Content/images/faq/view_report1.png" class="help-img"/></li>
+                            <li class="help-li">Click the question you'd like to see data of from the menu on the left. <br/><img src="~/Content/images/faq/view_report2.png" class="help-img" /></li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#rq1">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
+                    </div>
+                </div>
             </div>
+
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#reportsAccordion" href="#rq2">
+                        How do I download the data and answers from a survey?
+                    </a>
+                </div>
+                <div id="rq2" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <ol>
+                            <li class="help-li">Navigate to the report page of the survey you want to view following the above question.</li>
+                            <li class="help-li">Click the button labeled "Download Report".<br /><img src="~/Content/images/faq/download_report.png" class="help-img"/></li>
+                            <li class="help-li">Open the downloaded file in Excel.</li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#rq2">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <h3>Exhibits</h3>
 
@@ -116,25 +187,36 @@
             <div class="accordion-group">
                 <div class="accordion-heading">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#exhibitAccordion" href="#eq1">
-                        How do I create an exhibit?
+                        What are Exhibits?
                     </a>
                 </div>
                 <div id="eq1" class="accordion-body collapse">
                     <div class="accordion-inner">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis iaculis ex. Ut ac justo vel orci lobortis efficitur. Proin eu congue tellus. Phasellus posuere quam tortor, ut scelerisque velit tempus at. Nullam consectetur lacus sed nibh semper, eget cursus quam venenatis. Nulla quis faucibus sapien, et interdum sem. Donec venenatis ligula ut mauris laoreet, vitae luctus tellus mollis.
+                        <ol>
+                            <li class="help-li">i have no clue lol</li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#eq1">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
                     </div>
                 </div>
             </div>
-
             <div class="accordion-group">
                 <div class="accordion-heading">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#exhibitAccordion" href="#eq2">
-                        How do I delete an exhibit?
+                        How do I create an exhibit?
                     </a>
                 </div>
                 <div id="eq2" class="accordion-body collapse">
                     <div class="accordion-inner">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis iaculis ex. Ut ac justo vel orci lobortis efficitur. Proin eu congue tellus. Phasellus posuere quam tortor, ut scelerisque velit tempus at. Nullam consectetur lacus sed nibh semper, eget cursus quam venenatis. Nulla quis faucibus sapien, et interdum sem. Donec venenatis ligula ut mauris laoreet, vitae luctus tellus mollis.
+                        <ol>
+                            <li class="help-li">i have no clue lol</li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#eq2">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
                     </div>
                 </div>
             </div>
@@ -142,12 +224,37 @@
             <div class="accordion-group">
                 <div class="accordion-heading">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#exhibitAccordion" href="#eq3">
-                        How do I view an exhibit?
+                        How do I delete an exhibit?
                     </a>
                 </div>
                 <div id="eq3" class="accordion-body collapse">
                     <div class="accordion-inner">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis iaculis ex. Ut ac justo vel orci lobortis efficitur. Proin eu congue tellus. Phasellus posuere quam tortor, ut scelerisque velit tempus at. Nullam consectetur lacus sed nibh semper, eget cursus quam venenatis. Nulla quis faucibus sapien, et interdum sem. Donec venenatis ligula ut mauris laoreet, vitae luctus tellus mollis.
+                        <ol>
+                            <li class="help-li">i have no clue lol</li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#sq3">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#exhibitAccordion" href="#eq4">
+                        How do I view an exhibit?
+                    </a>
+                </div>
+                <div id="eq4" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <ol>
+                            <li class="help-li">i have no clue lol</li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#eq4">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
                     </div>
                 </div>
             </div>
@@ -156,6 +263,27 @@
         <h3>Themes</h3>
 
         <div class="accordion" id="themeAccordion">
+
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#themeAccordion" href="#tq4">
+                        What are Themes?
+                    </a>
+                </div>
+                <div id="tq4" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <ol>
+                            <li class="help-li">i have no clue lol</li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#tq4">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+        
+
             <div class="accordion-group">
                 <div class="accordion-heading">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#themeAccordion" href="#tq1">
@@ -164,7 +292,13 @@
                 </div>
                 <div id="tq1" class="accordion-body collapse">
                     <div class="accordion-inner">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis iaculis ex. Ut ac justo vel orci lobortis efficitur. Proin eu congue tellus. Phasellus posuere quam tortor, ut scelerisque velit tempus at. Nullam consectetur lacus sed nibh semper, eget cursus quam venenatis. Nulla quis faucibus sapien, et interdum sem. Donec venenatis ligula ut mauris laoreet, vitae luctus tellus mollis.
+                        <ol>
+                            <li class="help-li">i have no clue lol</li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#tq1">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
                     </div>
                 </div>
             </div>
@@ -177,7 +311,13 @@
                 </div>
                 <div id="tq2" class="accordion-body collapse">
                     <div class="accordion-inner">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis iaculis ex. Ut ac justo vel orci lobortis efficitur. Proin eu congue tellus. Phasellus posuere quam tortor, ut scelerisque velit tempus at. Nullam consectetur lacus sed nibh semper, eget cursus quam venenatis. Nulla quis faucibus sapien, et interdum sem. Donec venenatis ligula ut mauris laoreet, vitae luctus tellus mollis.
+                        <ol>
+                            <li class="help-li">i have no clue lol</li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#tq2">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
                     </div>
                 </div>
             </div>
@@ -190,7 +330,13 @@
                 </div>
                 <div id="tq3" class="accordion-body collapse">
                     <div class="accordion-inner">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis iaculis ex. Ut ac justo vel orci lobortis efficitur. Proin eu congue tellus. Phasellus posuere quam tortor, ut scelerisque velit tempus at. Nullam consectetur lacus sed nibh semper, eget cursus quam venenatis. Nulla quis faucibus sapien, et interdum sem. Donec venenatis ligula ut mauris laoreet, vitae luctus tellus mollis.
+                        <ol>
+                            <li class="help-li">i have no clue lol</li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#tq3">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
                     </div>
                 </div>
             </div>
@@ -201,13 +347,38 @@
         <div class="accordion" id="imagesAccordion">
             <div class="accordion-group">
                 <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#imagesAccordion" href="#iq3">
+                        What are Images?
+                    </a>
+                </div>
+                <div id="iq3" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <ol>
+                            <li class="help-li">i have no clue lol</li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#iq3">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-group">
+                <div class="accordion-heading">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#imagesAccordion" href="#iq1">
                         How do I upload an image?
                     </a>
                 </div>
                 <div id="iq1" class="accordion-body collapse">
                     <div class="accordion-inner">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis iaculis ex. Ut ac justo vel orci lobortis efficitur. Proin eu congue tellus. Phasellus posuere quam tortor, ut scelerisque velit tempus at. Nullam consectetur lacus sed nibh semper, eget cursus quam venenatis. Nulla quis faucibus sapien, et interdum sem. Donec venenatis ligula ut mauris laoreet, vitae luctus tellus mollis.
+                        <ol>
+                            <li class="help-li">i have no clue lol</li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#iq1">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
                     </div>
                 </div>
             </div>
@@ -220,12 +391,16 @@
                 </div>
                 <div id="iq2" class="accordion-body collapse">
                     <div class="accordion-inner">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis iaculis ex. Ut ac justo vel orci lobortis efficitur. Proin eu congue tellus. Phasellus posuere quam tortor, ut scelerisque velit tempus at. Nullam consectetur lacus sed nibh semper, eget cursus quam venenatis. Nulla quis faucibus sapien, et interdum sem. Donec venenatis ligula ut mauris laoreet, vitae luctus tellus mollis.
+                        <ol>
+                            <li class="help-li">i have no clue lol</li>
+                        </ol>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#surveyAccordion" href="#iq2">
+                            Close Question
+                        </a> | <a href="#">Back to top</a>
+                        <hr />
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>

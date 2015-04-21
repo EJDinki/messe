@@ -12,7 +12,7 @@ using System.IO;
 
 namespace DiscoveryCenter.Controllers
 {
-    // [Authorize]
+    [Authorize]
     public class CreationController : Controller
     {
         private SurveyContext db = new SurveyContext();
@@ -25,6 +25,22 @@ namespace DiscoveryCenter.Controllers
             var listText = choices.Split(';');
             var listImage = images.Split(';');
 
+            if (typeIndex == 3)
+            {
+                for (int i = 0; i < listText.Length; i++)
+                {
+                    Choice c = new Choice();
+                    c.Text = listText[i];
+
+                    if (i < listImage.Length)
+                        c.ImageName = listImage[i];
+
+                    listChoices.Add(c);
+                }
+            }
+            else
+            {
+
             for(int i=0; i < listText.Length; i ++)
             {
                 Choice c = new Choice();
@@ -35,6 +51,8 @@ namespace DiscoveryCenter.Controllers
 
                 listChoices.Add(c);
             }
+        }
+            System.Diagnostics.Debug.WriteLine(listText.Length);
             return PartialView("_ChoicesInputGroup", new Question() { Type = (Question.QuestionType)typeIndex, Choices = listChoices });
         }
 
@@ -51,7 +69,7 @@ namespace DiscoveryCenter.Controllers
             {
                 storedImageNames.Add(new SelectListItem() { Text = Path.GetFileName(image), Value = choiceImagePartial + Path.GetFileName(image) });
             }
-
+            System.Diagnostics.Debug.WriteLine("test");
             return PartialView("_ChoiceBox", new ChoiceBoxViewModel() { 
                 NameAndId = nameAndId,
                 ImgChoiceId = imgId,

@@ -61,9 +61,11 @@
         @Html.LabelFor(m => m.Choices, new { @class = "col-md-3 control-label" })
         <div class="col-md-9" style="padding-left:0px">
             <div class="AppendChoices">
-                @if (Model.Type == Question.QuestionType.Slider)
-                {
-                    @Html.Partial("_ChoiceBox", new ChoiceBoxViewModel()
+                @{
+    int length = 0;
+    if (Model.Type == Question.QuestionType.Slider)
+    {
+        @Html.Partial("_ChoiceBox", new ChoiceBoxViewModel()
             {
                 NameAndId = String.Format("Questions[{0}].Choice[{1}]", guid, 0),
                 ImgChoiceId = String.Format("Questions[{0}].Img[{1}]", guid, 0),
@@ -72,7 +74,12 @@
                 AvailableImages = storedImageNames,
                 AllowDelete = allowDelete
             })
-                    @Html.Partial("_ChoiceBox", new ChoiceBoxViewModel()
+
+        foreach (SelectListItem selItem in storedImageNames)
+        {
+            selItem.Selected = false;
+        }
+        @Html.Partial("_ChoiceBox", new ChoiceBoxViewModel()
             {
                 NameAndId = String.Format("Questions[{0}].Choice[{1}]", guid, 1),
                 ImgChoiceId = String.Format("Questions[{0}].Img[{1}]", guid, 1),
@@ -81,21 +88,19 @@
                 AvailableImages = storedImageNames,
                 AllowDelete = allowDelete
             })
-                    @Html.Partial("_ChoiceBox", new ChoiceBoxViewModel()
-            {
-                NameAndId = String.Format("Questions[{0}].Choice[{1}]", guid, 2),
-                ImgChoiceId = String.Format("Questions[{0}].Img[{1}]", guid, 2),
-                Value = Model.Choices[2].Text,
-                ImageName = Model.Choices[2].ImageName,
-                AvailableImages = storedImageNames,
-                AllowDelete = allowDelete
-            })
-                }
-                else
-                {
-                    for (int i = 0; i < Model.Choices.Count; i++)
-                    {
-                        @Html.Partial("_ChoiceBox", new ChoiceBoxViewModel()
+
+        foreach (SelectListItem selItem in storedImageNames)
+        {
+            selItem.Selected = false;
+        }
+    }
+    else
+    {
+        length = Model.Choices.Count;
+
+        for (int i = 0; i < length; i++)
+        {
+            @Html.Partial("_ChoiceBox", new ChoiceBoxViewModel()
             {
                 NameAndId = String.Format("Questions[{0}].Choice[{1}]", guid, i),
                 ImgChoiceId = String.Format("Questions[{0}].Img[{1}]", guid, i),
@@ -104,21 +109,26 @@
                 AvailableImages = storedImageNames,
                 AllowDelete = allowDelete
             })
-                        foreach (SelectListItem selItem in storedImageNames)
-                        {
-                            selItem.Selected = false;
-                        }
-                    }
-                }
+            foreach (SelectListItem selItem in storedImageNames)
+            {
+                selItem.Selected = false;
+            }
+        }
+        }
+    }
+
+
             </div>
+            @if (Model.Type == Question.QuestionType.MultipleChoiceChooseMany || Model.Type == Question.QuestionType.MultipleChoiceChooseOne)
+            {
             <div class="col-md-5">
-                @if (Model.Type == Question.QuestionType.MultipleChoiceChooseMany || Model.Type == Question.QuestionType.MultipleChoiceChooseOne)
-                {
+                
                     <button id="addChoice" onclick="AppendChoiceBox(this, '@(allowDelete.ToString())')" class="btn btn-primary" type="button">
                         <span class="glyphicon glyphicon-plus"></span> Add Choice
                     </button>
-                }
+            
             </div>
+            }
         </div>
     </div>
 }

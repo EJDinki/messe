@@ -520,14 +520,24 @@ ul{
     width:100%;
 }
 
-/*---------------Help stuff----------------------------*/
+/*---------------Help-----------------------------------*/
 
 .accordion-toggle{
     padding-left:15px;
+    padding-bottom:10px;
 }
 
 .accordion-body{
     padding-left:15px;
+}
+
+.help-img {
+    max-width:100%;
+    height:auto;
+}
+.help-li {
+    margin-bottom:5px;
+    margin-top:5px;
 }
 
 /*---------------Login---------------------------------*/

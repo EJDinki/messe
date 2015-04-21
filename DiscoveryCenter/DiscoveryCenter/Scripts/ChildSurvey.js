@@ -1,1 +1,1 @@
-﻿console.log("Child:its working");
+console.log("Child:its working");
