@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNet.Identity
+@model EventHub.Models.ManageUserViewModel
+
+@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@using (Html.BeginForm("Settings", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="col-md-offset-2 col-md-8 panel">
+        @Html.AntiForgeryToken()
+        <h4>Change Password</h4>
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(m => m.OldPassword, new { @class = "col-md-5 control-label" })
+            <div class="col-md-7">
+                @Html.PasswordFor(m => m.OldPassword, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.NewPassword, new { @class = "col-md-5 control-label" })
+            <div class="col-md-7">
+                @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-5 control-label" })
+            <div class="col-md-7">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                <div class="text-danger">@Html.ValidationSummary()</div>
+            </div>
+        </div>
+        <center>
+            <p class="text-success">@ViewBag.StatusMessage</p>
+        </center>
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-7">
+                <input type="submit" value="Change password" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}

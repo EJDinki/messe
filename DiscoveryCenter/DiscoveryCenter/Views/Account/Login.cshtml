@@ -10,7 +10,7 @@
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true)
+                
                 <div class="form-group">
                     @Html.LabelFor(m => m.UserName, new { @class = "control-label" })
                     <div>
@@ -24,7 +24,9 @@
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.Password)
                     </div>
+                    <div class="text-danger">@Html.ValidationSummary(true)</div>
                 </div>
+                
                 <div class="clearfix">
                     <div class="loginButton">
                         <input type="submit" value="Log in" class="btn btn-default" />
