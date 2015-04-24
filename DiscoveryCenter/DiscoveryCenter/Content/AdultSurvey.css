@@ -17,11 +17,11 @@ h1,h2,h3,h4,h5{
 
 .panel{
     border-radius: 0px;
-    background-color: #FFFFDB
+    background-color: #faff45
 }
 
 .panel-heading{
-    background-color: #FFFFDB;
+    background-color: #faff45;
 }
 
 .panel-heading.childheading img{

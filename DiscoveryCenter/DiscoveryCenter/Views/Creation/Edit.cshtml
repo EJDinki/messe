@@ -9,7 +9,6 @@
 @using (Html.BeginForm("Edit", "Creation", FormMethod.Post, new {@class="clearfix"}))
 {
     @Html.AntiForgeryToken()
-    <br />
     <div class="panel panel-body panel-default fixed-sidebar">
         <h2>Edit Survey</h2>
         <div class="form-group clearfix">
@@ -43,26 +42,29 @@
     </div>
 
 
-    <div class="form-horizontal panel panel-body edit-main-panel clearfix">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Survey.Id)
-        @Html.HiddenFor(model => model.Survey.CreateDate)
+    <div class="edit-main-panel-wrapper">
+        <div class="form-horizontal panel panel-body edit-main-panel clearfix">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Survey.Id)
+            @Html.HiddenFor(model => model.Survey.CreateDate)
 
-        <div id="questionDivList">
-            <div id="tip">
-                @Html.ValidationMessage("Questions", new { @class = "text-danger" })
-                <h2>No Questions in survey.</h2>
-                <br>
-                <h3><span class="glyphicon glyphicon-arrow-left"></span> Press '+Add Question' to add a question</h3>
+            <div id="questionDivList">
+                <div id="tip">
+                    @Html.ValidationMessage("Questions", new { @class = "text-danger" })
+                    <h2>No Questions in survey.</h2>
+                    <br>
+                    <h3><span class="glyphicon glyphicon-arrow-left"></span> Press '+Add Question' to add a question</h3>
+                </div>
+                <ul id="draggablePanelList" class="list-unstyled">
+                    @for (int i = 0; i < Model.Survey.Questions.Count; i++)
+                    {
+                        @Html.Partial("Question", Model.Survey.Questions[i])
+                    }
+                </ul>
             </div>
-            <ul id="draggablePanelList" class="list-unstyled">
-                @for (int i = 0; i < Model.Survey.Questions.Count; i++)
-                {
-                    @Html.Partial("Question", Model.Survey.Questions[i])
-                }
-            </ul>
         </div>
     </div>
+    
 }
 
 @section scripts{
