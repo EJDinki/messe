@@ -36,5 +36,7 @@ namespace DiscoveryCenter.Models
         public List<String> ShortAnswers { get; set; }
 
         public String ChartJSON { get; set; }
+
+        public List<Choice> Choices { get; set; }
     }
 }

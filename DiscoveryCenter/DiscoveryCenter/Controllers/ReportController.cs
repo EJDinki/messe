@@ -56,6 +56,7 @@ namespace DiscoveryCenter.Controllers
                 report.Type = question.Type;
                 report.QuestionIndex = question.IndexInSurvey;
                 report.Text = question.Text;
+                report.Choices = question.Choices;
 
                 if (report.Type == Question.QuestionType.ShortAnswer)
                 {
@@ -65,6 +66,15 @@ namespace DiscoveryCenter.Controllers
                 }
                 else
                 {
+                    if (report.Type != Question.QuestionType.Slider)
+                    {
+                        foreach (var choice in question.Choices)
+                        {
+                            report.Counts.Add(choice.Text, 0);
+                        }
+
+                    }
+
                     foreach (var answer in question.Answers)
                     {
                         if (!report.Counts.ContainsKey(answer.Value))
