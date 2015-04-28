@@ -38,11 +38,11 @@ namespace DiscoveryCenter.Controllers
             {
                 file.SaveAs(Path.Combine(Server.MapPath("~" + choiceImagePartial), Path.GetFileName(file.FileName)));
             }
-            else
+            else if(location == "exhibits")
             {
                 file.SaveAs(Path.Combine(Server.MapPath("~" + exhibitImagePartial), Path.GetFileName(file.FileName)));
             }
-            return View("Index", GetImageLocations());
+            return RedirectToAction("Index");
         }
 
         public ActionResult DeleteImage(string location)
@@ -52,7 +52,7 @@ namespace DiscoveryCenter.Controllers
             if(System.IO.File.Exists(truePath))
                 System.IO.File.Delete(truePath);
             
-            return View("Index",GetImageLocations());
+            return RedirectToAction("Index");
         }
 
         /// <summary>
