@@ -65,33 +65,22 @@
     int length = 0;
     if (Model.Type == Question.QuestionType.Slider)
     {
-        @Html.Partial("_ChoiceBox", new ChoiceBoxViewModel()
-            {
-                NameAndId = String.Format("Questions[{0}].Choice[{1}]", guid, 0),
-                ImgChoiceId = String.Format("Questions[{0}].Img[{1}]", guid, 0),
-                Value = Model.Choices[0].Text,
-                ImageName = Model.Choices[0].ImageName,
-                AvailableImages = storedImageNames,
-                AllowDelete = allowDelete
-            })
+        for (int i = 0; i < 3;i++ )
+        { 
+            @Html.Partial("_ChoiceBox", new ChoiceBoxViewModel()
+                {
+                    NameAndId = String.Format("Questions[{0}].Choice[{1}]", guid, i),
+                    ImgChoiceId = String.Format("Questions[{0}].Img[{1}]", guid, i),
+                    Value = Model.Choices[i].Text,
+                    ImageName = Model.Choices[i].ImageName,
+                    AvailableImages = storedImageNames,
+                    AllowDelete = allowDelete
+                })
 
-        foreach (SelectListItem selItem in storedImageNames)
-        {
-            selItem.Selected = false;
-        }
-        @Html.Partial("_ChoiceBox", new ChoiceBoxViewModel()
+            foreach (SelectListItem selItem in storedImageNames)
             {
-                NameAndId = String.Format("Questions[{0}].Choice[{1}]", guid, 1),
-                ImgChoiceId = String.Format("Questions[{0}].Img[{1}]", guid, 1),
-                Value = Model.Choices[1].Text,
-                ImageName = Model.Choices[1].ImageName,
-                AvailableImages = storedImageNames,
-                AllowDelete = allowDelete
-            })
-
-        foreach (SelectListItem selItem in storedImageNames)
-        {
-            selItem.Selected = false;
+                selItem.Selected = false;
+            }
         }
     }
     else

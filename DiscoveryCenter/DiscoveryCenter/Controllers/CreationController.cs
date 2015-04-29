@@ -20,17 +20,20 @@ namespace DiscoveryCenter.Controllers
         private static readonly string choiceImagePartial = "/Content/images/choiceImage/";
 
         public PartialViewResult RefreshChoices(int typeIndex, string choices, string images)
-        {
+        {   
             var listChoices = new List<Choice>();
             var listText = choices.Split(';');
             var listImage = images.Split(';');
 
-            if (typeIndex == 3)
+            if ((Question.QuestionType)typeIndex == Question.QuestionType.Slider)
             {
-                for (int i = 0; i < listText.Length; i++)
+                //Ugly magic number, but slider hard coded to have 3 choices
+                for (int i = 0; i < 3; i++)
                 {
                     Choice c = new Choice();
-                    c.Text = listText[i];
+
+                    if(i < listText.Length)
+                        c.Text = listText[i];
 
                     if (i < listImage.Length)
                         c.ImageName = listImage[i];
@@ -40,7 +43,8 @@ namespace DiscoveryCenter.Controllers
             }
             else
             {
-
+            
+                //If not slider, Choices should be based on the number of choices previously filled out
             for(int i=0; i < listText.Length; i ++)
             {
                 Choice c = new Choice();
@@ -52,7 +56,6 @@ namespace DiscoveryCenter.Controllers
                 listChoices.Add(c);
             }
         }
-            System.Diagnostics.Debug.WriteLine(listText.Length);
             return PartialView("_ChoicesInputGroup", new Question() { Type = (Question.QuestionType)typeIndex, Choices = listChoices });
         }
 
