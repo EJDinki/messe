@@ -26,11 +26,13 @@ namespace DiscoveryCenter.Migrations
             //accounts
             try
             {
-                AccountDbContext identityContext = new AccountDbContext();
-                var manager = new UserManager<Account>(new UserStore<Account>(identityContext));
-                var user1 = new Account { Id = "1", UserName = "admin" };
-                IdentityResult res = manager.Create(user1, "admin101");
-                identityContext.SaveChanges();
+                using (AccountDbContext identityContext = new AccountDbContext())
+                {
+                    var manager = new UserManager<Account>(new UserStore<Account>(identityContext));
+                    var user1 = new Account { Id = "1", UserName = "admin" };
+                    IdentityResult res = manager.Create(user1, "admin101");
+                    identityContext.SaveChanges();
+                }
             }
             catch (Exception) { }
 
@@ -118,8 +120,9 @@ namespace DiscoveryCenter.Migrations
                     {
                         Id = 3,
                         IndexInSurvey = 3,
-                        Text = "What was your child's favorite exhibit at The Discovery Center( Please choose only 4)?",
+                        Text = "What was your child's favorite exhibit at The Discovery Center (Please choose only 4)?",
                         Type = Question.QuestionType.ExhibitsChooseMany,
+                        MaxSelectedChoices = 4,
                         SurveyID = 1
                     },
                     new Question()

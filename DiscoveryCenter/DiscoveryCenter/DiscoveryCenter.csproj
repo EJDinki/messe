@@ -319,7 +319,6 @@
     <Content Include="Views\Home\ExhibitsChooseMany.cshtml" />
     <Content Include="Views\Home\ThankYou.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
-    <Content Include="Views\Home\SpinnerQuestion.cshtml" />
     <Content Include="Views\Theme\Index.cshtml" />
     <Content Include="Views\Theme\Edit.cshtml" />
     <Content Include="Views\Images\Index.cshtml" />
