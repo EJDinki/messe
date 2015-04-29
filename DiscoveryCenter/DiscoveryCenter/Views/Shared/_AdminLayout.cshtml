@@ -19,7 +19,9 @@
     <div class="navbar navbar-inverse  navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                @Html.ActionLink("Admin Console", "Index", "Creation", null, new { @class = "navbar-brand" })
+                @if (!Request.IsAuthenticated) { 
+                @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "navbar-brand" })
+                }
             </div>
             <div class="navbar-right">
 

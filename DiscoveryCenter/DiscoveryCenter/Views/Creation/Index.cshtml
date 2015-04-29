@@ -13,29 +13,36 @@
         <div class="clearfix">
             <div class="col-md-4" style="padding-left:0px">
                 <p>
+                    @if (Request.IsAuthenticated) {
                     <a class="btn btn-primary" href="@Url.Action("Create","Creation")" id="createSurvey">
                         <i class='glyphicon glyphicon-plus'></i> Create New Survey
                     </a>
+                    }
                 </p>
             </div>
 
             <div class="col-md-8 selection-buttons " style="padding-right:0px">
                 <div class="btn-group pull-right">
+                    @if (Request.IsAuthenticated) { 
                     <a id="editSurvey" class="btn btn-default" type="button" href="@Url.Action("Edit", "Creation", new { id = "" })">
                         <span class="glyphicon glyphicon-edit"></span> Edit
                     </a>
                     <a id="duplicateSurvey" class="btn btn-default" type="button" href="@Url.Action("Duplicate", "Creation", new { id = "" })">
                         <span class="glyphicon glyphicon-duplicate"></span> Duplicate
                     </a>
+                    }
                     <a id="viewSurvey" class="btn btn-default" type="button" href="@Url.Action("Index", "Home", new { id = "" })">
                         <span class="glyphicon glyphicon-eye-open"></span> View Survey
                     </a>
+
+                    @if (Request.IsAuthenticated) {
                     <a id="reportSurvey" class="btn btn-default" type="button" href="@Url.Action("Index", "Report", new { id = "" })">
                         <span class="glyphicon glyphicon-list-alt"></span> View Report
                     </a>
                     <a id="deleteSurvey" class="btn btn-danger" type="button" href="@Url.Action("Delete", "Creation", new { id = ""})">
                         <span class="glyphicon glyphicon-remove"></span> Delete
                     </a>
+                    }
                 </div>
             </div>
         </div>

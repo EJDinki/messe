@@ -12,13 +12,14 @@ using System.IO;
 
 namespace DiscoveryCenter.Controllers
 {
-    [Authorize]
+    
     public class CreationController : Controller
     {
         private SurveyContext db = new SurveyContext();
         private static readonly int surveyPerPage = 10;
         private static readonly string choiceImagePartial = "/Content/images/choiceImage/";
 
+        [Authorize]
         public PartialViewResult RefreshChoices(int typeIndex, string choices, string images)
         {   
             var listChoices = new List<Choice>();
@@ -59,6 +60,7 @@ namespace DiscoveryCenter.Controllers
             return PartialView("_ChoicesInputGroup", new Question() { Type = (Question.QuestionType)typeIndex, Choices = listChoices });
         }
 
+        [Authorize]
         public PartialViewResult BlankChoiceBox(string value, string imageName ,bool allowDelete)
         {
             string guid = Guid.NewGuid().ToString();
@@ -81,6 +83,7 @@ namespace DiscoveryCenter.Controllers
                 AllowDelete = allowDelete });
         }
 
+        [Authorize]
         public ActionResult Duplicate(int id)
         {
             Survey survey = db.Surveys.Find(id);
@@ -107,6 +110,8 @@ namespace DiscoveryCenter.Controllers
 
             return RedirectToAction("index");
         }
+        
+        [Authorize]
         public ViewResult BlankQuestionRow(int id)
         {
             Survey survey = (from s in db.Surveys where s.Id == id select s).FirstOrDefault();
@@ -140,7 +145,7 @@ namespace DiscoveryCenter.Controllers
             return View(tuple);
         }
 
-        // GET: Creation/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -155,7 +160,7 @@ namespace DiscoveryCenter.Controllers
             return View(survey);
         }
 
-        // GET: Creation/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View("Edit", MakeCreationEditVM(new Survey()));
@@ -166,6 +171,7 @@ namespace DiscoveryCenter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([ModelBinder(typeof(SurveyModelBinder))] CreationEditViewModel cevm)
         {
             Survey survey = cevm.Survey;
@@ -181,7 +187,7 @@ namespace DiscoveryCenter.Controllers
             return View("Edit", MakeCreationEditVM(survey));
         }
 
-        // GET: Creation/Edit/5
+       [Authorize]
         public ActionResult Edit(int? id)
         {
             Session.Add("questionIndex", 0);
@@ -214,6 +220,7 @@ namespace DiscoveryCenter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([ModelBinder(typeof(SurveyModelBinder))] CreationEditViewModel cevm)
         {
             Survey survey = cevm.Survey;
@@ -305,7 +312,7 @@ namespace DiscoveryCenter.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Creation/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -323,6 +330,7 @@ namespace DiscoveryCenter.Controllers
         // POST: Creation/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             //Include Questions & Submissions in context in case they are orphaned.

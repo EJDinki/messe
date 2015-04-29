@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace DiscoveryCenter.Controllers
 {
+    [Authorize]
     public class ImagesController : Controller
     {
         private static readonly string exhibitImagePartial = "/Content/images/exhibits/";

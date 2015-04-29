@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace DiscoveryCenter.Controllers
 {
+    [Authorize]
     public class ThemeController : Controller
     {
         private SurveyContext db = new SurveyContext();
