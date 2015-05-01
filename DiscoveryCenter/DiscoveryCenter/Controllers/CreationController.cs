@@ -104,6 +104,11 @@ namespace DiscoveryCenter.Controllers
             foreach (var question in questions)
             {
                 question.SurveyID = survey.Id;
+                foreach (var choice in question.Choices)
+                {
+                    choice.ParentQuestion = question;
+                    db.Choices.Add(choice);
+                }
                 db.Questions.Add(question);
             }
             db.SaveChanges();
