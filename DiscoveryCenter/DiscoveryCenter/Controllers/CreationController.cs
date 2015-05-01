@@ -288,8 +288,22 @@ namespace DiscoveryCenter.Controllers
                         q.Choices = new List<Choice>();
                         for(int i=0; i < match.Choices.Count; i++)
                         {
-                            q.Choices[i].Text = match.Choices[i].Text;
-                            q.Choices[i].ImageName = match.Choices[i].ImageName;
+                            //If the old version has no match, the choice was added in edit. Add to db.
+                            if (i < q.Choices.Count)
+                            {
+                                q.Choices[i].Text = match.Choices[i].Text;
+                                q.Choices[i].ImageName = match.Choices[i].ImageName;
+                            }
+                            else
+                            {
+                                Choice addedChoice = new Choice()
+                                {
+                                    ParentQuestion = q,
+                                    Text = match.Choices[i].Text,
+                                    ImageName = match.Choices[i].ImageName
+                                };
+                                db.Choices.Add(addedChoice);
+                            }
                         }
                         q.MaxSelectedChoices = match.MaxSelectedChoices;
                         q.IndexInSurvey = match.IndexInSurvey;
