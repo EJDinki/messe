@@ -11,6 +11,11 @@
     @Html.AntiForgeryToken()
     <div class="panel panel-body panel-default fixed-sidebar">
         <h2>Edit Survey</h2>
+
+        <a class="btn btn-primary" href="@Url.Action("BlankQuestionRow", "Creation", new {id=Model.Survey.Id })" id="addItem">
+            <i class='glyphicon glyphicon-plus'></i> Add Question
+        </a>
+
         <div class="form-group clearfix">
             <div class="col-md-12" style="padding-left:0px">
                 <h4>Survey Name</h4>
@@ -30,14 +35,9 @@
                 @Html.ValidationSummary("Survey contains errors.", new { id = "valSum", @class = "text-danger pull-right" })
             }
             <center>
-                <a class="btn btn-default" href="@Url.Action("BlankQuestionRow", "Creation", new {id=Model.Survey.Id })" id="addItem">
-                    <i class='glyphicon glyphicon-plus'></i> Add Question
-                </a>
-                <button id="save" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
+                <button id="save" name="save" type="submit" class="btn btn-default" onclick="savePressed = true"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
+                <a class="btn btn-default" href="~/"><span class="glyphicon glyphicon-list-alt"></span> Back To List</a>
             </center>
-        </div>
-        <div>
-            @Html.ActionLink("Back to Survey List", "Index")
         </div>
     </div>
 
@@ -52,7 +52,6 @@
                 <div id="tip">
                     @Html.ValidationMessage("Questions", new { @class = "text-danger" })
                     <h2>No Questions in survey.</h2>
-                    <br>
                     <h3><span class="glyphicon glyphicon-arrow-left"></span> Press '+Add Question' to add a question</h3>
                 </div>
                 <ul id="draggablePanelList" class="list-unstyled">
@@ -70,6 +69,16 @@
 @section scripts{
     <script>
         NoQuestions();
+
+        savePressed = false;
+        //get form data before changes
+        var serialized = $('form').serialize();
+        $(window).bind('beforeunload', function (e) {
+            //compare the form data with current to see if there were changes
+            if (!savePressed && $('form').serialize() != serialized)
+                return "All survey changes will be discarded.";
+            else e = null; // i.e; if form state change show box not.
+        });
     </script>
 }
 
