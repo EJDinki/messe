@@ -250,10 +250,17 @@ namespace DiscoveryCenter.Controllers
                     for (int i = 0; i < choices.Count; i++)
                         if (String.IsNullOrWhiteSpace(choices[i].Text))
                         {
-                            ModelState.AddModelError(String.Format("Questions[{0}].Choices", question.IndexInSurvey, i),
+                            ModelState.AddModelError(String.Format("Questions[{0}].Choices", question.IndexInSurvey),
                                 String.Format("Choice {0} for question {1} is blank.", i+1, question.IndexInSurvey));
                             break;
                         }
+
+                    var hasDuplicates = choices.GroupBy(c => c.Text).Where(g => g.Count() > 1).Count() >= 1;
+                    if(hasDuplicates)
+                    {
+                        ModelState.AddModelError(String.Format("Questions[{0}].Choices", question.IndexInSurvey),
+                                String.Format("Question {0} contains duplicate choices", question.IndexInSurvey));
+                    }
                 }
 
                 //check if question text is invalid

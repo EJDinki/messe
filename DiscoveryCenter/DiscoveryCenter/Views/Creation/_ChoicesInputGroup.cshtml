@@ -57,6 +57,9 @@
     Model.Type != Question.QuestionType.ExhibitsChooseMany &&
     Model.Type != Question.QuestionType.Spinner)
 {
+    <span class="col-md-offset-2 col-md-10">
+            @Html.ValidationMessage(String.Format("Questions[{0}].Choices", Model.IndexInSurvey), new { @class = "text-danger" })
+        </span>
     <div class="form-group">
         @Html.LabelFor(m => m.Choices, new { @class = "col-md-3 control-label" })
         <div class="col-md-9" style="padding-left:0px">

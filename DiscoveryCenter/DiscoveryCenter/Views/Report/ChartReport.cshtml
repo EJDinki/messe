@@ -46,17 +46,27 @@
             var counts = new Array();
             var labelsplit;
 
+            var preLabel = "";
+            var stringLength = 30;
             for (var key in data) {
-                labelsplit = data[key][0].match(/.{1,55}/g);
-                if(labelsplit)
-                    labels.push(labelsplit.join("<br>"));
+                if (data[key][0].length > stringLength) {
+                    preLabel = data[key][0].substring(0,stringLength)
+                    if (preLabel.length == stringLength)
+                        preLabel += "..."
+                }
                 else
-                    labels.push("");
+                    preLabel = data[key][0];
+                labels.push(preLabel);
+
+                
                 counts.push(data[key][1]);
             }
 
+            var height = labels.length * 60;
+            console.log(height);
             var bargraph = $.jqplot('bargraphdiv', [counts],
                 {
+                    height: height,
                     animate: !$.jqplot.use_excanvas,
                     seriesDefaults: {
                         renderer: $.jqplot.BarRenderer,
@@ -91,6 +101,15 @@
                     }
                 }
             );
+            
+            $(document).ready(function () {
+                //pie charts table legend overflow
+                var legend = $("#piechartdiv").children("table.jqplot-table-legend");
+                var top = parseFloat(legend.css("top"));
+                if (top < 0) {
+                    $("#piechartdiv").css('margin-bottom', -top).css('margin-top', -top);
+                }
+            });
         }
     });
 </script>

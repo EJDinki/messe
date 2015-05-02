@@ -24,6 +24,7 @@ $(document).on({
 
 
 
+
 function AppendChoiceBox(ele, allowDelete) {
     myUrl = "/Creation/BlankChoiceBox?allowDelete=" + allowDelete;
 
