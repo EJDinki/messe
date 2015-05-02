@@ -1,5 +1,7 @@
 ﻿@model Tuple<int,int>
 
+@if (Model.Item1 > 1)
+{
 <center>
     <ul class="list-inline">
         @{
@@ -19,4 +21,5 @@
         }
     </ul>
 </center>
+}
 
