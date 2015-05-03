@@ -1,4 +1,5 @@
-﻿@model Tuple<List<string>,List<string>>
+﻿@*Tuple<Choices,Exhibits,Sounds>*@
+@model Tuple<List<string>, List<string>, List<string>>
 
 @{
     ViewBag.Title = "Images";
@@ -9,65 +10,137 @@
 
 <div class="container">
     
-    <div class="col-md-5">
-        <h2>Choice Icons</h2>
-        <p id="messages"></p>
-        <div class="panel panel-body ">
-            <div class="row">
-                @using (Html.BeginForm("Upload", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("location", "choices");
-                    <div class="col-md-offset-1 col-md-4">
-                        <input type="file" id="fileselect" name="file" />
-                    </div>
+    <div class="panel-group col-md-12" id="accordion">
+        <div class="panel panel-heading" style="background-color:blue">
+            <h2 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Choice Icons</a>
+                <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+            </h2>
+            <p id="messages"></p>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse out">
+            <div class="panel panel-body">
+                <div class="row">
+                    @using (Html.BeginForm("Upload", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("location", "choices");
+                        <div class="col-md-offset-1 col-md-4">
+                            <input type="file" id="fileselect" name="file" />
+                        </div>
 
-                    <div class="col-md-offset-3 col-md-4">
-                        <input id="submitbutton" type="submit" value="Upload Image" class="btn btn-default" />
-                    </div>
-                }
-            </div>
-            <div class="row">
-                @foreach (string s in Model.Item1)
-                {
-                    <div class ="col-md-4">
-                        <img src="@s" height="128" width="128" />
-                        @Html.ActionLink("Delete Image", "DeleteImage", new { location = s })
-                    </div>
-                }
+                        <div class="col-md-offset-3 col-md-4">
+                            <input id="submitbutton" type="submit" value="Upload Image" class="btn btn-default" />
+                        </div>
+                    }
+                </div>
+                <div class="row">
+                    @foreach (string s in Model.Item1)
+                    {
+                        <div class="col-md-4">
+                            <img src="@s" height="128" width="128" />
+                            @Html.ActionLink("Delete Image", "DeleteImage", new { location = s })
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-offset-2 col-md-5">
-        <h2>Exhibit Icons</h2>
-        <div class="panel panel-body">
-            <div class="row">
-                @using (Html.BeginForm("Upload", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("location", "exhibits");
-                    <div class="col-md-offset-1 col-md-4">
-                        <input type="file" id="fileselect2" name="file" />
-                    </div>
+    <div class="panel-group col-md-12" id="accordion2" style="padding-top:5%">
+        <div class="panel panel-heading" style="background-color:blue">
+            <h2 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">Exhibit Icons</a>
+                <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+            </h2>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse out">
+            <div class="panel panel-body">
+                <div class="row">
+                    @using (Html.BeginForm("Upload", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("location", "exhibits");
+                        <div class="col-md-offset-1 col-md-4">
+                            <input type="file" id="fileselect" name="file" />
+                        </div>
 
-                    <div class="col-md-offset-3 col-md-4">
-                        <input id="submitbutton2" type="submit" value="Upload Image" class="btn btn-default" />
-                    </div>
-                }
-            </div>
-            <div class="row">
-                @foreach (string s in Model.Item2)
-                {
-                    <div class="col-md-4">
-                        <img src="@s" height="128" width="128" />
-                        @Html.ActionLink("Delete Image", "DeleteImage", new { location = s })
-                    </div>
-                }
+                        <div class="col-md-offset-3 col-md-4">
+                            <input id="submitbutton2" type="submit" value="Upload Image" class="btn btn-default" />
+                        </div>
+                    }
+                </div>
+                <div class="row">
+                    @foreach (string s in Model.Item2)
+                    {
+                        <div class="col-md-4">
+                            <img src="@s" height="128" width="128" />
+                            @Html.ActionLink("Delete Image", "DeleteImage", new { location = s })
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>
 
+    <div class="panel-group col-md-12" id="accordion3" style="padding-top:5%">
+        <div class="panel panel-heading" style="background-color:blue">
+            <h2 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion3" href="#collapseThree">Sounds (mp3 only)</a>
+                <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+            </h2>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse out">
+            <div class="panel panel-body">
+                <div class="row">
+                    @using (Html.BeginForm("Upload", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("location", "sounds");
+                        <div class="col-md-offset-1 col-md-4">
+                            <input type="file" id="fileselect" name="file" />
+                        </div>
+
+                        <div class="col-md-offset-3 col-md-4">
+                            <input id="submitbutton3" type="submit" value="Upload Sound" class="btn btn-default" />
+                        </div>
+                    }
+                </div>
+                <div class="row">
+                    @foreach (string s in Model.Item3)
+                    {
+                        <div class="col-md-12">
+                            <audio preload="auto" controls>
+                                <source src="@s" type="audio/mpeg" />
+                            </audio>
+                            @Html.ActionLink("Delete Sound", "DeleteImage", new { location = s })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+@section scripts
+{
+    <script>
+        function toggleChevron(e) {
+            $(e.target)
+                .prev('.panel-heading')
+                .find("i.indicator")
+                .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+        }
+
+        $('#accordion').on('hidden.bs.collapse', toggleChevron);
+        $('#accordion').on('shown.bs.collapse', toggleChevron);
+
+        $('#accordion2').on('hidden.bs.collapse', toggleChevron);
+        $('#accordion2').on('shown.bs.collapse', toggleChevron);
+
+        $('#accordion3').on('hidden.bs.collapse', toggleChevron);
+        $('#accordion3').on('shown.bs.collapse', toggleChevron);
+    </script>
+}
 
 
