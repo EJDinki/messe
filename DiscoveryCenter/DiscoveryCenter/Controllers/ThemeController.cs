@@ -83,6 +83,10 @@ namespace DiscoveryCenter.Controllers
             theme.CssFileName = themeVM.Theme.CssFileName;
             theme.JsFileName = themeVM.Theme.JsFileName;
             theme.Name = themeVM.Theme.Name;
+            theme.Logo = themeVM.Theme.Logo;
+            theme.PrevButtonAudio = themeVM.Theme.PrevButtonAudio;
+            theme.NextButtonAudio = themeVM.Theme.NextButtonAudio;
+            theme.FinishAudio = themeVM.Theme.FinishAudio;
 
             if (noEntries)
                 db.Themes.Add(theme);

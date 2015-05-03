@@ -7,14 +7,14 @@
 }
 
 <audio id="onNextSound">
-    <source src="~/Content/audio/CheckoutScanner.mp3" type="audio/mpeg" />
+    <source src="~@Model.Theme.NextButtonAudio" type="audio/mpeg" />
 </audio>
 <div class="selection-alert-wrapper">
     <div id="alert" class="alert alert-danger selection-alert" role="alert" hidden>Please pick only 3 choices.</div>
 </div>
 
 <audio  id="onPreviousSound">
-    <source src="~/Content/audio/green_beep.mp3" type="audio/mpeg" />
+    <source src="~@Model.Theme.PrevButtonAudio" type="audio/mpeg" />
 </audio>
 
 @using (Html.BeginForm("Survey", "Home", FormMethod.Post)) { 
