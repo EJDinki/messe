@@ -19,9 +19,12 @@
     <div class="navbar navbar-inverse  navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                @if (!Request.IsAuthenticated) { 
-                @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "navbar-brand" })
+                @if (!Request.IsAuthenticated)
+                { 
+                @*@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "navbar-brand" })*@
+                    <a href="~/Account/Login" class="navbar-brand" id="loginLink"><span class="glyphicon glyphicon-log-in"></span> Login In</a>
                 }
+                
             </div>
             <div class="navbar-right">
 

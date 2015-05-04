@@ -8,26 +8,27 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Surveys", "Index", "Creation", null, new { @class = "navbar-brand" })
+                <a href="~/Creation/Index" class="navbar-brand"><span class="glyphicon glyphicon-list-alt"></span> Surveys</a>
             </li>
 
             <li>
-                @Html.ActionLink("Exhibits", "Index", "Exhibits", null, new { @class = "navbar-brand" })
+                <a href="~/Exhibits/Index" class="navbar-brand"><span class="glyphicon glyphicon-blackboard"></span> Exhibits</a>
             </li>
             <li>
-                @Html.ActionLink("Themes", "Index", "Theme", null, new { @class = "navbar-brand" })
+                <a href="~/Theme/Index" class="navbar-brand"><span class="glyphicon glyphicon-pencil"></span> Themes</a>
             </li>
             <li>
-                @Html.ActionLink("Images", "Index", "Images", null, new { @class = "navbar-brand" })
+                <a href="~/Images/Index" class="navbar-brand"><span class="glyphicon glyphicon-picture"></span> Images</a>
             </li>
             <li>
-                @Html.ActionLink("Help", "Index", "Help", null, new { @class = "navbar-brand" })
+                <a href="~/Help/Index" class="navbar-brand"><span class="glyphicon glyphicon-question-sign"></span> Help</a>
+            </li>
+            <li style="width:50px;display:block;height:53px;"></li>
+            <li>
+                <a href="~/Account/Settings" class="navbar-brand"><span class="glyphicon glyphicon-wrench"></span> Settings</a>
             </li>
             <li>
-                @Html.ActionLink("Settings", "Settings", "Account", null, new { @class = "navbar-brand" })
-            </li>
-            <li>
-                <a href="javascript:document.getElementById('logoutForm').submit()" class="navbar-brand">Log off</a>
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="navbar-brand"><span class="glyphicon glyphicon-log-out"></span> Log off</a>
             </li>
         </ul>
     }
@@ -36,7 +37,7 @@ else
 {
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Surveys", "Index", "Creation", null, new { @class = "navbar-brand" })
+            <a href="~/Creation/Index" class="navbar-brand"><span class="glyphicon glyphicon-list-alt"></span> Surveys</a>
         </li>
     </ul>
 }

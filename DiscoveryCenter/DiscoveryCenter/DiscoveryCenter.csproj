@@ -211,11 +211,17 @@
     <Content Include="Content\audio\CheckoutScanner.mp3" />
     <Content Include="Content\audio\green_beep.mp3" />
     <Content Include="Content\audio\Victory.mp3" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\ChildSurvey.css" />
     <Content Include="Content\cobalt.css" />
     <Content Include="Content\codemirror.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Migrations\Grant.sql" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jqplot\jqplot.canvasAxisTickRenderer.min.js" />
     <Content Include="Scripts\jqplot\jqplot.canvasTextRenderer.min.js" />
     <Content Include="Scripts\jqplot\jqplot.categoryAxisRenderer.min.js" />
@@ -258,13 +264,15 @@
     <Content Include="Scripts\jqplot\jqplot.pointLabels.min.js" />
     <Content Include="Scripts\jqplot\jquery.jqplot.min.js" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\AllSurveys.css" />
     <Content Include="Scripts\bootstrap-slider.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\IIS.pubxml" />
+    <None Include="Properties\PublishProfiles\Laptop Remote Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\somee.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -332,9 +340,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>

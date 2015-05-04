@@ -49,7 +49,8 @@ namespace DiscoveryCenter
 
             //styles
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css"));
+                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-theme.css"));
 
             bundles.Add(new StyleBundle("~/Content/Admin").Include(
                       "~/Content/Admin.css",

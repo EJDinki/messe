@@ -17,6 +17,7 @@ namespace DiscoveryCenter.Models
         public SurveyContext()
             : base("name=Survey")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SurveyContext, Migrations.SurveyConfiguration>());
         }
 
         // Add a DbSet for each entity type that you want to include in your model. For more information 
