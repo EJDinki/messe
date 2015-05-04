@@ -13,12 +13,13 @@ namespace DiscoveryCenter.Controllers
     {
         private static readonly string exhibitImagePartial = "/Content/images/exhibits/";
         private static readonly string choiceImagePartial = "/Content/images/choiceImage/";
+        private static readonly string soundPartial = "/Content/audio/";
 
         // GET: Images
         public ActionResult Index()
         {
 
-            return View(GetImageLocations());
+            return View(GetLocations());
         }
 
         [HttpPost]
@@ -27,12 +28,16 @@ namespace DiscoveryCenter.Controllers
         {
             try
             {
-                Image.FromStream(file.InputStream);
+                if (location != "sounds")
+                    Image.FromStream(file.InputStream);
+                else if (!file.FileName.EndsWith("mp3"))
+                    throw new Exception("Not an mp3 file and was designated as sound.");
+                    
             }
             catch
             {
-                ModelState.AddModelError("NotAnImage", "The file chosen was not a valid image type. Please select another file.");
-                return View("Index", GetImageLocations());
+                ModelState.AddModelError("InvalidFile", "The file chosen was not a valid type. Please select another file.");
+                return View("Index", GetLocations());
             }
 
             if (location == "choices")
@@ -42,6 +47,10 @@ namespace DiscoveryCenter.Controllers
             else if(location == "exhibits")
             {
                 file.SaveAs(Path.Combine(Server.MapPath("~" + exhibitImagePartial), Path.GetFileName(file.FileName)));
+            }
+            else if (location == "sounds")
+            {
+                file.SaveAs(Path.Combine(Server.MapPath("~" + soundPartial), Path.GetFileName(file.FileName)));
             }
             return RedirectToAction("Index");
         }
@@ -57,15 +66,17 @@ namespace DiscoveryCenter.Controllers
         }
 
         /// <summary>
-        /// Tuple of 2 lists.
+        /// Tuple of 3 lists.
         /// 1) Choice Image Locations
         /// 2) Exhibit Image Locations
+        /// 3) Sound Locations
         /// </summary>
-        /// <returns>Tuple(choiceImageLocations,exhibitImageLocations)"</returns>
-        private Tuple<List<string>, List<string>> GetImageLocations()
+        /// <returns>Tuple(choiceImageLocations,exhibitImageLocations,soundLocations)"</returns>
+        private Tuple<List<string>, List<string>, List<string>> GetLocations()
         {
             List<string> storedImageNames = new List<string>();
             List<string> storedExhibitImages = new List<string>();
+            List<string> storedSounds = new List<string>();
 
             foreach (string image in Directory.GetFiles(Server.MapPath("~/Content/images/choiceImage")))
             {
@@ -79,7 +90,13 @@ namespace DiscoveryCenter.Controllers
                 storedExhibitImages.Add(val);
             }
 
-            return new Tuple<List<string>, List<string>>(storedImageNames, storedExhibitImages);
+            foreach (string sound in Directory.GetFiles(Server.MapPath("~/Content/audio/")))
+            {
+                string val = "/Content/audio/" + Path.GetFileName(sound);
+                storedSounds.Add(val);
+            }
+
+            return new Tuple<List<string>, List<string>, List<string>>(storedImageNames, storedExhibitImages, storedSounds);
         }
     }
 }

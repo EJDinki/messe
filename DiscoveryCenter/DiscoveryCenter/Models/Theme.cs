@@ -8,6 +8,20 @@ namespace DiscoveryCenter.Models
 {
     public class Theme
     {
+        /// <summary>
+        /// Themes help customize the layout and a few sounds of surveys.
+        /// The constructor is here because the strings must be empty instead of null if not set.
+        /// </summary>
+        public Theme()
+        {
+
+            //Set the SRCs of the following files to empty until set by user so no null pointers occur.
+            PrevButtonAudio = "";
+            NextButtonAudio = "";
+            FinishAudio = "";
+            Logo = "";
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -17,6 +31,13 @@ namespace DiscoveryCenter.Models
 
         public string JsFileName { get; set; }
 
+        public string PrevButtonAudio { get; set; }
+
+        public string NextButtonAudio { get; set; }
+
+        public string FinishAudio { get; set; }
+
+        public string Logo { get; set; }
     }
 
     //public enum ThemeName

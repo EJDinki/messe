@@ -3,7 +3,27 @@
 @{
     ViewBag.Title = "Admin Console - Themes";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    List<SelectListItem> storedImageNames = new List<SelectListItem>();
+    storedImageNames.Add(new SelectListItem() { Text = "None", Value = "" });
+
+    foreach (string image in Directory.GetFiles(Server.MapPath("~/Content/images/choiceImage")))
+    {
+        string val = "/Content/images/choiceImage/" + Path.GetFileName(image);
+        storedImageNames.Add(new SelectListItem() { Text = Path.GetFileName(image), Value = val });
+    }
+
+    List<SelectListItem> storedAudioNames = new List<SelectListItem>();
+    storedAudioNames.Add(new SelectListItem() { Text = "None", Value = "" });
+
+    foreach (string audio in Directory.GetFiles(Server.MapPath("~/Content/audio")))
+    {
+        string val = "/Content/audio/" + Path.GetFileName(audio);
+        storedAudioNames.Add(new SelectListItem() { Text = Path.GetFileName(audio), Value = val });
+    }
 }
+
+
 
 @using (Html.BeginForm("Edit", "Theme", FormMethod.Post, new { @class = "clearfix" }))
 {
@@ -25,6 +45,7 @@
             <ul>
                 <li><a href="#tabs-1">Theme Css</a></li>
                 <li><a href="#tabs-2">Theme Javascript/JQuery</a></li>
+                <li><a href="#tabs-3">Theme Sounds/Logo</a></li>
             </ul>
             <div id="tabs-1">
                 <div class="panel editor-panel">
@@ -34,6 +55,29 @@
             <div id="tabs-2">
                 <div class="panel editor-panel">
                     <textarea id="js" name="JsText">@Model.JsText</textarea>
+                </div>
+            </div>
+            <div id="tabs-3">
+                <div class="panel editor-panel">
+                    <label for="onPeviousSound">Sound played on pressing 'Previous Question'</label>
+                    <audio id="onPreviousSound" controls>
+                        <source id="onPreviousSource" src="@Model.Theme.PrevButtonAudio" type="audio/mpeg" />
+                    </audio>
+                    @Html.DropDownListFor(x => x.Theme.PrevButtonAudio, storedAudioNames, new { @class = "form-control", onChange = "updateIconSrc(\"onPreviousSource\",this);loadAudio(\"onPreviousSound\")" })
+
+                    <label for="onNextSound" style="padding-top: 5%;">Sound played on pressing 'Next Question'</label>
+                    <audio id="onNextSound" controls>
+                        <source id="onNextSource" src="@Model.Theme.NextButtonAudio" type="audio/mpeg" />
+                    </audio>
+                    @Html.DropDownListFor(x => x.Theme.NextButtonAudio, storedAudioNames, new { @class = "form-control", onChange = "updateIconSrc(\"onNextSource\",this);loadAudio(\"onNextSound\")" })
+
+                    <label for="onFinishSound" style="padding-top: 5%;">Sound played after completing a Survey</label>
+                    <audio id="onFinishSound" controls>
+                        <source id="onFinishSource" src="@Model.Theme.FinishAudio" type="audio/mpeg" />
+                    </audio>
+                    @Html.DropDownListFor(x => x.Theme.FinishAudio, storedAudioNames, new { @class = "form-control", onChange = "updateIconSrc(\"onFinishSource\",this);loadAudio(\"onFinishSound\")" })
+
+
                 </div>
             </div>
         </div>
@@ -100,6 +144,9 @@
             }
         });
 
-
+        function loadAudio(id) {
+            var audio = document.getElementById(id);
+            audio.load();
+        }
     </script>
 }
