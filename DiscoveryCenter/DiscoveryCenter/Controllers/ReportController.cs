@@ -71,7 +71,9 @@ namespace DiscoveryCenter.Controllers
                         if (report.Choices.Count == 3)
                         {
                             report.Counts.Add("1 (" + report.Choices[0].Text + ")", 0);
+                            report.Counts.Add("2", 0);
                             report.Counts.Add("3 (" + report.Choices[1].Text + ")", 0);
+                            report.Counts.Add("4", 0);
                             report.Counts.Add("5 (" + report.Choices[2].Text + ")", 0);
                         }
                     }
