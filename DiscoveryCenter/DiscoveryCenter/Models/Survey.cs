@@ -14,6 +14,7 @@ namespace DiscoveryCenter.Models
         {
             Questions = new List<Question>();
             Submissions = new List<Submission>();
+            IsRatingSurvey = false;
         }
         public int Id { get; set; }
 
@@ -31,6 +32,8 @@ namespace DiscoveryCenter.Models
 
         [Display(Name = "Last Modified Date")]
         public DateTime LastModifiedDate { get; set; }
+
+        public bool IsRatingSurvey { get; set; }
 
         [ForeignKey("Theme")]
         public int ThemeId { get; set; }

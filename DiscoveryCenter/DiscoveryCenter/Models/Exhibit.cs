@@ -28,8 +28,13 @@ namespace DiscoveryCenter.Models
 
         public string ImageLocation { get; set; }
 
-        public string ShowcaseImageLocation { get; set; }
-        
+
+        [ForeignKey("RatingSurvey")]
+        public int? RatingSurveyID { get; set; }
+
+        [ScriptIgnore]
+        public Survey RatingSurvey { get; set; }
+
         /// <summary>
         /// Please help. This is used because on the Exhibit edit page, the ImageLocation wasn't being bound to the model.
         /// Even though the same code from the creation page was used and it was bound correctly there. If we have time before release,

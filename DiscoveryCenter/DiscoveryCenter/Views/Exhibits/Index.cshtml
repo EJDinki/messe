@@ -19,6 +19,12 @@
             </div>
             <div class="col-md-8 selection-buttons " style="padding-right:0px">
                 <div class="btn-group pull-right">
+                    <a id="qrExhibit" class="btn btn-default" type="button" href="@Url.Action("DownloadQRCode", "Exhibits", new { id = "" })">
+                        <span class="glyphicon glyphicon-list-alt"></span> View QR Code
+                    </a>     
+                    <a id="ratingExhibit" class="btn btn-default" type="button" href="@Url.Action("ViewExhibitRating", "Exhibits", new { id = "" })">
+                        <span class="glyphicon glyphicon-list-alt"></span> View Ratings
+                    </a>                   
                     <a id="editExhibit" class="btn btn-default" type="button" href="@Url.Action("Edit", "Exhibits", new { id = "" })">
                         <span class="glyphicon glyphicon-edit"></span> Edit
                     </a>

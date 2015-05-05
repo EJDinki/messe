@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using DiscoveryCenter.Models;
 using System.IO;
 using System.Drawing;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace DiscoveryCenter.Controllers
 {
@@ -35,6 +37,40 @@ namespace DiscoveryCenter.Controllers
             return View(tuple);
         }
 
+        /// <summary>
+        /// Gets the rating survey based on exhibit id, then redirects to the survey report for the specified exhibit ratings.
+        /// </summary>
+        /// <param name="id">Exhibit id</param>
+        /// <returns></returns>
+        public ActionResult ViewExhibitRating(int id)
+        {
+            int? reportId = (from e in db.Exhibits where e.Id == id select e.RatingSurveyID).FirstOrDefault();
+
+            return RedirectToAction("Index", "Report", new { id=reportId });
+        }
+
+        /// <summary>
+        /// Gets the QR code for the First page of the Exhibit rating survey based on exhibit id.
+        /// </summary>
+        /// <param name="id">Exhibit id</param>
+        /// <returns>QRCode for url</returns>
+        public FileResult DownloadQRCode(int id)
+        {
+            int? reportId = (from e in db.Exhibits where e.Id == id select e.RatingSurveyID).FirstOrDefault();
+            FileContentResult result;
+            string baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+            string parameters = "/Home/Survey/"+reportId;
+            using (var client = new HttpClient())
+            {
+                HttpResponseMessage response = client.GetAsync("https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+
+                                                               baseUrl+parameters).Result;
+                byte[] bytes = response.Content.ReadAsByteArrayAsync().Result;
+                result = new FileContentResult(bytes, "image/png");
+            }
+          
+            return result;
+        }
+
         // GET: Exhibits/Create
         public ActionResult Create()
         {
@@ -53,10 +89,70 @@ namespace DiscoveryCenter.Controllers
 
             exhibit.CreateDate = DateTime.Now;
             exhibit.LastModifiedDate = DateTime.Now;
-          
+            exhibit.RatingSurvey = ExhibitsController.CreateRatingSurvey(exhibit,db);
             db.Exhibits.Add(exhibit);
             db.SaveChanges();
             return RedirectToAction("Index");    
+        }
+
+        public static Survey CreateRatingSurvey(Exhibit exhibit, SurveyContext db, int id = -1)
+        {
+            Survey RateThisExhibit = null;
+
+            if (id != -1)
+                RateThisExhibit = db.Surveys.Find(id);
+
+            if (RateThisExhibit == null)
+            {
+                RateThisExhibit = new Survey()
+                {
+                    IsRatingSurvey = true,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
+                    Theme = (from t in db.Themes where t.Name == "Mobile" select t).SingleOrDefault(),
+                    Description = "Give a rating to the " + exhibit.Name + " exhibit!",
+                    Name = "Rate " + exhibit.Name
+                };
+
+                RateThisExhibit.Id = id;
+
+                Question theQuestion =
+               new Question()
+               {
+                   Text = "Did you enjoy the " + exhibit.Name + " exhibit?",
+                   ParentSurvey = RateThisExhibit,
+                   Type = Question.QuestionType.Slider,
+
+               };
+
+
+
+                List<Choice> choices = new List<Choice>()
+            {
+                new Choice()
+                {
+                    Text = "Didn't like it.",
+                    ImageName = ""
+                },
+
+                new Choice()
+                {
+                    Text = "Liked it.",
+                    ImageName = ""
+                },
+                
+                new Choice()
+                {
+                    Text = "Loved it!",
+                    ImageName = ""
+                }
+            };
+                db.Questions.Add(theQuestion);
+
+                theQuestion.Choices = choices;
+            }
+     
+            return RateThisExhibit;
         }
 
         // GET: Exhibits/Edit/5

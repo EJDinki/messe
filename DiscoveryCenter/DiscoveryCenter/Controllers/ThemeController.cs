@@ -113,6 +113,10 @@ namespace DiscoveryCenter.Controllers
 
                 ModelState.AddModelError("Theme", errorMessage);
             }
+            else if (theme.Name == "Mobile")
+            {
+                ModelState.AddModelError("Theme", "The mobile theme is used to rate Exhibits from smartphones. It cannot be deleted.");
+            }
 
             if (!ModelState.IsValid)
                 return View("Index", getTuple(0));

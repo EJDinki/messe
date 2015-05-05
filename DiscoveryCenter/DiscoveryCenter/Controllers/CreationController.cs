@@ -132,9 +132,10 @@ namespace DiscoveryCenter.Controllers
         // GET: Creation
         public ActionResult Index(int id = 0)
         {
-            int numPages = (db.Surveys.Count() / surveyPerPage);
+            int nonRatingSurveys = (from x in db.Surveys where x.IsRatingSurvey == false select x).Count();
+            int numPages = (nonRatingSurveys / surveyPerPage);
 
-            numPages += (db.Surveys.Count() % surveyPerPage > 0 || numPages==0) ? 1 : 0;
+            numPages += (nonRatingSurveys % surveyPerPage > 0 || numPages == 0) ? 1 : 0;
 
             
 
@@ -144,7 +145,7 @@ namespace DiscoveryCenter.Controllers
             else if (id >= numPages)
                 id = numPages - 1;
 
-            var currentPageList = (from s in db.Surveys orderby s.Name select s).Skip(id * surveyPerPage).Take(surveyPerPage).ToList();              
+            var currentPageList = (from s in db.Surveys where s.IsRatingSurvey == false orderby s.Name select s).Skip(id * surveyPerPage).Take(surveyPerPage).ToList();              
             Tuple<IEnumerable<Survey>, int, int> tuple = new Tuple<IEnumerable<Survey>, int, int>(currentPageList, numPages, id);
 
             return View(tuple);

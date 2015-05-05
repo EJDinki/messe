@@ -89,7 +89,6 @@ namespace DiscoveryCenter.Migrations
                     ThemeId = 2,
                     Name = "Child", 
                 }
-
             }.ForEach(survey => context.Surveys.AddOrUpdate(survey));
             context.SaveChanges();
 
@@ -203,15 +202,14 @@ namespace DiscoveryCenter.Migrations
                 }.ForEach(question => context.Questions.AddOrUpdate(question));
             context.SaveChanges();
 
-            new List<Exhibit>
+            List<Exhibit> allExhibits = new List<Exhibit>()
             {
                 new Exhibit() 
                 { 
                     Id=1,
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Name = "Fire Station"
-
+                    Name = "Fire Station",
                 },
                 new Exhibit() 
                 { 
@@ -219,15 +217,13 @@ namespace DiscoveryCenter.Migrations
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
                     Name = "Widgets & Gadgets"
-
                 },
                 new Exhibit() 
                 { 
                     Id=3,
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Name = "Take Flight"
-
+                    Name = "Take Flight",
                 },
                 new Exhibit() 
                 { 
@@ -317,7 +313,15 @@ namespace DiscoveryCenter.Migrations
                     Name = "You've Got Game"
 
                 }
-            }.ForEach(exhibit => context.Exhibits.AddOrUpdate(exhibit));
+            };
+
+            for (int i = 0; i < allExhibits.Count; i++)
+            {
+                allExhibits[i].RatingSurveyID = i + 2;
+                allExhibits[i].RatingSurvey = DiscoveryCenter.Controllers.ExhibitsController.CreateRatingSurvey(allExhibits[i], context, i + 2);
+            }
+
+            allExhibits.ForEach(exhibit => context.Exhibits.AddOrUpdate(exhibit));
             context.SaveChanges();
         }
     }

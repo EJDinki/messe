@@ -12,9 +12,9 @@ namespace DiscoveryCenter.Controllers
     public class ReportController : Controller
     {
         // GET: Report
-        public ActionResult Index(int id = 0)
+        public ActionResult Index(int? id = 0)
         {
-            if (id <= 0)
+            if (id <= 0 || id == null)
             {
                 return RedirectToAction("Index", "Creation");
             }
