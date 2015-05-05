@@ -111,6 +111,7 @@ namespace DiscoveryCenter.Controllers
                     }
                     else if (qmodel.Type == Question.QuestionType.ExhibitsChooseMany)
                     {
+                        var question = db.Questions.Where(q => q.Id == qmodel.QuestionId).First();
                         foreach (string ex in qmodel.Answer.Split(';'))
                         {
                             if (ex != null && ex.Length != 0)
@@ -119,6 +120,28 @@ namespace DiscoveryCenter.Controllers
                                 db.Answers.Add(answer);
                             }
                         }
+                    }
+                    else if (qmodel.Type == Question.QuestionType.Slider)
+                    {
+                        var question = db.Questions.Where(q => q.Id == qmodel.QuestionId).First();
+                        string val = qmodel.Answer;
+                        if (question.Choices.Count == 3)
+                        {
+                            switch (qmodel.Answer)
+                            {
+                                case "1":
+                                    val = qmodel.Answer + " (" + question.Choices[0].Text + ")";
+                                    break;
+                                case "3":
+                                    val = qmodel.Answer + " (" + question.Choices[1].Text + ")";
+                                    break;
+                                case "5":
+                                    val = qmodel.Answer + " (" + question.Choices[2].Text + ")";
+                                    break;
+                            }
+                        }
+                        answer = new Answer() { QuestionId = qmodel.QuestionId, Value = val, Submission = submission };
+                        db.Answers.Add(answer);
                     }
                     else if (!String.IsNullOrWhiteSpace(qmodel.Answer))
                     {
