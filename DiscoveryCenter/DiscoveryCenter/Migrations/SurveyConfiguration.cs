@@ -51,8 +51,18 @@ namespace DiscoveryCenter.Migrations
                 CssFileName = "ChildSurvey.css",
                 JsFileName = "ChildSurvey.js",
             };
+
+            Theme mobileTheme = new Theme()
+            {
+                Id = 3,
+                Name = ThemeName.Mobile.Value,
+                CssFileName = "MobileSurvey.css",
+                JsFileName = "MobileSurvey.js",
+            };
+
             context.Themes.AddOrUpdate(adultTheme);
             context.Themes.AddOrUpdate(childTheme);
+            context.Themes.AddOrUpdate(mobileTheme);
             context.SaveChanges();
 
 

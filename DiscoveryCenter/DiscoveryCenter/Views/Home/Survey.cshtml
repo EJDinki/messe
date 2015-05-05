@@ -32,14 +32,14 @@
 
 <div class="panel">
     <div class="panel-heading">
-        <img src="~/Content/images/discovery75.png" />
+        <img id="discoveryLogo" src="~/Content/images/discovery75.png" />
         
-        <a id="quitSurey" class="btn btn-lg pull-right" type="button" href="#" onclick="confirmExit();">
-            <span class="glyphicon glyphicon-remove-circle pull-right" style="font-size:4em"></span>
+        <a id="quitSurvey" class="btn btn-lg pull-right" type="button" href="#" onclick="confirmExit();">
+            <span class="glyphicon glyphicon-remove-circle pull-right"></span>
         </a>
 
-        <a id="muteSurey" class="btn btn-lg pull-right" type="button" href="#" onclick="">
-            <span id="muteIcon" class="glyphicon glyphicon-volume-off pull-right" style="font-size:4em"></span>
+        <a id="muteSurvey" class="btn btn-lg pull-right" type="button" href="#" onclick="">
+            <span id="muteIcon" class="glyphicon glyphicon-volume-off pull-right"></span>
         </a>
     </div>
     <div class="panel-body">
@@ -131,7 +131,7 @@
     <script>
         var isMuted = false;
 
-        $('#muteSurey').on('click', function () {
+        $('#muteSurvey').on('click', function () {
             muteAll();
         });
 

@@ -12,7 +12,7 @@
             </label>
             @if (Model.Choices[z].ImageName != "" && Model.Choices[z].ImageName != null)
             {
-                <img onclick="getElementById('@buttonId').checked=(!getElementById('@buttonId').checked);" class="col-md-offset-2" src="@Model.Choices[z].ImageName" height="128" width="128">
+                <img onclick="getElementById('@buttonId').checked=(!getElementById('@buttonId').checked);" class="col-md-offset-2 choice-image" src="@Model.Choices[z].ImageName">
             }
             <br />
         </div>

@@ -362,3 +362,22 @@ textarea{
     margin-left: auto;
     margin-right: auto;
 }
+
+/*Late additions*/
+.glyphicon-remove-circle{
+    font-size:4em;
+    color: #ff0000;
+}
+
+.glyphicon-volume-off{
+    font-size:4em;
+}
+
+.glyphicon-volume-on{
+    font-size:4em;
+}
+
+.choice-image{
+    height:128px;
+    width:128px;
+}

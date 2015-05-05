@@ -3,4 +3,26 @@
 <div class="slider-container">
     @Html.Hidden(String.Format("QuestionModels[{0}].Answer", Model.QuestionId), "3")
     <div class="slider" id="QuestionModels_@(Model.QuestionId)__Slider" name="QuestionModels[@(Model.QuestionId)].Slider" labels='["@Model.Choices[0].Text", " ", "@Model.Choices[1].Text" , " " , "@Model.Choices[2].Text" ]'> </div>
+
+
+</div>
+<div class="row">
+    <div class="col-md-4">
+        @if (Model.Choices[0].ImageName != "" && Model.Choices[0].ImageName != null)
+        {
+            <img class="choice-image" src="@Model.Choices[0].ImageName" />
+        }
+    </div>
+    <div class="col-md-4">
+        @if (Model.Choices[1].ImageName != "" && Model.Choices[1].ImageName != null)
+        {
+            <img class="choice-image" src="@Model.Choices[1].ImageName" />
+        }
+    </div>
+    <div class="col-md-4">
+        @if (Model.Choices[2].ImageName != "" && Model.Choices[2].ImageName != null)
+        {
+            <img class="choice-image" src="@Model.Choices[2].ImageName" />
+        }
+    </div>
 </div>

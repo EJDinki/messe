@@ -1,7 +1,7 @@
-body {
+﻿body {
     font-family: Garamond;
     background-color: #4477AA;
-    font-size: 25px;
+    font-size: 18px;
     line-height: 2.1428571435;
     color: black;
 }
@@ -103,4 +103,12 @@ a.carousel-control{
 .exhibit{
     background-color:white;
     border-radius:0px;
+}
+
+#discoveryLogo{
+    display:none;
+}
+
+.choice-image{
+    display:none;
 }

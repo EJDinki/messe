@@ -50,6 +50,7 @@ namespace DiscoveryCenter.Models
     {
         public static readonly ThemeName Adult = new ThemeName("Adult");
         public static readonly ThemeName Child = new ThemeName("Child");
+        public static readonly ThemeName Mobile = new ThemeName("Mobile");
 
         //never call this!!!
         public ThemeName() { }
@@ -65,7 +66,9 @@ namespace DiscoveryCenter.Models
                 return Adult;
             else if (tn == Child.Value)
                 return Child;
-            else 
+            else if (tn == Mobile.Value)
+                return Mobile;
+            else
                 return null;
         }
 
