@@ -95,3 +95,7 @@ function rightCarouselClicked() {
 
 $('body').on('click', 'a.left.carousel-control', leftCarouselClicked);
 $('body').on('click', 'a.right.carousel-control', rightCarouselClicked);
+
+window.oncontextmenu = function () {
+    return false;
+}
