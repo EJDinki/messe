@@ -203,7 +203,8 @@ namespace DiscoveryCenter.Controllers
             {
                 return HttpNotFound();
             }
-            return View(exhibit);
+            ViewBag.DeleteObject = exhibit.Name + " exhibit";
+            return View("DeleteConfirm");
         }
 
         // POST: Exhibits/Delete/5

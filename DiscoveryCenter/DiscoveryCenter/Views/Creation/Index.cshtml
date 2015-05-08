@@ -39,9 +39,10 @@
                     <a id="reportSurvey" class="btn btn-default" type="button" href="@Url.Action("Index", "Report", new { id = "" })">
                         <span class="glyphicon glyphicon-list-alt"></span> View Report
                     </a>
-                    <a id="deleteSurvey" class="btn btn-danger" type="button" href="@Url.Action("Delete", "Creation", new { id = ""})">
+                    <button id="deleteSurvey" class="btn btn-danger confirmDelete" type="button" data-toggle="modal"
+                            data-target="#deleteDialog" href="@Url.Action("Delete", "Creation", new { id = "" })">
                         <span class="glyphicon glyphicon-remove"></span> Delete
-                    </a>
+                    </button>
                     }
                 </div>
             </div>
@@ -87,7 +88,13 @@
 
         @Html.Partial("_Pagination", new Tuple<int, int>(Model.Item2, Model.Item3))
         
+        <div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
-
-

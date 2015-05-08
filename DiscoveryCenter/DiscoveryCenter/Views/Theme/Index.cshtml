@@ -23,13 +23,15 @@
                     <a id="editSurvey" class="btn btn-default" type="button" href="@Url.Action("Edit", "Theme", new { id = "" })">
                         <span class="glyphicon glyphicon-edit"></span> Edit
                     </a>
-                    <a id="deleteSurvey" class="btn btn-danger" type="button" href="@Url.Action("Delete", "Theme", new { id = "" })">
+                    <a id="deleteSurvey" class="btn btn-danger confirmDelete" type="button" data-toggle="modal"
+                       data-target="#deleteDialog" href="@Url.Action("Delete", "Theme", new { id = "" })">
                         <span class="glyphicon glyphicon-remove"></span> Delete
                     </a>
                 </div>
             </div>
+            <div class="col-md-12 clearfix">@Html.ValidationMessage("Theme", new { @class = "text-danger" })</div>
         </div>
-        <div class="col-md-12 clearfix">@Html.ValidationMessage("Theme", new { @class = "text-danger pull-right" })</div>
+        
 
         <ul>
             <li class="header clearfix">
@@ -60,6 +62,14 @@
         <iframe class="preview"></iframe>
         <div id="iframeBlocker" style="position: absolute; top: 0; left: 0; right:0; bottom:0; padding:5%">
             <h3 style="position: absolute; top: 22%"><span class="glyphicon glyphicon-arrow-left"></span> Select a theme to preview!</h3>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
         </div>
     </div>
 </div>

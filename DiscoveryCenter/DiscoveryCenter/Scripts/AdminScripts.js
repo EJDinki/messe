@@ -153,7 +153,7 @@ function refreshButtons(target, callback) {
 
     if (selected != null) {
         var id = $(selected).find("input.id").first().val();
-        $(".selection-buttons a").each(function (index, ele) {
+        $(".selection-buttons a, .selection-buttons button").each(function (index, ele) {
             $(ele).attr('href', function (i, a) {
 
                 if (/id=[0-9]*&/.test(a))
@@ -169,10 +169,19 @@ function refreshButtons(target, callback) {
             callback(id);
     }
     else {
-        $(".selection-buttons a").each(function (index, ele) {
+        $(".selection-buttons a, .selection-buttons button").each(function (index, ele) {
             $(ele).attr("disabled", "disabled");
         });
     }
 
 }
-    
+
+$(".confirmDelete").on("click", function () {
+    var url = $(".confirmDelete").attr("href");
+    $.ajax({
+        url: url,
+        method: POST
+    }).success(function (data) {
+        $("#deleteDialog .modal-dialog .modal-content").html(data);
+    })
+});

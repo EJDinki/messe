@@ -28,7 +28,8 @@
                     <a id="editExhibit" class="btn btn-default" type="button" href="@Url.Action("Edit", "Exhibits", new { id = "" })">
                         <span class="glyphicon glyphicon-edit"></span> Edit
                     </a>
-                    <a id="deleteExhibit" class="btn btn-danger" type="button" href="@Url.Action("Delete", "Exhibits", new { id = ""})">
+                    <a id="deleteExhibit" class="btn btn-danger" type="button" data-toggle="modal"
+                       data-target="#deleteDialog" href="@Url.Action("Delete", "Exhibits", new { id = ""})">
                         <span class="glyphicon glyphicon-remove"></span> Delete
                     </a>
                 </div>
@@ -71,7 +72,13 @@
         @Html.Partial("_Pagination",new Tuple<int,int>(Model.Item2,Model.Item3))
     </div>
 </div>
+<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
+        </div>
+    </div>
+</div>
 @section scripts
 {
     <script>

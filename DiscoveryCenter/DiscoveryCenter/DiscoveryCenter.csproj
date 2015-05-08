@@ -303,6 +303,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\IIS.pubxml" />
     <None Include="Properties\PublishProfiles\Laptop Remote Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\somee.pubxml" />
@@ -344,7 +346,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Creation\Create.cshtml" />
-    <Content Include="Views\Creation\Delete.cshtml" />
     <Content Include="Views\Creation\Details.cshtml" />
     <Content Include="Views\Creation\Edit.cshtml" />
     <Content Include="Views\Creation\Index.cshtml" />
@@ -352,7 +353,6 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Exhibits\Create.cshtml" />
-    <Content Include="Views\Exhibits\Delete.cshtml" />
     <Content Include="Views\Exhibits\Edit.cshtml" />
     <Content Include="Views\Exhibits\Index.cshtml" />
     <Content Include="Views\Creation\_ChoicesInputGroup.cshtml" />
@@ -368,6 +368,7 @@
     <Content Include="Views\Report\ShortAnswerReport.cshtml" />
     <Content Include="Views\Shared\_Pagination.cshtml" />
     <Content Include="Views\Account\Settings.cshtml" />
+    <Content Include="Views\Shared\DeleteConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

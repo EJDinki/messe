@@ -7,7 +7,9 @@
 <br />
 <div class="col-md-offset-1 col-md-3 panel panel-default">
     <div class="panel-body ">
-        <a id="ExportDialog" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-download-alt"></span> Download Report</a>
+        <a id="ExportDialog" class="btn btn-primary pull-right" data-toggle="modal" data-target="#downloadReport">
+            <span class="glyphicon glyphicon-download-alt"></span>Download Report
+        </a>
         <h2>Questions</h2>
         <ul class="indexSelectableList">
 
@@ -29,24 +31,37 @@
     </div>
 </div>
 
-@using(Html.BeginForm("ExportToCSV", "Report", FormMethod.Post, new { @id="dialog-form", @title="Download Options" }))
+@using (Html.BeginForm("ExportToCSV", "Report", FormMethod.Post, new { @id = "dialog-form" }))
 {
-    @Html.Hidden("id", @Model.SurveyId)
-    @Html.RadioButton("dateRadio", "noDate", true, new { @id = "noDate" })
-    @Html.Label("Export All Data") <br />
+    <div class="modal fade" id="downloadReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Download Options</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Hidden("id", @Model.SurveyId)
+                    @Html.RadioButton("dateRadio", "noDate", true, new { @id = "noDate" })
+                    @Html.Label("Export All Data") <br />
 
-    @Html.RadioButton("dateRadio", "date", false, new { @id = "date" })
-    @Html.Label("Only Export Data in Date Range") <br />
-    <div style="padding-left:2em">
-        <span style="float:left">Start Date</span>
-        @Html.TextBox("startDate")
-        <span style="float:left">End Date</span>
-        @Html.TextBox("endDate")
+                    @Html.RadioButton("dateRadio", "date", false, new { @id = "date" })
+                    @Html.Label("Only Export Data in Date Range") <br />
+                    <div style="padding-left:2em">
+                        <span style="float:left">Start Date</span>
+                        @Html.TextBox("startDate")
+                        <span style="float:left">End Date</span>
+                        @Html.TextBox("endDate")
+                    </div>
+                    @Html.CheckBox("exportRawData", true)
+                    @Html.Label("Include Raw Data") <br />
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Download Report" id="submitBtn" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
     </div>
-
-    @Html.CheckBox("exportRawData", true)
-    @Html.Label("Include Raw Data") <br />
-    <input type="submit" value="Download Report" id="submitBtn"/>
 }
 
 @section scripts{
@@ -72,18 +87,6 @@
             }
         });
         refreshButtons($(".indexSelectableList:first"), loadReport);
-        
-
-        dialog = $( "#dialog-form" ).dialog({
-            autoOpen: false,
-            height: 300,
-            width: 350,
-            modal: true
-        });
-
-        $( "#ExportDialog" ).on( "click", function() {
-            dialog.dialog( "open" );
-        });
 
         // Enable Date Picker
         $( "#startDate" ).datepicker();

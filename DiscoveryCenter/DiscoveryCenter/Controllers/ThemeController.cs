@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -33,6 +34,22 @@ namespace DiscoveryCenter.Controllers
             var currentPageList = (from s in db.Themes orderby s.Name select s).Skip(id * themesPerPage).Take(themesPerPage).ToList();
             Tuple<IEnumerable<Theme>, int, int> tuple = new Tuple<IEnumerable<Theme>, int, int>(currentPageList, numPages, id);
             return tuple;
+        }
+
+        [Authorize]
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Theme theme = db.Themes.Find(id);
+            if (theme == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.DeleteObject = theme.Name + " theme";
+            return View("DeleteConfirm");
         }
 
         public ActionResult Edit(int? id)
@@ -98,6 +115,7 @@ namespace DiscoveryCenter.Controllers
             return RedirectToAction("Edit", new {id = theme.Id});
         }
 
+        [HttpPost]
         public ActionResult Delete(int id = 0)
         {
             Theme theme = db.Themes.Find(id);

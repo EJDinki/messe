@@ -351,7 +351,8 @@ namespace DiscoveryCenter.Controllers
             {
                 return HttpNotFound();
             }
-            return View(survey);
+            ViewBag.DeleteObject = survey.Name + " survey";
+            return View("DeleteConfirm");
         }
 
         // POST: Creation/Delete/5
