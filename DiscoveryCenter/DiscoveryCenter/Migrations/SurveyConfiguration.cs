@@ -11,6 +11,7 @@ namespace DiscoveryCenter.Migrations
 
     internal sealed class SurveyConfiguration : DbMigrationsConfiguration<DiscoveryCenter.Models.SurveyContext>
     {
+        string loc = "/Content/images/exhibits/";
         public SurveyConfiguration()
         {
             AutomaticMigrationsEnabled = true;
@@ -210,27 +211,32 @@ namespace DiscoveryCenter.Migrations
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
                     Name = "Fire Station",
+                    ImageLocation = loc + "fire_station.jpg"
                 },
                 new Exhibit() 
                 { 
                     Id=2,
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Name = "Widgets & Gadgets"
+                    Name = "Widgets & Gadgets",
+                    ImageLocation = loc + "widgets_and_gadgets.jpg"
                 },
                 new Exhibit() 
                 { 
                     Id=3,
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Name = "Take Flight",
+                    Name = "Plum Dragon",
+                    ImageLocation = loc + "plum_dragon.jpg"
+                    
                 },
                 new Exhibit() 
                 { 
                     Id=4,
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Name = "Hospital"
+                    Name = "Hospital",
+                    ImageLocation = loc + "hospital.jpg"
 
                 },
                 new Exhibit() 
@@ -238,15 +244,16 @@ namespace DiscoveryCenter.Migrations
                     Id=5,
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Name = "Dental"
-
+                    Name = "Dental",
+                    ImageLocation = loc+"open_wide_dental.jpg"
                 },
                 new Exhibit() 
                 { 
                     Id=6,
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Name = "Power of Play"
+                    Name = "Power of Play",
+                    ImageLocation = loc + "power_of_play.jpg"
 
                 },
                 new Exhibit() 
@@ -254,7 +261,8 @@ namespace DiscoveryCenter.Migrations
                     Id=7,
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Name = "Weis Markets"
+                    Name = "Weis Grocery Store",
+                    ImageLocation = loc + "weis_grocery.jpg"
 
                 },
                 new Exhibit() 
@@ -262,7 +270,8 @@ namespace DiscoveryCenter.Migrations
                     Id=8,
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Name = "Eco Kids"
+                    Name = "Eco Kids",
+                    ImageLocation = loc + "eco_kids.jpg"
 
                 },
                 new Exhibit() 
@@ -270,7 +279,8 @@ namespace DiscoveryCenter.Migrations
                     Id=9,
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Name = "Music Alley"
+                    Name = "Music Alley",
+                    ImageLocation = loc + "music_alley.jpg"
 
                 },
                 new Exhibit() 
@@ -278,7 +288,8 @@ namespace DiscoveryCenter.Migrations
                     Id=10,
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Name = "Chenango Canal Alley"
+                    Name = "Book Nook",
+                    ImageLocation = loc + "book_nook.jpg"
 
                 },
                 new Exhibit() 
@@ -286,7 +297,8 @@ namespace DiscoveryCenter.Migrations
                     Id=11,
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Name = "Susquhanna Meets The Chesapeake"
+                    Name = "Susquhanna Meets The Chesapeake",
+                    ImageLocation = loc + "susquehanna_meets.jpg"
 
                 },
                 new Exhibit() 
@@ -294,7 +306,8 @@ namespace DiscoveryCenter.Migrations
                     Id=12,
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Name = "Studio 60"
+                    Name = "Studio 60",
+                    ImageLocation = loc + "studio_60.jpg"
 
                 },
                 new Exhibit() 
@@ -302,7 +315,8 @@ namespace DiscoveryCenter.Migrations
                     Id=13,
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Name = "Action News"
+                    Name = "Action News",
+                    ImageLocation = loc + "action_news.jpg"
 
                 },
                 new Exhibit() 
@@ -310,9 +324,44 @@ namespace DiscoveryCenter.Migrations
                     Id=14,
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Name = "You've Got Game"
+                    Name = "3 and Under",
+                    ImageLocation = loc + "3_and_under.jpg"
 
+                },
+                new Exhibit()
+                {
+                    Id=15,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
+                    Name = "The Tower",
+                    ImageLocation = loc + "the_tower.jpg"
+                },
+                new Exhibit()
+                {
+                    Id=16,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
+                    Name = "ABC Bank",
+                    ImageLocation = loc + "abc_bank.jpg"
+                },
+                new Exhibit()
+                {
+                    Id=17,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
+                    Name = "Pirates",
+                    ImageLocation = loc + "pirates.jpg"
+                },
+                new Exhibit()
+                {
+                    Id=18,
+                    CreateDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
+                    Name = "What's The Buzz?!",
+                    ImageLocation = loc + "whats_the_buzz.jpg"
                 }
+
+                
             };
 
             for (int i = 0; i < allExhibits.Count; i++)

@@ -2,7 +2,7 @@
 @model Tuple<List<string>, List<string>, List<string>>
 
 @{
-    ViewBag.Title = "Images";
+    ViewBag.Title = "Multimedia";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -11,14 +11,14 @@
 <div class="container">
     
     <div class="panel-group col-md-12" id="accordion">
-        <div class="panel panel-heading" style="background-color:blue">
+        <div class="panel panel-heading" style="background-color:#ADD8E6">
             <h2 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Choice Icons</a>
                 <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
             </h2>
             <p id="messages"></p>
         </div>
-        <div id="collapseOne" class="panel-collapse collapse out">
+        <div id="collapseOne" class="panel-collapse collapse in">
             <div class="panel panel-body">
                 <div class="row">
                     @using (Html.BeginForm("Upload", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -47,14 +47,14 @@
         </div>
     </div>
 
-    <div class="panel-group col-md-12" id="accordion2" style="padding-top:5%">
-        <div class="panel panel-heading" style="background-color:blue">
+    <div class="panel-group col-md-12" id="accordion2" >
+        <div class="panel panel-heading" style="background-color:#ADD8E6">
             <h2 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">Exhibit Icons</a>
                 <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
             </h2>
         </div>
-        <div id="collapseTwo" class="panel-collapse collapse out">
+        <div id="collapseTwo" class="panel-collapse collapse in">
             <div class="panel panel-body">
                 <div class="row">
                     @using (Html.BeginForm("Upload", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -83,14 +83,14 @@
         </div>
     </div>
 
-    <div class="panel-group col-md-12" id="accordion3" style="padding-top:5%">
-        <div class="panel panel-heading" style="background-color:blue">
+    <div class="panel-group col-md-12" id="accordion3" >
+        <div class="panel panel-heading" style="background-color:#ADD8E6">
             <h2 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion3" href="#collapseThree">Sounds (mp3 only)</a>
                 <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
             </h2>
         </div>
-        <div id="collapseThree" class="panel-collapse collapse out">
+        <div id="collapseThree" class="panel-collapse collapse in">
             <div class="panel panel-body">
                 <div class="row">
                     @using (Html.BeginForm("Upload", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
