@@ -86,7 +86,7 @@
                                     break;
 
                                 case (Question.QuestionType.Spinner):
-                                <input class="spinner" name=@(String.Format(" QuestionModels[{0}].Answer", i) ) readonly/>
+                                <input class="spinner" name=@(String.Format(" QuestionModels[{0}].Answer", i) ) min="@(((SpinnerViewModel)Model.QuestionModels[i]).MinValue)" max="@(((SpinnerViewModel)Model.QuestionModels[i]).MaxValue)" value="@(((SpinnerViewModel)Model.QuestionModels[i]).StartValue)" readonly />
                                     break;
 
                                 default:

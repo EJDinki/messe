@@ -22,6 +22,13 @@ namespace DiscoveryCenter.Models
         public List<Choice> Choices { get; set; }    
     }
 
+    public class SpinnerViewModel : QuestionViewModel
+    {
+        public int MaxValue { get; set; }
+        public int MinValue { get; set; }
+        public int StartValue { get; set; }
+    }
+
     public class MultipleSelectViewModel : MultipleChoiceViewModel
     {
         public int MaxSelectedChoices { get; set; }

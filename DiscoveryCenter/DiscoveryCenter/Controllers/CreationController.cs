@@ -319,6 +319,7 @@ namespace DiscoveryCenter.Controllers
                             }
                         }
                         q.MaxSelectedChoices = match.MaxSelectedChoices;
+                        q.MinSelect = match.MinSelect;
                         q.IndexInSurvey = match.IndexInSurvey;
                     }
                 }

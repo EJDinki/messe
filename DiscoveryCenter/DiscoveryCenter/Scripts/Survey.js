@@ -1,7 +1,5 @@
 ﻿$(".slider").labeledslider({ min: 1, max: 5, tickInterval: 1, value: 3, stop: sliderChanged })
-$(".spinner").spinner({min:2, max: 20, value:5}).val(5);
-
-
+$(".spinner").spinner();
 function sliderChanged(event, ui)
 {
     var id = this.id.replace("Slider", "Answer");

@@ -41,6 +41,8 @@ namespace DiscoveryCenter.Models
         [Display(Name="Max Number of Choice Selections")]
         public int MaxSelectedChoices { get; set; }
 
+        public int MinSelect { get; set; }
+
         [ScriptIgnore]
         public virtual List<Answer> Answers { get; set; }
 

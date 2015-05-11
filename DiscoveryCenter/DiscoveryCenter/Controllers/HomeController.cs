@@ -72,6 +72,17 @@ namespace DiscoveryCenter.Controllers
 
                             model.QuestionModels.Add(eM);
                             break;
+                        case (Question.QuestionType.Spinner):
+                            SpinnerViewModel sp = new SpinnerViewModel();
+                            sp.QuestionId = question.Id;
+                            sp.Answer = "";
+                            sp.Question = question.Text;
+                            sp.Type = question.Type;
+                            sp.MaxValue = question.MaxSelectedChoices;
+                            sp.MinValue = question.MinSelect;
+                            sp.StartValue = (sp.MinValue + sp.MaxValue) / 2;
+                            model.QuestionModels.Add(sp);
+                            break;
                         default:
                             QuestionViewModel m = new QuestionViewModel();
                             m.QuestionId = question.Id;

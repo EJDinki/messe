@@ -88,6 +88,10 @@ namespace DiscoveryCenter.Models
                 {
                     question.MaxSelectedChoices = Convert.ToInt32(request.Form.Get(key));
                 }
+                else if(key.Contains("MinSelect"))
+                {
+                    question.MinSelect = Convert.ToInt32(request.Form.Get(key));
+                }
                 else if(key.Contains(".Choice"))
                 {
                     currentChoice = new Choice(){Text=request.Form.Get(key), IsSelected=false, ParentQuestion=question};
