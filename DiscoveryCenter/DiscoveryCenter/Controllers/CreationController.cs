@@ -263,6 +263,13 @@ namespace DiscoveryCenter.Controllers
                                 String.Format("Question {0} contains duplicate choices", question.IndexInSurvey));
                     }
                 }
+                else if (question.Type == Question.QuestionType.Spinner)
+                {
+                    if(question.MaxSelectedChoices < question.MinSelect)
+                    {
+                        ModelState.AddModelError(String.Format("Questions[{0}].Range", question.IndexInSurvey), String.Format("The Max must be >= Min for question {0}.", question.IndexInSurvey));
+                    }
+                }
 
                 //check if question text is invalid
                 if (String.IsNullOrWhiteSpace(question.Text))
