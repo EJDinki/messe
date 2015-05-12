@@ -112,7 +112,15 @@
                 {
                     <li data-target="#myCarousel" style="cursor:default"></li>
                 }
-            </ol>
+            </ol> 
+        </div>
+        <div class="text-center">
+            <div id="progress">
+                Question <span id="questionNumber">1</span> of @Model.QuestionModels.Count
+            </div>
+            <div id="done" hidden>
+                Done!
+            </div>
         </div>
     </div>
 
@@ -130,6 +138,24 @@
     <script src="/Scripts/@(Model.Theme.JsFileName)"></script>
     <script>
         var isMuted = false;
+
+        $(document).on("ready", function () {
+            var totalItems = $('.carousel-inner .item').length;
+
+            $("#myCarousel").on("slid.bs.carousel", function () {
+                var currentIndex = $('div.active').index() + 1;
+                if (currentIndex < totalItems) {
+                    $("#progress").show();
+                    $("#done").hide();
+                    $("#questionNumber").html(currentIndex);
+                }
+                else {
+                    $("#progress").hide();
+                    $("#done").show();
+                }
+            });
+        });
+        
 
         $('#muteSurvey').on('click', function () {
             muteAll();
