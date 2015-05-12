@@ -14,6 +14,7 @@ using System.Net.Http.Headers;
 
 namespace DiscoveryCenter.Controllers
 {
+    [Authorize]
     public class ExhibitsController : Controller
     {
         private SurveyContext db = new SurveyContext();
