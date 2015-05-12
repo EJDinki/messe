@@ -230,6 +230,7 @@
     <Content Include="Content\images\exhibits\pirates.jpg" />
     <Content Include="Content\images\exhibits\plum_dragon.jpg" />
     <Content Include="Content\images\exhibits\power_of_play.jpg" />
+    <Content Include="Content\images\exhibits\smiley.jpeg" />
     <Content Include="Content\images\exhibits\studio_60.jpg" />
     <Content Include="Content\images\exhibits\susquehanna_meets.jpg" />
     <Content Include="Content\images\exhibits\the_tower.jpg" />
@@ -282,7 +283,6 @@
     <Content Include="Content\images\discovery.png" />
     <Content Include="Content\images\discovery50.png" />
     <Content Include="Content\images\discovery75.png" />
-    <Content Include="Content\images\exhibits\smiley.jpeg" />
     <Content Include="Content\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\images\ui-bg_flat_55_fbec88_40x100.png" />
     <Content Include="Content\images\ui-bg_glass_75_d0e5f5_1x400.png" />
