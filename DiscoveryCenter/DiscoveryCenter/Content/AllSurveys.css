@@ -75,7 +75,7 @@ textarea{
     position:absolute;
     padding: 0 30px 0 30px;
     top: 149px;/*panel-heading height with border*/
-    bottom: 60px;
+    bottom: 65px;
     left: 0px;
     right: 0;
 }
@@ -143,9 +143,12 @@ textarea{
 .carousel-inner .item .question-text{
     height:auto;
 } 
-
 .carousel-inner .item .question-choices{
-    height:80%;
+    position: absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    top:53px;
 } 
 
 .carousel-inner > .item > img,
@@ -241,7 +244,7 @@ textarea{
   left: 50%;
   z-index: 15;
   width: 80%;
-  bottom: -20px;
+  bottom: -30px;
   padding-left: 0;
   margin-left: -40%;
   text-align: center;
@@ -326,6 +329,12 @@ textarea{
 }
 
 /*----------------------exhibits---------------------*/
+
+.exhibit-container-container
+{
+    height:100%;
+    position: relative;
+}
 
 .exhibit-container{
     border: 1px solid black;

@@ -290,6 +290,7 @@ namespace DiscoveryCenter.Controllers
             else
             {
                 oldVersion.Name = survey.Name;
+                oldVersion.Description = survey.Description;
                 oldVersion.ThemeId = survey.ThemeId;
                 oldVersion.LastModifiedDate = DateTime.Now;
                 List<Question> deleteList = new List<Question>();

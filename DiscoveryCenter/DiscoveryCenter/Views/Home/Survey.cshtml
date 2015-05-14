@@ -114,7 +114,7 @@
                 }
             </ol> 
         </div>
-        <div class="text-center">
+        <div class="text-center" style="margin-top:15px">
             <div id="progress">
                 Question <span id="questionNumber">1</span> of @Model.QuestionModels.Count
             </div>
@@ -123,9 +123,8 @@
             </div>
         </div>
     </div>
-
-
 </div>
+
 }
 
 @section Styles
@@ -154,7 +153,22 @@
                     $("#done").show();
                 }
             });
+            $("#myCarousel").on("slide.bs.carousel", function (direction, relatedTarget) {
+                setTimeout(fixQuestionChoiceHeight, 100);
+            });
         });
+
+        fixQuestionChoiceHeight();
+        function fixQuestionChoiceHeight()
+        {
+            $(".carousel-inner .item.left, .carousel-inner .item.right, .carousel-inner .item.active").each(function (index, item) {
+                console.log(item);
+                var height = $(item).find(".question-text").first().css("height");
+                console.log(height);
+
+                $(item).find(".question-choices").css("top", height);
+            });
+        }
         
 
         $('#muteSurvey').on('click', function () {

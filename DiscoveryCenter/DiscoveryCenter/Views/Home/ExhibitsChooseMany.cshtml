@@ -1,22 +1,25 @@
 ﻿@model DiscoveryCenter.Models.MultipleSelectViewModel
 
 @Html.Hidden("Exhibit" + Model.QuestionId + ".Answer", "", new {id = "exhibitA_" + Model.QuestionId })
-<div id="exhibitList_@Model.QuestionId" class="pull-left dropable-revert exhibit-container">
-    @for (int z = 0; z < @Model.Choices.Count; z++)
-    {
-        <div class="panel draggable exhibit" id="@Model.QuestionId">
-            @Html.Hidden(String.Format("{0}_Options[{1}].text", Model.QuestionId, z), Model.Choices[z].Text)
-            @if (Model.Choices[z].ImageName != null) { 
-            <img src="@Model.Choices[z].ImageName" height="64" width="64">
-            }
-            <label>
-                @Model.Choices[z].Text
-            </label>
-            <br />
-        </div>
-    } 
+<div class="exhibit-container-container">
+    <div id="exhibitList_@Model.QuestionId" class="pull-left dropable-revert exhibit-container">
+        @for (int z = 0; z < @Model.Choices.Count; z++)
+        {
+            <div class="panel draggable exhibit" id="@Model.QuestionId">
+                @Html.Hidden(String.Format("{0}_Options[{1}].text", Model.QuestionId, z), Model.Choices[z].Text)
+                @if (Model.Choices[z].ImageName != null)
+                {
+                    <img src="@Model.Choices[z].ImageName" height="64" width="64">
+                }
+                <label>
+                    @Model.Choices[z].Text
+                </label>
+                <br />
+            </div>
+        }
 
+    </div>
+
+    @Html.Hidden("MaxChoices_" + Model.MaxSelectedChoices, Model.MaxSelectedChoices, new { id = "MaxChoices_" + Model.MaxSelectedChoices })
+    <div id="dropArea_@Model.QuestionId" class="dropable pull-right exhibit-container"></div>
 </div>
-
-@Html.Hidden("MaxChoices_" + Model.MaxSelectedChoices, Model.MaxSelectedChoices, new { id = "MaxChoices_" + Model.MaxSelectedChoices })
-<div id="dropArea_@Model.QuestionId" class="dropable pull-right exhibit-container"></div>
