@@ -91,11 +91,11 @@
 @section scripts
 {
     <script>
-        $(".editDialog").on("click", function () {
-            var url = $(".confirmDelete").attr("href");
+        $(".editDialog").on("click", function (event) {
+            var url = $(event.target).attr("href");
             $.ajax({
                 url: url,
-                method: POST
+                method: 'GET'
             }).success(function (data) {
                 $("#editDialog .modal-dialog .modal-content").html(data);
             })
@@ -118,9 +118,7 @@
                 var selected = null;
 
             if (selected != null) {
-                console.log(selected);
                 var id = $(selected).find("input.id").first().val();
-                console.log(id);
                 $(".selection-buttons a").each(function (index, ele) {
                     $(ele).attr('href', function (i, a) {
 
@@ -132,18 +130,15 @@
                         }
                     });
                     $(ele).removeAttr('disabled');
-                    console.log(ele);
                 });
 
             }
             else
             {
                 $(".selection-buttons a").each(function (index, ele) {
-                    console.log(ele);
                     $(ele).attr("disabled", "disabled");
                 });
             }
-
         }
     </script>
 }

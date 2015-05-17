@@ -180,7 +180,7 @@ $(".confirmDelete").on("click", function () {
     var url = $(".confirmDelete").attr("href");
     $.ajax({
         url: url,
-        method: POST
+        method: 'GET'
     }).success(function (data) {
         $("#deleteDialog .modal-dialog .modal-content").html(data);
     })
