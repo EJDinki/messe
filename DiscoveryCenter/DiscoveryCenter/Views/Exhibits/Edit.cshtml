@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 @{
@@ -12,18 +11,23 @@
     foreach (string image in Directory.GetFiles(Server.MapPath("~/Content/images/exhibits")))
     {
         string val = "/Content/images/exhibits/" + Path.GetFileName(image);
-        bool selected = ( val==Model.ImageLocation);
-        storedImageNames.Add(new SelectListItem() { Text = Path.GetFileName(image), Value = val, Selected=selected });
+        if(Model.ImageLocation == null)
+        {
+            storedImageNames.Add(new SelectListItem() { Text = Path.GetFileName(image), Value = val });
+        }
+        else
+        {
+            bool selected = ( val==Model.ImageLocation);
+            storedImageNames.Add(new SelectListItem() { Text = Path.GetFileName(image), Value = val, Selected=selected });
+        }
     }
 }
-
-<br />
-<div class="col-md-offset-2 col-md-8 panel panel-default">
-    <div class="panel-body ">
+<div class="col-md-12 panel">
+    <div class="panel-body">
         <h2>Edit Exhibit</h2>
 
 
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Edit", "Exhibits"))
         {
             @Html.AntiForgeryToken()
             @Html.Hidden("CreateDate", Model.CreateDate.ToString("MM/dd/yyy hh:mm:ss"))

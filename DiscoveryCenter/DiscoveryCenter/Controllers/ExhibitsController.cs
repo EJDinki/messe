@@ -75,25 +75,7 @@ namespace DiscoveryCenter.Controllers
         // GET: Exhibits/Create
         public ActionResult Create()
         {
-            return View();
-        }
-
-        // POST: Exhibits/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Exhibit exhibit)
-        {
-            if (!ValidateExhibit(exhibit))
-                return View(exhibit);
-
-            exhibit.CreateDate = DateTime.Now;
-            exhibit.LastModifiedDate = DateTime.Now;
-            exhibit.RatingSurvey = ExhibitsController.CreateRatingSurvey(exhibit,db);
-            db.Exhibits.Add(exhibit);
-            db.SaveChanges();
-            return RedirectToAction("Index");    
+            return View("Edit", new Exhibit());
         }
 
         public static Survey CreateRatingSurvey(Exhibit exhibit, SurveyContext db, int id = -1)
@@ -183,13 +165,28 @@ namespace DiscoveryCenter.Controllers
             {
                 return View(exhibit);
             }
-            exhibit.ImageLocation = exhibit.BrokenWorkaround;
-            exhibit.LastModifiedDate = DateTime.Now;
-            db.Entry(exhibit).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Index");
 
-  
+            //if new exhibit
+            Exhibit oldVersion = db.Exhibits.Find(exhibit.Id);
+            if (oldVersion == null)
+            {
+                exhibit.CreateDate = DateTime.Now;
+                exhibit.LastModifiedDate = DateTime.Now;
+                exhibit.ImageLocation = exhibit.BrokenWorkaround;
+                exhibit.RatingSurvey = ExhibitsController.CreateRatingSurvey(exhibit, db);
+                db.Exhibits.Add(exhibit);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                oldVersion.ImageLocation = exhibit.BrokenWorkaround;
+                oldVersion.LastModifiedDate = DateTime.Now;
+                oldVersion.Name = exhibit.Name;
+                oldVersion.Description = exhibit.Description;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
 
         // GET: Exhibits/Delete/5
