@@ -6,378 +6,549 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAyXCrkMFhC0m2x0Z5tndaLwAAAAACAAAAAAAQZgAAAAEAACAAAAAdlxUq7yuUGYm2G56v5YcCG062O6PFSC4IRMyeu4PiAgAAAAAOgAAAAAIAACAAAABafodhA3GMDdu/jebsWVeZLCJAmMXYgAf4hbexa1mCeSAAAAD2sV1BusQvOQe1L1P4jhY91B2rf0zUhSNaJ5cN8nTzpkAAAADboeR11TdXJBfwp8kc61uYeUpNsNQAur15yH2P+Pxz8WjjAdLUs/IM3hCwu6I/TBpSVFVVy9h43M4Z4nobhs9b</EncryptedPassword>
     <_PublishTargetUrl>ftp://MuseumSurvey.somee.com/www.MuseumSurvey.somee.com</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:24</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
       <publishTime>05/01/2015 01:38:32</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>05/01/2015 01:38:31</publishTime>
+      <publishTime>05/11/2015 13:59:32</publishTime>
     </File>
     <File Include="bin/cs/DiscoveryCenter.resources.dll">
-      <publishTime>05/01/2015 01:38:16</publishTime>
+      <publishTime>05/11/2015 13:59:14</publishTime>
     </File>
     <File Include="bin/DiscoveryCenter.dll">
-      <publishTime>05/01/2015 01:38:16</publishTime>
+      <publishTime>05/11/2015 13:59:14</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:24</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:24</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:25</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.EntityFramework.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:25</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Owin.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:25</publishTime>
     </File>
     <File Include="bin/Microsoft.CSharp.dll">
       <publishTime>09/26/2012 04:16:08</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:26</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:26</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Cookies.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:26</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:26</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Facebook.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:26</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Google.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:26</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.MicrosoftAccount.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:26</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.OAuth.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:26</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Twitter.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:27</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:27</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:27</publishTime>
     </File>
     <File Include="bin/Owin.dll">
-      <publishTime>02/07/2015 17:55:53</publishTime>
+      <publishTime>04/05/2015 20:35:27</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:26</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:25</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:26</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:26</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:26</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:26</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>02/07/2015 17:55:52</publishTime>
+      <publishTime>04/05/2015 20:35:26</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>02/07/2015 17:55:53</publishTime>
+      <publishTime>04/05/2015 20:35:27</publishTime>
     </File>
     <File Include="Content/Admin.css">
-      <publishTime>04/23/2015 19:54:28</publishTime>
+      <publishTime>05/06/2015 23:12:55</publishTime>
     </File>
     <File Include="Content/AdultSurvey.css">
-      <publishTime>04/23/2015 20:09:12</publishTime>
+      <publishTime>05/05/2015 18:07:40</publishTime>
     </File>
     <File Include="Content/AllSurveys.css">
-      <publishTime>04/23/2015 19:30:33</publishTime>
+      <publishTime>05/11/2015 13:58:04</publishTime>
     </File>
     <File Include="Content/audio/CheckoutScanner.mp3">
-      <publishTime>04/02/2015 01:45:32</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/audio/green_beep.mp3">
-      <publishTime>04/02/2015 01:45:32</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/audio/Victory.mp3">
-      <publishTime>04/02/2015 01:45:32</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/bootstrap-slider.css">
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
+    <File Include="Content/bootstrap-theme.css">
+      <publishTime>05/04/2015 20:23:05</publishTime>
+    </File>
+    <File Include="Content/bootstrap-theme.css.map">
+      <publishTime>05/09/2015 16:12:51</publishTime>
+    </File>
+    <File Include="Content/bootstrap-theme.min.css">
+      <publishTime>05/04/2015 20:23:05</publishTime>
+    </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>05/04/2015 20:23:05</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css.map">
+      <publishTime>05/09/2015 16:12:51</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>05/04/2015 20:23:05</publishTime>
     </File>
     <File Include="Content/ChildSurvey.css">
-      <publishTime>04/03/2015 20:48:38</publishTime>
+      <publishTime>04/21/2015 16:45:53</publishTime>
     </File>
     <File Include="Content/cobalt.css">
-      <publishTime>04/03/2015 21:58:18</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/codemirror.css">
-      <publishTime>04/03/2015 21:53:12</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/discovery.png">
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
     <File Include="Content/images/childbackground.jpg">
-      <publishTime>03/22/2015 01:06:25</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/childbodybg.jpg">
-      <publishTime>03/22/2015 01:37:52</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/choiceImage/smiley.jpeg">
-      <publishTime>04/03/2015 02:22:55</publishTime>
+      <publishTime>05/09/2015 16:38:01</publishTime>
     </File>
     <File Include="Content/images/discovery.png">
-      <publishTime>02/26/2015 18:55:19</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/discovery50.png">
-      <publishTime>02/26/2015 18:55:19</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/discovery75.png">
-      <publishTime>02/26/2015 18:55:19</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/3_and_under.jpg">
+      <publishTime>05/09/2015 16:46:27</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/abc_bank.jpg">
+      <publishTime>05/09/2015 16:46:34</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/action_news.jpg">
+      <publishTime>05/05/2015 17:42:24</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/book_nook.jpg">
+      <publishTime>05/05/2015 17:50:12</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/eco_kids.jpg">
+      <publishTime>05/05/2015 17:38:00</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/fire_station.jpg">
+      <publishTime>05/05/2015 17:53:14</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/hospital.jpg">
+      <publishTime>05/05/2015 17:45:42</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/music_alley.jpg">
+      <publishTime>05/05/2015 18:05:44</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/open_wide_dental.jpg">
+      <publishTime>05/05/2015 17:43:32</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/pirates.jpg">
+      <publishTime>05/05/2015 18:02:32</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/plum_dragon.jpg">
+      <publishTime>05/05/2015 17:35:40</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/power_of_play.jpg">
+      <publishTime>05/05/2015 17:48:30</publishTime>
     </File>
     <File Include="Content/images/exhibits/smiley.jpeg">
-      <publishTime>04/03/2015 02:22:55</publishTime>
+      <publishTime>05/09/2015 16:38:53</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/studio_60.jpg">
+      <publishTime>05/05/2015 17:43:00</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/susquehanna_meets.jpg">
+      <publishTime>05/05/2015 17:39:56</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/the_tower.jpg">
+      <publishTime>05/05/2015 18:00:24</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/weis_grocery.jpg">
+      <publishTime>05/05/2015 17:55:38</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/whats_the_buzz.jpg">
+      <publishTime>05/05/2015 18:06:36</publishTime>
+    </File>
+    <File Include="Content/images/exhibits/widgets_and_gadgets.jpg">
+      <publishTime>05/05/2015 17:52:00</publishTime>
+    </File>
+    <File Include="Content/images/faq/create1.png">
+      <publishTime>04/16/2015 15:02:59</publishTime>
+    </File>
+    <File Include="Content/images/faq/create2.png">
+      <publishTime>04/16/2015 15:16:26</publishTime>
+    </File>
+    <File Include="Content/images/faq/create3.png">
+      <publishTime>04/16/2015 15:41:55</publishTime>
+    </File>
+    <File Include="Content/images/faq/create4.png">
+      <publishTime>04/16/2015 15:56:42</publishTime>
+    </File>
+    <File Include="Content/images/faq/create5.png">
+      <publishTime>04/16/2015 16:04:12</publishTime>
+    </File>
+    <File Include="Content/images/faq/delete1.png">
+      <publishTime>04/21/2015 16:56:07</publishTime>
+    </File>
+    <File Include="Content/images/faq/delete2.PNG">
+      <publishTime>04/21/2015 16:57:39</publishTime>
+    </File>
+    <File Include="Content/images/faq/download_report.png">
+      <publishTime>04/21/2015 17:22:34</publishTime>
+    </File>
+    <File Include="Content/images/faq/download_report2.png">
+      <publishTime>04/21/2015 17:38:58</publishTime>
+    </File>
+    <File Include="Content/images/faq/duplicate1.png">
+      <publishTime>04/17/2015 16:37:03</publishTime>
+    </File>
+    <File Include="Content/images/faq/duplicate2.PNG">
+      <publishTime>04/21/2015 16:48:36</publishTime>
+    </File>
+    <File Include="Content/images/faq/edit_survey1.png">
+      <publishTime>04/17/2015 16:24:54</publishTime>
+    </File>
+    <File Include="Content/images/faq/exhibits1.PNG">
+      <publishTime>04/28/2015 15:20:43</publishTime>
+    </File>
+    <File Include="Content/images/faq/exhibits2.PNG">
+      <publishTime>04/28/2015 15:22:35</publishTime>
+    </File>
+    <File Include="Content/images/faq/exhibits3.PNG">
+      <publishTime>04/28/2015 15:25:23</publishTime>
+    </File>
+    <File Include="Content/images/faq/exhibits4.PNG">
+      <publishTime>04/28/2015 15:28:59</publishTime>
+    </File>
+    <File Include="Content/images/faq/exhibits5.PNG">
+      <publishTime>04/28/2015 15:28:32</publishTime>
+    </File>
+    <File Include="Content/images/faq/exhibits6.png">
+      <publishTime>04/28/2015 15:30:42</publishTime>
+    </File>
+    <File Include="Content/images/faq/images1.PNG">
+      <publishTime>04/28/2015 14:48:02</publishTime>
+    </File>
+    <File Include="Content/images/faq/images2.png">
+      <publishTime>04/28/2015 14:51:42</publishTime>
+    </File>
+    <File Include="Content/images/faq/images3.PNG">
+      <publishTime>04/28/2015 14:52:07</publishTime>
+    </File>
+    <File Include="Content/images/faq/images4.png">
+      <publishTime>04/28/2015 14:56:46</publishTime>
+    </File>
+    <File Include="Content/images/faq/images5.png">
+      <publishTime>05/06/2015 23:33:57</publishTime>
+    </File>
+    <File Include="Content/images/faq/images6.png">
+      <publishTime>04/28/2015 15:04:44</publishTime>
+    </File>
+    <File Include="Content/images/faq/themes1.PNG">
+      <publishTime>05/06/2015 23:57:02</publishTime>
+    </File>
+    <File Include="Content/images/faq/themes2.png">
+      <publishTime>04/28/2015 16:05:40</publishTime>
+    </File>
+    <File Include="Content/images/faq/themes3.png">
+      <publishTime>04/28/2015 16:08:29</publishTime>
+    </File>
+    <File Include="Content/images/faq/themes4.png">
+      <publishTime>04/28/2015 16:08:01</publishTime>
+    </File>
+    <File Include="Content/images/faq/view_report1.png">
+      <publishTime>04/21/2015 17:11:21</publishTime>
+    </File>
+    <File Include="Content/images/faq/view_report2.png">
+      <publishTime>04/21/2015 17:19:36</publishTime>
+    </File>
+    <File Include="Content/images/faq/view_report3.png">
+      <publishTime>04/21/2015 17:18:42</publishTime>
     </File>
     <File Include="Content/images/ui-bg_flat_0_aaaaaa_40x100.png">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/ui-bg_flat_55_fbec88_40x100.png">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/ui-bg_glass_75_d0e5f5_1x400.png">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/ui-bg_glass_85_dfeffc_1x400.png">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/ui-bg_glass_95_fef1ec_1x400.png">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/ui-bg_inset-hard_100_f5f8f9_1x100.png">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/ui-bg_inset-hard_100_fcfdfd_1x100.png">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/ui-icons_217bc0_256x240.png">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/ui-icons_2e83ff_256x240.png">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/ui-icons_469bdd_256x240.png">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/ui-icons_6da8d5_256x240.png">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/ui-icons_cd0a0a_256x240.png">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/ui-icons_d8e7f3_256x240.png">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/images/ui-icons_f9bd01_256x240.png">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/jquery-ui.min.css">
-      <publishTime>03/07/2015 18:12:09</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/jquery-ui.structure.min.css">
-      <publishTime>03/07/2015 18:12:09</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/jquery-ui.theme.min.css">
-      <publishTime>03/07/2015 18:12:09</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/jquery.jqplot.css">
-      <publishTime>04/08/2015 18:41:00</publishTime>
+      <publishTime>04/09/2015 17:10:34</publishTime>
+    </File>
+    <File Include="Content/MobileSurvey.css">
+      <publishTime>05/05/2015 18:07:40</publishTime>
     </File>
     <File Include="Content/sliderExtension.css">
-      <publishTime>03/09/2015 00:49:16</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Content/SurveyView.css">
       <publishTime>03/07/2015 20:22:32</publishTime>
     </File>
     <File Include="favicon.ico">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>05/04/2015 20:23:05</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.svg">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>05/04/2015 20:23:05</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>05/04/2015 20:23:05</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>05/04/2015 20:23:05</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>05/04/2015 20:23:05</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
+    <File Include="Migrations/Grant.sql">
+      <publishTime>05/04/2015 20:23:05</publishTime>
+    </File>
     <File Include="packages.config">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>05/01/2015 01:38:29</publishTime>
+      <publishTime>05/11/2015 13:59:24</publishTime>
     </File>
     <File Include="Scripts/AdminScripts.js">
-      <publishTime>04/08/2015 00:12:29</publishTime>
+      <publishTime>05/09/2015 16:12:51</publishTime>
     </File>
     <File Include="Scripts/AdultSurvey.js">
-      <publishTime>04/23/2015 20:09:12</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Scripts/bootstrap-slider.js">
-      <publishTime>02/10/2015 00:37:23</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>05/04/2015 20:23:05</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>05/04/2015 20:23:05</publishTime>
     </File>
     <File Include="Scripts/ChildSurvey.js">
-      <publishTime>04/23/2015 19:30:33</publishTime>
+      <publishTime>04/14/2015 17:16:17</publishTime>
     </File>
     <File Include="Scripts/codemirror.js">
-      <publishTime>04/03/2015 21:53:25</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Scripts/css.js">
-      <publishTime>04/03/2015 21:55:31</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Scripts/exhibit-draggable.js">
-      <publishTime>04/23/2015 19:30:33</publishTime>
+      <publishTime>04/14/2015 17:49:40</publishTime>
     </File>
     <File Include="Scripts/javascript.js">
-      <publishTime>04/03/2015 21:56:08</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Scripts/jqplot/jqplot.barRenderer.min.js">
-      <publishTime>04/08/2015 01:08:26</publishTime>
+      <publishTime>04/09/2015 17:10:34</publishTime>
     </File>
     <File Include="Scripts/jqplot/jqplot.canvasAxisTickRenderer.min.js">
-      <publishTime>04/08/2015 02:35:30</publishTime>
+      <publishTime>04/09/2015 17:10:34</publishTime>
     </File>
     <File Include="Scripts/jqplot/jqplot.canvasTextRenderer.min.js">
-      <publishTime>04/08/2015 02:41:20</publishTime>
+      <publishTime>04/09/2015 17:10:34</publishTime>
     </File>
     <File Include="Scripts/jqplot/jqplot.categoryAxisRenderer.min.js">
-      <publishTime>04/08/2015 01:30:43</publishTime>
+      <publishTime>04/09/2015 17:10:34</publishTime>
     </File>
     <File Include="Scripts/jqplot/jqplot.pieRenderer.min.js">
-      <publishTime>02/24/2015 19:10:25</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Scripts/jqplot/jqplot.pointLabels.min.js">
-      <publishTime>04/08/2015 18:38:50</publishTime>
+      <publishTime>04/09/2015 17:10:34</publishTime>
     </File>
     <File Include="Scripts/jqplot/jquery.jqplot.min.js">
-      <publishTime>02/24/2015 19:10:25</publishTime>
+      <publishTime>04/05/2015 20:35:22</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.js">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.min.js">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.min.map">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Scripts/jquery-touch.js">
-      <publishTime>02/26/2015 19:23:17</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Scripts/jquery-ui.min.js">
-      <publishTime>03/07/2015 18:12:38</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.min.js">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.js">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
+    </File>
+    <File Include="Scripts/MobileSurvey.js">
+      <publishTime>05/05/2015 18:07:40</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.6.2.js">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Scripts/respond.js">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Scripts/respond.min.js">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Scripts/sliderExtension.js">
-      <publishTime>03/07/2015 20:03:32</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Scripts/Survey.js">
-      <publishTime>04/23/2015 19:30:33</publishTime>
+      <publishTime>05/11/2015 13:58:04</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>04/08/2015 18:38:50</publishTime>
+      <publishTime>05/05/2015 18:07:40</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>04/23/2015 22:29:24</publishTime>
+      <publishTime>04/28/2015 14:32:18</publishTime>
     </File>
     <File Include="Views/Account/Settings.cshtml">
-      <publishTime>04/23/2015 22:27:30</publishTime>
+      <publishTime>04/28/2015 14:32:18</publishTime>
     </File>
     <File Include="Views/Creation/Create.cshtml">
-      <publishTime>04/06/2015 01:32:02</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Views/Creation/Delete.cshtml">
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
     <File Include="Views/Creation/Details.cshtml">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Views/Creation/Edit.cshtml">
-      <publishTime>04/23/2015 19:54:38</publishTime>
+      <publishTime>05/03/2015 17:51:24</publishTime>
     </File>
     <File Include="Views/Creation/Index.cshtml">
-      <publishTime>05/01/2015 01:37:27</publishTime>
+      <publishTime>05/09/2015 16:12:51</publishTime>
     </File>
     <File Include="Views/Creation/Question.cshtml">
-      <publishTime>03/08/2015 13:35:52</publishTime>
+      <publishTime>05/03/2015 17:51:24</publishTime>
     </File>
     <File Include="Views/Creation/_ChoiceBox.cshtml">
-      <publishTime>04/03/2015 02:22:55</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Views/Creation/_ChoicesInputGroup.cshtml">
-      <publishTime>05/01/2015 01:37:27</publishTime>
+      <publishTime>05/11/2015 13:58:04</publishTime>
     </File>
     <File Include="Views/Exhibits/Create.cshtml">
-      <publishTime>04/06/2015 01:32:02</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Views/Exhibits/Delete.cshtml">
       <publishTime>04/02/2015 01:45:32</publishTime>
@@ -386,82 +557,85 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/09/2015 18:52:32</publishTime>
     </File>
     <File Include="Views/Exhibits/Edit.cshtml">
-      <publishTime>04/06/2015 01:32:02</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Views/Exhibits/Index.cshtml">
-      <publishTime>04/23/2015 19:30:33</publishTime>
+      <publishTime>05/09/2015 16:12:51</publishTime>
     </File>
     <File Include="Views/Help/Help.cshtml">
-      <publishTime>05/01/2015 01:37:27</publishTime>
+      <publishTime>05/09/2015 17:13:31</publishTime>
     </File>
     <File Include="Views/Home/ExhibitsChooseMany.cshtml">
-      <publishTime>04/23/2015 19:30:33</publishTime>
+      <publishTime>04/14/2015 17:49:40</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>03/24/2015 03:04:14</publishTime>
+      <publishTime>05/05/2015 18:07:40</publishTime>
     </File>
     <File Include="Views/Home/MultipleChoiceChooseMany.cshtml">
-      <publishTime>04/03/2015 02:22:55</publishTime>
+      <publishTime>05/05/2015 18:07:40</publishTime>
     </File>
     <File Include="Views/Home/MultipleChoiceChooseOne.cshtml">
-      <publishTime>04/02/2015 20:16:28</publishTime>
+      <publishTime>05/05/2015 18:07:40</publishTime>
     </File>
     <File Include="Views/Home/ShortAnswer.cshtml">
       <publishTime>02/07/2015 17:55:51</publishTime>
     </File>
     <File Include="Views/Home/SliderQuestion.cshtml">
-      <publishTime>04/23/2015 19:30:33</publishTime>
+      <publishTime>05/05/2015 18:07:40</publishTime>
     </File>
     <File Include="Views/Home/SpinnerQuestion.cshtml">
       <publishTime>03/22/2015 04:55:21</publishTime>
     </File>
     <File Include="Views/Home/Survey.cshtml">
-      <publishTime>05/01/2015 01:37:27</publishTime>
+      <publishTime>05/11/2015 13:58:04</publishTime>
     </File>
     <File Include="Views/Home/ThankYou.cshtml">
-      <publishTime>04/03/2015 02:22:55</publishTime>
+      <publishTime>05/05/2015 18:07:40</publishTime>
     </File>
     <File Include="Views/Images/Index.cshtml">
-      <publishTime>05/01/2015 01:37:27</publishTime>
+      <publishTime>05/09/2015 16:34:05</publishTime>
     </File>
     <File Include="Views/Report/ChartReport.cshtml">
-      <publishTime>04/08/2015 20:24:51</publishTime>
+      <publishTime>05/03/2015 17:51:24</publishTime>
     </File>
     <File Include="Views/Report/Index.cshtml">
-      <publishTime>04/08/2015 20:34:02</publishTime>
+      <publishTime>05/09/2015 16:12:51</publishTime>
     </File>
     <File Include="Views/Report/ShortAnswerReport.cshtml">
-      <publishTime>04/08/2015 00:12:29</publishTime>
+      <publishTime>04/09/2015 17:10:34</publishTime>
+    </File>
+    <File Include="Views/Shared/DeleteConfirm.cshtml">
+      <publishTime>05/09/2015 16:12:51</publishTime>
     </File>
     <File Include="Views/Shared/_AdminLayout.cshtml">
-      <publishTime>05/01/2015 01:37:27</publishTime>
+      <publishTime>05/04/2015 20:23:05</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>03/04/2015 14:28:17</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>05/01/2015 01:37:27</publishTime>
+      <publishTime>05/07/2015 00:01:40</publishTime>
     </File>
     <File Include="Views/Shared/_Pagination.cshtml">
-      <publishTime>04/23/2015 19:30:33</publishTime>
+      <publishTime>05/03/2015 17:51:24</publishTime>
     </File>
     <File Include="Views/Shared/_SurveyLayout.cshtml">
-      <publishTime>03/24/2015 03:16:08</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Views/Theme/Edit.cshtml">
-      <publishTime>04/09/2015 01:19:02</publishTime>
+      <publishTime>05/03/2015 17:51:24</publishTime>
     </File>
     <File Include="Views/Theme/Index.cshtml">
-      <publishTime>04/23/2015 19:30:33</publishTime>
+      <publishTime>05/09/2015 16:12:51</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>02/24/2015 19:10:17</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>02/07/2015 17:55:51</publishTime>
+      <publishTime>04/05/2015 20:35:23</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/01/2015 01:38:28</publishTime>
+      <publishTime>05/11/2015 13:59:20</publishTime>
     </File>
   </ItemGroup>
 </Project>
