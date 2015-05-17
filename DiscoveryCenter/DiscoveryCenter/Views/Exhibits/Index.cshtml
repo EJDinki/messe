@@ -12,7 +12,8 @@
         <div class="clearfix">
             <div class="col-md-4" style="padding-left:0px">
                 <p>
-                    <a class="btn btn-primary" href="@Url.Action("Create","Exhibits")" id="addExhibit">
+                    <a class="btn btn-primary editDialog" href="@Url.Action("Create","Exhibits")" id="addExhibit" data-toggle="modal"
+                       data-target="#deleteDialog">
                         <i class='glyphicon glyphicon-plus'></i> Create New Exhibit
                     </a>
                 </p>
@@ -25,10 +26,11 @@
                     <a id="ratingExhibit" class="btn btn-default" type="button" href="@Url.Action("ViewExhibitRating", "Exhibits", new { id = "" })">
                         <span class="glyphicon glyphicon-list-alt"></span> View Ratings
                     </a>                   
-                    <a id="editExhibit" class="btn btn-default" type="button" href="@Url.Action("Edit", "Exhibits", new { id = "" })">
+                    <a id="editExhibit" class="btn btn-default editDialog" type="button" data-toggle="modal"
+                       data-target="#editDialog" href="@Url.Action("Edit", "Exhibits", new { id = "" })">
                         <span class="glyphicon glyphicon-edit"></span> Edit
                     </a>
-                    <a id="deleteExhibit" class="btn btn-danger" type="button" data-toggle="modal"
+                    <a id="deleteExhibit" class="btn btn-danger confirmDelete" type="button" data-toggle="modal"
                        data-target="#deleteDialog" href="@Url.Action("Delete", "Exhibits", new { id = ""})">
                         <span class="glyphicon glyphicon-remove"></span> Delete
                     </a>
@@ -79,9 +81,26 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="editDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
 @section scripts
 {
     <script>
+        $(".editDialog").on("click", function (event) {
+            var url = $(event.target).attr("href");
+            $.ajax({
+                url: url,
+                method: 'GET'
+            }).success(function (data) {
+                $("#editDialog .modal-dialog .modal-content").html(data);
+            })
+        });
+
         $(".indexSelectableList").selectable({
             stop:function(event, ui){
                 $(event.target).children('.ui-selected').not(':first').removeClass('ui-selected');
@@ -99,9 +118,7 @@
                 var selected = null;
 
             if (selected != null) {
-                console.log(selected);
                 var id = $(selected).find("input.id").first().val();
-                console.log(id);
                 $(".selection-buttons a").each(function (index, ele) {
                     $(ele).attr('href', function (i, a) {
 
@@ -113,18 +130,15 @@
                         }
                     });
                     $(ele).removeAttr('disabled');
-                    console.log(ele);
                 });
 
             }
             else
             {
                 $(".selection-buttons a").each(function (index, ele) {
-                    console.log(ele);
                     $(ele).attr("disabled", "disabled");
                 });
             }
-
         }
     </script>
 }

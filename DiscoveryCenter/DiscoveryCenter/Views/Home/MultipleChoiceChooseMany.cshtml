@@ -8,12 +8,13 @@
             <label>
                 @Html.CheckBox(String.Format("{0}_Options[{1}].IsSelected", Model.QuestionId, z), Model.Choices[z].IsSelected,
                 new { onclick = "limitChecked(this, " + Model.MaxSelectedChoices + ");", id=buttonId })
+                @if (Model.Choices[z].ImageName != "" && Model.Choices[z].ImageName != null)
+                {
+                    <img onclick="getElementById('@buttonId').checked=(!getElementById('@buttonId').checked);" class="choice-image" src="@Model.Choices[z].ImageName">
+                }
                 @Model.Choices[z].Text
             </label>
-            @if (Model.Choices[z].ImageName != "" && Model.Choices[z].ImageName != null)
-            {
-                <img onclick="getElementById('@buttonId').checked=(!getElementById('@buttonId').checked);" class="col-md-offset-2 choice-image" src="@Model.Choices[z].ImageName">
-            }
+            
             <br />
         </div>
     }

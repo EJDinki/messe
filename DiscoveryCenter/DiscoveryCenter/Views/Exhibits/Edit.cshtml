@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 @{
@@ -12,76 +11,68 @@
     foreach (string image in Directory.GetFiles(Server.MapPath("~/Content/images/exhibits")))
     {
         string val = "/Content/images/exhibits/" + Path.GetFileName(image);
-        bool selected = ( val==Model.ImageLocation);
-        storedImageNames.Add(new SelectListItem() { Text = Path.GetFileName(image), Value = val, Selected=selected });
+        if(Model.ImageLocation == null)
+        {
+            storedImageNames.Add(new SelectListItem() { Text = Path.GetFileName(image), Value = val });
+        }
+        else
+        {
+            bool selected = ( val==Model.ImageLocation);
+            storedImageNames.Add(new SelectListItem() { Text = Path.GetFileName(image), Value = val, Selected=selected });
+        }
     }
 }
-
-<br />
-<div class="col-md-offset-2 col-md-8 panel panel-default">
-    <div class="panel-body ">
-        <h2>Edit Exhibit</h2>
-
-
-        @using (Html.BeginForm())
+<div class="panel" style="margin-bottom:0">
+    <div class="">
+        @using (Html.BeginForm("Edit", "Exhibits"))
         {
-            @Html.AntiForgeryToken()
-            @Html.Hidden("CreateDate", Model.CreateDate.ToString("MM/dd/yyy hh:mm:ss"))
-            @Html.HiddenFor(m => m.ImageLocation)
-            @Html.HiddenFor(m => m.Id)
-            <div class="form-horizontal">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.Id)
+            <div class="modal-header">
+                <h3 style="margin:0;">Edit Exhibit</h3>
+            </div>
+            <div class="modal-body">
+                @Html.AntiForgeryToken()
+                @Html.Hidden("CreateDate", Model.CreateDate.ToString("MM/dd/yyy hh:mm:ss"))
+                @Html.HiddenFor(m => m.ImageLocation)
+                @Html.HiddenFor(m => m.Id)
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="Image" class="control-label col-md-2">Choose Icon</label>
-                    <div class="col-md-6">
-                        @Html.DropDownListFor(m => m.ImageLocation, storedImageNames, new { Name = "BrokenWorkaround", id = "Image" })
-                        @Html.ValidationMessage("Image", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
                     </div>
 
-                    <div class="col-md-4 col-md-offset-1">
-                        <label for="icon" class="control-label">Icon Preview</label>
-                        <img id="icon" src="@Model.ImageLocation" height="64" width="64">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
-                <!--   Still debating on whether or not Showcase Images are needed
-                <div class="form-group">
-                    <label for="file" class="control-label col-md-2">Upload Showcase Image</label>
-                    <div class="col-md-6">
-                        <input type="file" name="ShowcaseImage" id="ShowcaseImage" style="width: 100%;" accept="image/*" />
-                        @Html.ValidationMessage("ShowcaseImage", new { @class = "text-danger" })
-                    </div>
-                </div> -->
+                    <div class="form-group">
+                        <label for="Image" class="control-label col-md-3">Choose Icon</label>
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(m => m.ImageLocation, storedImageNames, new { Name = "BrokenWorkaround", id = "Image", @class = "form-control" })
+                            @Html.ValidationMessage("Image", new { @class = "text-danger " })
+                        </div>
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-default" />
+                        <div class="col-md-3">
+                            <img id="icon" src="@Model.ImageLocation" height="64" width="64" class="pull-left">
+                        </div>
                     </div>
+                    @Html.ValidationMessage("ShowcaseImage", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="modal-footer">
+                <button id="save" name="save" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
+                <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
         }
-
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
     </div>
 </div>
 

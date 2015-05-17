@@ -6,20 +6,20 @@
         <div class="slider" id="QuestionModels_@(Model.QuestionId)__Slider" name="QuestionModels[@(Model.QuestionId)].Slider" labels='["@Model.Choices[0].Text", " ", "@Model.Choices[1].Text" , " " , "@Model.Choices[2].Text" ]'> </div>
     </div>
 </center>
-<div class="row">
-    <div class="col-md-4">
+<div class="">
+    <div class="col-md-4 text-center">
         @if (Model.Choices[0].ImageName != "" && Model.Choices[0].ImageName != null)
         {
             <img class="choice-image" src="@Model.Choices[0].ImageName" />
         }
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 text-center">
         @if (Model.Choices[1].ImageName != "" && Model.Choices[1].ImageName != null)
         {
             <img class="choice-image" src="@Model.Choices[1].ImageName" />
         }
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 text-center">
         @if (Model.Choices[2].ImageName != "" && Model.Choices[2].ImageName != null)
         {
             <img class="choice-image" src="@Model.Choices[2].ImageName" />

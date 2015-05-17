@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace DiscoveryCenter.Controllers
 {
+    [Authorize]
     public class HelpController : Controller
     {
         // GET: Help

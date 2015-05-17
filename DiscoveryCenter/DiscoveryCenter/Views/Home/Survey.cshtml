@@ -112,12 +112,19 @@
                 {
                     <li data-target="#myCarousel" style="cursor:default"></li>
                 }
-            </ol>
+            </ol> 
+        </div>
+        <div class="text-center" style="margin-top:15px">
+            <div id="progress">
+                Question <span id="questionNumber">1</span> of @Model.QuestionModels.Count
+            </div>
+            <div id="done" hidden>
+                Done!
+            </div>
         </div>
     </div>
-
-
 </div>
+
 }
 
 @section Styles
@@ -130,6 +137,39 @@
     <script src="/Scripts/@(Model.Theme.JsFileName)"></script>
     <script>
         var isMuted = false;
+
+        $(document).on("ready", function () {
+            var totalItems = $('.carousel-inner .item').length;
+
+            $("#myCarousel").on("slid.bs.carousel", function () {
+                var currentIndex = $('div.active').index() + 1;
+                if (currentIndex < totalItems) {
+                    $("#progress").show();
+                    $("#done").hide();
+                    $("#questionNumber").html(currentIndex);
+                }
+                else {
+                    $("#progress").hide();
+                    $("#done").show();
+                }
+            });
+            $("#myCarousel").on("slide.bs.carousel", function (direction, relatedTarget) {
+                setTimeout(fixQuestionChoiceHeight, 100);
+            });
+        });
+
+        fixQuestionChoiceHeight();
+        function fixQuestionChoiceHeight()
+        {
+            $(".carousel-inner .item.left, .carousel-inner .item.right, .carousel-inner .item.active").each(function (index, item) {
+                console.log(item);
+                var height = $(item).find(".question-text").first().css("height");
+                console.log(height);
+
+                $(item).find(".question-choices").css("top", height);
+            });
+        }
+        
 
         $('#muteSurvey').on('click', function () {
             muteAll();

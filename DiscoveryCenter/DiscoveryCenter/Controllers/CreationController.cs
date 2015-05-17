@@ -290,6 +290,7 @@ namespace DiscoveryCenter.Controllers
             else
             {
                 oldVersion.Name = survey.Name;
+                oldVersion.Description = survey.Description;
                 oldVersion.ThemeId = survey.ThemeId;
                 oldVersion.LastModifiedDate = DateTime.Now;
                 List<Question> deleteList = new List<Question>();
@@ -333,6 +334,11 @@ namespace DiscoveryCenter.Controllers
 
                 foreach (Question delete in deleteList)
                 {
+                    List<Choice> allChoices = (from c in db.Choices where c.QuestionID == delete.Id select c).ToList();
+                    foreach (var choice in allChoices)
+                    {
+                        db.Set<Choice>().Remove(choice);
+                    }
                     db.Set(typeof(Question)).Remove(delete);
                 }
 
