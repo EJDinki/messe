@@ -305,6 +305,9 @@ namespace DiscoveryCenter.Controllers
                 {
                     Question match = (from s in survey.Questions where s.Id == q.Id select s).SingleOrDefault();
 
+                    //Load answers into context in case question is deleted and they are orphaned.
+                    List<Answer> allAnswers = (from a in db.Answers where a.QuestionId == q.Id select a).ToList();
+
                     if (match == null)
                     {
                         deleteList.Add(q);
