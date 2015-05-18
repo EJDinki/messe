@@ -41,6 +41,7 @@
                     {
                         <div class="col-md-4">
                             <img src="@s" height="128" width="128" />
+                            <p style="margin-bottom:0">@s.Split('/').Last()</p>
                             @Html.ActionLink("Delete Image", "DeleteImage", new { location = s })
                         </div>
                     }
@@ -79,6 +80,7 @@
                     {
                         <div class="col-md-4">
                             <img src="@s" height="128" width="128" />
+                            <p style="margin-bottom:0">@s.Split('/').Last()</p>
                             @Html.ActionLink("Delete Image", "DeleteImage", new { location = s })
                         </div>
                     }
@@ -119,6 +121,7 @@
                             <audio preload="auto" controls>
                                 <source src="@s" type="audio/mpeg" />
                             </audio>
+                            <p style="margin-bottom:0">@s.Split('/').Last()</p>
                             @Html.ActionLink("Delete Sound", "DeleteImage", new { location = s })
                         </div>
                     }
