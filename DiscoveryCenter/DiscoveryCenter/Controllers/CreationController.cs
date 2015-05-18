@@ -248,6 +248,13 @@ namespace DiscoveryCenter.Controllers
                     question.Type != Question.QuestionType.Spinner)
                 {
                     var choices = question.Choices;
+
+                    if (choices.Count == 0)
+                    {
+                        ModelState.AddModelError(String.Format("Questions[{0}].Choices", question.IndexInSurvey),
+                                                 String.Format("Question {0} must have at least one choice.", question.IndexInSurvey));
+                    }
+
                     for (int i = 0; i < choices.Count; i++)
                         if (String.IsNullOrWhiteSpace(choices[i].Text))
                         {
