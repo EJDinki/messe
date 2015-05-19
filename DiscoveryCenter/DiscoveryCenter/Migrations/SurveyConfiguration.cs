@@ -14,8 +14,12 @@ namespace DiscoveryCenter.Migrations
         string loc = "/Content/images/exhibits/";
         public SurveyConfiguration()
         {
+#if DEBUG
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
+#else
+            AutomaticMigrationsEnabled = false;
+#endif
         }
 
         protected override void Seed(DiscoveryCenter.Models.SurveyContext context)

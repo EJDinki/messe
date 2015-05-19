@@ -137,8 +137,7 @@ function updateIconSrc(id, val) {
 
     
 $(".indexSelectableList").selectable({
-    stop: function (event, ui) {
-        $(event.target).children('.ui-selected').not(':first').removeClass('ui-selected');
+    selected: function (event, ui) {
         refreshButtons(event.target);
     }
 });

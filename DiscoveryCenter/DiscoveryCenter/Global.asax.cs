@@ -21,6 +21,10 @@ namespace DiscoveryCenter
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             ModelBinders.Binders.Add(typeof(SurveyViewModel), new SurveyModelBinder());
             ModelBinders.Binders.Add(typeof(Survey), new SurveyModelBinder());
+#if DEBUG
+#else
+            Database.SetInitializer<SurveyContext>(null);
+#endif
         }
     }
 }
