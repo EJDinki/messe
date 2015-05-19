@@ -57,7 +57,7 @@
                     @Html.Label("Include Raw Data") <br />
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" value="Download Report" id="submitBtn" class="btn btn-primary" />
+                    <input type="submit" value="Download Report" id="submitBtn" class="btn btn-primary" data-toggle="modal" data-target="#downloadReport"/>
                 </div>
             </div>
         </div>
@@ -119,10 +119,6 @@
                 $( "#startDate" ).prop('disabled', true)
                 $( "#endDate" ).prop('disabled', true)
             }
-        });
-
-        $( '#dialog-form' ).submit(function() {
-            dialog.dialog("close");
         });
     });
 </script>

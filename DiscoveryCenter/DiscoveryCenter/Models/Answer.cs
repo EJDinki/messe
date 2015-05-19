@@ -19,7 +19,7 @@ namespace DiscoveryCenter.Models
         public int Id { get; set; }
 
         [ForeignKey("Question")]
-        public int QuestionId { get; set; }
+        public int? QuestionId { get; set; }
         public Question Question { get; set; }
 
         public string Value { get; set; }

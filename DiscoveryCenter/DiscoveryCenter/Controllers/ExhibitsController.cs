@@ -92,7 +92,7 @@ namespace DiscoveryCenter.Controllers
                     IsRatingSurvey = true,
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now,
-                    Theme = (from t in db.Themes where t.Name == "Mobile" select t).SingleOrDefault(),
+                    Theme = (from t in db.Themes where t.Name == "Mobile" select t).FirstOrDefault(),
                     Description = "Give a rating to the " + exhibit.Name + " exhibit!",
                     Name = "Rate " + exhibit.Name
                 };

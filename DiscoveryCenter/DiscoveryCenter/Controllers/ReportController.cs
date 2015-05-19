@@ -202,12 +202,14 @@ namespace DiscoveryCenter.Controllers
                         case Question.QuestionType.ShortAnswer:
                         default:
                             if (exportRawData)
+                            {
                                 builder.Append("\n");
                                 builder.Append("Raw Data Below\n");
                                 if (useDates)
                                     ConvertAnswersToCSV(question, builder, startDate.Value, endDate.Value);
                                 else
                                     ConvertAnswersToCSV(question, builder);
+                            }
                             break;
                     }
                 }
