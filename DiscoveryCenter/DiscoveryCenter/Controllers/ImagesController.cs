@@ -32,7 +32,7 @@ namespace DiscoveryCenter.Controllers
                     Image.FromStream(file.InputStream);
                 else if (!file.FileName.EndsWith("mp3"))
                     throw new Exception("Not an mp3 file and was designated as sound.");
-                    
+
             }
             catch
             {
