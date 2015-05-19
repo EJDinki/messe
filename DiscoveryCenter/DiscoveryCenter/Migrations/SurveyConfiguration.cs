@@ -370,8 +370,8 @@ namespace DiscoveryCenter.Migrations
 
             for (int i = 0; i < allExhibits.Count; i++)
             {
-                allExhibits[i].RatingSurveyID = i + 2;
-                allExhibits[i].RatingSurvey = DiscoveryCenter.Controllers.ExhibitsController.CreateRatingSurvey(allExhibits[i], context, i + 2);
+                allExhibits[i].RatingSurveyID = i + 3;
+                allExhibits[i].RatingSurvey = DiscoveryCenter.Controllers.ExhibitsController.CreateRatingSurvey(allExhibits[i], context, i + 3);
             }
 
             allExhibits.ForEach(exhibit => context.Exhibits.AddOrUpdate(exhibit));
