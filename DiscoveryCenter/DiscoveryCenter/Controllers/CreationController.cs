@@ -203,11 +203,12 @@ namespace DiscoveryCenter.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Survey survey = db.Surveys.Find(id);
-            survey.Questions = survey.Questions.OrderBy(q => q.IndexInSurvey).ToList();
+            
             if (survey == null)
             {
                 return HttpNotFound();
             }
+            survey.Questions = survey.Questions.OrderBy(q => q.IndexInSurvey).ToList();
 
 
             return View(MakeCreationEditVM(survey));
