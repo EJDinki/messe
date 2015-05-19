@@ -91,7 +91,8 @@ else if (Model.Type == Question.QuestionType.Spinner)
                     Value = Model.Choices[i].Text,
                     ImageName = Model.Choices[i].ImageName,
                     AvailableImages = storedImageNames,
-                    AllowDelete = allowDelete
+                    AllowDelete = allowDelete,
+                    MaxChoiceLength = 15
                 })
 
             foreach (SelectListItem selItem in storedImageNames)

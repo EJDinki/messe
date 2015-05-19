@@ -13,7 +13,7 @@
 <div class="clearfix Choice" style="margin-bottom:5px;">
     <div class="col-md-5">
         @Html.LabelFor(m => m.Value)
-        @Html.TextBox(Model.NameAndId, Model.Value, new { @class = "form-control" })
+        @Html.TextBox(Model.NameAndId, Model.Value, new { @class = "form-control" , maxlength=Model.MaxChoiceLength.ToString()})
     </div>
 
     <div class="col-md-3">

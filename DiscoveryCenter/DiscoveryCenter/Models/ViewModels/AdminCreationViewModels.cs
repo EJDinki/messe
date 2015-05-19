@@ -8,6 +8,11 @@ namespace DiscoveryCenter.Models
 {
     public class ChoiceBoxViewModel
     {
+        public ChoiceBoxViewModel()
+        {
+            MaxChoiceLength = 50;
+        }
+
         /// <summary>
         /// Used to uniquely identify a Choice Text to a question
         /// </summary>
@@ -36,5 +41,7 @@ namespace DiscoveryCenter.Models
         public List<System.Web.Mvc.SelectListItem> AvailableImages { get; set; }
 
         public bool AllowDelete { get; set; }
+
+        public int MaxChoiceLength { get; set; }
     }
 }
