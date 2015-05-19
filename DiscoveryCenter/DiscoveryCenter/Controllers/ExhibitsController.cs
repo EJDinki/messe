@@ -23,6 +23,9 @@ namespace DiscoveryCenter.Controllers
         // GET: Exhibits
         public ActionResult Index(int id = 0)
         {
+            if (TempData["Exhibit"] != null)
+                ModelState.AddModelError("Exhibit", TempData["Exhibit"].ToString());
+
             int numPages = (db.Exhibits.Count() / exhibitsPerPage);
             numPages += (db.Exhibits.Count() % exhibitsPerPage > 0 || numPages == 0) ? 1 : 0;
 
@@ -161,9 +164,9 @@ namespace DiscoveryCenter.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Exhibit exhibit)
         {
-            if (!ValidateExhibit(exhibit, true))
+            if (!ValidateExhibit(exhibit))
             {
-                return View(exhibit);
+                return RedirectToAction("Index");
             }
 
             //if new exhibit
@@ -216,22 +219,26 @@ namespace DiscoveryCenter.Controllers
             return RedirectToAction("Index");
         }
 
-        private bool ValidateExhibit(Exhibit ex, bool isEdit = false)
+        private bool ValidateExhibit(Exhibit ex)
         {
-            bool passed = true;
-
             Exhibit existing = null;
             
-            if (!isEdit)
-                existing = (from e in db.Exhibits where e.Name == ex.Name select e).FirstOrDefault();
+            //If we are creating a new exhibit, do not create an exhibit whose name already exists
+            existing = (from e in db.Exhibits where e.Name == ex.Name select e).FirstOrDefault();
 
-            if (existing != null)
+            if (existing != null && existing.Id != ex.Id)
             {
-                ModelState.AddModelError("Name", "An exhibt already exists with the name chosen. Please the exhibit.");
-                passed = false;
+                TempData.Add("Exhibit", "Exhibit names must be unique. Exhibit not created.");
+                return false;
             }
 
-            return passed;
+            if(ex.Name == null || ex.Name == "")
+            {
+                TempData.Add("Exhibit", "An exhibit must have a name. Exhibit not created.");
+                return false;
+            }
+
+            return true;
         }
 
         protected override void Dispose(bool disposing)
